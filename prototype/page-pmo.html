@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="theme.css" type="text/css"> </head>
+
+<body>
+  <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#"><b>UPT Pengembangan Manusia dan Organisasi ITB</b></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <a class="btn navbar-btn btn-primary ml-2 text-white"><i class="fa d-inline fa-lg fa-user-circle-o"></i> Alkhwarizm</a>
+      </div>
+    </div>
+  </nav>
+  <div class="py-3 bg-secondary">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="">Data Pegawai</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-3">
+    <div class="container">
+      <div class="row my-1">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 p-0"></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="transition: all 0.25s;">
+          <div class="row">
+            <div class="col-md-6">
+              <form class="form-inline my-2">
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Filter</span></div>
+                  <input type="email" class="form-control" placeholder="unit, pendidikan">
+                </div>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <form class="form-inline justify-content-end flex-row my-2">
+                <div class="input-group w-100">
+                  <input type="search" class="form-control" placeholder="Cari nama, nomor pegawai atau nomor telepon">
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary" type="button">Search</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>NIP</th>
+                <th>Nama</th>
+                <th>Unit</th>
+                <th>No. Telp.</th>
+                <th>Pendidikan</th>
+                <th>Tanggal Lahir</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>13515086</td>
+                <td>Iqbal</td>
+                <td>Shorinji Kempo ITB</td>
+                <td>08560000000</td>
+                <td>S1</td>
+                <td>18 Juli 1997</td>
+              </tr>
+              <tr>
+                <td>23515123</td>
+                <td>Alkhwarizm</td>
+                <td>UKJ</td>
+                <td>08560000000</td>
+                <td>S2</td>
+                <td>18 Juli 1997</td>
+              </tr>
+              <tr>
+                <td>12345678</td>
+                <td>Test</td>
+                <td>Test</td>
+                <td>08210000000</td>
+                <td>S1</td>
+                <td>19 Juli 1996</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row my-1">
+        <div class="col-md-4">
+          <p class="">Menampilkan 3 dari 3 entri.</p>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4 p-0">
+          <ul class="pagination flex-row justify-content-end">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">«</span> <span class="sr-only">Previous</span> </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">»</span> <span class="sr-only">Next</span> </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-4"></div>
+  <div class="bg-primary py-4"></div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:180px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo&nbsp;&nbsp;
+    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
+  </pingendo>
+</body>
+
+</html>
