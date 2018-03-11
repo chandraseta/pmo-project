@@ -141,12 +141,12 @@ sup {
   top: -.5em; }
 
 a {
-  color: #00BBF0;
+  color: #FFFFFF;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
   a:hover {
-    color: #007fa4;
+    color: #d9d9d9;
     text-decoration: underline; }
 
 a:not([href]):not([tabindex]) {
@@ -2021,10 +2021,10 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 200;
-  color: #00BBF0;
+  color: #FFFFFF;
   background-color: transparent; }
   .btn-link:hover {
-    color: #007fa4;
+    color: #d9d9d9;
     text-decoration: underline;
     background-color: transparent;
     border-color: transparent; }
@@ -3177,11 +3177,11 @@ tbody.collapse.show {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #00BBF0;
+  color: #FFFFFF;
   background-color: #fff;
   border: 1px solid #dee2e6; }
   .page-link:hover {
-    color: #007fa4;
+    color: #d9d9d9;
     text-decoration: none;
     background-color: #e9ecef;
     border-color: #dee2e6; }
