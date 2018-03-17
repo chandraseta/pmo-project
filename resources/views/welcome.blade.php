@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laray
+                    PPL II-2
                 </div>
 
                 <div class="links">
