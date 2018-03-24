@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    <nav class="navbar bg-primary navbar-dark">
-        <a class="navbar-brand" href="#">UPT Pengembangan Manusia dan Organisasi</a>
-    </nav>
+    <main-navbar></main-navbar>
 @endsection
 
 @section('content')
