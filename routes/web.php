@@ -13,4 +13,4 @@
 
 Route::get('/', 'PagesController@index');
 
-Route::get('/pmo', 'PagesController@pmo');
+Route::get('/pages/pmo', 'PagesController@pmo');
