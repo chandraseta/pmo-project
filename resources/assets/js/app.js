@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('main-navbar', require('./components/Navbar.vue'));
+Vue.component('page-header', require('./components/PageHeader.vue'));
 
 const app = new Vue({
     el: '#app'

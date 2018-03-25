@@ -2,8 +2,9 @@
 
 @section('header')
     <main-navbar></main-navbar>
+    <page-header></page-header>
 @endsection
 
 @section('content')
-    <h1>This is PMO page with layout.</h1>
+
 @endsection

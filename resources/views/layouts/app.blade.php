@@ -14,6 +14,10 @@
     <!-- Style -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+    <!-- Icons -->
+    <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+
+
 </head>
 <body>
     <div id="app">
