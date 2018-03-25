@@ -62827,7 +62827,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -62896,8 +62896,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            username: 'Username',
+            navItems: [{
+                name: 'dataPegawai',
+                label: 'Data Pegawai',
+                link: '#',
+                isActive: true
+            }, {
+                name: 'dataKompetensi',
+                label: 'Data Kompetensi',
+                link: '#',
+                isActive: false
+            }, {
+                name: 'dataKinerja',
+                label: 'Data Kinerja',
+                link: '#',
+                isActive: false
+            }]
+        };
+    },
+
+    methods: {
+        navigateTo: function navigateTo(navItemName) {
+            this.navItems.forEach(function (item) {
+                item.isActive = item.name === navItemName;
+            });
+        }
+    },
     mounted: function mounted() {
         console.log("Navbar mounted.");
     }
@@ -62911,7 +62944,90 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "nav",
+    { staticClass: "navbar navbar-expand-md bg-primary navbar-dark" },
+    [
+      _c(
+        "a",
+        { staticClass: "navbar-brand font-weight-bold", attrs: { href: "#" } },
+        [_vm._v("UPT PMO")]
+      ),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse",
+          attrs: { id: "navbarNavDropdown" }
+        },
+        [
+          _c(
+            "ul",
+            { staticClass: "navbar-nav" },
+            _vm._l(_vm.navItems, function(item) {
+              return _c(
+                "li",
+                {
+                  staticClass: "nav-item",
+                  class: { active: item.isActive },
+                  attrs: { id: item.name }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: item.link },
+                      on: {
+                        click: function($event) {
+                          _vm.navigateTo(item.name)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(item.label) +
+                          "\n                "
+                      )
+                    ]
+                  )
+                ]
+              )
+            })
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "collapse navbar-collapse text-center justify-content-end",
+              attrs: { id: "navbar2SupportedContent" }
+            },
+            [
+              _c(
+                "a",
+                { staticClass: "btn navbar-btn btn-primary ml-2 text-white" },
+                [
+                  _c("span", {
+                    staticClass: "oi oi-person",
+                    attrs: { title: "user icon", "aria-hidden": "true" }
+                  }),
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.username) +
+                      "\n            "
+                  )
+                ]
+              )
+            ]
+          )
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -62919,86 +63035,19 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "nav",
-      { staticClass: "navbar navbar-expand-md bg-primary navbar-dark" },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "navbar-brand font-weight-bold",
-            attrs: { href: "#" }
-          },
-          [_vm._v("UPT PMO")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "navbar-toggler",
-            attrs: {
-              type: "button",
-              "data-toggle": "collapse",
-              "data-target": "#navbarNavDropdown",
-              "aria-controls": "navbarNavDropdown",
-              "aria-expanded": "false",
-              "aria-label": "Toggle navigation"
-            }
-          },
-          [_c("span", { staticClass: "navbar-toggler-icon" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "collapse navbar-collapse",
-            attrs: { id: "navbarNavDropdown" }
-          },
-          [
-            _c("ul", { staticClass: "navbar-nav" }, [
-              _c("li", { staticClass: "nav-item active" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Data Pegawai "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Data Kompetensi ")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Data Kinerja")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "collapse navbar-collapse text-center justify-content-end",
-                attrs: { id: "navbar2SupportedContent" }
-              },
-              [
-                _c(
-                  "a",
-                  { staticClass: "btn navbar-btn btn-primary ml-2 text-white" },
-                  [
-                    _c("span", {
-                      staticClass: "oi oi-person",
-                      attrs: { title: "user icon", "aria-hidden": "true" }
-                    }),
-                    _vm._v(" Username")
-                  ]
-                )
-              ]
-            )
-          ]
-        )
-      ]
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarNavDropdown",
+          "aria-controls": "navbarNavDropdown",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
   }
 ]
