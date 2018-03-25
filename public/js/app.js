@@ -47924,7 +47924,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row text-white" }, [
           _c("div", { staticClass: "col-md-6 p-3" }, [
-            _c("h1", [_vm._v("Data Kompetensi")])
+            _c("h1", [_vm._v("Data Pegawai")])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-6" })

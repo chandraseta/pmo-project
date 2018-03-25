@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row text-white">
                 <div class="col-md-6 p-3">
-                    <h1>Data Kompetensi</h1>
+                    <h1>Data Pegawai</h1>
                 </div>
                 <div class="col-md-6">
 

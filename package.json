@@ -20,6 +20,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "open-iconic": "^1.1.1"
+        "open-iconic": "^1.1.1",
+        "vue-good-table": "^1.20.3"
     }
 }
