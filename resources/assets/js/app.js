@@ -17,10 +17,12 @@ window.Vue = require('vue');
 import VueGoodTable from 'vue-good-table'
 Vue.use(VueGoodTable);
 
-Vue.component('main-navbar', require('./components/Navbar.vue'));
-Vue.component('page-header', require('./components/PageHeader.vue'));
-Vue.component('data-table', require('./components/DataTable.vue'));
-
-const app = new Vue({
-    el: '#app'
-});
+if (document.getElementById('pmo-page')) {
+    const pmoPage = new Vue({
+        el: '#pmo-page',
+        components: {
+            'pmo-navbar': require('./components/Navbar.vue'),
+            'data-table': require('./components/DataTable.vue')
+        }
+    });
+}

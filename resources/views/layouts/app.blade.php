@@ -20,17 +20,7 @@
 
 </head>
 <body>
-    <div id="app">
-        <header>
-            @yield('header')
-        </header>
-        <section>
-            @yield('content')
-        </section>
-        <footer>
-            @yield('footer')
-        </footer>
-    </div>
+    @yield('content');
 </body>
 
 <script src="{{ asset('js/app.js') }}"></script>
