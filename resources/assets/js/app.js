@@ -14,9 +14,12 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import VueGoodTable from 'vue-good-table'
+Vue.use(VueGoodTable);
 
 Vue.component('main-navbar', require('./components/Navbar.vue'));
 Vue.component('page-header', require('./components/PageHeader.vue'));
+Vue.component('data-table', require('./components/DataTable.vue'));
 
 const app = new Vue({
     el: '#app'
