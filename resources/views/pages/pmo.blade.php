@@ -2,16 +2,6 @@
 
 @section('content')
     <div id="pmo-page">
-        <header>
-            <pmo-navbar>
-
-            </pmo-navbar>
-        </header>
-        <main role="main" class="container">
-            <data-table></data-table>
-        </main>
-        <footer>
-
-        </footer>
+        <pmo-main-page></pmo-main-page>
     </div>
 @endsection

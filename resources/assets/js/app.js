@@ -21,8 +21,7 @@ if (document.getElementById('pmo-page')) {
     const pmoPage = new Vue({
         el: '#pmo-page',
         components: {
-            'pmo-navbar': require('./components/Navbar.vue'),
-            'data-table': require('./components/DataTable.vue')
+            'pmo-main-page': require('./components/PMOMainPage.vue')
         }
     });
 }

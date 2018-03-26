@@ -1,7 +1,7 @@
 <template>
     <div>
         <vue-good-table
-                title="Tabel Data Pegawai"
+                :title="tableTitle"
                 :columns="columns"
                 :rows="rows"
                 :paginate="true"
@@ -13,6 +13,9 @@
 <script>
     export default {
         name: 'test',
+        props: [
+            'tableTitle'
+        ],
         data(){
             return {
                 columns: [
