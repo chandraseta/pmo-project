@@ -63134,30 +63134,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'test',
-    props: ['tableTitle'],
+    props: ['tableTitle', 'columns', 'rows'],
     data: function data() {
-        return {
-            columns: [{
-                label: 'NIP',
-                field: 'nip'
-            }, {
-                label: 'Nama',
-                field: 'name'
-            }, {
-                label: 'Unit',
-                field: 'unit'
-            }, {
-                label: 'No. Telp.',
-                field: 'phone'
-            }, {
-                label: 'Pendidikan',
-                field: 'education'
-            }, {
-                label: 'Tanggal Lahir',
-                field: 'birthday'
-            }],
-            rows: [{ id: 1, nip: 12345678, name: "Iqbal", unit: "UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 2, nip: 12345678, name: "Iqbal", unit: "UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 3, nip: 12345678, name: "Iqbal", unit: "UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }]
-        };
+        return {};
     }
 });
 
@@ -63295,7 +63274,7 @@ exports = module.exports = __webpack_require__(44)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -63320,6 +63299,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'pmo-main-page',
@@ -63329,13 +63311,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            title: 'Data Pegawai'
+            title: 'Data Pegawai',
+            columns: [{
+                label: 'NIP',
+                field: 'nip'
+            }, {
+                label: 'Nama',
+                field: 'name'
+            }, {
+                label: 'Unit',
+                field: 'unit'
+            }, {
+                label: 'No. Telp.',
+                field: 'phone'
+            }, {
+                label: 'Pendidikan',
+                field: 'education'
+            }, {
+                label: 'Tanggal Lahir',
+                field: 'birthday'
+            }],
+            rows: [{ id: 1, nip: 12345678, name: "Iqbal", unit: "UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 2, nip: 12345678, name: "Iqbal", unit: "UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 3, nip: 12345678, name: "Iqbal", unit: "UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }],
+            dataPegawai: [{ id: 1, nip: 12345678, name: "Iqbal", unit: "UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 2, nip: 12345678, name: "Iqbal", unit: "UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 3, nip: 12345678, name: "Iqbal", unit: "UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }],
+            dataKinerja: [{ id: 1, nip: 12345678, name: "Al", unit: "Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 2, nip: 12345678, name: "Al", unit: "Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 3, nip: 12345678, name: "Al", unit: "Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }],
+            dataKompetensi: [{ id: 1, nip: 99999999, name: "Al", unit: "Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 2, nip: 99999999, name: "Al", unit: "Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 3, nip: 99999999, name: "Al", unit: "Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }]
         };
     },
 
     methods: {
         changeTable: function changeTable(payload) {
             this.title = payload.label;
+            this.rows = this[payload.name];
         }
     }
 });
@@ -63358,7 +63364,11 @@ var render = function() {
     _c(
       "main",
       { staticClass: "container", attrs: { role: "main" } },
-      [_c("data-table", { attrs: { tableTitle: _vm.title } })],
+      [
+        _c("data-table", {
+          attrs: { tableTitle: _vm.title, columns: _vm.columns, rows: _vm.rows }
+        })
+      ],
       1
     ),
     _vm._v(" "),
