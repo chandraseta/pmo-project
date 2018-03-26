@@ -14,3 +14,7 @@
 Route::get('/', 'PagesController@index');
 
 Route::get('/pages/pmo', 'PagesController@pmo');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
