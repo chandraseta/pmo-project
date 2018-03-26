@@ -62518,7 +62518,7 @@ exports = module.exports = __webpack_require__(44)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -62927,9 +62927,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         navigateTo: function navigateTo(navItemName) {
+            var navItem = void 0;
             this.navItems.forEach(function (item) {
                 item.isActive = item.name === navItemName;
+                if (item.name === navItemName) {
+                    navItem = item;
+                }
             });
+            this.$emit('navigation', navItem);
         }
     },
     mounted: function mounted() {
@@ -63290,7 +63295,7 @@ exports = module.exports = __webpack_require__(44)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -63326,6 +63331,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             title: 'Data Pegawai'
         };
+    },
+
+    methods: {
+        changeTable: function changeTable(payload) {
+            this.title = payload.label;
+        }
     }
 });
 
@@ -63338,7 +63349,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("header", [_c("pmo-navbar")], 1),
+    _c(
+      "header",
+      [_c("pmo-navbar", { on: { navigation: _vm.changeTable } })],
+      1
+    ),
     _vm._v(" "),
     _c(
       "main",

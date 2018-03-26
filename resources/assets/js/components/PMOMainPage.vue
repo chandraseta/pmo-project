@@ -1,7 +1,7 @@
 <template>
     <div>
         <header>
-            <pmo-navbar></pmo-navbar>
+            <pmo-navbar v-on:navigation="changeTable"></pmo-navbar>
         </header>
         <main role="main" class="container">
             <data-table :tableTitle="title"></data-table>
@@ -22,6 +22,11 @@
         data() {
             return {
                 title: 'Data Pegawai'
+            }
+        },
+        methods: {
+            changeTable: function (payload) {
+                this.title = payload.label;
             }
         }
     }

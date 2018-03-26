@@ -56,9 +56,14 @@
         },
         methods: {
             navigateTo: function (navItemName) {
+                let navItem;
                 this.navItems.forEach(function (item) {
                     item.isActive = item.name === navItemName;
-                })
+                    if (item.name === navItemName) {
+                        navItem = item;
+                    }
+                });
+                this.$emit('navigation', navItem);
             }
         },
         mounted() {
