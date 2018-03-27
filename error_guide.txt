@@ -1,8 +1,0 @@
--see whether using SSH or HTTP on git remote host, check: git remote -v
--add di composer.json sebelum run "composer global update":
-"repositories": [
-{"type": "composer",
-"url": "http://packagist.org"}
-]
--set proxy variable
--set key on heroku: "heroku config:set APP_KEY=[php artisan key:generate]"
