@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
     <!-- Style -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="/css/app.css">
 
     <!-- Icons -->
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
@@ -23,5 +23,5 @@
     @yield('content');
 </body>
 
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="/js/app.js"></script>
 </html>
