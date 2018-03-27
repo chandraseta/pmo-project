@@ -52,7 +52,8 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    //'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://whispering-bastion-35072.herokuapp.com'),
 
     /*
     |--------------------------------------------------------------------------
