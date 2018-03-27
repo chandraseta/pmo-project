@@ -11,6 +11,10 @@
 |
 */
 
+if (env('APP_ENV') === 'production') {
+    URL::forceSchema('https');
+}
+
 Route::get('/', 'PagesController@index');
 
 Route::get('/pages/pmo', 'PagesController@pmo');
