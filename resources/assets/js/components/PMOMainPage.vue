@@ -25,18 +25,32 @@
         data() {
             return {
                 title: 'Data Pegawai',
-                columns: [
+                columns: [],
+                dataPegawaiColumns:[
                     {
                         label: 'NIP',
-                        field: 'nip'
+                        field: 'nip',
+                        sortable: true
                     },
                     {
-                        label: 'Nama',
+                        label: 'Nama Lengkap',
                         field: 'name'
                     },
                     {
-                        label: 'Unit',
+                        label: 'Unit Kerja',
                         field: 'unit'
+                    },
+                    {
+                        label: 'Jabatan',
+                        field: 'position'
+                    },
+                    {
+                        label: 'Tahun Menjabat',
+                        field: 'startYear'
+                    },
+                    {
+                        label: 'Kelompok Kompetensi',
+                        field: 'competencyGroup'
                     },
                     {
                         label: 'No. Telp.',
@@ -51,21 +65,15 @@
                         field: 'birthday'
                     },
                 ],
-                rows: [
-                    {id:1, nip:12345678, name:"Iqbal", unit:"UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:2, nip:12345678, name:"Iqbal", unit:"UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:3, nip:12345678, name:"Iqbal", unit:"UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"}
-                ],
+                dataKompetensiColumns:[],
+                dataKinerjaColumns:[],
+                rows: [],
                 dataPegawai: [
-                    {id:1, nip:12345678, name:"Iqbal", unit:"UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:2, nip:12345678, name:"Iqbal", unit:"UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:3, nip:12345678, name:"Iqbal", unit:"UKJ", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"}
+                    {id:1, nip:"12345678", name:"Iqbal", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
+                    {id:2, nip:"12345634", name:"Iqbal", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
+                    {id:3, nip:"12345623", name:"Iqbal", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
                 ],
-                dataKinerja: [
-                    {id:1, nip:12345678, name:"Al", unit:"Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:2, nip:12345678, name:"Al", unit:"Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:3, nip:12345678, name:"Al", unit:"Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"}
-                ],
+                dataKinerja: [],
                 dataKompetensi: [
                     {id:1, nip:99999999, name:"Al", unit:"Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
                     {id:2, nip:99999999, name:"Al", unit:"Shokenbu", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
@@ -77,7 +85,12 @@
             changeTable: function (payload) {
                 this.title = payload.label;
                 this.rows = this[payload.name];
+                this.columns = this[payload.name + 'Columns']
             }
+        },
+        created: function () {
+            this.rows = this.dataPegawai;
+            this.columns = this.dataPegawaiColumns;
         }
     }
 </script>
