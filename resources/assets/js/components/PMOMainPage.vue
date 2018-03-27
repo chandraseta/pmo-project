@@ -4,6 +4,21 @@
             <pmo-navbar v-on:navigation="changeTable"></pmo-navbar>
         </header>
         <main role="main" class="container">
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 p-2">
+                            <button type="button" class="btn btn-primary m-1">Add Data</button>
+                        </div>
+                        <div class="col-md-3 p-2"></div>
+                        <div class="col-md-3 p-2"></div>
+                        <div class="col-md-3 p-2">
+                            <button type="button" class="btn btn-outline-primary float-md-right m-1">Download</button>
+                            <button type="button" class="btn btn-outline-primary float-md-right m-1">Upload</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <data-table :tableTitle="title"
                         :columns="columns"
                         :rows="rows">
