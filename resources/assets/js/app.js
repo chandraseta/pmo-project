@@ -14,9 +14,14 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import VueGoodTable from 'vue-good-table'
+Vue.use(VueGoodTable);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-const app = new Vue({
-    el: '#app'
-});
+if (document.getElementById('pmo-page')) {
+    const pmoPage = new Vue({
+        el: '#pmo-page',
+        components: {
+            'pmo-main-page': require('./components/PMOMainPage.vue')
+        }
+    });
+}
