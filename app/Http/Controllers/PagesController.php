@@ -11,6 +11,6 @@ class PagesController extends Controller
     }
 
     public function pmo() {
-        return view('pages.pmo');
+        return view('pages.pmo')->with('page', 'pmo');
     }
 }
