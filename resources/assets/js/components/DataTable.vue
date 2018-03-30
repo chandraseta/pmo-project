@@ -5,14 +5,15 @@
                 :columns="columns"
                 :rows="rows"
                 :paginate="true"
-                :lineNumbers="true">
+                :lineNumbers="true"
+                :globalSearch="true">
         </vue-good-table>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'test',
+        name: 'data-table',
         props: [
             'tableTitle',
             'columns',
