@@ -8,19 +8,21 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <title>{{ config('app.name', 'PMO') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Style -->
+    <link rel="stylesheet" href="/css/app.css">
+
 </head>
 <body>
+<?php if(!isset($page)) {$page = '';}?>
+@if($page === 'pmo')
+    @yield('content')
+@else
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
@@ -52,7 +54,7 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -71,5 +73,8 @@
             @yield('content')
         </main>
     </div>
+@endif
 </body>
+
+<script src="/js/app.js"></script>
 </html>
