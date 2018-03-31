@@ -34,6 +34,10 @@
                 columns: [],
                 dataUserColumns:[
                     {
+                        label: 'Username',
+                        field: 'username',
+                    },
+                    {
                         label: 'NIP',
                         field: 'nip',
                     },
@@ -42,40 +46,15 @@
                         field: 'name'
                     },
                     {
-                        label: 'Unit Kerja',
-                        field: 'unit'
-                    },
-                    {
-                        label: 'Jabatan',
-                        field: 'position'
-                    },
-                    {
-                        label: 'Tahun Menjabat',
-                        field: 'startYear',
-                        type: 'number'
-                    },
-                    {
-                        label: 'Kelompok Kompetensi',
-                        field: 'competencyGroup'
-                    },
-                    {
-                        label: 'No. Telp.',
-                        field: 'phone'
-                    },
-                    {
-                        label: 'Pendidikan',
-                        field: 'education'
-                    },
-                    {
-                        label: 'Tanggal Lahir',
-                        field: 'birthday'
+                        label: 'E-mail',
+                        field: 'email'
                     },
                 ],
                 rows: [],
                 dataUser: [
-                    {id:1, nip:"12345678", name:"Iqbal", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:2, nip:"12345634", name:"Al", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:3, nip:"12345623", name:"Khowarizmi", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
+                    {id:1, username:'shigure', nip:'172859212', name:'Shigure', email:'shigure@sailor.com'},
+                    {id:2, username:'tokiwa-matsu', nip:'175821032', name:'Tokiwa Matsu', email:'tokiwa-matsu@sailor.com'},
+                    {id:3, username:'ku-jaku', nip:'114828124', name:'Ku Jaku', email:'ku-jaku@iroshizuku.com'}
                 ],
             }
         },
