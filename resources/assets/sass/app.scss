@@ -7,8 +7,29 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~open-iconic/font/css/open-iconic-bootstrap';
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.fungsi-kognitif-group {
+  background-color: #ccdfff;
+}
+
+.fungsi-interaksional-group {
+  background-color: #efccff;
+}
+
+.fungsi-emosional-group {
+  background-color: #ffcccc;
+}
+
+.fungsi-sikap-kerja-group {
+  background-color: #fff2cc;
+}
+
+.fungsi-manajerial-group {
+  background-color: #e3ffcc;
 }
