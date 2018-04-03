@@ -13,4 +13,8 @@ class PagesController extends Controller
     public function pmo() {
         return view('pages.pmo')->with('page', 'pmo');
     }
+
+    public function admin() {
+        return view('pages.admin')->with('page', 'admin');
+    }
 }

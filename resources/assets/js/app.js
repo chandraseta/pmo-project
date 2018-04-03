@@ -25,3 +25,12 @@ if (document.getElementById('pmo-page')) {
         }
     });
 }
+
+if (document.getElementById('admin-page')) {
+    const adminPage = new Vue({
+        el: '#admin-page',
+        components: {
+            'admin-main-page': require('./components/AdminPage.vue')
+        }
+    });
+}
