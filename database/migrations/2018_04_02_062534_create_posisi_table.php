@@ -18,8 +18,7 @@ class CreatePosisiTable extends Migration
             $table->string('nama_posisi')->index();
             $table->string('kompetensi');
             $table->string('unit_kerja');
-            // $table->json('kinerja');
-            $table->string('kinerja');
+            $table->longtext('kinerja')->json()->nullable();
         });
 
         Schema::create('rekomendasi_posisi', function (Blueprint $table) {
@@ -45,7 +44,7 @@ class CreatePosisiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posisi');
         Schema::dropIfExists('rekomendasi_posisi');
+        Schema::dropIfExists('posisi');
     }
 }

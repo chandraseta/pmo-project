@@ -17,8 +17,7 @@ class CreateKinerjaTable extends Migration
             $table->increments('id_kinerja');
             $table->unsignedInteger('id_pegawai')->index();
             $table->datetime('tanggal');
-            // $table->json('laporan_kinerja');
-            $table->longtext('laporan_kinerja');
+            $table->longtext('laporan_kinerja')->json()->nullable();
 
             $table->foreign('id_pegawai')
                   ->references('id_user')->on('pegawai')
