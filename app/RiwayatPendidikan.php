@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_riwayat_pendidikan
  * @property int $id_pegawai
  * @property string $nama_institusi
+ * @property string $strata
  * @property string $jurusan
  * @property string $tahun_masuk
  * @property string $tahun_keluar
@@ -32,7 +33,7 @@ class RiwayatPendidikan extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_pegawai', 'nama_institusi', 'jurusan', 'tahun_masuk', 'tahun_keluar'];
+    protected $fillable = ['id_pegawai', 'nama_institusi', 'strata', 'jurusan', 'tahun_masuk', 'tahun_keluar'];
 
     /**
      * Indicates if the model should be timestamped.

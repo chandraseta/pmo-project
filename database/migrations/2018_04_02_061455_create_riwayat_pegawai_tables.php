@@ -31,6 +31,7 @@ class CreateRiwayatPegawaiTables extends Migration
             $table->increments('id_riwayat_pendidikan');
             $table->unsignedInteger('id_pegawai')->index();
             $table->string('nama_institusi')->index();
+            $table->string('strata')->index();
             $table->string('jurusan');
             $table->year('tahun_masuk');
             $table->year('tahun_keluar');

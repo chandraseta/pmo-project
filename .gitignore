@@ -90,3 +90,7 @@ fabric.properties
 
 
 # End of https://www.gitignore.io/api/laravel,phpstorm
+
+# Custom
+.vscode
+*.bat
