@@ -19,7 +19,7 @@ class CreateRiwayatPegawaiTables extends Migration
             $table->string('nama_institusi')->index();
             $table->string('posisi');
             $table->year('tahun_masuk');
-            $table->year('tahun_keluar');
+            $table->year('tahun_keluar')->nullable();
 
             $table->foreign('id_pegawai')
                   ->references('id_user')->on('pegawai')
@@ -34,7 +34,7 @@ class CreateRiwayatPegawaiTables extends Migration
             $table->string('strata')->index();
             $table->string('jurusan');
             $table->year('tahun_masuk');
-            $table->year('tahun_keluar');
+            $table->year('tahun_keluar')->nullable();
 
             $table->foreign('id_pegawai')
                   ->references('id_user')->on('pegawai')
@@ -49,7 +49,7 @@ class CreateRiwayatPegawaiTables extends Migration
             $table->string('unit_kerja')->index();
             $table->string('posisi');
             $table->year('tahun_masuk');
-            $table->year('tahun_keluar');
+            $table->year('tahun_keluar')->nullable();
 
             $table->foreign('id_pegawai')
                   ->references('id_user')->on('pegawai')

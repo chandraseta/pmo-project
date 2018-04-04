@@ -10,6 +10,6 @@ $factory->define(App\RiwayatPekerjaan::class, function (Faker $faker) {
         'nama_institusi' => $faker->company(),
         'posisi' => $faker->jobTitle(),
         'tahun_masuk' => min($year),
-        'tahun_keluar' => max($year),
+        'tahun_keluar' => $faker->boolean($chanceOfGettingTrue = 90) ? max($year) : NULL,
     ];
 });

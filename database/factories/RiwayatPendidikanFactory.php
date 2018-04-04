@@ -12,6 +12,6 @@ $factory->define(App\RiwayatPendidikan::class, function (Faker $faker) {
         'strata' => $faker->randomElement($strata),
         'jurusan' => $faker->company(),
         'tahun_masuk' => min($year),
-        'tahun_keluar' => max($year),
+        'tahun_keluar' => $faker->boolean($chanceOfGettingTrue = 90) ? max($year) : NULL,
     ];
 });

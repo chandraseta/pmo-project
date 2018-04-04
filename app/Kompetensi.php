@@ -41,6 +41,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $profil_potensi_pengembangan_diri
  * @property float $profil_loyalitas_terhadap_tugas
  * @property float $profil_efektivitas_manajerial
+ * @property float $profil
+ * @property char $indeks
  * @property Pegawai $pegawai
  */
 class Kompetensi extends Model

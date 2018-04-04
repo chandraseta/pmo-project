@@ -11,7 +11,7 @@ class RiwayatSeeder extends Seeder
      */
     public function run()
     {
-        // factory(App\RiwayatPekerjaan::class, 200)->create();
+        factory(App\RiwayatPekerjaan::class, 200)->create();
         factory(App\RiwayatPendidikan::class, 200)->create();
         factory(App\DataKepegawaian::class, 200)->create();
     }
