@@ -45,10 +45,12 @@
                     {
                         label: 'NIP',
                         field: 'nip',
+                        immutable: true
                     },
                     {
                         label: 'Nama Lengkap',
-                        field: 'name'
+                        field: 'name',
+                        immutable: true
                     },
                     {
                         label: 'Unit Kerja',
@@ -77,7 +79,8 @@
                     },
                     {
                         label: 'Tanggal Lahir',
-                        field: 'birthday'
+                        field: 'birthday',
+                        immutable: true
                     },
                     {
                         label: '',
@@ -247,6 +250,10 @@
                         type: 'number',
                         thClass: 'text-center fungsi-manajerial-group'
                     },
+                    {
+                        label: '',
+                        field: 'editButton'
+                    }
                 ],
                 dataKinerjaColumns:[],
                 rows: [],

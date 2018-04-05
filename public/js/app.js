@@ -65807,7 +65807,7 @@ exports = module.exports = __webpack_require__(65)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -65896,10 +65896,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             columns: [],
             dataPegawaiColumns: [{
                 label: 'NIP',
-                field: 'nip'
+                field: 'nip',
+                immutable: true
             }, {
                 label: 'Nama Lengkap',
-                field: 'name'
+                field: 'name',
+                immutable: true
             }, {
                 label: 'Unit Kerja',
                 field: 'unit'
@@ -65921,7 +65923,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 field: 'education'
             }, {
                 label: 'Tanggal Lahir',
-                field: 'birthday'
+                field: 'birthday',
+                immutable: true
             }, {
                 label: '',
                 field: 'editButton'
@@ -66067,6 +66070,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 field: 'kekuatanPengawasan',
                 type: 'number',
                 thClass: 'text-center fungsi-manajerial-group'
+            }, {
+                label: '',
+                field: 'editButton'
             }],
             dataKinerjaColumns: [],
             rows: [],
@@ -66456,12 +66462,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'data-table',
     props: ['tableTitle', 'columns', 'rows'],
     data: function data() {
-        return {};
+        return {
+            rowBeingEdited: -1
+        };
+    },
+
+    methods: {
+        editRow: function editRow(props) {
+            this.rowBeingEdited = props.row.originalIndex;
+            console.log(props);
+        },
+        saveRow: function saveRow(props) {
+            this.rowBeingEdited = -1;
+        }
     }
 });
 
@@ -66492,17 +66523,59 @@ var render = function() {
               return [
                 props.column.field == "editButton"
                   ? _c("span", [
-                      _c("button", { staticClass: "btn btn-sm btn-default" }, [
-                        _vm._v("Edit")
+                      props.row.originalIndex != _vm.rowBeingEdited
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-default",
+                              attrs: { disabled: _vm.rowBeingEdited != -1 },
+                              on: {
+                                click: function($event) {
+                                  _vm.editRow(props)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    Edit\n                "
+                              )
+                            ]
+                          )
+                        : _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-primary",
+                              on: {
+                                click: function($event) {
+                                  _vm.saveRow(props)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    Save\n                "
+                              )
+                            ]
+                          )
+                    ])
+                  : props.row.originalIndex == _vm.rowBeingEdited &&
+                    !props.column.immutable
+                    ? _c("span", [
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: {
+                            value: props.formattedRow[props.column.field]
+                          }
+                        })
                       ])
-                    ])
-                  : _c("span", [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(props.formattedRow[props.column.field]) +
-                          "\n            "
-                      )
-                    ])
+                    : _c("span", [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(props.formattedRow[props.column.field]) +
+                            "\n            "
+                        )
+                      ])
               ]
             }
           }
