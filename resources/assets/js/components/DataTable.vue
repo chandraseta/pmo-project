@@ -22,7 +22,11 @@
                     </button>
                 </span>
                 <span v-else-if="props.row.originalIndex == rowBeingEdited && !props.column.immutable">
-                    <input type="text" class="form-control" :value="props.formattedRow[props.column.field]"/>
+                    <input class="form-control"
+                           :id="props.column.field + '-' + props.row.originalIndex"
+                           :title="props.column.label"
+                           :type="props.column.type == 'number' || 'date' ? props.column.type : 'text'"
+                           :value="props.formattedRow[props.column.field]"/>
                 </span>
                 <span v-else>
                     {{ props.formattedRow[props.column.field] }}

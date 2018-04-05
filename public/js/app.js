@@ -66475,6 +66475,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'data-table',
@@ -66563,7 +66567,17 @@ var render = function() {
                     ? _c("span", [
                         _c("input", {
                           staticClass: "form-control",
-                          attrs: { type: "text" },
+                          attrs: {
+                            id:
+                              props.column.field +
+                              "-" +
+                              props.row.originalIndex,
+                            title: props.column.label,
+                            type:
+                              props.column.type == "number" || "date"
+                                ? props.column.type
+                                : "text"
+                          },
                           domProps: {
                             value: props.formattedRow[props.column.field]
                           }
