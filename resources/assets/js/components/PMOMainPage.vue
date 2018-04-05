@@ -79,6 +79,10 @@
                         label: 'Tanggal Lahir',
                         field: 'birthday'
                     },
+                    {
+                        label: '',
+                        field: 'editButton'
+                    }
                 ],
                 dataKompetensiColumns:[
 //                    Data Pegawai

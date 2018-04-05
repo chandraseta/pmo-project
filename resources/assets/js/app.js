@@ -15,6 +15,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import VueGoodTable from 'vue-good-table'
+import 'vue-good-table/dist/vue-good-table.css'
 Vue.use(VueGoodTable);
 
 if (document.getElementById('pmo-page')) {
