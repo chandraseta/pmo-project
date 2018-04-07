@@ -41,8 +41,9 @@ class ProfileAPIController extends APIBaseController
 
         $validator = Validator::make($input, [
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'nip' => 'required',
+            'birth_place' => 'required',
+            'birth_date' => 'required'
         ]);
 
 
@@ -92,8 +93,9 @@ class ProfileAPIController extends APIBaseController
 
         $validator = Validator::make($input, [
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'nip' => 'required',
+            'birth_place' => 'required',
+            'birth_date' => 'required',
         ]);
 
 
@@ -109,8 +111,9 @@ class ProfileAPIController extends APIBaseController
 
 
         $post->name = $input['name'];
-        $post->email = $input['email'];
-        $post->password = $input['password'];
+        $post->nip = $input['nip'];
+        $post->birth_place = $input['birth_place'];
+        $post->birth_date = $input['birth_date'];
         $post->save();
 
 
