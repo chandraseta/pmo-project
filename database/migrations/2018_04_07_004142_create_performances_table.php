@@ -18,7 +18,7 @@ class CreatePerformancesTable extends Migration
             $table->integer('user_id');
             $table->string('date', 200);
             $table->string('purpose', 250);
-            $table->string('performace_report', 300);
+            $table->string('performance_report', 300);
             $table->timestamps();
         });
     }

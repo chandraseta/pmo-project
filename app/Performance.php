@@ -11,5 +11,5 @@ class Performance extends Model
     	'date',
     	'purpose',
     	'performance_report'
-    ]
+    ];
 }

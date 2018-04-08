@@ -18,8 +18,8 @@ class CreateEducationTable extends Migration
             $table->string('degree', 200);
             $table->string('institution', 200);
             $table->string('major', 200);
-            $table->string('start_date', 200);
-            $table->string('end_date', 200);
+            $table->string('start_year', 200);
+            $table->string('end_year', 200);
             $table->timestamps();
         });
     }

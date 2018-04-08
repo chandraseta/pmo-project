@@ -13,5 +13,5 @@ class Education extends Model
     	'major',
     	'start_year',
     	'end_year'
-    ]
+    ];
 }

@@ -12,5 +12,5 @@ class Experience extends Model
     	'position',
     	'start_year',
     	'end_year'
-    ]
+    ];
 }
