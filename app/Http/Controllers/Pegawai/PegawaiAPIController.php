@@ -90,7 +90,7 @@ class PegawaiAPIController extends APIBaseController
      */
     public function show($id)
     {
-        $post = Profile::find($id);
+        $post = Pegawai::find($id);
 
 
         if (is_null($post)) {
