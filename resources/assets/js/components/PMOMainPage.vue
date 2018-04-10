@@ -118,10 +118,6 @@
                         field: 'birthday',
                         immutable: true
                     },
-                    {
-                        label: '',
-                        field: 'editButton'
-                    }
                 ],
                 dataKompetensiColumns:[
 //                    Data Pegawai
