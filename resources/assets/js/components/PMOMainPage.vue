@@ -8,13 +8,22 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3 p-2">
-                            <button type="button" class="btn btn-primary m-1">Add Data</button>
+                            <button type="button"
+                                    class="btn btn-primary m-1"
+                                    data-toggle="modal"
+                                    data-target="#addDataModal">
+                                Tambah Data
+                            </button>
                         </div>
                         <div class="col-md-3 p-2"></div>
                         <div class="col-md-3 p-2"></div>
                         <div class="col-md-3 p-2">
-                            <button type="button" class="btn btn-outline-primary float-md-right m-1">Download</button>
-                            <button type="button" class="btn btn-outline-primary float-md-right m-1">Upload</button>
+                            <button type="button" class="btn btn-outline-primary float-md-right m-1">
+                                Download
+                            </button>
+                            <button type="button" class="btn btn-outline-primary float-md-right m-1">
+                                Upload
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -27,6 +36,33 @@
         <footer>
 
         </footer>
+        <!--Modals-->
+        <div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addDataModalLabel">Entri {{ title }} Baru</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group" v-for="column in columns" v-if="column.label != ''">
+                                <label :for="column.field">{{ column.label }}</label>
+                                <input class="form-control"
+                                       :type="column.type == 'number' || 'date' ? column.type : 'text'"
+                                       :id="column.field" :placeholder="column.label">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -45,10 +81,12 @@
                     {
                         label: 'NIP',
                         field: 'nip',
+                        immutable: true
                     },
                     {
                         label: 'Nama Lengkap',
-                        field: 'name'
+                        field: 'name',
+                        immutable: true
                     },
                     {
                         label: 'Unit Kerja',
@@ -77,8 +115,13 @@
                     },
                     {
                         label: 'Tanggal Lahir',
-                        field: 'birthday'
+                        field: 'birthday',
+                        immutable: true
                     },
+                    {
+                        label: '',
+                        field: 'editButton'
+                    }
                 ],
                 dataKompetensiColumns:[
 //                    Data Pegawai
@@ -243,6 +286,10 @@
                         type: 'number',
                         thClass: 'text-center fungsi-manajerial-group'
                     },
+                    {
+                        label: '',
+                        field: 'editButton'
+                    }
                 ],
                 dataKinerjaColumns:[],
                 rows: [],
