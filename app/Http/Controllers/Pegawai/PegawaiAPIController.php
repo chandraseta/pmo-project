@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Pegawai;
 
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Pegawai\APIBaseController as APIBaseController;
+use App\Http\Controllers\APIBaseController as APIBaseController;
 use App\User;
 use App\Pegawai;
 use App\RiwayatPendidikan;
