@@ -19,15 +19,17 @@
 
     @include('layout-profile.nav')
 
-    <main role="main" class="container">
 
-        <div class="starter-template">
-            <h1>Bootstrap starter template</h1>
-            <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
-                mostly barebones HTML document.</p>
-        </div>
+    <div class="container" id="profile-page">
+        @yield('content')
+    </div>
 
-    </main>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
     @include('layout-profile.footer')
 
@@ -40,5 +42,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
             integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
             crossorigin="anonymous"></script>
+
+    {{--<script src="https://cdn.jsdelivr.net/npm/vue"></script>--}}
+    <script src="/js/profile.js"></script>
 </body>
 </html>

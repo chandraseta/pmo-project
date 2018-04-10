@@ -5,3 +5,12 @@ body {
     padding: 3rem 1.5rem;
     text-align: center;
 }
+
+#img-profile {
+    /*height: 500px;*/
+    /*width: 400px;*/
+}
+
+.card-container {
+    padding: 30px 120px;
+}
