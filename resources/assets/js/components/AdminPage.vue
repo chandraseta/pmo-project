@@ -31,16 +31,8 @@
         data() {
             return {
                 title: 'Data User',
-                columns: [],
-                dataUserColumns:[
-                    {
-                        label: 'Username',
-                        field: 'username',
-                    },
-                    {
-                        label: 'NIP',
-                        field: 'nip',
-                    },
+                rows: [],
+                columns: [
                     {
                         label: 'Nama Lengkap',
                         field: 'name'
@@ -50,17 +42,17 @@
                         field: 'email'
                     },
                 ],
-                rows: [],
-                dataUser: [
-                    {id:1, username:'shigure', nip:'172859212', name:'Shigure', email:'shigure@sailor.com'},
-                    {id:2, username:'tokiwa-matsu', nip:'175821032', name:'Tokiwa Matsu', email:'tokiwa-matsu@sailor.com'},
-                    {id:3, username:'ku-jaku', nip:'114828124', name:'Ku Jaku', email:'ku-jaku@iroshizuku.com'}
-                ],
             }
         },
-        created: function () {
-            this.rows = this.dataUser;
-            this.columns = this.dataUserColumns;
+        methods:{
+            getData() {
+                axios.get('/api/user')
+                    .then(response => {
+                        this.rows.name = response.data.name;
+                        this.rows.email = response.data.email;
+                })
+                    .catch(error => console.log(error));
+            }
         }
     }
 </script>
