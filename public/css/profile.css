@@ -27,3 +27,7 @@ table td,
 table th{
     text-align: center;
 }
+
+.btn-simpan {
+    margin-left: 10px;
+}
