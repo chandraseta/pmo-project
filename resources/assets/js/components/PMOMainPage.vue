@@ -122,165 +122,254 @@
                 dataKompetensiColumns:[
 //                    Data Pegawai
                     {
-                        label: 'NIP',
-                        field: 'nip',
+                        label: 'Nama Lengkap',
+                        field: 'nama'
                     },
                     {
-                        label: 'Nama Lengkap',
-                        field: 'name'
+                        label: 'NIP',
+                        field: 'nip',
                     },
                     {
                         label: 'Unit Kerja',
                         field: 'unit'
                     },
+                    {
+                        label: 'Tingkat Pendidikan',
+                        field: 'pendidikan_terakhir'
+                    },
+                    {
+                        label: 'Tanggal Lahir',
+                        field: 'tanggal_lahir'
+                    },
+                    {
+                        label: 'Jabatan',
+                        field: 'jabatan'
+                    },
+                    {
+                        label: 'Tujuan Pemeriksaan',
+                        field: 'tujuan_pemeriksaan'
+                    },
+                    {
+                        label: 'Tanggal Pelaksanaan',
+                        field: 'tanggal',
+                        type: 'date',
+                        dateInputFormat: 'YYYY-MM-DD',
+                        dateOutputFormat: 'DD-MM-YYYY'
+                    },
 //                    Fungsi Kognitif
                     {
                         label: 'Efisiensi Kecerdasan',
-                        field: 'efisiensiKecerdasan',
+                        field: 'kognitif_efisiensi_kecerdasan',
                         type: 'number',
                         thClass: 'text-center fungsi-kognitif-group'
                     },
                     {
                         label: 'Daya Nalar',
-                        field: 'dayaNalar',
+                        field: 'kognitif_daya_nalar',
                         type: 'number',
                         thClass: 'text-center fungsi-kognitif-group'
                     },
                     {
                         label: 'Daya Asosiasi',
-                        field: 'dayaAsosiasi',
+                        field: 'kognitif_daya_asosiasi',
                         type: 'number',
                         thClass: 'text-center fungsi-kognitif-group'
                     },
                     {
                         label: 'Daya Analitis',
-                        field: 'dayaAnalitis',
+                        field: 'kognitif_daya_analitis',
                         type: 'number',
                         thClass: 'text-center fungsi-kognitif-group'
                     },
                     {
                         label: 'Daya Antisipasi',
-                        field: 'dayaAntisipasi',
+                        field: 'kognitif_daya_antisipasi',
                         type: 'number',
                         thClass: 'text-center fungsi-kognitif-group'
                     },
                     {
                         label: 'Kemandirian Berpikir',
-                        field: 'kemandirianBerpikir',
+                        field: 'kognitif_kemandirian_berpikir',
                         type: 'number',
                         thClass: 'text-center fungsi-kognitif-group'
                     },
                     {
                         label: 'Fleksibilitas',
-                        field: 'fleksibilitas',
+                        field: 'kognitif_fleksibilitas',
                         type: 'number',
                         thClass: 'text-center fungsi-kognitif-group'
                     },
                     {
                         label: 'Daya Tangkap',
-                        field: 'dayaTangkap',
+                        field: 'kognitif_daya_tangkap',
                         type: 'number',
+                        thClass: 'text-center fungsi-kognitif-group'
+                    },
+                    {
+                        label: 'Rata-rata Kognitif',
+                        field: 'kognitif',
+                        type: 'decimal',
                         thClass: 'text-center fungsi-kognitif-group'
                     },
 //                    Fungsi Interaksional
                     {
                         label: 'Penempatan Diri',
-                        field: 'penempatanDiri',
+                        field: 'interaksional_penempatan_diri',
                         type: 'number',
                         thClass: 'text-center fungsi-interaksional-group'
                     },
                     {
                         label: 'Percaya Diri',
-                        field: 'percayaDiri',
+                        field: 'interaksional_percaya_diri',
                         type: 'number',
                         thClass: 'text-center fungsi-interaksional-group'
                     },
                     {
                         label: 'Daya Kooperatif',
-                        field: 'dayaKooperatif',
+                        field: 'interaksional_daya_kooperatif',
                         type: 'number',
                         thClass: 'text-center fungsi-interaksional-group'
                     },
                     {
                         label: 'Penyesuaian Perasaan',
-                        field: 'penyesuaianPerasaan',
+                        field: 'interaksional_penyesuaian_perasaan',
                         type: 'number',
+                        thClass: 'text-center fungsi-interaksional-group'
+                    },
+                    {
+                        label: 'Penyesuaian Perasaan',
+                        field: 'interaksional',
+                        type: 'decimal',
                         thClass: 'text-center fungsi-interaksional-group'
                     },
 //                    Fungsi Emosional
                     {
                         label: 'Stabilitas Emosi',
-                        field: 'stabilitasEmosi',
+                        field: 'emosional_stabilitas_emosi',
                         type: 'number',
                         thClass: 'text-center fungsi-emosional-group'
                     },
                     {
                         label: 'Toleransi terhadap Stress',
-                        field: 'toleransiStress',
+                        field: 'emosional_toleransi_stres',
                         type: 'number',
                         thClass: 'text-center fungsi-emosional-group'
                     },
                     {
                         label: 'Pengendalian Diri',
-                        field: 'pengendalianDiri',
+                        field: 'emosional_pengendalian_diri',
                         type: 'number',
                         thClass: 'text-center fungsi-emosional-group'
                     },
                     {
                         label: 'Kemantapan Konsentrasi',
-                        field: 'kemantapanKonsentrasi',
+                        field: 'emosional_kemantapan_konsentrasi',
                         type: 'number',
+                        thClass: 'text-center fungsi-emosional-group'
+                    },
+                    {
+                        label: 'Rata-rata Emosional',
+                        field: 'emosional_kemantapan_konsentrasi',
+                        type: 'decimal',
                         thClass: 'text-center fungsi-emosional-group'
                     },
 //                    Fungsi Sikap Kerja
                     {
                         label: 'Hasrat Berprestasi',
-                        field: 'hasratBerprestasi',
+                        field: 'sikap_kerja_hasrat_berprestasi',
                         type: 'number',
                         thClass: 'text-center fungsi-sikap-kerja-group'
                     },
                     {
                         label: 'Daya Tahan',
-                        field: 'dayaTahan',
+                        field: 'sikap_kerja_daya_tahan',
                         type: 'number',
                         thClass: 'text-center fungsi-sikap-kerja-group'
                     },
                     {
                         label: 'Keteraturan Kerja',
-                        field: 'keteraturanKerja',
+                        field: 'sikap_kerja_keteraturan_kerja',
                         type: 'number',
                         thClass: 'text-center fungsi-sikap-kerja-group'
                     },
                     {
                         label: 'Pengerahan Energi Kerja',
-                        field: 'pengerahanEnergi',
+                        field: 'sikap_kerja_pengerahan_energi_kerja',
                         type: 'number',
+                        thClass: 'text-center fungsi-sikap-kerja-group'
+                    },
+                    {
+                        label: 'Rata-rata Sikap Kerja',
+                        field: 'sikap_kerja',
+                        type: 'decimal',
                         thClass: 'text-center fungsi-sikap-kerja-group'
                     },
 //                    Fungsi Manajerial
                     {
                         label: 'Efektivitas Perencanaan',
-                        field: 'efektivitasPerencanaan',
+                        field: 'manajerial_efektivitas_perencanaan',
                         type: 'number',
                         thClass: 'text-center fungsi-manajerial-group'
                     },
                     {
                         label: 'Pengorganisasian Pelaksanaan',
-                        field: 'pengorganisasianPelaksanaan',
+                        field: 'manajerial_pengorganisasian_pelaksanaan',
                         type: 'number',
                         thClass: 'text-center fungsi-manajerial-group'
                     },
                     {
                         label: 'Intensitas Pengarahan',
-                        field: 'intensitasPengarahan',
+                        field: 'manajerial_intensitas_pengarahan',
                         type: 'number',
                         thClass: 'text-center fungsi-manajerial-group'
                     },
                     {
                         label: 'Kekuatan Pengawasan',
-                        field: 'kekuatanPengawasan',
+                        field: 'manajerial_kekuatan_pengawasan',
                         type: 'number',
                         thClass: 'text-center fungsi-manajerial-group'
+                    },
+                    {
+                        label: 'Rata-rata Manajerial',
+                        field: 'manajerial',
+                        type: 'decimal',
+                        thClass: 'text-center fungsi-manajerial-group'
+                    },
+                    // Summary
+                    {
+                        label: 'Potensi Keberhasilan',
+                        field: 'profil_potensi_keberhasilan',
+                        type: 'decimal',
+                        thClass: 'text-center'
+                    },
+                    {
+                        label: 'Potensi Pengembangan Diri',
+                        field: 'profil_potensi_pengembangan_diri',
+                        type: 'decimal',
+                        thClass: 'text-center'
+                    },
+                    {
+                        label: 'Loyalitas Terhadap Tugas',
+                        field: 'profil_loyalitas_terhadap_tugas',
+                        type: 'decimal',
+                        thClass: 'text-center'
+                    },
+                    {
+                        label: 'Efektivitas Manajerial',
+                        field: 'profil_efektivitas_manajerial',
+                        type: 'decimal',
+                        thClass: 'text-center'
+                    },
+                    {
+                        label: 'Nilai Prediksi',
+                        field: 'profil',
+                        type: 'decimal',
+                        thClass: 'text-center'
+                    },
+                    {
+                        label: 'Rekomendasi',
+                        field: 'indeks',
+                        thClass: 'text-center'
                     },
                     {
                         label: '',
@@ -295,11 +384,7 @@
                     {id:3, nip:"12345623", name:"Khowarizmi", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
                 ],
                 dataKinerja: [],
-                dataKompetensi: [
-                    {
-                        id:1, nip:99999999, name:"Al", unit:"Shokenbu"
-                    },
-                ],
+                dataKompetensi: [],
             }
         },
         methods: {
@@ -312,6 +397,16 @@
         created: function () {
             this.rows = this.dataPegawai;
             this.columns = this.dataPegawaiColumns;
+
+            axios.get('/api/kompetensi')
+                .then(response => {
+                    console.log(response.data);
+                    console.log(response.data.data);
+                    this.dataKompetensi = response.data.data;
+                })
+                .catch(e => {
+                    this.errors.push(e);
+                })
         }
     }
 </script>

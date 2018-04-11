@@ -6,7 +6,8 @@
                 :rows="rows"
                 :paginate="true"
                 :lineNumbers="true"
-                :globalSearch="true">
+                :globalSearch="true"
+                styleClass="vgt-table striped condensed bordered">
             <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'editButton'">
                     <button class="btn btn-sm btn-default"
