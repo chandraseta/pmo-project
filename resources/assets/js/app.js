@@ -35,3 +35,62 @@ if (document.getElementById('admin-page')) {
         }
     });
 }
+
+if (document.getElementById('profile-page')) {
+    const profilePage = new Vue({
+        el: '#profile-page',
+        data : {
+            isEditProfile : false,
+            isEditRiwayat : false,
+            imageProfileUrl: "https://i.pinimg.com/236x/34/ba/c1/34bac13dd65ab3b81267f727e5633549--patrick-dempsey-handsome-man.jpg",
+            nama : "Joko Susilo",
+            tempatLahir : "Medan",
+            tanggalLahir: "17 Agustus 1981",
+            email: "joko.susilo@gmail.com",
+            nopeg: "12340009876",
+            unitKerja: "Fakultas FMIPA",
+            posisi: "Kepala Bidang Kemahasiswaan",
+            kompetensi: "Administrasi",
+            tahunMasuk: "2010",
+            tahunKeluar: "2020",
+            riwayatPendidikan: [
+                { tingkatPendidikan: "S1",
+                    namaInstitusi: "ITB",
+                    jurusan: "Teknik Sipil",
+                    tahunMasuk: "2000",
+                    tahunKeluar: "2005" },
+                { tingkatPendidikan: "S2",
+                    namaInstitusi: "ITB",
+                    jurusan: "Teknik Sipil",
+                    tahunMasuk: "2006",
+                    tahunKeluar: "2008" }
+            ],
+            riwayatPekerjaan: [
+                { namaInstitusi: "FTSL ITB",
+                    posisi: "Tenaga Pendidik",
+                    tahunMasuk: "2008",
+                    tahunKeluar: "2013" },
+                { namaInstitusi: "FMIPA ITB",
+                    posisi: "Tenaga Pendidik",
+                    tahunMasuk: "2013",
+                    tahunKeluar: "2017" }
+            ],
+            rekomendasiTraining: [
+                { namaTraining: "Emotional Training",
+                    penyelenggara: "PMO",
+                    bidang: "Psikologi"}
+            ]
+
+        },
+        methods: {
+            editProfilPegawai() {
+                this.isEditProfile = true;
+            },
+
+            editRiwayatPegawai() {
+                this.isEditRiwayat = true;
+            },
+        }
+
+    });
+}
