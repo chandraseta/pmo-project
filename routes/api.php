@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('pegawai', 'Pegawai\PegawaiAPIController');
 
 Route::resource('user', 'User\UserAPIController');
+
+Route::resource('kompetensi', 'DataKompetensiController');
