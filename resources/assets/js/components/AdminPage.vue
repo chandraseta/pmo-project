@@ -38,7 +38,13 @@
         data() {
             return {
                 title: 'Data User',
-                rows: [],
+                rows: [
+                    {name: 'Andrew Ng', email:'andrew@ng.com'},
+                    {name: 'Nathanael', email:'nathanael@bic.com'},
+                    {name: 'Jonathan', email:'jona@than.com'},
+                    {name: 'Iriana', email:'iriana@google.com'},
+                    {name: 'Rando', email:'rando@wis.com'}
+                ],
                 columns: [
                     {
                         label: 'Nama Lengkap',
@@ -53,17 +59,18 @@
         },
 
         created: function() {
-            this.getData();
+            // this.getData();
         },
 
         methods:{
-            getData() {
-                axios.get('/api/user')
-                    .then(response => {
-                        this.rows.push(response.data);
-                })
-                    .catch(error => console.log(error));
-            }
+            // getData() {
+            //     axios.get('/api/user')
+            //         .then(response => {
+            //             this.rows.name.push(response.data.name);
+            //             this.rows.email.push(response.data.email);
+            //     })
+            //         .catch(error => console.log(error));
+            // }
         }
     }
 </script>
