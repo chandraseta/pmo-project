@@ -28,17 +28,6 @@
 
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                No. Pegawai
-                            </div>
-                            <div class="col-sm-5">
-                                <b>12349200022</b>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
                                 Tempat, Tanggal Lahir
                             </div>
                             <div class="col-sm-5">
@@ -56,6 +45,73 @@
                                 <b>joko.susilo@gmail.com</b>
                             </div>
                         </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                No. Pegawai
+                            </div>
+                            <div class="col-sm-5">
+                                <b>12340009876</b>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                Unit Kerja
+                            </div>
+                            <div class="col-sm-5">
+                                <b>Fakultas FMIPA</b>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                Posisi
+                            </div>
+                            <div class="col-sm-5">
+                                <b>Kepala Bidang Kemahasiswaan</b>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                Kompetensi
+                            </div>
+                            <div class="col-sm-5">
+                                <b>Administrasi</b>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                Tahun Masuk
+                            </div>
+                            <div class="col-sm-5">
+                                <b>2010</b>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                Tahun Keluar
+                            </div>
+                            <div class="col-sm-5">
+                                <b>2020</b>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -72,12 +128,86 @@
         <div class="card-body">
             <div class="container">
 
-                
+                <h5>Riwayat Pendidikan</h5>
+
+                <hr>
+
+                Belum ditambahkan.
+
+                <br><br><br>
+
+
+                <h5>Riwayat Pendidikan</h5>
+
+                <hr>
+
+                Belum ditambahkan.
 
             </div>
         </div>
     </div>
 
+    <br>
 
+    <div class="card">
+        <div class="card-header">
+            Hasil Kinerja
+        </div>
+
+        <div class="card-body">
+            <div class="container">
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header">
+            Hasil Kompetensi
+        </div>
+
+        <div class="card-body">
+            <div class="container">
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header">
+            Rekomendasi
+        </div>
+
+        <div class="card-body">
+            <div class="container">
+
+                <h5>Rekomendasi Training</h5>
+
+                <hr>
+
+                Tidak ada.
+
+                <br><br><br>
+
+
+                <h5>Rekomendasi Posisi</h5>
+
+                <hr>
+
+                Tidak ada.
+
+            </div>
+        </div>
+    </div>
+
+    <br>
 
 @endsection
