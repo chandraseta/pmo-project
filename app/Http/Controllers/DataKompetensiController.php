@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Profile\APIBaseController;
+use App\Http\Controllers\APIBaseController;
 use App\Kompetensi;
 
 class DataKompetensiController extends APIBaseController

@@ -85,7 +85,7 @@
                     },
                     {
                         label: 'Nama Lengkap',
-                        field: 'name',
+                        field: 'nama',
                         immutable: true
                     },
                     {
@@ -115,7 +115,10 @@
                     },
                     {
                         label: 'Tanggal Lahir',
-                        field: 'birthday',
+                        field: 'tanggal_lahir',
+                        type: 'date',
+                        dateInputFormat: 'YYYY-MM-DD',
+                        dateOutputFormat: 'DD-MM-YYYY',
                         immutable: true
                     },
                 ],
@@ -378,11 +381,7 @@
                 ],
                 dataKinerjaColumns:[],
                 rows: [],
-                dataPegawai: [
-                    {id:1, nip:"12345678", name:"Iqbal", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:2, nip:"12345634", name:"Al", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:3, nip:"12345623", name:"Khowarizmi", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                ],
+                dataPegawai: [],
                 dataKinerja: [],
                 dataKompetensi: [],
             }
@@ -398,15 +397,21 @@
             this.rows = this.dataPegawai;
             this.columns = this.dataPegawaiColumns;
 
+            axios.get('/api/pegawai')
+                .then(response => {
+                    this.dataPegawai = response.data.data;
+                })
+                .catch(e => {
+                    this.errors.push(e);
+                });
+
             axios.get('/api/kompetensi')
                 .then(response => {
-                    console.log(response.data);
-                    console.log(response.data.data);
                     this.dataKompetensi = response.data.data;
                 })
                 .catch(e => {
                     this.errors.push(e);
-                })
+                });
         }
     }
 </script>
