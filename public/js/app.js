@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 69);
+/******/ 	return __webpack_require__(__webpack_require__.s = 70);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -410,7 +410,7 @@ function dayOfISOYear (isoYear, week, day) {
 "use strict";
 
 
-var bind = __webpack_require__(30);
+var bind = __webpack_require__(31);
 var isBuffer = __webpack_require__(76);
 
 /*global toString:true*/
@@ -1589,10 +1589,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(32);
+    adapter = __webpack_require__(33);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(32);
+    adapter = __webpack_require__(33);
   }
   return adapter;
 }
@@ -1667,7 +1667,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
 
 /***/ }),
 /* 20 */
@@ -1802,7 +1802,7 @@ function addWeeks (dirtyDate, dirtyAmount, dirtyOptions) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = differenceInMonths;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__differenceInCalendarMonths_index_js__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__differenceInCalendarMonths_index_js__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__compareAsc_index_js__ = __webpack_require__(5);
 
 
@@ -1901,7 +1901,7 @@ function differenceInSeconds (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = startOfUTCISOWeekYear;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getUTCISOWeekYear_index_js__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getUTCISOWeekYear_index_js__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__startOfUTCISOWeek_index_js__ = __webpack_require__(16);
 
 
@@ -1924,7 +1924,7 @@ function startOfUTCISOWeekYear (dirtyDate, dirtyOptions) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = subMinutes;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addMinutes_index_js__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addMinutes_index_js__ = __webpack_require__(40);
 
 
 /**
@@ -15090,6 +15090,12 @@ return jQuery;
 /* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(75);
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -15105,7 +15111,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -15295,7 +15301,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15306,7 +15312,7 @@ var settle = __webpack_require__(79);
 var buildURL = __webpack_require__(81);
 var parseHeaders = __webpack_require__(82);
 var isURLSameOrigin = __webpack_require__(83);
-var createError = __webpack_require__(33);
+var createError = __webpack_require__(34);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(84);
 
 module.exports = function xhrAdapter(config) {
@@ -15482,7 +15488,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15507,7 +15513,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15519,7 +15525,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15545,7 +15551,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15587,13 +15593,13 @@ function addHours (dirtyDate, dirtyAmount, dirtyOptions) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = addISOYears;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getISOYear_index_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__setISOYear_index_js__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__setISOYear_index_js__ = __webpack_require__(39);
 
 
 
@@ -15631,7 +15637,7 @@ function addISOYears (dirtyDate, dirtyAmount, dirtyOptions) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15685,7 +15691,7 @@ function setISOYear (dirtyDate, dirtyISOYear, dirtyOptions) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15727,7 +15733,7 @@ function addMinutes (dirtyDate, dirtyAmount, dirtyOptions) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15768,7 +15774,7 @@ function addQuarters (dirtyDate, dirtyAmount, dirtyOptions) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15808,7 +15814,7 @@ function addSeconds (dirtyDate, dirtyAmount, dirtyOptions) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15848,7 +15854,7 @@ function addYears (dirtyDate, dirtyAmount, dirtyOptions) {
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15892,7 +15898,7 @@ function differenceInCalendarISOYears (dirtyDateLeft, dirtyDateRight, dirtyOptio
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15940,7 +15946,7 @@ function differenceInCalendarMonths (dirtyDateLeft, dirtyDateRight, dirtyOptions
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15980,7 +15986,7 @@ function getQuarter (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16025,7 +16031,7 @@ function differenceInCalendarYears (dirtyDateLeft, dirtyDateRight, dirtyOptions)
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16082,12 +16088,12 @@ function differenceInDays (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = subISOYears;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addISOYears_index_js__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addISOYears_index_js__ = __webpack_require__(38);
 
 
 /**
@@ -16124,7 +16130,7 @@ function subISOYears (dirtyDate, dirtyAmount, dirtyOptions) {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16165,7 +16171,7 @@ function endOfDay (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16230,7 +16236,7 @@ function endOfWeek (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16273,13 +16279,13 @@ function endOfMonth (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = format;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isValid_index_js__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isValid_index_js__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__locale_en_US_index_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_formatters_index_js__ = __webpack_require__(136);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_cloneObject_index_js__ = __webpack_require__(3);
@@ -16470,7 +16476,7 @@ function cleanEscapedString (input) {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16523,7 +16529,7 @@ function isValid (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16551,7 +16557,7 @@ function getUTCISOWeek (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16588,7 +16594,7 @@ function getUTCISOWeekYear (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16631,7 +16637,7 @@ function startOfYear (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16671,7 +16677,7 @@ function isLeapYear (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16719,7 +16725,7 @@ function getISODay (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16771,7 +16777,7 @@ function getISOWeek (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16812,7 +16818,7 @@ function startOfHour (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16870,7 +16876,7 @@ function isSameWeek (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16911,7 +16917,7 @@ function startOfMinute (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16955,7 +16961,7 @@ function startOfQuarter (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16996,7 +17002,7 @@ function startOfSecond (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17060,7 +17066,7 @@ function lastDayOfWeek (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17113,7 +17119,7 @@ function setMonth (dirtyDate, dirtyMonth, dirtyOptions) {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -17142,7 +17148,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Navbar.vue"
+Component.options.__file = "resources/assets/js/components/Navbar.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -17151,9 +17157,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-cd7fb372", Component.options)
+    hotAPI.createRecord("data-v-cadbadf2", Component.options)
   } else {
-    hotAPI.reload("data-v-cd7fb372", Component.options)
+    hotAPI.reload("data-v-cadbadf2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -17164,7 +17170,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -17189,7 +17195,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\DataTable.vue"
+Component.options.__file = "resources/assets/js/components/DataTable.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -17198,9 +17204,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7f7ae246", Component.options)
+    hotAPI.createRecord("data-v-66f0941d", Component.options)
   } else {
-    hotAPI.reload("data-v-7f7ae246", Component.options)
+    hotAPI.reload("data-v-66f0941d", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -17211,22 +17217,24 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(70);
+__webpack_require__(71);
 module.exports = __webpack_require__(234);
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_good_table__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_good_table_dist_vue_good_table_css__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_good_table_dist_vue_good_table_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_good_table_dist_vue_good_table_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_good_table_dist_vue_good_table_css__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_good_table_dist_vue_good_table_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_good_table_dist_vue_good_table_css__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -17234,7 +17242,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(71);
+__webpack_require__(72);
 
 window.Vue = __webpack_require__(93);
 
@@ -17245,7 +17253,9 @@ window.Vue = __webpack_require__(93);
  */
 
 
+
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_good_table__["a" /* default */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_axios___default.a);
 
 if (document.getElementById('pmo-page')) {
     var pmoPage = new Vue({
@@ -17376,11 +17386,11 @@ if (document.getElementById('profile-page')) {
 }
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(72);
+window._ = __webpack_require__(73);
 window.Popper = __webpack_require__(28).default;
 
 /**
@@ -17392,7 +17402,7 @@ window.Popper = __webpack_require__(28).default;
 try {
   window.$ = window.jQuery = __webpack_require__(29);
 
-  __webpack_require__(73);
+  __webpack_require__(74);
 } catch (e) {}
 
 /**
@@ -17401,7 +17411,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(74);
+window.axios = __webpack_require__(30);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -17437,7 +17447,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -34542,7 +34552,7 @@ if (token) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(12)(module)))
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -38473,12 +38483,6 @@ if (token) {
 
 
 /***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(75);
-
-/***/ }),
 /* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38486,7 +38490,7 @@ module.exports = __webpack_require__(75);
 
 
 var utils = __webpack_require__(1);
-var bind = __webpack_require__(30);
+var bind = __webpack_require__(31);
 var Axios = __webpack_require__(77);
 var defaults = __webpack_require__(19);
 
@@ -38521,9 +38525,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(35);
+axios.Cancel = __webpack_require__(36);
 axios.CancelToken = __webpack_require__(91);
-axios.isCancel = __webpack_require__(34);
+axios.isCancel = __webpack_require__(35);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -38676,7 +38680,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(33);
+var createError = __webpack_require__(34);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -39109,7 +39113,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(88);
-var isCancel = __webpack_require__(34);
+var isCancel = __webpack_require__(35);
 var defaults = __webpack_require__(19);
 var isAbsoluteURL = __webpack_require__(89);
 var combineURLs = __webpack_require__(90);
@@ -39269,7 +39273,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(35);
+var Cancel = __webpack_require__(36);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -50584,7 +50588,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(31)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(32)))
 
 /***/ }),
 /* 96 */
@@ -57317,23 +57321,23 @@ module.exports = function (text) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addDays_index_js__ = __webpack_require__(7);
 /* unused harmony reexport addDays */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addHours_index_js__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addHours_index_js__ = __webpack_require__(37);
 /* unused harmony reexport addHours */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__addISOYears_index_js__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__addISOYears_index_js__ = __webpack_require__(38);
 /* unused harmony reexport addISOYears */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__addMilliseconds_index_js__ = __webpack_require__(8);
 /* unused harmony reexport addMilliseconds */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__addMinutes_index_js__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__addMinutes_index_js__ = __webpack_require__(40);
 /* unused harmony reexport addMinutes */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__addMonths_index_js__ = __webpack_require__(14);
 /* unused harmony reexport addMonths */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__addQuarters_index_js__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__addQuarters_index_js__ = __webpack_require__(41);
 /* unused harmony reexport addQuarters */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__addSeconds_index_js__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__addSeconds_index_js__ = __webpack_require__(42);
 /* unused harmony reexport addSeconds */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__addWeeks_index_js__ = __webpack_require__(22);
 /* unused harmony reexport addWeeks */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__addYears_index_js__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__addYears_index_js__ = __webpack_require__(43);
 /* unused harmony reexport addYears */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__areIntervalsOverlapping_index_js__ = __webpack_require__(103);
 /* unused harmony reexport areIntervalsOverlapping */
@@ -57349,17 +57353,17 @@ module.exports = function (text) {
 /* unused harmony reexport differenceInCalendarDays */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__differenceInCalendarISOWeeks_index_js__ = __webpack_require__(107);
 /* unused harmony reexport differenceInCalendarISOWeeks */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__differenceInCalendarISOYears_index_js__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__differenceInCalendarISOYears_index_js__ = __webpack_require__(44);
 /* unused harmony reexport differenceInCalendarISOYears */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__differenceInCalendarMonths_index_js__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__differenceInCalendarMonths_index_js__ = __webpack_require__(45);
 /* unused harmony reexport differenceInCalendarMonths */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__differenceInCalendarQuarters_index_js__ = __webpack_require__(108);
 /* unused harmony reexport differenceInCalendarQuarters */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__differenceInCalendarWeeks_index_js__ = __webpack_require__(109);
 /* unused harmony reexport differenceInCalendarWeeks */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__differenceInCalendarYears_index_js__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__differenceInCalendarYears_index_js__ = __webpack_require__(47);
 /* unused harmony reexport differenceInCalendarYears */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__differenceInDays_index_js__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__differenceInDays_index_js__ = __webpack_require__(48);
 /* unused harmony reexport differenceInDays */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__differenceInHours_index_js__ = __webpack_require__(110);
 /* unused harmony reexport differenceInHours */
@@ -57381,7 +57385,7 @@ module.exports = function (text) {
 /* unused harmony reexport differenceInYears */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__eachDayOfInterval_index_js__ = __webpack_require__(116);
 /* unused harmony reexport eachDayOfInterval */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__endOfDay_index_js__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__endOfDay_index_js__ = __webpack_require__(50);
 /* unused harmony reexport endOfDay */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__endOfHour_index_js__ = __webpack_require__(117);
 /* unused harmony reexport endOfHour */
@@ -57391,17 +57395,17 @@ module.exports = function (text) {
 /* unused harmony reexport endOfISOYear */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__endOfMinute_index_js__ = __webpack_require__(120);
 /* unused harmony reexport endOfMinute */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__endOfMonth_index_js__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__endOfMonth_index_js__ = __webpack_require__(52);
 /* unused harmony reexport endOfMonth */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__endOfQuarter_index_js__ = __webpack_require__(121);
 /* unused harmony reexport endOfQuarter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__endOfSecond_index_js__ = __webpack_require__(122);
 /* unused harmony reexport endOfSecond */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__endOfWeek_index_js__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__endOfWeek_index_js__ = __webpack_require__(51);
 /* unused harmony reexport endOfWeek */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__endOfYear_index_js__ = __webpack_require__(123);
 /* unused harmony reexport endOfYear */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__format_index_js__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__format_index_js__ = __webpack_require__(53);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_43__format_index_js__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__formatDistance_index_js__ = __webpack_require__(139);
 /* unused harmony reexport formatDistance */
@@ -57421,9 +57425,9 @@ module.exports = function (text) {
 /* unused harmony reexport getDaysInYear */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__getHours_index_js__ = __webpack_require__(146);
 /* unused harmony reexport getHours */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__getISODay_index_js__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__getISODay_index_js__ = __webpack_require__(59);
 /* unused harmony reexport getISODay */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__getISOWeek_index_js__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__getISOWeek_index_js__ = __webpack_require__(60);
 /* unused harmony reexport getISOWeek */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__getISOWeeksInYear_index_js__ = __webpack_require__(147);
 /* unused harmony reexport getISOWeeksInYear */
@@ -57437,7 +57441,7 @@ module.exports = function (text) {
 /* unused harmony reexport getMonth */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__getOverlappingDaysInIntervals_index_js__ = __webpack_require__(151);
 /* unused harmony reexport getOverlappingDaysInIntervals */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__getQuarter_index_js__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__getQuarter_index_js__ = __webpack_require__(46);
 /* unused harmony reexport getQuarter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__getSeconds_index_js__ = __webpack_require__(152);
 /* unused harmony reexport getSeconds */
@@ -57457,7 +57461,7 @@ module.exports = function (text) {
 /* unused harmony reexport isFriday */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_70__isLastDayOfMonth_index_js__ = __webpack_require__(160);
 /* unused harmony reexport isLastDayOfMonth */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71__isLeapYear_index_js__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71__isLeapYear_index_js__ = __webpack_require__(58);
 /* unused harmony reexport isLeapYear */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_72__isMonday_index_js__ = __webpack_require__(161);
 /* unused harmony reexport isMonday */
@@ -57477,7 +57481,7 @@ module.exports = function (text) {
 /* unused harmony reexport isSameQuarter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_80__isSameSecond_index_js__ = __webpack_require__(169);
 /* unused harmony reexport isSameSecond */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_81__isSameWeek_index_js__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_81__isSameWeek_index_js__ = __webpack_require__(62);
 /* unused harmony reexport isSameWeek */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_82__isSameYear_index_js__ = __webpack_require__(170);
 /* unused harmony reexport isSameYear */
@@ -57489,7 +57493,7 @@ module.exports = function (text) {
 /* unused harmony reexport isThursday */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_86__isTuesday_index_js__ = __webpack_require__(174);
 /* unused harmony reexport isTuesday */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_87__isValid_index_js__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_87__isValid_index_js__ = __webpack_require__(54);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_87__isValid_index_js__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_88__isWednesday_index_js__ = __webpack_require__(175);
 /* unused harmony reexport isWednesday */
@@ -57505,7 +57509,7 @@ module.exports = function (text) {
 /* unused harmony reexport lastDayOfMonth */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_94__lastDayOfQuarter_index_js__ = __webpack_require__(181);
 /* unused harmony reexport lastDayOfQuarter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_95__lastDayOfWeek_index_js__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_95__lastDayOfWeek_index_js__ = __webpack_require__(66);
 /* unused harmony reexport lastDayOfWeek */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_96__lastDayOfYear_index_js__ = __webpack_require__(182);
 /* unused harmony reexport lastDayOfYear */
@@ -57527,13 +57531,13 @@ module.exports = function (text) {
 /* unused harmony reexport setISODay */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_105__setISOWeek_index_js__ = __webpack_require__(197);
 /* unused harmony reexport setISOWeek */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_106__setISOYear_index_js__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_106__setISOYear_index_js__ = __webpack_require__(39);
 /* unused harmony reexport setISOYear */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_107__setMilliseconds_index_js__ = __webpack_require__(198);
 /* unused harmony reexport setMilliseconds */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_108__setMinutes_index_js__ = __webpack_require__(199);
 /* unused harmony reexport setMinutes */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_109__setMonth_index_js__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_109__setMonth_index_js__ = __webpack_require__(67);
 /* unused harmony reexport setMonth */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_110__setQuarter_index_js__ = __webpack_require__(200);
 /* unused harmony reexport setQuarter */
@@ -57543,29 +57547,29 @@ module.exports = function (text) {
 /* unused harmony reexport setYear */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_113__startOfDay_index_js__ = __webpack_require__(20);
 /* unused harmony reexport startOfDay */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_114__startOfHour_index_js__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_114__startOfHour_index_js__ = __webpack_require__(61);
 /* unused harmony reexport startOfHour */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_115__startOfISOWeek_index_js__ = __webpack_require__(4);
 /* unused harmony reexport startOfISOWeek */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_116__startOfISOYear_index_js__ = __webpack_require__(9);
 /* unused harmony reexport startOfISOYear */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_117__startOfMinute_index_js__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_117__startOfMinute_index_js__ = __webpack_require__(63);
 /* unused harmony reexport startOfMinute */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_118__startOfMonth_index_js__ = __webpack_require__(203);
 /* unused harmony reexport startOfMonth */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_119__startOfQuarter_index_js__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_119__startOfQuarter_index_js__ = __webpack_require__(64);
 /* unused harmony reexport startOfQuarter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_120__startOfSecond_index_js__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_120__startOfSecond_index_js__ = __webpack_require__(65);
 /* unused harmony reexport startOfSecond */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_121__startOfWeek_index_js__ = __webpack_require__(13);
 /* unused harmony reexport startOfWeek */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_122__startOfYear_index_js__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_122__startOfYear_index_js__ = __webpack_require__(57);
 /* unused harmony reexport startOfYear */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_123__subDays_index_js__ = __webpack_require__(204);
 /* unused harmony reexport subDays */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_124__subHours_index_js__ = __webpack_require__(205);
 /* unused harmony reexport subHours */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_125__subISOYears_index_js__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_125__subISOYears_index_js__ = __webpack_require__(49);
 /* unused harmony reexport subISOYears */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_126__subMilliseconds_index_js__ = __webpack_require__(206);
 /* unused harmony reexport subMilliseconds */
@@ -58084,7 +58088,7 @@ function differenceInCalendarISOWeeks (dirtyDateLeft, dirtyDateRight, dirtyOptio
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getQuarter_index_js__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getQuarter_index_js__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toDate_index_js__ = __webpack_require__(0);
 
 
@@ -58249,9 +58253,9 @@ function differenceInHours (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 "use strict";
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__differenceInCalendarISOYears_index_js__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__differenceInCalendarISOYears_index_js__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__compareAsc_index_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__subISOYears_index_js__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__subISOYears_index_js__ = __webpack_require__(49);
 
 
 
@@ -58397,7 +58401,7 @@ function differenceInQuarters (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__differenceInDays_index_js__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__differenceInDays_index_js__ = __webpack_require__(48);
 
 
 /**
@@ -58441,7 +58445,7 @@ function differenceInWeeks (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 "use strict";
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__differenceInCalendarYears_index_js__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__differenceInCalendarYears_index_js__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__compareAsc_index_js__ = __webpack_require__(5);
 
 
@@ -58607,7 +58611,7 @@ function endOfHour (dirtyDate, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__endOfWeek_index_js__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__endOfWeek_index_js__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_cloneObject_index_js__ = __webpack_require__(3);
 
 
@@ -59484,8 +59488,8 @@ function parseDecimal (matchResult) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_getUTCDayOfYear_index_js__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_getUTCISOWeek_index_js__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_getUTCISOWeekYear_index_js__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_getUTCISOWeek_index_js__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_getUTCISOWeekYear_index_js__ = __webpack_require__(56);
 
 
 
@@ -60236,7 +60240,7 @@ function formatDistanceStrict (dirtyDate, dirtyBaseDate, dirtyOptions) {
 "use strict";
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__format_index_js__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__format_index_js__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__differenceInCalendarDays_index_js__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__locale_en_US_index_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__subMinutes_index_js__ = __webpack_require__(26);
@@ -60414,7 +60418,7 @@ function getDay (dirtyDate, dirtyOptions) {
 "use strict";
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__startOfYear_index_js__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__startOfYear_index_js__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__differenceInCalendarDays_index_js__ = __webpack_require__(10);
 
 
@@ -60459,7 +60463,7 @@ function getDayOfYear (dirtyDate, dirtyOptions) {
 "use strict";
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isLeapYear_index_js__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isLeapYear_index_js__ = __webpack_require__(58);
 
 
 
@@ -61119,8 +61123,8 @@ function isFriday (dirtyDate, dirtyOptions) {
 "use strict";
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__endOfDay_index_js__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__endOfMonth_index_js__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__endOfDay_index_js__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__endOfMonth_index_js__ = __webpack_require__(52);
 
 
 
@@ -61244,7 +61248,7 @@ function isSameDay (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfHour_index_js__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfHour_index_js__ = __webpack_require__(61);
 
 
 /**
@@ -61289,7 +61293,7 @@ function isSameHour (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isSameWeek_index_js__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isSameWeek_index_js__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_cloneObject_index_js__ = __webpack_require__(3);
 
 
@@ -61384,7 +61388,7 @@ function isSameISOYear (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfMinute_index_js__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfMinute_index_js__ = __webpack_require__(63);
 
 
 /**
@@ -61475,7 +61479,7 @@ function isSameMonth (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfQuarter_index_js__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfQuarter_index_js__ = __webpack_require__(64);
 
 
 /**
@@ -61520,7 +61524,7 @@ function isSameQuarter (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfSecond_index_js__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfSecond_index_js__ = __webpack_require__(65);
 
 
 /**
@@ -61902,7 +61906,7 @@ function isWithinInterval (dirtyDate, dirtyInterval, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lastDayOfWeek_index_js__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lastDayOfWeek_index_js__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_cloneObject_index_js__ = __webpack_require__(3);
 
 
@@ -63299,7 +63303,7 @@ function setUTCISODay (dirtyDate, dirtyDay, dirtyOptions) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = setUTCISOWeek;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getUTCISOWeek_index_js__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getUTCISOWeek_index_js__ = __webpack_require__(55);
 
 
 
@@ -63546,7 +63550,7 @@ function setHours (dirtyDate, dirtyHours, dirtyOptions) {
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addDays_index_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getISODay_index_js__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getISODay_index_js__ = __webpack_require__(59);
 
 
 
@@ -63594,7 +63598,7 @@ function setISODay (dirtyDate, dirtyDay, dirtyOptions) {
 "use strict";
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getISOWeek_index_js__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getISOWeek_index_js__ = __webpack_require__(60);
 
 
 
@@ -63725,7 +63729,7 @@ function setMinutes (dirtyDate, dirtyMinutes, dirtyOptions) {
 "use strict";
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__setMonth_index_js__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__setMonth_index_js__ = __webpack_require__(67);
 
 
 
@@ -63941,7 +63945,7 @@ function subDays (dirtyDate, dirtyAmount, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addHours_index_js__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addHours_index_js__ = __webpack_require__(37);
 
 
 /**
@@ -64061,7 +64065,7 @@ function subMonths (dirtyDate, dirtyAmount, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addQuarters_index_js__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addQuarters_index_js__ = __webpack_require__(41);
 
 
 /**
@@ -64101,7 +64105,7 @@ function subQuarters (dirtyDate, dirtyAmount, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addSeconds_index_js__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addSeconds_index_js__ = __webpack_require__(42);
 
 
 /**
@@ -64181,7 +64185,7 @@ function subWeeks (dirtyDate, dirtyAmount, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addYears_index_js__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addYears_index_js__ = __webpack_require__(43);
 
 
 /**
@@ -66507,7 +66511,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\PMOMainPage.vue"
+Component.options.__file = "resources/assets/js/components/PMOMainPage.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66516,9 +66520,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e5d14d1a", Component.options)
+    hotAPI.createRecord("data-v-40590eb3", Component.options)
   } else {
-    hotAPI.reload("data-v-e5d14d1a", Component.options)
+    hotAPI.reload("data-v-40590eb3", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66539,13 +66543,13 @@ var content = __webpack_require__(219);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(27)("f2467798", content, false, {});
+var update = __webpack_require__(27)("7a2d00fd", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e5d14d1a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMOMainPage.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e5d14d1a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMOMainPage.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-40590eb3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMOMainPage.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-40590eb3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMOMainPage.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -66563,7 +66567,7 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66679,8 +66683,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'pmo-main-page',
     components: {
-        'pmo-navbar': __webpack_require__(67),
-        'data-table': __webpack_require__(68)
+        'pmo-navbar': __webpack_require__(68),
+        'data-table': __webpack_require__(69)
     },
     data: function data() {
         return {
@@ -66692,7 +66696,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 immutable: true
             }, {
                 label: 'Nama Lengkap',
-                field: 'name',
+                field: 'nama',
                 immutable: true
             }, {
                 label: 'Unit Kerja',
@@ -66715,161 +66719,236 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 field: 'education'
             }, {
                 label: 'Tanggal Lahir',
-                field: 'birthday',
+                field: 'tanggal_lahir',
+                type: 'date',
+                dateInputFormat: 'YYYY-MM-DD',
+                dateOutputFormat: 'DD-MM-YYYY',
                 immutable: true
             }],
             dataKompetensiColumns: [
             //                    Data Pegawai
             {
+                label: 'Nama Lengkap',
+                field: 'nama'
+            }, {
                 label: 'NIP',
                 field: 'nip'
             }, {
-                label: 'Nama Lengkap',
-                field: 'name'
-            }, {
                 label: 'Unit Kerja',
                 field: 'unit'
+            }, {
+                label: 'Tingkat Pendidikan',
+                field: 'pendidikan_terakhir'
+            }, {
+                label: 'Tanggal Lahir',
+                field: 'tanggal_lahir'
+            }, {
+                label: 'Jabatan',
+                field: 'jabatan'
+            }, {
+                label: 'Tujuan Pemeriksaan',
+                field: 'tujuan_pemeriksaan'
+            }, {
+                label: 'Tanggal Pelaksanaan',
+                field: 'tanggal',
+                type: 'date',
+                dateInputFormat: 'YYYY-MM-DD',
+                dateOutputFormat: 'DD-MM-YYYY'
             },
             //                    Fungsi Kognitif
             {
                 label: 'Efisiensi Kecerdasan',
-                field: 'efisiensiKecerdasan',
+                field: 'kognitif_efisiensi_kecerdasan',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Daya Nalar',
-                field: 'dayaNalar',
+                field: 'kognitif_daya_nalar',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Daya Asosiasi',
-                field: 'dayaAsosiasi',
+                field: 'kognitif_daya_asosiasi',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Daya Analitis',
-                field: 'dayaAnalitis',
+                field: 'kognitif_daya_analitis',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Daya Antisipasi',
-                field: 'dayaAntisipasi',
+                field: 'kognitif_daya_antisipasi',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Kemandirian Berpikir',
-                field: 'kemandirianBerpikir',
+                field: 'kognitif_kemandirian_berpikir',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Fleksibilitas',
-                field: 'fleksibilitas',
+                field: 'kognitif_fleksibilitas',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Daya Tangkap',
-                field: 'dayaTangkap',
+                field: 'kognitif_daya_tangkap',
                 type: 'number',
+                thClass: 'text-center fungsi-kognitif-group'
+            }, {
+                label: 'Rata-rata Kognitif',
+                field: 'kognitif',
+                type: 'decimal',
                 thClass: 'text-center fungsi-kognitif-group'
             },
             //                    Fungsi Interaksional
             {
                 label: 'Penempatan Diri',
-                field: 'penempatanDiri',
+                field: 'interaksional_penempatan_diri',
                 type: 'number',
                 thClass: 'text-center fungsi-interaksional-group'
             }, {
                 label: 'Percaya Diri',
-                field: 'percayaDiri',
+                field: 'interaksional_percaya_diri',
                 type: 'number',
                 thClass: 'text-center fungsi-interaksional-group'
             }, {
                 label: 'Daya Kooperatif',
-                field: 'dayaKooperatif',
+                field: 'interaksional_daya_kooperatif',
                 type: 'number',
                 thClass: 'text-center fungsi-interaksional-group'
             }, {
                 label: 'Penyesuaian Perasaan',
-                field: 'penyesuaianPerasaan',
+                field: 'interaksional_penyesuaian_perasaan',
                 type: 'number',
+                thClass: 'text-center fungsi-interaksional-group'
+            }, {
+                label: 'Penyesuaian Perasaan',
+                field: 'interaksional',
+                type: 'decimal',
                 thClass: 'text-center fungsi-interaksional-group'
             },
             //                    Fungsi Emosional
             {
                 label: 'Stabilitas Emosi',
-                field: 'stabilitasEmosi',
+                field: 'emosional_stabilitas_emosi',
                 type: 'number',
                 thClass: 'text-center fungsi-emosional-group'
             }, {
                 label: 'Toleransi terhadap Stress',
-                field: 'toleransiStress',
+                field: 'emosional_toleransi_stres',
                 type: 'number',
                 thClass: 'text-center fungsi-emosional-group'
             }, {
                 label: 'Pengendalian Diri',
-                field: 'pengendalianDiri',
+                field: 'emosional_pengendalian_diri',
                 type: 'number',
                 thClass: 'text-center fungsi-emosional-group'
             }, {
                 label: 'Kemantapan Konsentrasi',
-                field: 'kemantapanKonsentrasi',
+                field: 'emosional_kemantapan_konsentrasi',
                 type: 'number',
+                thClass: 'text-center fungsi-emosional-group'
+            }, {
+                label: 'Rata-rata Emosional',
+                field: 'emosional_kemantapan_konsentrasi',
+                type: 'decimal',
                 thClass: 'text-center fungsi-emosional-group'
             },
             //                    Fungsi Sikap Kerja
             {
                 label: 'Hasrat Berprestasi',
-                field: 'hasratBerprestasi',
+                field: 'sikap_kerja_hasrat_berprestasi',
                 type: 'number',
                 thClass: 'text-center fungsi-sikap-kerja-group'
             }, {
                 label: 'Daya Tahan',
-                field: 'dayaTahan',
+                field: 'sikap_kerja_daya_tahan',
                 type: 'number',
                 thClass: 'text-center fungsi-sikap-kerja-group'
             }, {
                 label: 'Keteraturan Kerja',
-                field: 'keteraturanKerja',
+                field: 'sikap_kerja_keteraturan_kerja',
                 type: 'number',
                 thClass: 'text-center fungsi-sikap-kerja-group'
             }, {
                 label: 'Pengerahan Energi Kerja',
-                field: 'pengerahanEnergi',
+                field: 'sikap_kerja_pengerahan_energi_kerja',
                 type: 'number',
+                thClass: 'text-center fungsi-sikap-kerja-group'
+            }, {
+                label: 'Rata-rata Sikap Kerja',
+                field: 'sikap_kerja',
+                type: 'decimal',
                 thClass: 'text-center fungsi-sikap-kerja-group'
             },
             //                    Fungsi Manajerial
             {
                 label: 'Efektivitas Perencanaan',
-                field: 'efektivitasPerencanaan',
+                field: 'manajerial_efektivitas_perencanaan',
                 type: 'number',
                 thClass: 'text-center fungsi-manajerial-group'
             }, {
                 label: 'Pengorganisasian Pelaksanaan',
-                field: 'pengorganisasianPelaksanaan',
+                field: 'manajerial_pengorganisasian_pelaksanaan',
                 type: 'number',
                 thClass: 'text-center fungsi-manajerial-group'
             }, {
                 label: 'Intensitas Pengarahan',
-                field: 'intensitasPengarahan',
+                field: 'manajerial_intensitas_pengarahan',
                 type: 'number',
                 thClass: 'text-center fungsi-manajerial-group'
             }, {
                 label: 'Kekuatan Pengawasan',
-                field: 'kekuatanPengawasan',
+                field: 'manajerial_kekuatan_pengawasan',
                 type: 'number',
                 thClass: 'text-center fungsi-manajerial-group'
+            }, {
+                label: 'Rata-rata Manajerial',
+                field: 'manajerial',
+                type: 'decimal',
+                thClass: 'text-center fungsi-manajerial-group'
+            },
+            // Summary
+            {
+                label: 'Potensi Keberhasilan',
+                field: 'profil_potensi_keberhasilan',
+                type: 'decimal',
+                thClass: 'text-center'
+            }, {
+                label: 'Potensi Pengembangan Diri',
+                field: 'profil_potensi_pengembangan_diri',
+                type: 'decimal',
+                thClass: 'text-center'
+            }, {
+                label: 'Loyalitas Terhadap Tugas',
+                field: 'profil_loyalitas_terhadap_tugas',
+                type: 'decimal',
+                thClass: 'text-center'
+            }, {
+                label: 'Efektivitas Manajerial',
+                field: 'profil_efektivitas_manajerial',
+                type: 'decimal',
+                thClass: 'text-center'
+            }, {
+                label: 'Nilai Prediksi',
+                field: 'profil',
+                type: 'decimal',
+                thClass: 'text-center'
+            }, {
+                label: 'Rekomendasi',
+                field: 'indeks',
+                thClass: 'text-center'
             }, {
                 label: '',
                 field: 'editButton'
             }],
             dataKinerjaColumns: [],
             rows: [],
-            dataPegawai: [{ id: 1, nip: "12345678", name: "Iqbal", unit: "UKJ", position: "Ketua", startYear: 2015, competencyGroup: "IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 2, nip: "12345634", name: "Al", unit: "UKJ", position: "Ketua", startYear: 2015, competencyGroup: "IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 3, nip: "12345623", name: "Khowarizmi", unit: "UKJ", position: "Ketua", startYear: 2015, competencyGroup: "IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }],
+            dataPegawai: [],
             dataKinerja: [],
-            dataKompetensi: [{
-                id: 1, nip: 99999999, name: "Al", unit: "Shokenbu"
-            }]
+            dataKompetensi: []
         };
     },
 
@@ -66881,8 +66960,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
+        var _this = this;
+
         this.rows = this.dataPegawai;
         this.columns = this.dataPegawaiColumns;
+
+        axios.get('/api/pegawai').then(function (response) {
+            _this.dataPegawai = response.data.data;
+        }).catch(function (e) {
+            _this.errors.push(e);
+        });
+
+        axios.get('/api/kompetensi').then(function (response) {
+            _this.dataKompetensi = response.data.data;
+        }).catch(function (e) {
+            _this.errors.push(e);
+        });
     }
 });
 
@@ -66897,13 +66990,13 @@ var content = __webpack_require__(223);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(27)("1ea5d7e9", content, false, {});
+var update = __webpack_require__(27)("48b55190", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cd7fb372\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Navbar.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cd7fb372\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Navbar.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cadbadf2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Navbar.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cadbadf2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Navbar.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -67122,7 +67215,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-cd7fb372", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-cadbadf2", module.exports)
   }
 }
 
@@ -67132,6 +67225,14 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -67209,7 +67310,15 @@ var render = function() {
           rows: _vm.rows,
           paginate: true,
           lineNumbers: true,
-          globalSearch: true
+          searchOptions: {
+            enabled: true,
+            placeholder: "Cari data"
+          },
+          paginationOptions: {
+            enabled: true,
+            perPage: 5
+          },
+          styleClass: "vgt-table striped condensed bordered"
         },
         scopedSlots: _vm._u([
           {
@@ -67296,7 +67405,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7f7ae246", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-66f0941d", module.exports)
   }
 }
 
@@ -67501,7 +67610,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-e5d14d1a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-40590eb3", module.exports)
   }
 }
 
@@ -67535,7 +67644,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\AdminPage.vue"
+Component.options.__file = "resources/assets/js/components/AdminPage.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -67544,9 +67653,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f12c33d2", Component.options)
+    hotAPI.createRecord("data-v-2e17eb57", Component.options)
   } else {
-    hotAPI.reload("data-v-f12c33d2", Component.options)
+    hotAPI.reload("data-v-2e17eb57", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -67567,13 +67676,13 @@ var content = __webpack_require__(231);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(27)("9fb912be", content, false, {});
+var update = __webpack_require__(27)("62b3436f", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f12c33d2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminPage.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f12c33d2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminPage.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2e17eb57\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminPage.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2e17eb57\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminPage.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -67629,8 +67738,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'admin-main-page',
     components: {
-        'admin-navbar': __webpack_require__(67),
-        'data-table': __webpack_require__(68)
+        'admin-navbar': __webpack_require__(68),
+        'data-table': __webpack_require__(69)
     },
     data: function data() {
         return {
@@ -67710,7 +67819,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-f12c33d2", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2e17eb57", module.exports)
   }
 }
 
