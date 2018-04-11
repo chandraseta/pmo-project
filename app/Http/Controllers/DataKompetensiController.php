@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Profile\APIBaseController;
 use App\Kompetensi;
 
-class DataKompetensiController extends Controller
+class DataKompetensiController extends APIBaseController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class DataKompetensiController extends Controller
      */
     public function index()
     {
-        return Kompetensi::all();
+        $data = Kompetensi::all();
+        return $this->sendResponse($data->toArray(), 'Data Kompetensi retrieved successfully');
     }
 
     /**
@@ -47,7 +48,13 @@ class DataKompetensiController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Kompetensi::find($id);
+
+        if (is_null($data)) {
+            return $this->sendError('Data Kompetensi not found.');
+        }
+
+        return $this->sendResponse($data, 'Data Kompetensi retrieved successfully.');
     }
 
     /**
