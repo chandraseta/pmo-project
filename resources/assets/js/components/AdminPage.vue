@@ -1,5 +1,8 @@
 <template>
     <div>
+        <header>
+            <admin-navbar></admin-navbar>
+        </header>
         <main role="main" class="container">
             <section>
                 <div class="container">
@@ -12,7 +15,8 @@
             </section>
             <data-table :tableTitle="title"
                         :columns="columns"
-                        :rows="rows">
+                        :rows="rows"
+                        :lineNumbers="true">
             </data-table>
         </main>
         <footer>
@@ -22,10 +26,13 @@
 </template>
 
 <script>
+
+    import axios from 'axios'
+
     export default {
         name: 'admin-main-page',
         components: {
-            'admin-navbar': require('./Navbar.vue'),
+            'admin-navbar': require('./AdminNavbar.vue'),
             'data-table': require('./DataTable.vue'),
         },
         data() {
@@ -44,12 +51,16 @@
                 ],
             }
         },
+
+        created: function() {
+            this.getData();
+        },
+
         methods:{
             getData() {
                 axios.get('/api/user')
                     .then(response => {
-                        this.rows.name = response.data.name;
-                        this.rows.email = response.data.email;
+                        this.rows.push(response.data);
                 })
                     .catch(error => console.log(error));
             }

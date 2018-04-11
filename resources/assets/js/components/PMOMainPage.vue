@@ -70,7 +70,7 @@
     export default {
         name: 'pmo-main-page',
         components: {
-            'pmo-navbar': require('./Navbar.vue'),
+            'pmo-navbar': require('./PMONavbar.vue'),
             'data-table': require('./DataTable.vue'),
         },
         data() {
