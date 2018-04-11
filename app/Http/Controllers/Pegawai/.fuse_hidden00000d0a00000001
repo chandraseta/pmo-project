@@ -90,28 +90,15 @@ class PegawaiAPIController extends APIBaseController
      */
     public function show($id)
     {
+        $post = Pegawai::find($id);
 
-        $pegawai = Pegawai::find($id);
 
-        if (is_null($pegawai)) {
+        if (is_null($post)) {
             return $this->sendError('Profile not found.');
         }
 
-        $user = User::find($id);
 
-        $pendidikan = RiwayatPendidikan::where("id_pegawai", $id);
-        $pekerjaan = RiwayatPekerjaan::where("id_pegawai", $id);
-        $kepegawaian = DataKepegawaian::where("id_pegawai", $id);
-
-        $data = [
-            'user' => $user->toArray(),
-            'pegawai'    => $pegawai->toArray(),
-            'pendidikan' => $pendidikan->get()->toArray(),
-            'pekerjaan' => $pekerjaan->get()->toArray(),
-            'kepegawaian' => $kepegawaian->get()->toArray(),
-        ];
-
-        return $this->sendResponse($data, 'Profile retrieved successfully.');
+        return $this->sendResponse($post->toArray(), 'Profile retrieved successfully.');
     }
 
 
@@ -141,11 +128,12 @@ class PegawaiAPIController extends APIBaseController
         }
         
 
-        $pegawai = Pegawai::where('id_user', $id)->first();
+        $user = User::find($id);
 
-        if (is_null($pegawai)) {
+        if (is_null($user)) {
             return $this->sendError('Profile not found.');
         }
+
 
         $find = User::where('username', $input['username']);
 
@@ -154,7 +142,7 @@ class PegawaiAPIController extends APIBaseController
         }
 
 
-        $user = User::find($id);
+        $pegawai = Pegawai::where('id_user', $id)->first();
 
         $user->username = $input['username'];
         $user->email = $input['email'];
