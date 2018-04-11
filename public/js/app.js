@@ -1073,7 +1073,7 @@ function startOfISOYear (dirtyDate, dirtyOptions) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = differenceInCalendarDays;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfDay_index_js__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfDay_index_js__ = __webpack_require__(22);
 
 
 var MILLISECONDS_IN_MINUTE = 60000
@@ -1452,7 +1452,7 @@ function startOfWeek (dirtyDate, dirtyOptions) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = addMonths;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getDaysInMonth_index_js__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getDaysInMonth_index_js__ = __webpack_require__(23);
 
 
 
@@ -1797,6 +1797,12 @@ function applyToTag (styleElement, obj) {
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(74);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
@@ -1898,7 +1904,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1939,7 +1945,7 @@ function startOfDay (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1983,7 +1989,7 @@ function getDaysInMonth (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2024,7 +2030,7 @@ function addWeeks (dirtyDate, dirtyAmount, dirtyOptions) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2080,7 +2086,7 @@ function differenceInMonths (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2124,7 +2130,7 @@ function differenceInSeconds (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2147,7 +2153,7 @@ function startOfUTCISOWeekYear (dirtyDate, dirtyOptions) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2187,7 +2193,7 @@ function subMinutes (dirtyDate, dirtyAmount, dirtyOptions) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4716,7 +4722,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15087,12 +15093,6 @@ return jQuery;
 
 
 /***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(74);
-
-/***/ }),
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16536,7 +16536,7 @@ function isValid (dirtyDate, dirtyOptions) {
 /* harmony export (immutable) */ __webpack_exports__["a"] = getUTCISOWeek;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__startOfUTCISOWeek_index_js__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__startOfUTCISOWeekYear_index_js__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__startOfUTCISOWeekYear_index_js__ = __webpack_require__(27);
 
 
 
@@ -17072,7 +17072,7 @@ function lastDayOfWeek (dirtyDate, dirtyOptions) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = setMonth;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getDaysInMonth_index_js__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getDaysInMonth_index_js__ = __webpack_require__(23);
 
 
 
@@ -17180,8 +17180,10 @@ module.exports = __webpack_require__(239);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_good_table__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_good_table_dist_vue_good_table_css__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_good_table_dist_vue_good_table_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_good_table_dist_vue_good_table_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_good_table_dist_vue_good_table_css__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_good_table_dist_vue_good_table_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_good_table_dist_vue_good_table_css__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -17200,7 +17202,9 @@ window.Vue = __webpack_require__(92);
  */
 
 
+
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_good_table__["a" /* default */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_axios___default.a);
 
 if (document.getElementById('pmo-page')) {
     var pmoPage = new Vue({
@@ -17224,19 +17228,31 @@ if (document.getElementById('profile-page')) {
     var profilePage = new Vue({
         el: '#profile-page',
         data: {
+            isEditKepegawaian: false,
             isEditProfile: false,
             isEditRiwayat: false,
-            imageProfileUrl: "https://i.pinimg.com/236x/34/ba/c1/34bac13dd65ab3b81267f727e5633549--patrick-dempsey-handsome-man.jpg",
-            nama: "Joko Susilo",
-            tempatLahir: "Medan",
-            tanggalLahir: "17 Agustus 1981",
-            email: "joko.susilo@gmail.com",
-            nopeg: "12340009876",
-            unitKerja: "Fakultas FMIPA",
-            posisi: "Kepala Bidang Kemahasiswaan",
-            kompetensi: "Administrasi",
-            tahunMasuk: "2010",
-            tahunKeluar: "2020",
+            cachedUser: null,
+            cachedDataKepegawaian: null,
+            cachedRiwayatPendidikan: null,
+            cachedRiwayatPekerjaan: null,
+            user: {
+                imageProfileUrl: "https://i.pinimg.com/236x/34/ba/c1/34bac13dd65ab3b81267f727e5633549--patrick-dempsey-handsome-man.jpg",
+                nama: "Joko Susilo",
+                tempatLahir: "Medan",
+                tanggalLahir: "17 Agustus 1981",
+                email: "joko.susilo@gmail.com",
+                nopeg: "12340009876",
+                unitKerja: "Fakultas FMIPA",
+                posisi: "Kepala Bidang Kemahasiswaan",
+                kompetensi: "Administrasi",
+                tahunMasuk: "2010",
+                tahunKeluar: "2020"
+            },
+            dataKepegawaian: [{ unitKerja: "Fakultas FMIPA",
+                posisi: "Tenaga Pendidik",
+                kompetensi: "Teknikal",
+                tahunMasuk: "2013",
+                tahunKeluar: "2017" }],
             riwayatPendidikan: [{ tingkatPendidikan: "S1",
                 namaInstitusi: "ITB",
                 jurusan: "Teknik Sipil",
@@ -17246,8 +17262,8 @@ if (document.getElementById('profile-page')) {
                 jurusan: "Teknik Sipil",
                 tahunMasuk: "2006",
                 tahunKeluar: "2008" }],
-            riwayatPekerjaan: [{ namaInstitusi: "FTSL ITB",
-                posisi: "Tenaga Pendidik",
+            riwayatPekerjaan: [{ namaInstitusi: "PT TIMBUL TENGGELAM",
+                posisi: "Engineer",
                 tahunMasuk: "2008",
                 tahunKeluar: "2013" }, { namaInstitusi: "FMIPA ITB",
                 posisi: "Tenaga Pendidik",
@@ -17258,12 +17274,60 @@ if (document.getElementById('profile-page')) {
                 bidang: "Psikologi" }]
 
         },
+        mounted: function mounted() {
+
+            this.cachedUser = Object.assign({}, this.user);
+            this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
+            this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
+            this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
+        },
+
         methods: {
             editProfilPegawai: function editProfilPegawai() {
                 this.isEditProfile = true;
             },
+            editDataKepegawaian: function editDataKepegawaian() {
+                this.isEditKepegawaian = true;
+            },
             editRiwayatPegawai: function editRiwayatPegawai() {
                 this.isEditRiwayat = true;
+            },
+            saveProfilPegawai: function saveProfilPegawai() {
+                this.cachedUser = Object.assign({}, this.user);
+                this.isEditProfile = false;
+
+                axios.patch('/api/pegawai/4', {
+                    name: this.user.nama,
+                    email: this.user.email,
+                    password: '1234',
+                    nip: this.user.nopeg
+                }).then(function (response) {
+                    alert(response);
+                }).catch(function (error) {
+                    alert(error);
+                });
+            },
+            saveDataKepegawaian: function saveDataKepegawaian() {
+                this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
+                this.isEditKepegawaian = false;
+            },
+            saveRiwayatPegawai: function saveRiwayatPegawai() {
+                this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
+                this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
+                this.isEditRiwayat = false;
+            },
+            cancelProfilPegawai: function cancelProfilPegawai() {
+                this.user = Object.assign({}, this.cachedUser);
+                this.isEditProfile = false;
+            },
+            cancelDataKepegawaian: function cancelDataKepegawaian() {
+                this.dataKepegawaian = Object.assign({}, this.cachedDataKepegawaian);
+                this.isEditKepegawaian = false;
+            },
+            cancelRiwayatPegawai: function cancelRiwayatPegawai() {
+                this.riwayatPendidikan = Object.assign({}, this.cachedRiwayatPendidikan);
+                this.riwayatPekerjaan = Object.assign({}, this.cachedRiwayatPekerjaan);
+                this.isEditRiwayat = false;
             }
         }
 
@@ -17276,7 +17340,7 @@ if (document.getElementById('profile-page')) {
 
 
 window._ = __webpack_require__(72);
-window.Popper = __webpack_require__(28).default;
+window.Popper = __webpack_require__(29).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -17285,7 +17349,7 @@ window.Popper = __webpack_require__(28).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(29);
+  window.$ = window.jQuery = __webpack_require__(30);
 
   __webpack_require__(73);
 } catch (e) {}
@@ -17296,7 +17360,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(30);
+window.axios = __webpack_require__(20);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -34446,7 +34510,7 @@ if (token) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(29), __webpack_require__(28)) :
+   true ? factory(exports, __webpack_require__(30), __webpack_require__(29)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -38377,7 +38441,7 @@ if (token) {
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(31);
 var Axios = __webpack_require__(76);
-var defaults = __webpack_require__(20);
+var defaults = __webpack_require__(21);
 
 /**
  * Create an instance of Axios
@@ -38460,7 +38524,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(20);
+var defaults = __webpack_require__(21);
 var utils = __webpack_require__(1);
 var InterceptorManager = __webpack_require__(85);
 var dispatchRequest = __webpack_require__(86);
@@ -38999,7 +39063,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(87);
 var isCancel = __webpack_require__(35);
-var defaults = __webpack_require__(20);
+var defaults = __webpack_require__(21);
 var isAbsoluteURL = __webpack_require__(88);
 var combineURLs = __webpack_require__(89);
 
@@ -57220,7 +57284,7 @@ module.exports = function (text) {
 /* unused harmony reexport addQuarters */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__addSeconds_index_js__ = __webpack_require__(42);
 /* unused harmony reexport addSeconds */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__addWeeks_index_js__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__addWeeks_index_js__ = __webpack_require__(24);
 /* unused harmony reexport addWeeks */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__addYears_index_js__ = __webpack_require__(43);
 /* unused harmony reexport addYears */
@@ -57258,11 +57322,11 @@ module.exports = function (text) {
 /* unused harmony reexport differenceInMilliseconds */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__differenceInMinutes_index_js__ = __webpack_require__(111);
 /* unused harmony reexport differenceInMinutes */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__differenceInMonths_index_js__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__differenceInMonths_index_js__ = __webpack_require__(25);
 /* unused harmony reexport differenceInMonths */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__differenceInQuarters_index_js__ = __webpack_require__(112);
 /* unused harmony reexport differenceInQuarters */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__differenceInSeconds_index_js__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__differenceInSeconds_index_js__ = __webpack_require__(26);
 /* unused harmony reexport differenceInSeconds */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__differenceInWeeks_index_js__ = __webpack_require__(113);
 /* unused harmony reexport differenceInWeeks */
@@ -57304,7 +57368,7 @@ module.exports = function (text) {
 /* unused harmony reexport getDay */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__getDayOfYear_index_js__ = __webpack_require__(143);
 /* unused harmony reexport getDayOfYear */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__getDaysInMonth_index_js__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__getDaysInMonth_index_js__ = __webpack_require__(23);
 /* unused harmony reexport getDaysInMonth */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__getDaysInYear_index_js__ = __webpack_require__(144);
 /* unused harmony reexport getDaysInYear */
@@ -57430,7 +57494,7 @@ module.exports = function (text) {
 /* unused harmony reexport setSeconds */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_112__setYear_index_js__ = __webpack_require__(201);
 /* unused harmony reexport setYear */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_113__startOfDay_index_js__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_113__startOfDay_index_js__ = __webpack_require__(22);
 /* unused harmony reexport startOfDay */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_114__startOfHour_index_js__ = __webpack_require__(61);
 /* unused harmony reexport startOfHour */
@@ -57458,7 +57522,7 @@ module.exports = function (text) {
 /* unused harmony reexport subISOYears */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_126__subMilliseconds_index_js__ = __webpack_require__(205);
 /* unused harmony reexport subMilliseconds */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_127__subMinutes_index_js__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_127__subMinutes_index_js__ = __webpack_require__(28);
 /* unused harmony reexport subMinutes */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_128__subMonths_index_js__ = __webpack_require__(206);
 /* unused harmony reexport subMonths */
@@ -58243,7 +58307,7 @@ function differenceInMinutes (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__differenceInMonths_index_js__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__differenceInMonths_index_js__ = __webpack_require__(25);
 
 
 /**
@@ -59685,8 +59749,8 @@ function addUTCMinutes (dirtyDate, dirtyAmount, dirtyOptions) {
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compareAsc_index_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__differenceInSeconds_index_js__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__differenceInMonths_index_js__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__differenceInSeconds_index_js__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__differenceInMonths_index_js__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_cloneObject_index_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__locale_en_US_index_js__ = __webpack_require__(11);
 
@@ -59913,7 +59977,7 @@ function formatDistance (dirtyDate, dirtyBaseDate, dirtyOptions) {
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compareAsc_index_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__differenceInSeconds_index_js__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__differenceInSeconds_index_js__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_cloneObject_index_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__locale_en_US_index_js__ = __webpack_require__(11);
 
@@ -60128,7 +60192,7 @@ function formatDistanceStrict (dirtyDate, dirtyBaseDate, dirtyOptions) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__format_index_js__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__differenceInCalendarDays_index_js__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__locale_en_US_index_js__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__subMinutes_index_js__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__subMinutes_index_js__ = __webpack_require__(28);
 
 
 
@@ -60434,7 +60498,7 @@ function getHours (dirtyDate, dirtyOptions) {
 "use strict";
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfISOYear_index_js__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addWeeks_index_js__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addWeeks_index_js__ = __webpack_require__(24);
 
 
 
@@ -61088,7 +61152,7 @@ function isMonday (dirtyDate, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfDay_index_js__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__startOfDay_index_js__ = __webpack_require__(22);
 
 
 /**
@@ -62153,7 +62217,7 @@ function min (dirtyDatesArray, dirtyOptions) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = parse;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__subMinutes_index_js__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__subMinutes_index_js__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__locale_en_US_index_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_parsers_index_js__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_units_index_js__ = __webpack_require__(186);
@@ -62922,7 +62986,7 @@ parsers['a'] = parsers['A']
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_setUTCISOWeek_index_js__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_setUTCISOWeekYear_index_js__ = __webpack_require__(190);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_startOfUTCISOWeek_index_js__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lib_startOfUTCISOWeekYear_index_js__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lib_startOfUTCISOWeekYear_index_js__ = __webpack_require__(27);
 
 
 
@@ -63210,7 +63274,7 @@ function setUTCISOWeek (dirtyDate, dirtyISOWeek, dirtyOptions) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = setUTCISOWeekYear;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__toDate_index_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__startOfUTCISOWeekYear_index_js__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__startOfUTCISOWeekYear_index_js__ = __webpack_require__(27);
 
 
 
@@ -64030,7 +64094,7 @@ function subSeconds (dirtyDate, dirtyAmount, dirtyOptions) {
 
 "use strict";
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addWeeks_index_js__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addWeeks_index_js__ = __webpack_require__(24);
 
 
 /**
@@ -66452,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66581,7 +66645,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 immutable: true
             }, {
                 label: 'Nama Lengkap',
-                field: 'name',
+                field: 'nama',
                 immutable: true
             }, {
                 label: 'Unit Kerja',
@@ -66604,161 +66668,236 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 field: 'education'
             }, {
                 label: 'Tanggal Lahir',
-                field: 'birthday',
+                field: 'tanggal_lahir',
+                type: 'date',
+                dateInputFormat: 'YYYY-MM-DD',
+                dateOutputFormat: 'DD-MM-YYYY',
                 immutable: true
             }],
             dataKompetensiColumns: [
             //                    Data Pegawai
             {
+                label: 'Nama Lengkap',
+                field: 'nama'
+            }, {
                 label: 'NIP',
                 field: 'nip'
             }, {
-                label: 'Nama Lengkap',
-                field: 'name'
-            }, {
                 label: 'Unit Kerja',
                 field: 'unit'
+            }, {
+                label: 'Tingkat Pendidikan',
+                field: 'pendidikan_terakhir'
+            }, {
+                label: 'Tanggal Lahir',
+                field: 'tanggal_lahir'
+            }, {
+                label: 'Jabatan',
+                field: 'jabatan'
+            }, {
+                label: 'Tujuan Pemeriksaan',
+                field: 'tujuan_pemeriksaan'
+            }, {
+                label: 'Tanggal Pelaksanaan',
+                field: 'tanggal',
+                type: 'date',
+                dateInputFormat: 'YYYY-MM-DD',
+                dateOutputFormat: 'DD-MM-YYYY'
             },
             //                    Fungsi Kognitif
             {
                 label: 'Efisiensi Kecerdasan',
-                field: 'efisiensiKecerdasan',
+                field: 'kognitif_efisiensi_kecerdasan',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Daya Nalar',
-                field: 'dayaNalar',
+                field: 'kognitif_daya_nalar',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Daya Asosiasi',
-                field: 'dayaAsosiasi',
+                field: 'kognitif_daya_asosiasi',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Daya Analitis',
-                field: 'dayaAnalitis',
+                field: 'kognitif_daya_analitis',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Daya Antisipasi',
-                field: 'dayaAntisipasi',
+                field: 'kognitif_daya_antisipasi',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Kemandirian Berpikir',
-                field: 'kemandirianBerpikir',
+                field: 'kognitif_kemandirian_berpikir',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Fleksibilitas',
-                field: 'fleksibilitas',
+                field: 'kognitif_fleksibilitas',
                 type: 'number',
                 thClass: 'text-center fungsi-kognitif-group'
             }, {
                 label: 'Daya Tangkap',
-                field: 'dayaTangkap',
+                field: 'kognitif_daya_tangkap',
                 type: 'number',
+                thClass: 'text-center fungsi-kognitif-group'
+            }, {
+                label: 'Rata-rata Kognitif',
+                field: 'kognitif',
+                type: 'decimal',
                 thClass: 'text-center fungsi-kognitif-group'
             },
             //                    Fungsi Interaksional
             {
                 label: 'Penempatan Diri',
-                field: 'penempatanDiri',
+                field: 'interaksional_penempatan_diri',
                 type: 'number',
                 thClass: 'text-center fungsi-interaksional-group'
             }, {
                 label: 'Percaya Diri',
-                field: 'percayaDiri',
+                field: 'interaksional_percaya_diri',
                 type: 'number',
                 thClass: 'text-center fungsi-interaksional-group'
             }, {
                 label: 'Daya Kooperatif',
-                field: 'dayaKooperatif',
+                field: 'interaksional_daya_kooperatif',
                 type: 'number',
                 thClass: 'text-center fungsi-interaksional-group'
             }, {
                 label: 'Penyesuaian Perasaan',
-                field: 'penyesuaianPerasaan',
+                field: 'interaksional_penyesuaian_perasaan',
                 type: 'number',
+                thClass: 'text-center fungsi-interaksional-group'
+            }, {
+                label: 'Penyesuaian Perasaan',
+                field: 'interaksional',
+                type: 'decimal',
                 thClass: 'text-center fungsi-interaksional-group'
             },
             //                    Fungsi Emosional
             {
                 label: 'Stabilitas Emosi',
-                field: 'stabilitasEmosi',
+                field: 'emosional_stabilitas_emosi',
                 type: 'number',
                 thClass: 'text-center fungsi-emosional-group'
             }, {
                 label: 'Toleransi terhadap Stress',
-                field: 'toleransiStress',
+                field: 'emosional_toleransi_stres',
                 type: 'number',
                 thClass: 'text-center fungsi-emosional-group'
             }, {
                 label: 'Pengendalian Diri',
-                field: 'pengendalianDiri',
+                field: 'emosional_pengendalian_diri',
                 type: 'number',
                 thClass: 'text-center fungsi-emosional-group'
             }, {
                 label: 'Kemantapan Konsentrasi',
-                field: 'kemantapanKonsentrasi',
+                field: 'emosional_kemantapan_konsentrasi',
                 type: 'number',
+                thClass: 'text-center fungsi-emosional-group'
+            }, {
+                label: 'Rata-rata Emosional',
+                field: 'emosional_kemantapan_konsentrasi',
+                type: 'decimal',
                 thClass: 'text-center fungsi-emosional-group'
             },
             //                    Fungsi Sikap Kerja
             {
                 label: 'Hasrat Berprestasi',
-                field: 'hasratBerprestasi',
+                field: 'sikap_kerja_hasrat_berprestasi',
                 type: 'number',
                 thClass: 'text-center fungsi-sikap-kerja-group'
             }, {
                 label: 'Daya Tahan',
-                field: 'dayaTahan',
+                field: 'sikap_kerja_daya_tahan',
                 type: 'number',
                 thClass: 'text-center fungsi-sikap-kerja-group'
             }, {
                 label: 'Keteraturan Kerja',
-                field: 'keteraturanKerja',
+                field: 'sikap_kerja_keteraturan_kerja',
                 type: 'number',
                 thClass: 'text-center fungsi-sikap-kerja-group'
             }, {
                 label: 'Pengerahan Energi Kerja',
-                field: 'pengerahanEnergi',
+                field: 'sikap_kerja_pengerahan_energi_kerja',
                 type: 'number',
+                thClass: 'text-center fungsi-sikap-kerja-group'
+            }, {
+                label: 'Rata-rata Sikap Kerja',
+                field: 'sikap_kerja',
+                type: 'decimal',
                 thClass: 'text-center fungsi-sikap-kerja-group'
             },
             //                    Fungsi Manajerial
             {
                 label: 'Efektivitas Perencanaan',
-                field: 'efektivitasPerencanaan',
+                field: 'manajerial_efektivitas_perencanaan',
                 type: 'number',
                 thClass: 'text-center fungsi-manajerial-group'
             }, {
                 label: 'Pengorganisasian Pelaksanaan',
-                field: 'pengorganisasianPelaksanaan',
+                field: 'manajerial_pengorganisasian_pelaksanaan',
                 type: 'number',
                 thClass: 'text-center fungsi-manajerial-group'
             }, {
                 label: 'Intensitas Pengarahan',
-                field: 'intensitasPengarahan',
+                field: 'manajerial_intensitas_pengarahan',
                 type: 'number',
                 thClass: 'text-center fungsi-manajerial-group'
             }, {
                 label: 'Kekuatan Pengawasan',
-                field: 'kekuatanPengawasan',
+                field: 'manajerial_kekuatan_pengawasan',
                 type: 'number',
                 thClass: 'text-center fungsi-manajerial-group'
+            }, {
+                label: 'Rata-rata Manajerial',
+                field: 'manajerial',
+                type: 'decimal',
+                thClass: 'text-center fungsi-manajerial-group'
+            },
+            // Summary
+            {
+                label: 'Potensi Keberhasilan',
+                field: 'profil_potensi_keberhasilan',
+                type: 'decimal',
+                thClass: 'text-center'
+            }, {
+                label: 'Potensi Pengembangan Diri',
+                field: 'profil_potensi_pengembangan_diri',
+                type: 'decimal',
+                thClass: 'text-center'
+            }, {
+                label: 'Loyalitas Terhadap Tugas',
+                field: 'profil_loyalitas_terhadap_tugas',
+                type: 'decimal',
+                thClass: 'text-center'
+            }, {
+                label: 'Efektivitas Manajerial',
+                field: 'profil_efektivitas_manajerial',
+                type: 'decimal',
+                thClass: 'text-center'
+            }, {
+                label: 'Nilai Prediksi',
+                field: 'profil',
+                type: 'decimal',
+                thClass: 'text-center'
+            }, {
+                label: 'Rekomendasi',
+                field: 'indeks',
+                thClass: 'text-center'
             }, {
                 label: '',
                 field: 'editButton'
             }],
             dataKinerjaColumns: [],
             rows: [],
-            dataPegawai: [{ id: 1, nip: "12345678", name: "Iqbal", unit: "UKJ", position: "Ketua", startYear: 2015, competencyGroup: "IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 2, nip: "12345634", name: "Al", unit: "UKJ", position: "Ketua", startYear: 2015, competencyGroup: "IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }, { id: 3, nip: "12345623", name: "Khowarizmi", unit: "UKJ", position: "Ketua", startYear: 2015, competencyGroup: "IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997" }],
+            dataPegawai: [],
             dataKinerja: [],
-            dataKompetensi: [{
-                id: 1, nip: 99999999, name: "Al", unit: "Shokenbu"
-            }]
+            dataKompetensi: []
         };
     },
 
@@ -66770,8 +66909,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
+        var _this = this;
+
         this.rows = this.dataPegawai;
         this.columns = this.dataPegawaiColumns;
+
+        axios.get('/api/pegawai').then(function (response) {
+            _this.dataPegawai = response.data.data;
+        }).catch(function (e) {
+            _this.errors.push(e);
+        });
+
+        axios.get('/api/kompetensi').then(function (response) {
+            _this.dataKompetensi = response.data.data;
+        }).catch(function (e) {
+            _this.errors.push(e);
+        });
     }
 });
 
@@ -67110,6 +67263,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'data-table',
@@ -67149,7 +67310,15 @@ var render = function() {
           rows: _vm.rows,
           paginate: true,
           lineNumbers: true,
-          globalSearch: true
+          searchOptions: {
+            enabled: true,
+            placeholder: "Cari data"
+          },
+          paginationOptions: {
+            enabled: true,
+            perPage: 5
+          },
+          styleClass: "vgt-table striped condensed bordered"
         },
         scopedSlots: _vm._u([
           {
@@ -67542,7 +67711,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
