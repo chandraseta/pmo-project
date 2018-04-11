@@ -6,7 +6,14 @@
                 :rows="rows"
                 :paginate="true"
                 :lineNumbers="true"
-                :globalSearch="true"
+                :searchOptions="{
+                    enabled: true,
+                    placeholder: 'Cari data'
+                }"
+                :paginationOptions="{
+                    enabled: true,
+                    perPage: 5
+                }"
                 styleClass="vgt-table striped condensed bordered">
             <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'editButton'">

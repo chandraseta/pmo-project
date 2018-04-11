@@ -67147,6 +67147,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'data-table',
@@ -67186,7 +67193,14 @@ var render = function() {
           rows: _vm.rows,
           paginate: true,
           lineNumbers: true,
-          globalSearch: true,
+          searchOptions: {
+            enabled: true,
+            placeholder: "Cari data"
+          },
+          paginationOptions: {
+            enabled: true,
+            perPage: 5
+          },
           styleClass: "vgt-table striped condensed bordered"
         },
         scopedSlots: _vm._u([
