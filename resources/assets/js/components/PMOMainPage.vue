@@ -126,27 +126,34 @@
 //                    Data Pegawai
                     {
                         label: 'Nama Lengkap',
-                        field: 'nama'
+                        field: 'nama',
+                        immutable: true
                     },
                     {
                         label: 'NIP',
                         field: 'nip',
+                        immutable: true
                     },
                     {
                         label: 'Unit Kerja',
-                        field: 'unit'
+                        field: 'unit',
+                        immutable: true
+
                     },
                     {
                         label: 'Tingkat Pendidikan',
-                        field: 'pendidikan_terakhir'
+                        field: 'pendidikan_terakhir',
+                        immutable: true
                     },
                     {
                         label: 'Tanggal Lahir',
-                        field: 'tanggal_lahir'
+                        field: 'tanggal_lahir',
+                        immutable: true
                     },
                     {
                         label: 'Jabatan',
-                        field: 'jabatan'
+                        field: 'jabatan',
+                        immutable: true
                     },
                     {
                         label: 'Tujuan Pemeriksaan',
@@ -212,6 +219,7 @@
                         label: 'Rata-rata Kognitif',
                         field: 'kognitif',
                         type: 'decimal',
+                        immutable: true,
                         thClass: 'text-center fungsi-kognitif-group'
                     },
 //                    Fungsi Interaksional
@@ -243,6 +251,7 @@
                         label: 'Penyesuaian Perasaan',
                         field: 'interaksional',
                         type: 'decimal',
+                        immutable: true,
                         thClass: 'text-center fungsi-interaksional-group'
                     },
 //                    Fungsi Emosional
@@ -274,6 +283,7 @@
                         label: 'Rata-rata Emosional',
                         field: 'emosional_kemantapan_konsentrasi',
                         type: 'decimal',
+                        immutable: true,
                         thClass: 'text-center fungsi-emosional-group'
                     },
 //                    Fungsi Sikap Kerja
@@ -305,6 +315,7 @@
                         label: 'Rata-rata Sikap Kerja',
                         field: 'sikap_kerja',
                         type: 'decimal',
+                        immutable: true,
                         thClass: 'text-center fungsi-sikap-kerja-group'
                     },
 //                    Fungsi Manajerial
@@ -336,6 +347,7 @@
                         label: 'Rata-rata Manajerial',
                         field: 'manajerial',
                         type: 'decimal',
+                        immutable: true,
                         thClass: 'text-center fungsi-manajerial-group'
                     },
                     // Summary
@@ -343,30 +355,35 @@
                         label: 'Potensi Keberhasilan',
                         field: 'profil_potensi_keberhasilan',
                         type: 'decimal',
+                        immutable: true,
                         thClass: 'text-center'
                     },
                     {
                         label: 'Potensi Pengembangan Diri',
                         field: 'profil_potensi_pengembangan_diri',
                         type: 'decimal',
+                        immutable: true,
                         thClass: 'text-center'
                     },
                     {
                         label: 'Loyalitas Terhadap Tugas',
                         field: 'profil_loyalitas_terhadap_tugas',
                         type: 'decimal',
+                        immutable: true,
                         thClass: 'text-center'
                     },
                     {
                         label: 'Efektivitas Manajerial',
                         field: 'profil_efektivitas_manajerial',
                         type: 'decimal',
+                        immutable: true,
                         thClass: 'text-center'
                     },
                     {
                         label: 'Nilai Prediksi',
                         field: 'profil',
                         type: 'decimal',
+                        immutable: true,
                         thClass: 'text-center'
                     },
                     {
