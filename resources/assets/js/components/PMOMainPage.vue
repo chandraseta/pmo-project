@@ -68,6 +68,9 @@
 
 <script>
     export default {
+        dataPegawaiColumns: require('./configs/data-pegawai-columns.json'),
+        dataKompetensiColumns: require('./configs/data-kompetensi-columns.json'),
+        dataKinerjaColumns: require('./configs/data-kinerja-columns.json'),
         name: 'pmo-main-page',
         components: {
             'pmo-navbar': require('./PMONavbar.vue'),
@@ -77,326 +80,6 @@
             return {
                 title: 'Data Pegawai',
                 columns: [],
-                dataPegawaiColumns:[
-                    {
-                        label: 'NIP',
-                        field: 'nip',
-                        immutable: true
-                    },
-                    {
-                        label: 'Nama Lengkap',
-                        field: 'nama',
-                        immutable: true
-                    },
-                    {
-                        label: 'Unit Kerja',
-                        field: 'unit'
-                    },
-                    {
-                        label: 'Jabatan',
-                        field: 'position'
-                    },
-                    {
-                        label: 'Tahun Menjabat',
-                        field: 'startYear',
-                        type: 'number'
-                    },
-                    {
-                        label: 'Kelompok Kompetensi',
-                        field: 'competencyGroup'
-                    },
-                    {
-                        label: 'No. Telp.',
-                        field: 'phone'
-                    },
-                    {
-                        label: 'Pendidikan',
-                        field: 'education'
-                    },
-                    {
-                        label: 'Tanggal Lahir',
-                        field: 'tanggal_lahir',
-                        type: 'date',
-                        dateInputFormat: 'YYYY-MM-DD',
-                        dateOutputFormat: 'DD-MM-YYYY',
-                        immutable: true
-                    },
-                ],
-                dataKompetensiColumns:[
-//                    Data Pegawai
-                    {
-                        label: 'Nama Lengkap',
-                        field: 'nama',
-                        immutable: true
-                    },
-                    {
-                        label: 'NIP',
-                        field: 'nip',
-                        immutable: true
-                    },
-                    {
-                        label: 'Unit Kerja',
-                        field: 'unit',
-                        immutable: true
-
-                    },
-                    {
-                        label: 'Tingkat Pendidikan',
-                        field: 'pendidikan_terakhir',
-                        immutable: true
-                    },
-                    {
-                        label: 'Tanggal Lahir',
-                        field: 'tanggal_lahir',
-                        immutable: true
-                    },
-                    {
-                        label: 'Jabatan',
-                        field: 'jabatan',
-                        immutable: true
-                    },
-                    {
-                        label: 'Tujuan Pemeriksaan',
-                        field: 'tujuan_pemeriksaan'
-                    },
-                    {
-                        label: 'Tanggal Pelaksanaan',
-                        field: 'tanggal',
-                        type: 'date',
-                        dateInputFormat: 'YYYY-MM-DD',
-                        dateOutputFormat: 'DD-MM-YYYY'
-                    },
-//                    Fungsi Kognitif
-                    {
-                        label: 'Efisiensi Kecerdasan',
-                        field: 'kognitif_efisiensi_kecerdasan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Daya Nalar',
-                        field: 'kognitif_daya_nalar',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Daya Asosiasi',
-                        field: 'kognitif_daya_asosiasi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Daya Analitis',
-                        field: 'kognitif_daya_analitis',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Daya Antisipasi',
-                        field: 'kognitif_daya_antisipasi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Kemandirian Berpikir',
-                        field: 'kognitif_kemandirian_berpikir',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Fleksibilitas',
-                        field: 'kognitif_fleksibilitas',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Daya Tangkap',
-                        field: 'kognitif_daya_tangkap',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Rata-rata Kognitif',
-                        field: 'kognitif',
-                        type: 'decimal',
-                        immutable: true,
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-//                    Fungsi Interaksional
-                    {
-                        label: 'Penempatan Diri',
-                        field: 'interaksional_penempatan_diri',
-                        type: 'number',
-                        thClass: 'text-center fungsi-interaksional-group'
-                    },
-                    {
-                        label: 'Percaya Diri',
-                        field: 'interaksional_percaya_diri',
-                        type: 'number',
-                        thClass: 'text-center fungsi-interaksional-group'
-                    },
-                    {
-                        label: 'Daya Kooperatif',
-                        field: 'interaksional_daya_kooperatif',
-                        type: 'number',
-                        thClass: 'text-center fungsi-interaksional-group'
-                    },
-                    {
-                        label: 'Penyesuaian Perasaan',
-                        field: 'interaksional_penyesuaian_perasaan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-interaksional-group'
-                    },
-                    {
-                        label: 'Penyesuaian Perasaan',
-                        field: 'interaksional',
-                        type: 'decimal',
-                        immutable: true,
-                        thClass: 'text-center fungsi-interaksional-group'
-                    },
-//                    Fungsi Emosional
-                    {
-                        label: 'Stabilitas Emosi',
-                        field: 'emosional_stabilitas_emosi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-emosional-group'
-                    },
-                    {
-                        label: 'Toleransi terhadap Stress',
-                        field: 'emosional_toleransi_stres',
-                        type: 'number',
-                        thClass: 'text-center fungsi-emosional-group'
-                    },
-                    {
-                        label: 'Pengendalian Diri',
-                        field: 'emosional_pengendalian_diri',
-                        type: 'number',
-                        thClass: 'text-center fungsi-emosional-group'
-                    },
-                    {
-                        label: 'Kemantapan Konsentrasi',
-                        field: 'emosional_kemantapan_konsentrasi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-emosional-group'
-                    },
-                    {
-                        label: 'Rata-rata Emosional',
-                        field: 'emosional_kemantapan_konsentrasi',
-                        type: 'decimal',
-                        immutable: true,
-                        thClass: 'text-center fungsi-emosional-group'
-                    },
-//                    Fungsi Sikap Kerja
-                    {
-                        label: 'Hasrat Berprestasi',
-                        field: 'sikap_kerja_hasrat_berprestasi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-sikap-kerja-group'
-                    },
-                    {
-                        label: 'Daya Tahan',
-                        field: 'sikap_kerja_daya_tahan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-sikap-kerja-group'
-                    },
-                    {
-                        label: 'Keteraturan Kerja',
-                        field: 'sikap_kerja_keteraturan_kerja',
-                        type: 'number',
-                        thClass: 'text-center fungsi-sikap-kerja-group'
-                    },
-                    {
-                        label: 'Pengerahan Energi Kerja',
-                        field: 'sikap_kerja_pengerahan_energi_kerja',
-                        type: 'number',
-                        thClass: 'text-center fungsi-sikap-kerja-group'
-                    },
-                    {
-                        label: 'Rata-rata Sikap Kerja',
-                        field: 'sikap_kerja',
-                        type: 'decimal',
-                        immutable: true,
-                        thClass: 'text-center fungsi-sikap-kerja-group'
-                    },
-//                    Fungsi Manajerial
-                    {
-                        label: 'Efektivitas Perencanaan',
-                        field: 'manajerial_efektivitas_perencanaan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-manajerial-group'
-                    },
-                    {
-                        label: 'Pengorganisasian Pelaksanaan',
-                        field: 'manajerial_pengorganisasian_pelaksanaan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-manajerial-group'
-                    },
-                    {
-                        label: 'Intensitas Pengarahan',
-                        field: 'manajerial_intensitas_pengarahan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-manajerial-group'
-                    },
-                    {
-                        label: 'Kekuatan Pengawasan',
-                        field: 'manajerial_kekuatan_pengawasan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-manajerial-group'
-                    },
-                    {
-                        label: 'Rata-rata Manajerial',
-                        field: 'manajerial',
-                        type: 'decimal',
-                        immutable: true,
-                        thClass: 'text-center fungsi-manajerial-group'
-                    },
-                    // Summary
-                    {
-                        label: 'Potensi Keberhasilan',
-                        field: 'profil_potensi_keberhasilan',
-                        type: 'decimal',
-                        immutable: true,
-                        thClass: 'text-center'
-                    },
-                    {
-                        label: 'Potensi Pengembangan Diri',
-                        field: 'profil_potensi_pengembangan_diri',
-                        type: 'decimal',
-                        immutable: true,
-                        thClass: 'text-center'
-                    },
-                    {
-                        label: 'Loyalitas Terhadap Tugas',
-                        field: 'profil_loyalitas_terhadap_tugas',
-                        type: 'decimal',
-                        immutable: true,
-                        thClass: 'text-center'
-                    },
-                    {
-                        label: 'Efektivitas Manajerial',
-                        field: 'profil_efektivitas_manajerial',
-                        type: 'decimal',
-                        immutable: true,
-                        thClass: 'text-center'
-                    },
-                    {
-                        label: 'Nilai Prediksi',
-                        field: 'profil',
-                        type: 'decimal',
-                        immutable: true,
-                        thClass: 'text-center'
-                    },
-                    {
-                        label: 'Rekomendasi',
-                        field: 'indeks',
-                        thClass: 'text-center'
-                    },
-                    {
-                        label: '',
-                        field: 'editButton'
-                    }
-                ],
-                dataKinerjaColumns:[],
                 rows: [],
                 dataPegawai: [],
                 dataKinerja: [],
@@ -407,12 +90,11 @@
             changeTable: function (payload) {
                 this.title = payload.label;
                 this.rows = this[payload.name];
-                this.columns = this[payload.name + 'Columns']
+                this.columns = this.$options[payload.name + 'Columns'];
             }
         },
         created: function () {
-            this.rows = this.dataPegawai;
-            this.columns = this.dataPegawaiColumns;
+            this.columns = this.$options.dataPegawaiColumns;
 
             axios.get('/api/pegawai')
                 .then(response => {
@@ -429,6 +111,8 @@
                 .catch(e => {
                     this.errors.push(e);
                 });
+
+            this.rows = this.dataPegawai;
         }
     }
 </script>

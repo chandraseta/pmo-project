@@ -17125,9 +17125,9 @@ function setMonth (dirtyDate, dirtyMonth, dirtyOptions) {
 var disposed = false
 var normalizeComponent = __webpack_require__(13)
 /* script */
-var __vue_script__ = __webpack_require__(226)
+var __vue_script__ = __webpack_require__(229)
 /* template */
-var __vue_template__ = __webpack_require__(227)
+var __vue_template__ = __webpack_require__(230)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17170,7 +17170,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(70);
-module.exports = __webpack_require__(239);
+module.exports = __webpack_require__(242);
 
 
 /***/ }),
@@ -17219,7 +17219,7 @@ if (document.getElementById('admin-page')) {
     var adminPage = new Vue({
         el: '#admin-page',
         components: {
-            'admin-main-page': __webpack_require__(229)
+            'admin-main-page': __webpack_require__(232)
         }
     });
 }
@@ -66443,7 +66443,7 @@ var normalizeComponent = __webpack_require__(13)
 /* script */
 var __vue_script__ = __webpack_require__(220)
 /* template */
-var __vue_template__ = __webpack_require__(228)
+var __vue_template__ = __webpack_require__(231)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66630,287 +66630,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    dataPegawaiColumns: __webpack_require__(221),
+    dataKompetensiColumns: __webpack_require__(222),
+    dataKinerjaColumns: __webpack_require__(223),
     name: 'pmo-main-page',
     components: {
-        'pmo-navbar': __webpack_require__(221),
+        'pmo-navbar': __webpack_require__(224),
         'data-table': __webpack_require__(68)
     },
     data: function data() {
         return {
             title: 'Data Pegawai',
             columns: [],
-            dataPegawaiColumns: [{
-                label: 'NIP',
-                field: 'nip',
-                immutable: true
-            }, {
-                label: 'Nama Lengkap',
-                field: 'nama',
-                immutable: true
-            }, {
-                label: 'Unit Kerja',
-                field: 'unit'
-            }, {
-                label: 'Jabatan',
-                field: 'position'
-            }, {
-                label: 'Tahun Menjabat',
-                field: 'startYear',
-                type: 'number'
-            }, {
-                label: 'Kelompok Kompetensi',
-                field: 'competencyGroup'
-            }, {
-                label: 'No. Telp.',
-                field: 'phone'
-            }, {
-                label: 'Pendidikan',
-                field: 'education'
-            }, {
-                label: 'Tanggal Lahir',
-                field: 'tanggal_lahir',
-                type: 'date',
-                dateInputFormat: 'YYYY-MM-DD',
-                dateOutputFormat: 'DD-MM-YYYY',
-                immutable: true
-            }],
-            dataKompetensiColumns: [
-            //                    Data Pegawai
-            {
-                label: 'Nama Lengkap',
-                field: 'nama',
-                immutable: true
-            }, {
-                label: 'NIP',
-                field: 'nip',
-                immutable: true
-            }, {
-                label: 'Unit Kerja',
-                field: 'unit',
-                immutable: true
-
-            }, {
-                label: 'Tingkat Pendidikan',
-                field: 'pendidikan_terakhir',
-                immutable: true
-            }, {
-                label: 'Tanggal Lahir',
-                field: 'tanggal_lahir',
-                immutable: true
-            }, {
-                label: 'Jabatan',
-                field: 'jabatan',
-                immutable: true
-            }, {
-                label: 'Tujuan Pemeriksaan',
-                field: 'tujuan_pemeriksaan'
-            }, {
-                label: 'Tanggal Pelaksanaan',
-                field: 'tanggal',
-                type: 'date',
-                dateInputFormat: 'YYYY-MM-DD',
-                dateOutputFormat: 'DD-MM-YYYY'
-            },
-            //                    Fungsi Kognitif
-            {
-                label: 'Efisiensi Kecerdasan',
-                field: 'kognitif_efisiensi_kecerdasan',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Daya Nalar',
-                field: 'kognitif_daya_nalar',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Daya Asosiasi',
-                field: 'kognitif_daya_asosiasi',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Daya Analitis',
-                field: 'kognitif_daya_analitis',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Daya Antisipasi',
-                field: 'kognitif_daya_antisipasi',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Kemandirian Berpikir',
-                field: 'kognitif_kemandirian_berpikir',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Fleksibilitas',
-                field: 'kognitif_fleksibilitas',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Daya Tangkap',
-                field: 'kognitif_daya_tangkap',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Rata-rata Kognitif',
-                field: 'kognitif',
-                type: 'decimal',
-                immutable: true,
-                thClass: 'text-center fungsi-kognitif-group'
-            },
-            //                    Fungsi Interaksional
-            {
-                label: 'Penempatan Diri',
-                field: 'interaksional_penempatan_diri',
-                type: 'number',
-                thClass: 'text-center fungsi-interaksional-group'
-            }, {
-                label: 'Percaya Diri',
-                field: 'interaksional_percaya_diri',
-                type: 'number',
-                thClass: 'text-center fungsi-interaksional-group'
-            }, {
-                label: 'Daya Kooperatif',
-                field: 'interaksional_daya_kooperatif',
-                type: 'number',
-                thClass: 'text-center fungsi-interaksional-group'
-            }, {
-                label: 'Penyesuaian Perasaan',
-                field: 'interaksional_penyesuaian_perasaan',
-                type: 'number',
-                thClass: 'text-center fungsi-interaksional-group'
-            }, {
-                label: 'Penyesuaian Perasaan',
-                field: 'interaksional',
-                type: 'decimal',
-                immutable: true,
-                thClass: 'text-center fungsi-interaksional-group'
-            },
-            //                    Fungsi Emosional
-            {
-                label: 'Stabilitas Emosi',
-                field: 'emosional_stabilitas_emosi',
-                type: 'number',
-                thClass: 'text-center fungsi-emosional-group'
-            }, {
-                label: 'Toleransi terhadap Stress',
-                field: 'emosional_toleransi_stres',
-                type: 'number',
-                thClass: 'text-center fungsi-emosional-group'
-            }, {
-                label: 'Pengendalian Diri',
-                field: 'emosional_pengendalian_diri',
-                type: 'number',
-                thClass: 'text-center fungsi-emosional-group'
-            }, {
-                label: 'Kemantapan Konsentrasi',
-                field: 'emosional_kemantapan_konsentrasi',
-                type: 'number',
-                thClass: 'text-center fungsi-emosional-group'
-            }, {
-                label: 'Rata-rata Emosional',
-                field: 'emosional_kemantapan_konsentrasi',
-                type: 'decimal',
-                immutable: true,
-                thClass: 'text-center fungsi-emosional-group'
-            },
-            //                    Fungsi Sikap Kerja
-            {
-                label: 'Hasrat Berprestasi',
-                field: 'sikap_kerja_hasrat_berprestasi',
-                type: 'number',
-                thClass: 'text-center fungsi-sikap-kerja-group'
-            }, {
-                label: 'Daya Tahan',
-                field: 'sikap_kerja_daya_tahan',
-                type: 'number',
-                thClass: 'text-center fungsi-sikap-kerja-group'
-            }, {
-                label: 'Keteraturan Kerja',
-                field: 'sikap_kerja_keteraturan_kerja',
-                type: 'number',
-                thClass: 'text-center fungsi-sikap-kerja-group'
-            }, {
-                label: 'Pengerahan Energi Kerja',
-                field: 'sikap_kerja_pengerahan_energi_kerja',
-                type: 'number',
-                thClass: 'text-center fungsi-sikap-kerja-group'
-            }, {
-                label: 'Rata-rata Sikap Kerja',
-                field: 'sikap_kerja',
-                type: 'decimal',
-                immutable: true,
-                thClass: 'text-center fungsi-sikap-kerja-group'
-            },
-            //                    Fungsi Manajerial
-            {
-                label: 'Efektivitas Perencanaan',
-                field: 'manajerial_efektivitas_perencanaan',
-                type: 'number',
-                thClass: 'text-center fungsi-manajerial-group'
-            }, {
-                label: 'Pengorganisasian Pelaksanaan',
-                field: 'manajerial_pengorganisasian_pelaksanaan',
-                type: 'number',
-                thClass: 'text-center fungsi-manajerial-group'
-            }, {
-                label: 'Intensitas Pengarahan',
-                field: 'manajerial_intensitas_pengarahan',
-                type: 'number',
-                thClass: 'text-center fungsi-manajerial-group'
-            }, {
-                label: 'Kekuatan Pengawasan',
-                field: 'manajerial_kekuatan_pengawasan',
-                type: 'number',
-                thClass: 'text-center fungsi-manajerial-group'
-            }, {
-                label: 'Rata-rata Manajerial',
-                field: 'manajerial',
-                type: 'decimal',
-                immutable: true,
-                thClass: 'text-center fungsi-manajerial-group'
-            },
-            // Summary
-            {
-                label: 'Potensi Keberhasilan',
-                field: 'profil_potensi_keberhasilan',
-                type: 'decimal',
-                immutable: true,
-                thClass: 'text-center'
-            }, {
-                label: 'Potensi Pengembangan Diri',
-                field: 'profil_potensi_pengembangan_diri',
-                type: 'decimal',
-                immutable: true,
-                thClass: 'text-center'
-            }, {
-                label: 'Loyalitas Terhadap Tugas',
-                field: 'profil_loyalitas_terhadap_tugas',
-                type: 'decimal',
-                immutable: true,
-                thClass: 'text-center'
-            }, {
-                label: 'Efektivitas Manajerial',
-                field: 'profil_efektivitas_manajerial',
-                type: 'decimal',
-                immutable: true,
-                thClass: 'text-center'
-            }, {
-                label: 'Nilai Prediksi',
-                field: 'profil',
-                type: 'decimal',
-                immutable: true,
-                thClass: 'text-center'
-            }, {
-                label: 'Rekomendasi',
-                field: 'indeks',
-                thClass: 'text-center'
-            }, {
-                label: '',
-                field: 'editButton'
-            }],
-            dataKinerjaColumns: [],
             rows: [],
             dataPegawai: [],
             dataKinerja: [],
@@ -66922,14 +66653,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         changeTable: function changeTable(payload) {
             this.title = payload.label;
             this.rows = this[payload.name];
-            this.columns = this[payload.name + 'Columns'];
+            this.columns = this.$options[payload.name + 'Columns'];
         }
     },
     created: function created() {
         var _this = this;
 
-        this.rows = this.dataPegawai;
-        this.columns = this.dataPegawaiColumns;
+        this.columns = this.$options.dataPegawaiColumns;
 
         axios.get('/api/pegawai').then(function (response) {
             _this.dataPegawai = response.data.data;
@@ -66942,23 +66672,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).catch(function (e) {
             _this.errors.push(e);
         });
+
+        this.rows = this.dataPegawai;
     }
 });
 
 /***/ }),
 /* 221 */
+/***/ (function(module, exports) {
+
+module.exports = [{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit"},{"label":"Jabatan","field":"position"},{"label":"Tahun Menjabat","field":"startYear","type":"number"},{"label":"Kelompok Kompetensi","field":"competencyGroup"},{"label":"No. Telp.","field":"phone"},{"label":"Pendidikan","field":"education"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true}]
+
+/***/ }),
+/* 222 */
+/***/ (function(module, exports) {
+
+module.exports = [{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true},{"label":"Unit Kerja","field":"unit","immutable":true},{"label":"Tingkat Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"jabatan","immutable":true},{"label":"Tujuan Pemeriksaan","field":"tujuan_pemeriksaan"},{"label":"Tanggal Pelaksanaan","field":"tanggal","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY"},{"label":"Efisiensi Kecerdasan","field":"kognitif_efisiensi_kecerdasan","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Daya Nalar","field":"kognitif_daya_nalar","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Daya Asosiasi","field":"kognitif_daya_asosiasi","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Daya Analitis","field":"kognitif_daya_analitis","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Daya Antisipasi","field":"kognitif_daya_antisipasi","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Kemandirian Berpikir","field":"kognitif_kemandirian_berpikir","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Fleksibilitas","field":"kognitif_fleksibilitas","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Daya Tangkap","field":"kognitif_daya_tangkap","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Rata-rata Kognitif","field":"kognitif","type":"decimal","immutable":true,"thClass":"text-center fungsi-kognitif-group"},{"label":"Penempatan Diri","field":"interaksional_penempatan_diri","type":"number","thClass":"text-center fungsi-interaksional-group"},{"label":"Percaya Diri","field":"interaksional_percaya_diri","type":"number","thClass":"text-center fungsi-interaksional-group"},{"label":"Daya Kooperatif","field":"interaksional_daya_kooperatif","type":"number","thClass":"text-center fungsi-interaksional-group"},{"label":"Penyesuaian Perasaan","field":"interaksional_penyesuaian_perasaan","type":"number","thClass":"text-center fungsi-interaksional-group"},{"label":"Penyesuaian Perasaan","field":"interaksional","type":"decimal","immutable":true,"thClass":"text-center fungsi-interaksional-group"},{"label":"Stabilitas Emosi","field":"emosional_stabilitas_emosi","type":"number","thClass":"text-center fungsi-emosional-group"},{"label":"Toleransi terhadap Stress","field":"emosional_toleransi_stres","type":"number","thClass":"text-center fungsi-emosional-group"},{"label":"Pengendalian Diri","field":"emosional_pengendalian_diri","type":"number","thClass":"text-center fungsi-emosional-group"},{"label":"Kemantapan Konsentrasi","field":"emosional_kemantapan_konsentrasi","type":"number","thClass":"text-center fungsi-emosional-group"},{"label":"Rata-rata Emosional","field":"emosional_kemantapan_konsentrasi","type":"decimal","immutable":true,"thClass":"text-center fungsi-emosional-group"},{"label":"Hasrat Berprestasi","field":"sikap_kerja_hasrat_berprestasi","type":"number","thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Daya Tahan","field":"sikap_kerja_daya_tahan","type":"number","thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Keteraturan Kerja","field":"sikap_kerja_keteraturan_kerja","type":"number","thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Pengerahan Energi Kerja","field":"sikap_kerja_pengerahan_energi_kerja","type":"number","thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Rata-rata Sikap Kerja","field":"sikap_kerja","type":"decimal","immutable":true,"thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Efektivitas Perencanaan","field":"manajerial_efektivitas_perencanaan","type":"number","thClass":"text-center fungsi-manajerial-group"},{"label":"Pengorganisasian Pelaksanaan","field":"manajerial_pengorganisasian_pelaksanaan","type":"number","thClass":"text-center fungsi-manajerial-group"},{"label":"Intensitas Pengarahan","field":"manajerial_intensitas_pengarahan","type":"number","thClass":"text-center fungsi-manajerial-group"},{"label":"Kekuatan Pengawasan","field":"manajerial_kekuatan_pengawasan","type":"number","thClass":"text-center fungsi-manajerial-group"},{"label":"Rata-rata Manajerial","field":"manajerial","type":"decimal","immutable":true,"thClass":"text-center fungsi-manajerial-group"},{"label":"Potensi Keberhasilan","field":"profil_potensi_keberhasilan","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Potensi Pengembangan Diri","field":"profil_potensi_pengembangan_diri","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Loyalitas Terhadap Tugas","field":"profil_loyalitas_terhadap_tugas","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Efektivitas Manajerial","field":"profil_efektivitas_manajerial","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Nilai Prediksi","field":"profil","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Rekomendasi","field":"indeks","thClass":"text-center"},{"label":"","field":"editButton"}]
+
+/***/ }),
+/* 223 */
+/***/ (function(module, exports) {
+
+module.exports = []
+
+/***/ }),
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(222)
+  __webpack_require__(225)
 }
 var normalizeComponent = __webpack_require__(13)
 /* script */
-var __vue_script__ = __webpack_require__(224)
+var __vue_script__ = __webpack_require__(227)
 /* template */
-var __vue_template__ = __webpack_require__(225)
+var __vue_template__ = __webpack_require__(228)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66997,13 +66747,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 222 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(223);
+var content = __webpack_require__(226);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -67023,7 +66773,7 @@ if(false) {
 }
 
 /***/ }),
-/* 223 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)(false);
@@ -67037,7 +66787,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 224 */
+/* 227 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67113,7 +66863,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 225 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67237,7 +66987,7 @@ if (false) {
 }
 
 /***/ }),
-/* 226 */
+/* 229 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67310,7 +67060,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 227 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67427,7 +67177,7 @@ if (false) {
 }
 
 /***/ }),
-/* 228 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67632,19 +67382,19 @@ if (false) {
 }
 
 /***/ }),
-/* 229 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(230)
+  __webpack_require__(233)
 }
 var normalizeComponent = __webpack_require__(13)
 /* script */
-var __vue_script__ = __webpack_require__(232)
+var __vue_script__ = __webpack_require__(235)
 /* template */
-var __vue_template__ = __webpack_require__(238)
+var __vue_template__ = __webpack_require__(241)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67683,13 +67433,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 230 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(231);
+var content = __webpack_require__(234);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -67709,7 +67459,7 @@ if(false) {
 }
 
 /***/ }),
-/* 231 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)(false);
@@ -67723,7 +67473,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 232 */
+/* 235 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67764,7 +67514,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'admin-main-page',
     components: {
-        'admin-navbar': __webpack_require__(233),
+        'admin-navbar': __webpack_require__(236),
         'data-table': __webpack_require__(68)
     },
     data: function data() {
@@ -67800,19 +67550,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 233 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(234)
+  __webpack_require__(237)
 }
 var normalizeComponent = __webpack_require__(13)
 /* script */
-var __vue_script__ = __webpack_require__(236)
+var __vue_script__ = __webpack_require__(239)
 /* template */
-var __vue_template__ = __webpack_require__(237)
+var __vue_template__ = __webpack_require__(240)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67851,13 +67601,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 234 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(235);
+var content = __webpack_require__(238);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -67877,7 +67627,7 @@ if(false) {
 }
 
 /***/ }),
-/* 235 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)(false);
@@ -67891,7 +67641,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 
 /***/ }),
-/* 236 */
+/* 239 */
 /***/ (function(module, exports) {
 
 //
@@ -67915,7 +67665,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 // }
 
 /***/ }),
-/* 237 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67990,7 +67740,7 @@ if (false) {
 }
 
 /***/ }),
-/* 238 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68051,7 +67801,7 @@ if (false) {
 }
 
 /***/ }),
-/* 239 */
+/* 242 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
