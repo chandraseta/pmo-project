@@ -91,28 +91,38 @@
                 this.title = payload.label;
                 this.rows = this[payload.name];
                 this.columns = this.$options[payload.name + 'Columns'];
-            }
+            },
+            getPegawai: function () {
+                 axios.get('/api/pegawai')
+                    .then(response => {
+                        this.dataPegawai = response.data.data;
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                    });
+            },
+            getKompetensi: function () {
+                 axios.get('/api/kompetensi')
+                    .then(response => {
+                        this.dataKompetensi = response.data.data;
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                    });
+            },
         },
         created: function () {
-            this.columns = this.$options.dataPegawaiColumns;
-
             axios.get('/api/pegawai')
                 .then(response => {
                     this.dataPegawai = response.data.data;
+                    this.columns = this.$options.dataPegawaiColumns;
+                    this.rows = this.dataPegawai;
                 })
                 .catch(e => {
                     this.errors.push(e);
                 });
 
-            axios.get('/api/kompetensi')
-                .then(response => {
-                    this.dataKompetensi = response.data.data;
-                })
-                .catch(e => {
-                    this.errors.push(e);
-                });
-
-            this.rows = this.dataPegawai;
+            this.getKompetensi();
         }
     }
 </script>

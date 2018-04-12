@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66649,31 +66649,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    watch: {},
     methods: {
         changeTable: function changeTable(payload) {
             this.title = payload.label;
             this.rows = this[payload.name];
             this.columns = this.$options[payload.name + 'Columns'];
+        },
+        getPegawai: function getPegawai() {
+            var _this = this;
+
+            axios.get('/api/pegawai').then(function (response) {
+                _this.dataPegawai = response.data.data;
+            }).catch(function (e) {
+                _this.errors.push(e);
+            });
+        },
+        getKompetensi: function getKompetensi() {
+            var _this2 = this;
+
+            axios.get('/api/kompetensi').then(function (response) {
+                _this2.dataKompetensi = response.data.data;
+            }).catch(function (e) {
+                _this2.errors.push(e);
+            });
         }
     },
     created: function created() {
-        var _this = this;
-
-        this.columns = this.$options.dataPegawaiColumns;
+        var _this3 = this;
 
         axios.get('/api/pegawai').then(function (response) {
-            _this.dataPegawai = response.data.data;
+            _this3.dataPegawai = response.data.data;
+            _this3.columns = _this3.$options.dataPegawaiColumns;
+            _this3.rows = _this3.dataPegawai;
         }).catch(function (e) {
-            _this.errors.push(e);
+            _this3.errors.push(e);
         });
 
-        axios.get('/api/kompetensi').then(function (response) {
-            _this.dataKompetensi = response.data.data;
-        }).catch(function (e) {
-            _this.errors.push(e);
-        });
-
-        this.rows = this.dataPegawai;
+        this.getKompetensi();
     }
 });
 
