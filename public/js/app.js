@@ -66693,7 +66693,7 @@ module.exports = [{"label":"Nama Lengkap","field":"nama","immutable":true},{"lab
 /* 223 */
 /***/ (function(module, exports) {
 
-module.exports = []
+module.exports = [{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true},{"label":"Unit Kerja","field":"unit","immutable":true},{"label":"Tingkat Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"jabatan","immutable":true},{"label":"Tahun","field":"tahun","type":"number"},{"label":"Semester","field":"semester","type":"number"},{"label":"Skor Kinerja","field":"skor_kinerja","type":"number"},{"label":"","field":"editButton"}]
 
 /***/ }),
 /* 224 */
