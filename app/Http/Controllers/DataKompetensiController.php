@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\APIBaseController;
 use App\Kompetensi;
 use Validator;
+use DB;
 
 class DataKompetensiController extends APIBaseController
 {
@@ -16,7 +17,11 @@ class DataKompetensiController extends APIBaseController
      */
     public function index()
     {
-        $data = Kompetensi::all();
+        //$data = Kompetensi::all();
+        $data = DB::table('kompetensi')
+            ->join('pegawai', 'kompetensi.id_pegawai', '=', 'pegawai.id_user')
+            ->get();
+
         return $this->sendResponse($data->toArray(), 'Data Kompetensi retrieved successfully');
     }
 

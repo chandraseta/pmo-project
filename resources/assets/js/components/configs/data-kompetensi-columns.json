@@ -257,6 +257,7 @@
   {
     "label": "Rekomendasi",
     "field": "indeks",
+    "immutable": true,
     "thClass": "text-center"
   },
   {
