@@ -29,6 +29,13 @@
                         Save
                     </button>
                 </span>
+                <span v-else-if="props.column.field == 'viewButton'">
+                    <a class="btn btn-sm btn-default"
+                       role="button" :href="'pegawai/' + props.row.originalIndex"
+                       @click="viewProfile(props)">
+                        View
+                    </a>
+                </span>
                 <span v-else-if="props.row.originalIndex == rowBeingEdited && !props.column.immutable">
                     <input class="form-control"
                            :id="props.column.field + '-' + props.row.originalIndex"
@@ -64,6 +71,9 @@
             },
             saveRow(props) {
                 this.rowBeingEdited = -1;
+            },
+            viewProfile(props) {
+
             }
         }
     };

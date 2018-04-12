@@ -66681,7 +66681,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 221 */
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit"},{"label":"Jabatan","field":"position"},{"label":"Tahun Menjabat","field":"startYear","type":"number"},{"label":"Kelompok Kompetensi","field":"competencyGroup"},{"label":"No. Telp.","field":"phone"},{"label":"Pendidikan","field":"education"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true}]
+module.exports = [{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit"},{"label":"Jabatan","field":"position"},{"label":"Tahun Menjabat","field":"startYear","type":"number"},{"label":"Kelompok Kompetensi","field":"competencyGroup"},{"label":"No. Telp.","field":"phone"},{"label":"Pendidikan","field":"education"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true},{"label":"","field":"viewButton"}]
 
 /***/ }),
 /* 222 */
@@ -67038,6 +67038,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'data-table',
@@ -67055,7 +67062,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         saveRow: function saveRow(props) {
             this.rowBeingEdited = -1;
-        }
+        },
+        viewProfile: function viewProfile(props) {}
     }
 });
 
@@ -67129,34 +67137,57 @@ var render = function() {
                             ]
                           )
                     ])
-                  : props.row.originalIndex == _vm.rowBeingEdited &&
-                    !props.column.immutable
+                  : props.column.field == "viewButton"
                     ? _c("span", [
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            id:
-                              props.column.field +
-                              "-" +
-                              props.row.originalIndex,
-                            title: props.column.label,
-                            type:
-                              props.column.type == "number" || "date"
-                                ? props.column.type
-                                : "text"
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-sm btn-default",
+                            attrs: {
+                              role: "button",
+                              href: "pegawai/" + props.row.originalIndex
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.viewProfile(props)
+                              }
+                            }
                           },
-                          domProps: {
-                            value: props.formattedRow[props.column.field]
-                          }
-                        })
-                      ])
-                    : _c("span", [
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(props.formattedRow[props.column.field]) +
-                            "\n            "
+                          [
+                            _vm._v(
+                              "\n                    View\n                "
+                            )
+                          ]
                         )
                       ])
+                    : props.row.originalIndex == _vm.rowBeingEdited &&
+                      !props.column.immutable
+                      ? _c("span", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              id:
+                                props.column.field +
+                                "-" +
+                                props.row.originalIndex,
+                              title: props.column.label,
+                              type:
+                                props.column.type == "number" || "date"
+                                  ? props.column.type
+                                  : "text"
+                            },
+                            domProps: {
+                              value: props.formattedRow[props.column.field]
+                            }
+                          })
+                        ])
+                      : _c("span", [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(props.formattedRow[props.column.field]) +
+                              "\n            "
+                          )
+                        ])
               ]
             }
           }

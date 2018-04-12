@@ -41,5 +41,9 @@
     "dateInputFormat": "YYYY-MM-DD",
     "dateOutputFormat": "DD-MM-YYYY",
     "immutable": true
+  },
+  {
+    "label": "",
+    "field": "viewButton"
   }
 ]
