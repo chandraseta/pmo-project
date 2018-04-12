@@ -1,5 +1,9 @@
 [
   {
+    "label": "",
+    "field": "editButton"
+  },
+  {
     "label": "Nama Lengkap",
     "field": "nama",
     "immutable": true
@@ -43,9 +47,5 @@
     "label": "Skor Kinerja",
     "field": "skor_kinerja",
     "type": "number"
-  },
-  {
-    "label": "",
-    "field": "editButton"
   }
 ]

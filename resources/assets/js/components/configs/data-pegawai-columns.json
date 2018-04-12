@@ -1,5 +1,9 @@
 [
   {
+    "label": "",
+    "field": "viewButton"
+  },
+  {
     "label": "NIP",
     "field": "nip",
     "immutable": true
@@ -41,9 +45,5 @@
     "dateInputFormat": "YYYY-MM-DD",
     "dateOutputFormat": "DD-MM-YYYY",
     "immutable": true
-  },
-  {
-    "label": "",
-    "field": "viewButton"
   }
 ]

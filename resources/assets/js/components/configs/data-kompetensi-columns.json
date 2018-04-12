@@ -1,5 +1,9 @@
 [
   {
+    "label": "",
+    "field": "editButton"
+  },
+  {
     "label": "Nama Lengkap",
     "field": "nama",
     "immutable": true
@@ -259,9 +263,5 @@
     "field": "indeks",
     "immutable": true,
     "thClass": "text-center"
-  },
-  {
-    "label": "",
-    "field": "editButton"
   }
 ]

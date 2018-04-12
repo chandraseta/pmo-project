@@ -31,7 +31,7 @@
                 </span>
                 <span v-else-if="props.column.field == 'viewButton'">
                     <a class="btn btn-sm btn-default"
-                       role="button" :href="'pegawai/' + props.row.originalIndex"
+                       :href="'/api/pegawai/' + props.row['id_user']"
                        @click="viewProfile(props)">
                         View
                     </a>
