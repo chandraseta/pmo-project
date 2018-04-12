@@ -66649,12 +66649,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    watch: {},
     methods: {
         changeTable: function changeTable(payload) {
             this.title = payload.label;
             this.rows = this[payload.name];
             this.columns = this.$options[payload.name + 'Columns'];
+        },
+        saveData: function saveData(payload) {
+            console.log(payload);
         },
         getPegawai: function getPegawai() {
             var _this = this;
@@ -67064,17 +67066,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['tableTitle', 'columns', 'rows'],
     data: function data() {
         return {
-            rowBeingEdited: -1
+            rowBeingEdited: -1,
+            dataBeingEdited: {}
         };
     },
 
     methods: {
         editRow: function editRow(props) {
             this.rowBeingEdited = props.row.originalIndex;
-            console.log(props);
+            this.dataBeingEdited = props.row;
         },
         saveRow: function saveRow(props) {
+            console.log(this.dataBeingEdited);
+            this.$emit('dataChange', this.dataBeingEdited);
             this.rowBeingEdited = -1;
+            this.dataBeingEdited = {};
         },
         viewProfile: function viewProfile(props) {}
     }
@@ -67176,23 +67182,154 @@ var render = function() {
                     : props.row.originalIndex == _vm.rowBeingEdited &&
                       !props.column.immutable
                       ? _c("span", [
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              id:
-                                props.column.field +
-                                "-" +
-                                props.row.originalIndex,
-                              title: props.column.label,
-                              type:
-                                props.column.type == "number" || "date"
-                                  ? props.column.type
-                                  : "text"
-                            },
-                            domProps: {
-                              value: props.formattedRow[props.column.field]
-                            }
-                          })
+                          (props.column.type == "number" || "date"
+                            ? props.column.type
+                            : "text") === "checkbox"
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.dataBeingEdited[props.column.field],
+                                    expression:
+                                      "dataBeingEdited[props.column.field]"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  id:
+                                    props.column.field +
+                                    "-" +
+                                    props.row.originalIndex,
+                                  title: props.column.label,
+                                  type: "checkbox"
+                                },
+                                domProps: {
+                                  checked: Array.isArray(
+                                    _vm.dataBeingEdited[props.column.field]
+                                  )
+                                    ? _vm._i(
+                                        _vm.dataBeingEdited[props.column.field],
+                                        null
+                                      ) > -1
+                                    : _vm.dataBeingEdited[props.column.field]
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$a =
+                                        _vm.dataBeingEdited[props.column.field],
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            _vm.dataBeingEdited,
+                                            props.column.field,
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            _vm.dataBeingEdited,
+                                            props.column.field,
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(
+                                        _vm.dataBeingEdited,
+                                        props.column.field,
+                                        $$c
+                                      )
+                                    }
+                                  }
+                                }
+                              })
+                            : (props.column.type == "number" || "date"
+                                ? props.column.type
+                                : "text") === "radio"
+                              ? _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value:
+                                        _vm.dataBeingEdited[props.column.field],
+                                      expression:
+                                        "dataBeingEdited[props.column.field]"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    id:
+                                      props.column.field +
+                                      "-" +
+                                      props.row.originalIndex,
+                                    title: props.column.label,
+                                    type: "radio"
+                                  },
+                                  domProps: {
+                                    checked: _vm._q(
+                                      _vm.dataBeingEdited[props.column.field],
+                                      null
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.$set(
+                                        _vm.dataBeingEdited,
+                                        props.column.field,
+                                        null
+                                      )
+                                    }
+                                  }
+                                })
+                              : _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value:
+                                        _vm.dataBeingEdited[props.column.field],
+                                      expression:
+                                        "dataBeingEdited[props.column.field]"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    id:
+                                      props.column.field +
+                                      "-" +
+                                      props.row.originalIndex,
+                                    title: props.column.label,
+                                    type:
+                                      props.column.type == "number" || "date"
+                                        ? props.column.type
+                                        : "text"
+                                  },
+                                  domProps: {
+                                    value:
+                                      _vm.dataBeingEdited[props.column.field]
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.dataBeingEdited,
+                                        props.column.field,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
                         ])
                       : _c("span", [
                           _vm._v(
@@ -67242,7 +67379,12 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("data-table", {
-          attrs: { tableTitle: _vm.title, columns: _vm.columns, rows: _vm.rows }
+          attrs: {
+            tableTitle: _vm.title,
+            columns: _vm.columns,
+            rows: _vm.rows
+          },
+          on: { dataChange: _vm.saveData }
         })
       ],
       1

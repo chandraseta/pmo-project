@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </section>
-            <data-table :tableTitle="title"
+            <data-table v-on:dataChange="saveData" :tableTitle="title"
                         :columns="columns"
                         :rows="rows">
             </data-table>
@@ -91,6 +91,9 @@
                 this.title = payload.label;
                 this.rows = this[payload.name];
                 this.columns = this.$options[payload.name + 'Columns'];
+            },
+            saveData: function (payload) {
+                console.log(payload);
             },
             getPegawai: function () {
                  axios.get('/api/pegawai')

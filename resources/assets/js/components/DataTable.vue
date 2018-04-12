@@ -41,7 +41,7 @@
                            :id="props.column.field + '-' + props.row.originalIndex"
                            :title="props.column.label"
                            :type="props.column.type == 'number' || 'date' ? props.column.type : 'text'"
-                           :value="props.formattedRow[props.column.field]"/>
+                           v-model="dataBeingEdited[props.column.field]"/>
                 </span>
                 <span v-else>
                     {{ props.formattedRow[props.column.field] }}
@@ -61,16 +61,19 @@
         ],
         data(){
             return {
-                rowBeingEdited: -1
+                rowBeingEdited: -1,
+                dataBeingEdited: {}
             };
         },
         methods: {
             editRow(props) {
                 this.rowBeingEdited = props.row.originalIndex;
-                console.log(props);
+                this.dataBeingEdited = props.row;
             },
             saveRow(props) {
+                this.$emit('dataChange', this.dataBeingEdited);
                 this.rowBeingEdited = -1;
+                this.dataBeingEdited = {};
             },
             viewProfile(props) {
 
