@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66656,36 +66656,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.columns = this.$options[payload.name + 'Columns'];
         },
         saveData: function saveData(payload) {
-            console.log(payload);
-        },
-        getPegawai: function getPegawai() {
             var _this = this;
 
-            axios.get('/api/pegawai').then(function (response) {
-                _this.dataPegawai = response.data.data;
+            console.log(payload);
+            var url = '/api/kompetensi/' + payload.id_kompetensi;
+            var data = payload;
+            var config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            axios.put(url, data, config).then(function (response) {
+                console.log(response.data);
             }).catch(function (e) {
-                _this.errors.push(e);
+                _this.error.push(e);
+            });
+        },
+        getPegawai: function getPegawai() {
+            var _this2 = this;
+
+            axios.get('/api/pegawai').then(function (response) {
+                _this2.dataPegawai = response.data.data;
+            }).catch(function (e) {
+                _this2.errors.push(e);
             });
         },
         getKompetensi: function getKompetensi() {
-            var _this2 = this;
+            var _this3 = this;
 
             axios.get('/api/kompetensi').then(function (response) {
-                _this2.dataKompetensi = response.data.data;
+                _this3.dataKompetensi = response.data.data;
             }).catch(function (e) {
-                _this2.errors.push(e);
+                _this3.errors.push(e);
             });
         }
     },
     created: function created() {
-        var _this3 = this;
+        var _this4 = this;
 
         axios.get('/api/pegawai').then(function (response) {
-            _this3.dataPegawai = response.data.data;
-            _this3.columns = _this3.$options.dataPegawaiColumns;
-            _this3.rows = _this3.dataPegawai;
+            _this4.dataPegawai = response.data.data;
+            _this4.columns = _this4.$options.dataPegawaiColumns;
+            _this4.rows = _this4.dataPegawai;
         }).catch(function (e) {
-            _this3.errors.push(e);
+            _this4.errors.push(e);
         });
 
         this.getKompetensi();
@@ -67077,7 +67091,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dataBeingEdited = props.row;
         },
         saveRow: function saveRow(props) {
-            console.log(this.dataBeingEdited);
             this.$emit('dataChange', this.dataBeingEdited);
             this.rowBeingEdited = -1;
             this.dataBeingEdited = {};

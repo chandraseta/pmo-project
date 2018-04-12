@@ -94,6 +94,20 @@
             },
             saveData: function (payload) {
                 console.log(payload);
+                let url = '/api/kompetensi/' + payload.id_kompetensi;
+                let data = payload;
+                let config = {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                axios.put(url, data, config)
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(e => {
+                        this.error.push(e);
+                    });
             },
             getPegawai: function () {
                  axios.get('/api/pegawai')

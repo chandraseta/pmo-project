@@ -51,7 +51,7 @@ class DataKompetensiController extends APIBaseController
         $data = Kompetensi::find($id);
 
         if (is_null($data)) {
-            return $this->sendError('Data Kompetensi not found.');
+            return $this->sendError('Data Kompetensi is not found.');
         }
 
         return $this->sendResponse($data, 'Data Kompetensi retrieved successfully.');
@@ -77,7 +77,8 @@ class DataKompetensiController extends APIBaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        return $this->sendResponse($data, 'Updated');
     }
 
     /**
