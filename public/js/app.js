@@ -17125,15 +17125,9 @@ function setMonth (dirtyDate, dirtyMonth, dirtyOptions) {
 var disposed = false
 var normalizeComponent = __webpack_require__(13)
 /* script */
-<<<<<<< HEAD
 var __vue_script__ = __webpack_require__(229)
 /* template */
 var __vue_template__ = __webpack_require__(230)
-=======
-var __vue_script__ = __webpack_require__(226)
-/* template */
-var __vue_template__ = __webpack_require__(227)
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17176,11 +17170,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(70);
-<<<<<<< HEAD
 module.exports = __webpack_require__(242);
-=======
-module.exports = __webpack_require__(239);
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 
 
 /***/ }),
@@ -66526,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66700,11 +66690,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     dataKinerjaColumns: __webpack_require__(223),
     name: 'pmo-main-page',
     components: {
-<<<<<<< HEAD
         'pmo-navbar': __webpack_require__(224),
-=======
-        'pmo-navbar': __webpack_require__(221),
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
         'data-table': __webpack_require__(68)
     },
     data: function data() {
@@ -66769,6 +66755,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         axios.get('/api/pegawai').then(function (response) {
             _this4.dataPegawai = response.data.data;
+            console.log(_this4.dataPegawai);
+            console.log("----");
+            _this4.dataPegawai.forEach(function (row, index, array) {
+                if (row.data_kepegawaians.length > 0) {
+                    var data_kepegawaian = row.data_kepegawaians[row.data_kepegawaians.length - 1];
+                    array[index].unit_kerja = data_kepegawaian.unit_kerja;
+                    array[index].kompetensi = data_kepegawaian.kompetensi;
+                    array[index].jabatan = data_kepegawaian.posisi;
+                    array[index].tahun_masuk = data_kepegawaian.tahun_masuk;
+                }
+
+                if (row.riwayat_pendidikans.length > 0) {
+                    array[index].strata = row.riwayat_pendidikans[row.riwayat_pendidikans.length - 1].strata;
+                }
+            });
+            console.log(_this4.dataPegawai);
             _this4.columns = _this4.$options.dataPegawaiColumns;
             _this4.rows = _this4.dataPegawai;
         }).catch(function (e) {
@@ -66781,60 +66783,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 221 */
-<<<<<<< HEAD
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"","field":"viewButton"},{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit"},{"label":"Jabatan","field":"position"},{"label":"Tahun Menjabat","field":"startYear","type":"number"},{"label":"Kelompok Kompetensi","field":"competencyGroup"},{"label":"No. Telp.","field":"phone"},{"label":"Pendidikan","field":"education"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true}]
-=======
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(222)
-}
-var normalizeComponent = __webpack_require__(13)
-/* script */
-var __vue_script__ = __webpack_require__(224)
-/* template */
-var __vue_template__ = __webpack_require__(225)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/PMONavbar.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4f96ef9b", Component.options)
-  } else {
-    hotAPI.reload("data-v-4f96ef9b", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
+module.exports = [{"label":"","field":"viewButton"},{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit_kerja"},{"label":"Jabatan","field":"jabatan"},{"label":"Tahun Menjabat","field":"tahun_masuk","type":"number"},{"label":"Kelompok Kompetensi","field":"kompetensi"},{"label":"No. Telp.","field":"phone"},{"label":"Pendidikan","field":"strata"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true}]
 
 /***/ }),
 /* 222 */
@@ -67861,11 +67812,7 @@ var normalizeComponent = __webpack_require__(13)
 /* script */
 var __vue_script__ = __webpack_require__(235)
 /* template */
-<<<<<<< HEAD
 var __vue_template__ = __webpack_require__(241)
-=======
-var __vue_template__ = __webpack_require__(238)
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67938,11 +67885,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-<<<<<<< HEAD
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-=======
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 
 // exports
 
@@ -67989,11 +67932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'admin-main-page',
     components: {
-<<<<<<< HEAD
         'admin-navbar': __webpack_require__(236),
-=======
-        'admin-navbar': __webpack_require__(233),
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
         'data-table': __webpack_require__(68)
     },
     data: function data() {
@@ -68012,21 +67951,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     created: function created() {
-<<<<<<< HEAD
-        this.getData();
-    },
-
-    methods: {
-        getData: function getData() {
-            var _this = this;
-
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/user').then(function (response) {
-                _this.rows.push(response.data);
-            }).catch(function (error) {
-                return console.log(error);
-            });
-        }
-=======
         // this.getData();
     },
 
@@ -68039,7 +67963,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //     })
         //         .catch(error => console.log(error));
         // }
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
     }
 });
 
@@ -68129,15 +68052,17 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 239 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -68154,9 +68079,13 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 //
 //
 
-// export default {
-//
-// }
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            username: 'Username'
+        };
+    }
+});
 
 /***/ }),
 /* 240 */
@@ -68237,202 +68166,6 @@ if (false) {
 /* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(234)
-}
-var normalizeComponent = __webpack_require__(13)
-/* script */
-var __vue_script__ = __webpack_require__(236)
-/* template */
-var __vue_template__ = __webpack_require__(237)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/AdminNavbar.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-25355f50", Component.options)
-  } else {
-    hotAPI.reload("data-v-25355f50", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 234 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(235);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(19)("7afb2708", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25355f50\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminNavbar.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25355f50\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminNavbar.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 235 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 236 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            username: 'Username'
-        };
-    }
-});
-
-/***/ }),
-/* 237 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    { staticClass: "navbar navbar-expand-md bg-primary navbar-dark" },
-    [
-      _c(
-        "a",
-        { staticClass: "navbar-brand font-weight-bold", attrs: { href: "#" } },
-        [_vm._v("UPT PMO")]
-      ),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "collapse navbar-collapse text-center justify-content-end",
-          attrs: { id: "navbar2SupportedContent" }
-        },
-        [
-          _c(
-            "a",
-            { staticClass: "btn navbar-btn btn-primary ml-2 text-white" },
-            [
-              _c("span", {
-                staticClass: "oi oi-person",
-                attrs: { title: "user icon", "aria-hidden": "true" }
-              }),
-              _vm._v("\n            " + _vm._s(_vm.username) + "\n        ")
-            ]
-          )
-        ]
-      )
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarNavDropdown",
-          "aria-controls": "navbarNavDropdown",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-25355f50", module.exports)
-  }
-}
-
-/***/ }),
-/* 238 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -68491,11 +68224,7 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< HEAD
 /* 242 */
-=======
-/* 239 */
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
