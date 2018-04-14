@@ -67125,7 +67125,7 @@ var render = function() {
             enabled: true,
             perPage: 5
           },
-          styleClass: "vgt-table striped condensed bordered"
+          styleClass: "vgt-table striped condensed bordered text-nowrap"
         },
         scopedSlots: _vm._u([
           {

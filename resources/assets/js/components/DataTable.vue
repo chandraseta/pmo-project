@@ -14,7 +14,7 @@
                     enabled: true,
                     perPage: 5
                 }"
-                styleClass="vgt-table striped condensed bordered">
+                styleClass="vgt-table striped condensed bordered text-nowrap">
             <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'editButton'">
                     <button class="btn btn-sm btn-default"
