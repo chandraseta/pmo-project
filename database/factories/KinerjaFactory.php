@@ -8,7 +8,9 @@ $factory->define(App\Kinerja::class, function (Faker $faker) {
 
     return [
         'id_pegawai' => App\Pegawai::pluck('id_user')->random(),
-        'tanggal' => $faker->date,
-        'laporan_kinerja' => json_encode($a)
+        'tahun' => $faker->year,
+        'semester' => $faker->boolean,
+        'nilai' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 6),
+        'catatan' => $faker->paragraph,
     ];
 });

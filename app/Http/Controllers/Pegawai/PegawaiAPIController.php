@@ -24,8 +24,11 @@ class PegawaiAPIController extends APIBaseController
      */
     public function index()
     {
-        $posts = Pegawai::all();
-        return $this->sendResponse($posts->toArray(), 'Profiles retrieved successfully.');
+        // $user = User::with(Pegawai::with(['riwayat_pendidikan', 'riwayat_pekerjaan', 'data_kepegawaian']));
+        $user = Pegawai::with(['user','riwayatPendidikans','riwayatPekerjaans','dataKepegawaians'])->get();
+
+        
+        return $this->sendResponse($user, 'Profiles retrieved successfully.');
     }
 
 
