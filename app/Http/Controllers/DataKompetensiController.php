@@ -43,7 +43,18 @@ class DataKompetensiController extends APIBaseController
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $validator = $this->validateDataKompetensi($input);
+        if ($validator->fails()) {
+            return $this->sendError('Gagal menambahkan data kompetensi.', $validator->errors());
+        }
+
+        $data = new Kompetensi;
+        $data = $this->updateDataKompetensi($data, $input);
+        $data.save();
+
+        return $this->sendResponse($data, 'Data kompetensi berhasil ditambahkan.');
     }
 
     /**
