@@ -1,0 +1,49 @@
+[
+  {
+    "label": "",
+    "field": "viewButton"
+  },
+  {
+    "label": "NIP",
+    "field": "nip",
+    "immutable": true
+  },
+  {
+    "label": "Nama Lengkap",
+    "field": "nama",
+    "immutable": true
+  },
+  {
+    "label": "Unit Kerja",
+    "field": "unit"
+  },
+  {
+    "label": "Jabatan",
+    "field": "position"
+  },
+  {
+    "label": "Tahun Menjabat",
+    "field": "startYear",
+    "type": "number"
+  },
+  {
+    "label": "Kelompok Kompetensi",
+    "field": "competencyGroup"
+  },
+  {
+    "label": "No. Telp.",
+    "field": "phone"
+  },
+  {
+    "label": "Pendidikan",
+    "field": "education"
+  },
+  {
+    "label": "Tanggal Lahir",
+    "field": "tanggal_lahir",
+    "type": "date",
+    "dateInputFormat": "YYYY-MM-DD",
+    "dateOutputFormat": "DD-MM-YYYY",
+    "immutable": true
+  }
+]

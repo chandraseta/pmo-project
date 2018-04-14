@@ -17125,9 +17125,15 @@ function setMonth (dirtyDate, dirtyMonth, dirtyOptions) {
 var disposed = false
 var normalizeComponent = __webpack_require__(13)
 /* script */
+<<<<<<< HEAD
+var __vue_script__ = __webpack_require__(229)
+/* template */
+var __vue_template__ = __webpack_require__(230)
+=======
 var __vue_script__ = __webpack_require__(226)
 /* template */
 var __vue_template__ = __webpack_require__(227)
+>>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17170,7 +17176,11 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(70);
+<<<<<<< HEAD
+module.exports = __webpack_require__(242);
+=======
 module.exports = __webpack_require__(239);
+>>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 
 
 /***/ }),
@@ -17219,7 +17229,7 @@ if (document.getElementById('admin-page')) {
     var adminPage = new Vue({
         el: '#admin-page',
         components: {
-            'admin-main-page': __webpack_require__(229)
+            'admin-main-page': __webpack_require__(232)
         }
     });
 }
@@ -66443,7 +66453,7 @@ var normalizeComponent = __webpack_require__(13)
 /* script */
 var __vue_script__ = __webpack_require__(220)
 /* template */
-var __vue_template__ = __webpack_require__(228)
+var __vue_template__ = __webpack_require__(231)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66516,7 +66526,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66628,272 +66638,79 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    dataPegawaiColumns: __webpack_require__(221),
+    dataKompetensiColumns: __webpack_require__(222),
+    dataKinerjaColumns: __webpack_require__(223),
     name: 'pmo-main-page',
     components: {
+<<<<<<< HEAD
+        'pmo-navbar': __webpack_require__(224),
+=======
         'pmo-navbar': __webpack_require__(221),
+>>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
         'data-table': __webpack_require__(68)
     },
     data: function data() {
         return {
             title: 'Data Pegawai',
             columns: [],
-            dataPegawaiColumns: [{
-                label: 'NIP',
-                field: 'nip',
-                immutable: true
-            }, {
-                label: 'Nama Lengkap',
-                field: 'nama',
-                immutable: true
-            }, {
-                label: 'Unit Kerja',
-                field: 'unit'
-            }, {
-                label: 'Jabatan',
-                field: 'position'
-            }, {
-                label: 'Tahun Menjabat',
-                field: 'startYear',
-                type: 'number'
-            }, {
-                label: 'Kelompok Kompetensi',
-                field: 'competencyGroup'
-            }, {
-                label: 'No. Telp.',
-                field: 'phone'
-            }, {
-                label: 'Pendidikan',
-                field: 'education'
-            }, {
-                label: 'Tanggal Lahir',
-                field: 'tanggal_lahir',
-                type: 'date',
-                dateInputFormat: 'YYYY-MM-DD',
-                dateOutputFormat: 'DD-MM-YYYY',
-                immutable: true
-            }],
-            dataKompetensiColumns: [
-            //                    Data Pegawai
-            {
-                label: 'Nama Lengkap',
-                field: 'nama'
-            }, {
-                label: 'NIP',
-                field: 'nip'
-            }, {
-                label: 'Unit Kerja',
-                field: 'unit'
-            }, {
-                label: 'Tingkat Pendidikan',
-                field: 'pendidikan_terakhir'
-            }, {
-                label: 'Tanggal Lahir',
-                field: 'tanggal_lahir'
-            }, {
-                label: 'Jabatan',
-                field: 'jabatan'
-            }, {
-                label: 'Tujuan Pemeriksaan',
-                field: 'tujuan_pemeriksaan'
-            }, {
-                label: 'Tanggal Pelaksanaan',
-                field: 'tanggal',
-                type: 'date',
-                dateInputFormat: 'YYYY-MM-DD',
-                dateOutputFormat: 'DD-MM-YYYY'
-            },
-            //                    Fungsi Kognitif
-            {
-                label: 'Efisiensi Kecerdasan',
-                field: 'kognitif_efisiensi_kecerdasan',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Daya Nalar',
-                field: 'kognitif_daya_nalar',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Daya Asosiasi',
-                field: 'kognitif_daya_asosiasi',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Daya Analitis',
-                field: 'kognitif_daya_analitis',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Daya Antisipasi',
-                field: 'kognitif_daya_antisipasi',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Kemandirian Berpikir',
-                field: 'kognitif_kemandirian_berpikir',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Fleksibilitas',
-                field: 'kognitif_fleksibilitas',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Daya Tangkap',
-                field: 'kognitif_daya_tangkap',
-                type: 'number',
-                thClass: 'text-center fungsi-kognitif-group'
-            }, {
-                label: 'Rata-rata Kognitif',
-                field: 'kognitif',
-                type: 'decimal',
-                thClass: 'text-center fungsi-kognitif-group'
-            },
-            //                    Fungsi Interaksional
-            {
-                label: 'Penempatan Diri',
-                field: 'interaksional_penempatan_diri',
-                type: 'number',
-                thClass: 'text-center fungsi-interaksional-group'
-            }, {
-                label: 'Percaya Diri',
-                field: 'interaksional_percaya_diri',
-                type: 'number',
-                thClass: 'text-center fungsi-interaksional-group'
-            }, {
-                label: 'Daya Kooperatif',
-                field: 'interaksional_daya_kooperatif',
-                type: 'number',
-                thClass: 'text-center fungsi-interaksional-group'
-            }, {
-                label: 'Penyesuaian Perasaan',
-                field: 'interaksional_penyesuaian_perasaan',
-                type: 'number',
-                thClass: 'text-center fungsi-interaksional-group'
-            }, {
-                label: 'Penyesuaian Perasaan',
-                field: 'interaksional',
-                type: 'decimal',
-                thClass: 'text-center fungsi-interaksional-group'
-            },
-            //                    Fungsi Emosional
-            {
-                label: 'Stabilitas Emosi',
-                field: 'emosional_stabilitas_emosi',
-                type: 'number',
-                thClass: 'text-center fungsi-emosional-group'
-            }, {
-                label: 'Toleransi terhadap Stress',
-                field: 'emosional_toleransi_stres',
-                type: 'number',
-                thClass: 'text-center fungsi-emosional-group'
-            }, {
-                label: 'Pengendalian Diri',
-                field: 'emosional_pengendalian_diri',
-                type: 'number',
-                thClass: 'text-center fungsi-emosional-group'
-            }, {
-                label: 'Kemantapan Konsentrasi',
-                field: 'emosional_kemantapan_konsentrasi',
-                type: 'number',
-                thClass: 'text-center fungsi-emosional-group'
-            }, {
-                label: 'Rata-rata Emosional',
-                field: 'emosional_kemantapan_konsentrasi',
-                type: 'decimal',
-                thClass: 'text-center fungsi-emosional-group'
-            },
-            //                    Fungsi Sikap Kerja
-            {
-                label: 'Hasrat Berprestasi',
-                field: 'sikap_kerja_hasrat_berprestasi',
-                type: 'number',
-                thClass: 'text-center fungsi-sikap-kerja-group'
-            }, {
-                label: 'Daya Tahan',
-                field: 'sikap_kerja_daya_tahan',
-                type: 'number',
-                thClass: 'text-center fungsi-sikap-kerja-group'
-            }, {
-                label: 'Keteraturan Kerja',
-                field: 'sikap_kerja_keteraturan_kerja',
-                type: 'number',
-                thClass: 'text-center fungsi-sikap-kerja-group'
-            }, {
-                label: 'Pengerahan Energi Kerja',
-                field: 'sikap_kerja_pengerahan_energi_kerja',
-                type: 'number',
-                thClass: 'text-center fungsi-sikap-kerja-group'
-            }, {
-                label: 'Rata-rata Sikap Kerja',
-                field: 'sikap_kerja',
-                type: 'decimal',
-                thClass: 'text-center fungsi-sikap-kerja-group'
-            },
-            //                    Fungsi Manajerial
-            {
-                label: 'Efektivitas Perencanaan',
-                field: 'manajerial_efektivitas_perencanaan',
-                type: 'number',
-                thClass: 'text-center fungsi-manajerial-group'
-            }, {
-                label: 'Pengorganisasian Pelaksanaan',
-                field: 'manajerial_pengorganisasian_pelaksanaan',
-                type: 'number',
-                thClass: 'text-center fungsi-manajerial-group'
-            }, {
-                label: 'Intensitas Pengarahan',
-                field: 'manajerial_intensitas_pengarahan',
-                type: 'number',
-                thClass: 'text-center fungsi-manajerial-group'
-            }, {
-                label: 'Kekuatan Pengawasan',
-                field: 'manajerial_kekuatan_pengawasan',
-                type: 'number',
-                thClass: 'text-center fungsi-manajerial-group'
-            }, {
-                label: 'Rata-rata Manajerial',
-                field: 'manajerial',
-                type: 'decimal',
-                thClass: 'text-center fungsi-manajerial-group'
-            },
-            // Summary
-            {
-                label: 'Potensi Keberhasilan',
-                field: 'profil_potensi_keberhasilan',
-                type: 'decimal',
-                thClass: 'text-center'
-            }, {
-                label: 'Potensi Pengembangan Diri',
-                field: 'profil_potensi_pengembangan_diri',
-                type: 'decimal',
-                thClass: 'text-center'
-            }, {
-                label: 'Loyalitas Terhadap Tugas',
-                field: 'profil_loyalitas_terhadap_tugas',
-                type: 'decimal',
-                thClass: 'text-center'
-            }, {
-                label: 'Efektivitas Manajerial',
-                field: 'profil_efektivitas_manajerial',
-                type: 'decimal',
-                thClass: 'text-center'
-            }, {
-                label: 'Nilai Prediksi',
-                field: 'profil',
-                type: 'decimal',
-                thClass: 'text-center'
-            }, {
-                label: 'Rekomendasi',
-                field: 'indeks',
-                thClass: 'text-center'
-            }, {
-                label: '',
-                field: 'editButton'
-            }],
-            dataKinerjaColumns: [],
             rows: [],
             dataPegawai: [],
             dataKinerja: [],
@@ -66905,31 +66722,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         changeTable: function changeTable(payload) {
             this.title = payload.label;
             this.rows = this[payload.name];
-            this.columns = this[payload.name + 'Columns'];
+            this.columns = this.$options[payload.name + 'Columns'];
+        },
+        saveData: function saveData(payload) {
+            var _this = this;
+
+            console.log(payload);
+            var url = '/api/kompetensi/' + payload.id_kompetensi;
+            var data = payload;
+            var config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            axios.put(url, data, config).then(function (response) {
+                console.log(response.data);
+            }).catch(function (e) {
+                _this.error.push(e);
+            });
+        },
+        getPegawai: function getPegawai() {
+            var _this2 = this;
+
+            axios.get('/api/pegawai').then(function (response) {
+                _this2.dataPegawai = response.data.data;
+            }).catch(function (e) {
+                _this2.errors.push(e);
+            });
+        },
+        getKompetensi: function getKompetensi() {
+            var _this3 = this;
+
+            axios.get('/api/kompetensi').then(function (response) {
+                _this3.dataKompetensi = response.data.data;
+            }).catch(function (e) {
+                _this3.errors.push(e);
+            });
+        },
+        downloadTemplate: function downloadTemplate() {
+            var url = '/api/templates/template.xlsx';
+            window.open(url);
         }
     },
     created: function created() {
-        var _this = this;
-
-        this.rows = this.dataPegawai;
-        this.columns = this.dataPegawaiColumns;
+        var _this4 = this;
 
         axios.get('/api/pegawai').then(function (response) {
-            _this.dataPegawai = response.data.data;
+            _this4.dataPegawai = response.data.data;
+            _this4.columns = _this4.$options.dataPegawaiColumns;
+            _this4.rows = _this4.dataPegawai;
         }).catch(function (e) {
-            _this.errors.push(e);
+            _this4.errors.push(e);
         });
 
-        axios.get('/api/kompetensi').then(function (response) {
-            _this.dataKompetensi = response.data.data;
-        }).catch(function (e) {
-            _this.errors.push(e);
-        });
+        this.getKompetensi();
     }
 });
 
 /***/ }),
 /* 221 */
+<<<<<<< HEAD
+/***/ (function(module, exports) {
+
+module.exports = [{"label":"","field":"viewButton"},{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit"},{"label":"Jabatan","field":"position"},{"label":"Tahun Menjabat","field":"startYear","type":"number"},{"label":"Kelompok Kompetensi","field":"competencyGroup"},{"label":"No. Telp.","field":"phone"},{"label":"Pendidikan","field":"education"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true}]
+=======
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -66978,15 +66834,79 @@ if (false) {(function () {
 
 module.exports = Component.exports
 
+>>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 
 /***/ }),
 /* 222 */
+/***/ (function(module, exports) {
+
+module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true},{"label":"Unit Kerja","field":"unit","immutable":true},{"label":"Tingkat Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"jabatan","immutable":true},{"label":"Tujuan Pemeriksaan","field":"tujuan_pemeriksaan"},{"label":"Tanggal Pelaksanaan","field":"tanggal","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY"},{"label":"Efisiensi Kecerdasan","field":"kognitif_efisiensi_kecerdasan","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Daya Nalar","field":"kognitif_daya_nalar","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Daya Asosiasi","field":"kognitif_daya_asosiasi","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Daya Analitis","field":"kognitif_daya_analitis","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Daya Antisipasi","field":"kognitif_daya_antisipasi","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Kemandirian Berpikir","field":"kognitif_kemandirian_berpikir","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Fleksibilitas","field":"kognitif_fleksibilitas","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Daya Tangkap","field":"kognitif_daya_tangkap","type":"number","thClass":"text-center fungsi-kognitif-group"},{"label":"Rata-rata Kognitif","field":"kognitif","type":"decimal","immutable":true,"thClass":"text-center fungsi-kognitif-group"},{"label":"Penempatan Diri","field":"interaksional_penempatan_diri","type":"number","thClass":"text-center fungsi-interaksional-group"},{"label":"Percaya Diri","field":"interaksional_percaya_diri","type":"number","thClass":"text-center fungsi-interaksional-group"},{"label":"Daya Kooperatif","field":"interaksional_daya_kooperatif","type":"number","thClass":"text-center fungsi-interaksional-group"},{"label":"Penyesuaian Perasaan","field":"interaksional_penyesuaian_perasaan","type":"number","thClass":"text-center fungsi-interaksional-group"},{"label":"Penyesuaian Perasaan","field":"interaksional","type":"decimal","immutable":true,"thClass":"text-center fungsi-interaksional-group"},{"label":"Stabilitas Emosi","field":"emosional_stabilitas_emosi","type":"number","thClass":"text-center fungsi-emosional-group"},{"label":"Toleransi terhadap Stress","field":"emosional_toleransi_stres","type":"number","thClass":"text-center fungsi-emosional-group"},{"label":"Pengendalian Diri","field":"emosional_pengendalian_diri","type":"number","thClass":"text-center fungsi-emosional-group"},{"label":"Kemantapan Konsentrasi","field":"emosional_kemantapan_konsentrasi","type":"number","thClass":"text-center fungsi-emosional-group"},{"label":"Rata-rata Emosional","field":"emosional_kemantapan_konsentrasi","type":"decimal","immutable":true,"thClass":"text-center fungsi-emosional-group"},{"label":"Hasrat Berprestasi","field":"sikap_kerja_hasrat_berprestasi","type":"number","thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Daya Tahan","field":"sikap_kerja_daya_tahan","type":"number","thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Keteraturan Kerja","field":"sikap_kerja_keteraturan_kerja","type":"number","thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Pengerahan Energi Kerja","field":"sikap_kerja_pengerahan_energi_kerja","type":"number","thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Rata-rata Sikap Kerja","field":"sikap_kerja","type":"decimal","immutable":true,"thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Efektivitas Perencanaan","field":"manajerial_efektivitas_perencanaan","type":"number","thClass":"text-center fungsi-manajerial-group"},{"label":"Pengorganisasian Pelaksanaan","field":"manajerial_pengorganisasian_pelaksanaan","type":"number","thClass":"text-center fungsi-manajerial-group"},{"label":"Intensitas Pengarahan","field":"manajerial_intensitas_pengarahan","type":"number","thClass":"text-center fungsi-manajerial-group"},{"label":"Kekuatan Pengawasan","field":"manajerial_kekuatan_pengawasan","type":"number","thClass":"text-center fungsi-manajerial-group"},{"label":"Rata-rata Manajerial","field":"manajerial","type":"decimal","immutable":true,"thClass":"text-center fungsi-manajerial-group"},{"label":"Potensi Keberhasilan","field":"profil_potensi_keberhasilan","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Potensi Pengembangan Diri","field":"profil_potensi_pengembangan_diri","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Loyalitas Terhadap Tugas","field":"profil_loyalitas_terhadap_tugas","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Efektivitas Manajerial","field":"profil_efektivitas_manajerial","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Nilai Prediksi","field":"profil","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Rekomendasi","field":"indeks","immutable":true,"thClass":"text-center"}]
+
+/***/ }),
+/* 223 */
+/***/ (function(module, exports) {
+
+module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true},{"label":"Unit Kerja","field":"unit","immutable":true},{"label":"Tingkat Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"jabatan","immutable":true},{"label":"Tahun","field":"tahun","type":"number"},{"label":"Semester","field":"semester","type":"number"},{"label":"Skor Kinerja","field":"skor_kinerja","type":"number"}]
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(225)
+}
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(227)
+/* template */
+var __vue_template__ = __webpack_require__(228)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/PMONavbar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4f96ef9b", Component.options)
+  } else {
+    hotAPI.reload("data-v-4f96ef9b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(223);
+var content = __webpack_require__(226);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -67006,7 +66926,7 @@ if(false) {
 }
 
 /***/ }),
-/* 223 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)(false);
@@ -67020,7 +66940,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 224 */
+/* 227 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67096,7 +67016,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 225 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67220,11 +67140,18 @@ if (false) {
 }
 
 /***/ }),
-/* 226 */
+/* 229 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -67277,23 +67204,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['tableTitle', 'columns', 'rows'],
     data: function data() {
         return {
-            rowBeingEdited: -1
+            rowBeingEdited: -1,
+            dataBeingEdited: {}
         };
     },
 
     methods: {
         editRow: function editRow(props) {
             this.rowBeingEdited = props.row.originalIndex;
-            console.log(props);
+            this.dataBeingEdited = props.row;
         },
         saveRow: function saveRow(props) {
+            this.$emit('dataChange', this.dataBeingEdited);
             this.rowBeingEdited = -1;
-        }
+            this.dataBeingEdited = {};
+        },
+        viewProfile: function viewProfile(props) {}
     }
 });
 
 /***/ }),
-/* 227 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67318,7 +67249,7 @@ var render = function() {
             enabled: true,
             perPage: 5
           },
-          styleClass: "vgt-table striped condensed bordered"
+          styleClass: "vgt-table striped condensed bordered text-nowrap"
         },
         scopedSlots: _vm._u([
           {
@@ -67362,34 +67293,187 @@ var render = function() {
                             ]
                           )
                     ])
-                  : props.row.originalIndex == _vm.rowBeingEdited &&
-                    !props.column.immutable
+                  : props.column.field == "viewButton"
                     ? _c("span", [
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            id:
-                              props.column.field +
-                              "-" +
-                              props.row.originalIndex,
-                            title: props.column.label,
-                            type:
-                              props.column.type == "number" || "date"
-                                ? props.column.type
-                                : "text"
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-sm btn-default",
+                            attrs: {
+                              href: "/api/pegawai/" + props.row["id_user"]
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.viewProfile(props)
+                              }
+                            }
                           },
-                          domProps: {
-                            value: props.formattedRow[props.column.field]
-                          }
-                        })
-                      ])
-                    : _c("span", [
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(props.formattedRow[props.column.field]) +
-                            "\n            "
+                          [
+                            _vm._v(
+                              "\n                    View\n                "
+                            )
+                          ]
                         )
                       ])
+                    : props.row.originalIndex == _vm.rowBeingEdited &&
+                      !props.column.immutable
+                      ? _c("span", [
+                          (props.column.type == "number" || "date"
+                            ? props.column.type
+                            : "text") === "checkbox"
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.dataBeingEdited[props.column.field],
+                                    expression:
+                                      "dataBeingEdited[props.column.field]"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  id:
+                                    props.column.field +
+                                    "-" +
+                                    props.row.originalIndex,
+                                  title: props.column.label,
+                                  type: "checkbox"
+                                },
+                                domProps: {
+                                  checked: Array.isArray(
+                                    _vm.dataBeingEdited[props.column.field]
+                                  )
+                                    ? _vm._i(
+                                        _vm.dataBeingEdited[props.column.field],
+                                        null
+                                      ) > -1
+                                    : _vm.dataBeingEdited[props.column.field]
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$a =
+                                        _vm.dataBeingEdited[props.column.field],
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            _vm.dataBeingEdited,
+                                            props.column.field,
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            _vm.dataBeingEdited,
+                                            props.column.field,
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(
+                                        _vm.dataBeingEdited,
+                                        props.column.field,
+                                        $$c
+                                      )
+                                    }
+                                  }
+                                }
+                              })
+                            : (props.column.type == "number" || "date"
+                                ? props.column.type
+                                : "text") === "radio"
+                              ? _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value:
+                                        _vm.dataBeingEdited[props.column.field],
+                                      expression:
+                                        "dataBeingEdited[props.column.field]"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    id:
+                                      props.column.field +
+                                      "-" +
+                                      props.row.originalIndex,
+                                    title: props.column.label,
+                                    type: "radio"
+                                  },
+                                  domProps: {
+                                    checked: _vm._q(
+                                      _vm.dataBeingEdited[props.column.field],
+                                      null
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.$set(
+                                        _vm.dataBeingEdited,
+                                        props.column.field,
+                                        null
+                                      )
+                                    }
+                                  }
+                                })
+                              : _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value:
+                                        _vm.dataBeingEdited[props.column.field],
+                                      expression:
+                                        "dataBeingEdited[props.column.field]"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    id:
+                                      props.column.field +
+                                      "-" +
+                                      props.row.originalIndex,
+                                    title: props.column.label,
+                                    type:
+                                      props.column.type == "number" || "date"
+                                        ? props.column.type
+                                        : "text"
+                                  },
+                                  domProps: {
+                                    value:
+                                      _vm.dataBeingEdited[props.column.field]
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.dataBeingEdited,
+                                        props.column.field,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                        ])
+                      : _c("span", [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(props.formattedRow[props.column.field]) +
+                              "\n            "
+                          )
+                        ])
               ]
             }
           }
@@ -67410,7 +67494,7 @@ if (false) {
 }
 
 /***/ }),
-/* 228 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67431,7 +67515,12 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("data-table", {
-          attrs: { tableTitle: _vm.title, columns: _vm.columns, rows: _vm.rows }
+          attrs: {
+            tableTitle: _vm.title,
+            columns: _vm.columns,
+            rows: _vm.rows
+          },
+          on: { dataChange: _vm.saveData }
         })
       ],
       1
@@ -67501,7 +67590,65 @@ var render = function() {
           ]
         )
       ]
-    )
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "uploadModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _vm._v("\n                    Upload Data\n                ")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "container" }, [
+                  _c("p", [
+                    _vm._v(
+                      "\n                            Download format excel di bawah ini terlebih dahulu.\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-dark btn-sm",
+                      attrs: { type: "button" },
+                      on: { click: _vm.downloadTemplate }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Download Format Excel\n                        "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(3)
+              ]),
+              _vm._v(" "),
+              _vm._m(4)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _vm._m(5)
   ])
 }
 var staticRenderFns = [
@@ -67540,11 +67687,15 @@ var staticRenderFns = [
               "button",
               {
                 staticClass: "btn btn-outline-primary float-md-right m-1",
-                attrs: { type: "button" }
+                attrs: {
+                  type: "button",
+                  "data-toggle": "modal",
+                  "data-target": "#downloadModal"
+                }
               },
               [
                 _vm._v(
-                  "\n                            Download\n                        "
+                  "\n                            Download Hasil\n                        "
                 )
               ]
             ),
@@ -67553,11 +67704,15 @@ var staticRenderFns = [
               "button",
               {
                 staticClass: "btn btn-outline-primary float-md-right m-1",
-                attrs: { type: "button" }
+                attrs: {
+                  type: "button",
+                  "data-toggle": "modal",
+                  "data-target": "#uploadModal"
+                }
               },
               [
                 _vm._v(
-                  "\n                            Upload\n                        "
+                  "\n                            Upload Data\n                        "
                 )
               ]
             )
@@ -67591,10 +67746,10 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "btn btn-danger",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
-        [_vm._v("Tutup")]
+        [_vm._v("Batal")]
       ),
       _vm._v(" "),
       _c(
@@ -67603,6 +67758,85 @@ var staticRenderFns = [
         [_vm._v("Simpan")]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", [
+      _c("div", { staticClass: "form-group container" }, [
+        _c("label", { attrs: { for: "uploadFile" } }, [
+          _vm._v("Upload data menggunakan file excel: ")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control-file",
+          attrs: { type: "file", id: "uploadFile" }
+        }),
+        _vm._v(" "),
+        _c("small", { staticClass: "text-muted" }, [
+          _vm._v(
+            "Harap gunakan file excel dengan format yang telah disediakan di atas."
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Batal")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "downloadModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Batal")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -67615,19 +67849,23 @@ if (false) {
 }
 
 /***/ }),
-/* 229 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(230)
+  __webpack_require__(233)
 }
 var normalizeComponent = __webpack_require__(13)
 /* script */
-var __vue_script__ = __webpack_require__(232)
+var __vue_script__ = __webpack_require__(235)
 /* template */
+<<<<<<< HEAD
+var __vue_template__ = __webpack_require__(241)
+=======
 var __vue_template__ = __webpack_require__(238)
+>>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67666,13 +67904,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 230 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(231);
+var content = __webpack_require__(234);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -67692,7 +67930,7 @@ if(false) {
 }
 
 /***/ }),
-/* 231 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)(false);
@@ -67700,13 +67938,17 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
+<<<<<<< HEAD
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+=======
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+>>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 
 // exports
 
 
 /***/ }),
-/* 232 */
+/* 235 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67747,7 +67989,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'admin-main-page',
     components: {
+<<<<<<< HEAD
+        'admin-navbar': __webpack_require__(236),
+=======
         'admin-navbar': __webpack_require__(233),
+>>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
         'data-table': __webpack_require__(68)
     },
     data: function data() {
@@ -67766,6 +68012,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     created: function created() {
+<<<<<<< HEAD
+        this.getData();
+    },
+
+    methods: {
+        getData: function getData() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/user').then(function (response) {
+                _this.rows.push(response.data);
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        }
+=======
         // this.getData();
     },
 
@@ -67778,11 +68039,202 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //     })
         //         .catch(error => console.log(error));
         // }
+>>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
     }
 });
 
 /***/ }),
-/* 233 */
+/* 236 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(237)
+}
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(239)
+/* template */
+var __vue_template__ = __webpack_require__(240)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/AdminNavbar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-25355f50", Component.options)
+  } else {
+    hotAPI.reload("data-v-25355f50", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(238);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(19)("7afb2708", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25355f50\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminNavbar.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25355f50\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminNavbar.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports) {
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// export default {
+//
+// }
+
+/***/ }),
+/* 240 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "nav",
+    { staticClass: "navbar navbar-expand-md bg-primary navbar-dark" },
+    [
+      _c(
+        "a",
+        { staticClass: "navbar-brand font-weight-bold", attrs: { href: "#" } },
+        [_vm._v("UPT PMO")]
+      ),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "collapse navbar-collapse text-center justify-content-end",
+          attrs: { id: "navbar2SupportedContent" }
+        },
+        [
+          _c(
+            "a",
+            { staticClass: "btn navbar-btn btn-primary ml-2 text-white" },
+            [
+              _c("span", {
+                staticClass: "oi oi-person",
+                attrs: { title: "user icon", "aria-hidden": "true" }
+              }),
+              _vm._v("\n            " + _vm._s(_vm.username) + "\n        ")
+            ]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarNavDropdown",
+          "aria-controls": "navbarNavDropdown",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-25355f50", module.exports)
+  }
+}
+
+/***/ }),
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -68039,7 +68491,11 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
+/* 242 */
+=======
 /* 239 */
+>>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
