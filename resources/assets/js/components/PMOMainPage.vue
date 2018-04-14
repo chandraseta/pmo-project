@@ -18,11 +18,17 @@
                         <div class="col-md-3 p-2"></div>
                         <div class="col-md-3 p-2"></div>
                         <div class="col-md-3 p-2">
-                            <button type="button" class="btn btn-outline-primary float-md-right m-1">
-                                Download
+                            <button type="button"
+                                    class="btn btn-outline-primary float-md-right m-1"
+                                    data-toggle="modal"
+                                    data-target="#downloadModal">
+                                Download Hasil
                             </button>
-                            <button type="button" class="btn btn-outline-primary float-md-right m-1">
-                                Upload
+                            <button type="button"
+                                    class="btn btn-outline-primary float-md-right m-1"
+                                    data-toggle="modal"
+                                    data-target="#uploadModal">
+                                Upload Data
                             </button>
                         </div>
                     </div>
@@ -57,8 +63,46 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                         <button type="button" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        Upload Data
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="uploadFile">Upload data menggunakan file excel: </label>
+                                <input type="file" class="form-control-file" id="uploadFile">
+                                <small class="text-muted">Harap gunakan file excel dengan format yang telah disediakan di atas.</small>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                     </div>
                 </div>
             </div>
