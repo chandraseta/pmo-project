@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66560,6 +66560,12 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -67543,19 +67549,29 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary btn-sm",
-                    attrs: { type: "button" },
-                    on: { click: _vm.downloadTemplate }
-                  },
-                  [
+                _c("div", { staticClass: "container" }, [
+                  _c("p", [
                     _vm._v(
-                      "\n                        Download Format Excel\n                    "
+                      "\n                            Download format excel di bawah ini terlebih dahulu.\n                        "
                     )
-                  ]
-                ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-dark btn-sm",
+                      attrs: { type: "button" },
+                      on: { click: _vm.downloadTemplate }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Download Format Excel\n                        "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("br"),
                 _vm._v(" "),
                 _vm._m(3)
               ]),
@@ -67683,7 +67699,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("form", [
-      _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "form-group container" }, [
         _c("label", { attrs: { for: "uploadFile" } }, [
           _vm._v("Upload data menggunakan file excel: ")
         ]),

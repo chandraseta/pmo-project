@@ -77,13 +77,19 @@
                         Upload Data
                     </div>
                     <div class="modal-body">
-                        <button type="button"
-                                class="btn btn-secondary btn-sm"
-                                @click="downloadTemplate">
-                            Download Format Excel
-                        </button>
+                        <div class="container">
+                            <p>
+                                Download format excel di bawah ini terlebih dahulu.
+                            </p>
+                            <button type="button"
+                                    class="btn btn-dark btn-sm"
+                                    @click="downloadTemplate">
+                                Download Format Excel
+                            </button>
+                        </div>
+                        <br>
                         <form>
-                            <div class="form-group">
+                            <div class="form-group container">
                                 <label for="uploadFile">Upload data menggunakan file excel: </label>
                                 <input type="file" class="form-control-file" id="uploadFile">
                                 <small class="text-muted">Harap gunakan file excel dengan format yang telah disediakan di atas.</small>
