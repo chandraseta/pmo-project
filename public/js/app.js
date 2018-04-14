@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66560,6 +66560,11 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -66733,6 +66738,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (e) {
                 _this3.errors.push(e);
             });
+        },
+        downloadTemplate: function downloadTemplate() {
+            var url = '/api/templates/template.xlsx';
+            window.open(url);
         }
     },
     created: function created() {
@@ -67512,9 +67521,53 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(3),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "uploadModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _vm._v("\n                    Upload Data\n                ")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary btn-sm",
+                    attrs: { type: "button" },
+                    on: { click: _vm.downloadTemplate }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Download Format Excel\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(3)
+              ]),
+              _vm._v(" "),
+              _vm._m(4)
+            ])
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
-    _vm._m(4)
+    _vm._m(5)
   ])
 }
 var staticRenderFns = [
@@ -67629,63 +67682,39 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "uploadModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _vm._v("\n                    Upload Data\n                ")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("form", [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "uploadFile" } }, [
-                      _vm._v("Upload data menggunakan file excel: ")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control-file",
-                      attrs: { type: "file", id: "uploadFile" }
-                    }),
-                    _vm._v(" "),
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v(
-                        "Harap gunakan file excel dengan format yang telah disediakan di atas."
-                      )
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Batal")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("form", [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "uploadFile" } }, [
+          _vm._v("Upload data menggunakan file excel: ")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control-file",
+          attrs: { type: "file", id: "uploadFile" }
+        }),
+        _vm._v(" "),
+        _c("small", { staticClass: "text-muted" }, [
+          _vm._v(
+            "Harap gunakan file excel dengan format yang telah disediakan di atas."
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Batal")]
+      )
+    ])
   },
   function() {
     var _vm = this

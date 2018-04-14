@@ -77,6 +77,11 @@
                         Upload Data
                     </div>
                     <div class="modal-body">
+                        <button type="button"
+                                class="btn btn-secondary btn-sm"
+                                @click="downloadTemplate">
+                            Download Format Excel
+                        </button>
                         <form>
                             <div class="form-group">
                                 <label for="uploadFile">Upload data menggunakan file excel: </label>
@@ -171,6 +176,10 @@
                         this.errors.push(e);
                     });
             },
+            downloadTemplate: function() {
+                let url = '/api/templates/template.xlsx';
+                window.open(url);
+            }
         },
         created: function () {
             axios.get('/api/pegawai')
