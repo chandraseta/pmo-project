@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 class FileDownloadController extends Controller
 {
-    public function download($template) {
-        $uri = 'public/templates/'.$template;
+    public function downloadTemplate($template) {
+        $uri = 'templates/'.$template;
         return Storage::download($uri);
     }
 }
