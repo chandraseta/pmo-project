@@ -11,7 +11,7 @@
                             <button type="button"
                                     class="btn btn-primary m-1"
                                     data-toggle="modal"
-                                    data-target="#addDataModal">
+                                    data-target="#addDataModal" :disabled="disableTambahDataButton">
                                 Tambah Data
                             </button>
                         </div>
@@ -139,6 +139,7 @@
                 dataPegawai: [],
                 dataKinerja: [],
                 dataKompetensi: [],
+                disableTambahDataButton: true,
             }
         },
         methods: {
@@ -146,6 +147,8 @@
                 this.title = payload.label;
                 this.rows = this[payload.name];
                 this.columns = this.$options[payload.name + 'Columns'];
+
+                this.disableTambahDataButton = payload.name === "dataPegawai";
             },
             saveData: function (payload) {
                 console.log(payload);

@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66700,7 +66700,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             rows: [],
             dataPegawai: [],
             dataKinerja: [],
-            dataKompetensi: []
+            dataKompetensi: [],
+            disableTambahDataButton: true
         };
     },
 
@@ -66709,6 +66710,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.title = payload.label;
             this.rows = this[payload.name];
             this.columns = this.$options[payload.name + 'Columns'];
+
+            this.disableTambahDataButton = payload.name === "dataPegawai";
         },
         saveData: function saveData(payload) {
             var _this = this;
@@ -67463,7 +67466,37 @@ var render = function() {
       "main",
       { staticClass: "container", attrs: { role: "main" } },
       [
-        _vm._m(0),
+        _c("section", [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-3 p-2" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary m-1",
+                    attrs: {
+                      type: "button",
+                      "data-toggle": "modal",
+                      "data-target": "#addDataModal",
+                      disabled: _vm.disableTambahDataButton
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Tambah Data\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-3 p-2" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-3 p-2" }),
+              _vm._v(" "),
+              _vm._m(0)
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("data-table", {
           attrs: {
@@ -67607,69 +67640,40 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-3 p-2" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary m-1",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "modal",
-                  "data-target": "#addDataModal"
-                }
-              },
-              [
-                _vm._v(
-                  "\n                            Tambah Data\n                        "
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-3 p-2" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-3 p-2" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-3 p-2" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary float-md-right m-1",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "modal",
-                  "data-target": "#downloadModal"
-                }
-              },
-              [
-                _vm._v(
-                  "\n                            Download Hasil\n                        "
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary float-md-right m-1",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "modal",
-                  "data-target": "#uploadModal"
-                }
-              },
-              [
-                _vm._v(
-                  "\n                            Upload Data\n                        "
-                )
-              ]
-            )
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "col-md-3 p-2" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-primary float-md-right m-1",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#downloadModal"
+          }
+        },
+        [
+          _vm._v(
+            "\n                            Download Hasil\n                        "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-primary float-md-right m-1",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#uploadModal"
+          }
+        },
+        [
+          _vm._v(
+            "\n                            Upload Data\n                        "
+          )
+        ]
+      )
     ])
   },
   function() {
