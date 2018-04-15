@@ -67947,7 +67947,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 236 */
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"Nama Lengkap","field":"name"},{"label":"Email","field":"email"}]
+module.exports = [{"label":"Nama Lengkap","field":"name"},{"label":"Email","field":"email"},{"label":"","field":"resetButton"}]
 
 /***/ }),
 /* 237 */
@@ -68189,7 +68189,7 @@ var staticRenderFns = [
             _c(
               "button",
               { staticClass: "btn btn-primary m-1", attrs: { type: "button" } },
-              [_vm._v("Add User")]
+              [_vm._v("Tambah User")]
             )
           ])
         ])
