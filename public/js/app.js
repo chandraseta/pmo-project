@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66735,6 +66735,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('/api/pegawai').then(function (response) {
                 _this2.dataPegawai = response.data.data;
+                _this2.dataPegawai.forEach(function (row, index, array) {
+                    if (row.data_kepegawaians.length > 0) {
+                        var data_kepegawaian = row.data_kepegawaians[row.data_kepegawaians.length - 1];
+                        array[index].unit_kerja = data_kepegawaian.unit_kerja;
+                        array[index].kompetensi = data_kepegawaian.kompetensi;
+                        array[index].jabatan = data_kepegawaian.posisi;
+                        array[index].tahun_masuk = data_kepegawaian.tahun_masuk;
+                    }
+
+                    if (row.riwayat_pendidikans.length > 0) {
+                        array[index].strata = row.riwayat_pendidikans[row.riwayat_pendidikans.length - 1].strata;
+                    }
+                });
+                _this2.columns = _this2.$options.dataPegawaiColumns;
+                _this2.rows = _this2.dataPegawai;
             }).catch(function (e) {
                 _this2.errors.push(e);
             });
@@ -66754,32 +66769,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
-        var _this4 = this;
-
-        axios.get('/api/pegawai').then(function (response) {
-            _this4.dataPegawai = response.data.data;
-            console.log(_this4.dataPegawai);
-            console.log("----");
-            _this4.dataPegawai.forEach(function (row, index, array) {
-                if (row.data_kepegawaians.length > 0) {
-                    var data_kepegawaian = row.data_kepegawaians[row.data_kepegawaians.length - 1];
-                    array[index].unit_kerja = data_kepegawaian.unit_kerja;
-                    array[index].kompetensi = data_kepegawaian.kompetensi;
-                    array[index].jabatan = data_kepegawaian.posisi;
-                    array[index].tahun_masuk = data_kepegawaian.tahun_masuk;
-                }
-
-                if (row.riwayat_pendidikans.length > 0) {
-                    array[index].strata = row.riwayat_pendidikans[row.riwayat_pendidikans.length - 1].strata;
-                }
-            });
-            console.log(_this4.dataPegawai);
-            _this4.columns = _this4.$options.dataPegawaiColumns;
-            _this4.rows = _this4.dataPegawai;
-        }).catch(function (e) {
-            _this4.errors.push(e);
-        });
-
+        this.getPegawai();
         this.getKompetensi();
     }
 });
