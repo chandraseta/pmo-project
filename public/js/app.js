@@ -17125,15 +17125,9 @@ function setMonth (dirtyDate, dirtyMonth, dirtyOptions) {
 var disposed = false
 var normalizeComponent = __webpack_require__(13)
 /* script */
-<<<<<<< HEAD
 var __vue_script__ = __webpack_require__(229)
 /* template */
 var __vue_template__ = __webpack_require__(230)
-=======
-var __vue_script__ = __webpack_require__(226)
-/* template */
-var __vue_template__ = __webpack_require__(227)
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17176,11 +17170,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(70);
-<<<<<<< HEAD
-module.exports = __webpack_require__(242);
-=======
-module.exports = __webpack_require__(239);
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
+module.exports = __webpack_require__(243);
 
 
 /***/ }),
@@ -66700,11 +66690,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     dataKinerjaColumns: __webpack_require__(223),
     name: 'pmo-main-page',
     components: {
-<<<<<<< HEAD
         'pmo-navbar': __webpack_require__(224),
-=======
-        'pmo-navbar': __webpack_require__(221),
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
         'data-table': __webpack_require__(68)
     },
     data: function data() {
@@ -66781,60 +66767,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 221 */
-<<<<<<< HEAD
 /***/ (function(module, exports) {
 
 module.exports = [{"label":"","field":"viewButton"},{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit"},{"label":"Jabatan","field":"position"},{"label":"Tahun Menjabat","field":"startYear","type":"number"},{"label":"Kelompok Kompetensi","field":"competencyGroup"},{"label":"No. Telp.","field":"phone"},{"label":"Pendidikan","field":"education"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true}]
-=======
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(222)
-}
-var normalizeComponent = __webpack_require__(13)
-/* script */
-var __vue_script__ = __webpack_require__(224)
-/* template */
-var __vue_template__ = __webpack_require__(225)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/PMONavbar.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4f96ef9b", Component.options)
-  } else {
-    hotAPI.reload("data-v-4f96ef9b", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 
 /***/ }),
 /* 222 */
@@ -67861,11 +67796,7 @@ var normalizeComponent = __webpack_require__(13)
 /* script */
 var __vue_script__ = __webpack_require__(235)
 /* template */
-<<<<<<< HEAD
-var __vue_template__ = __webpack_require__(241)
-=======
-var __vue_template__ = __webpack_require__(238)
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
+var __vue_template__ = __webpack_require__(242)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67938,11 +67869,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-<<<<<<< HEAD
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-=======
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
 
 // exports
 
@@ -67982,271 +67909,69 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    dataUserColumns: __webpack_require__(236),
     name: 'admin-main-page',
     components: {
-<<<<<<< HEAD
-        'admin-navbar': __webpack_require__(236),
-=======
-        'admin-navbar': __webpack_require__(233),
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
+        'admin-navbar': __webpack_require__(237),
         'data-table': __webpack_require__(68)
     },
     data: function data() {
         return {
             title: 'Data User',
-            rows: [{ name: 'Andrew Ng', email: 'andrew@ng.com' }, { name: 'Nathanael', email: 'nathanael@bic.com' }, { name: 'Jonathan', email: 'jona@than.com' }, { name: 'Iriana', email: 'iriana@google.com' }, { name: 'Rando', email: 'rando@wis.com' }],
-            columns: [{
-                label: 'Nama Lengkap',
-                field: 'name'
-            }, {
-                label: 'E-mail',
-                field: 'email'
-            }]
+            columns: [],
+            rows: [],
+            dataUser: []
         };
     },
 
 
-    created: function created() {
-<<<<<<< HEAD
-        this.getData();
-    },
-
     methods: {
-        getData: function getData() {
-            var _this = this;
-
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/user').then(function (response) {
-                _this.rows.push(response.data);
-            }).catch(function (error) {
-                return console.log(error);
-            });
+        redirectAddUser: function redirectAddUser() {
+            var url = '/pages/admin/adduser';
+            window.location.href = url;
         }
-=======
-        // this.getData();
     },
 
-    methods: {
-        // getData() {
-        //     axios.get('/api/user')
-        //         .then(response => {
-        //             this.rows.name.push(response.data.name);
-        //             this.rows.email.push(response.data.email);
-        //     })
-        //         .catch(error => console.log(error));
-        // }
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
+    created: function created() {
+        var _this = this;
+
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/user').then(function (response) {
+            _this.dataUser = response.data.data;
+            _this.columns = _this.$options.dataUserColumns;
+            _this.rows = _this.dataUser;
+        }).catch(function (e) {
+            _this.errors.push(e);
+        });
     }
 });
 
 /***/ }),
 /* 236 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(237)
-}
-var normalizeComponent = __webpack_require__(13)
-/* script */
-var __vue_script__ = __webpack_require__(239)
-/* template */
-var __vue_template__ = __webpack_require__(240)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/AdminNavbar.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-25355f50", Component.options)
-  } else {
-    hotAPI.reload("data-v-25355f50", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
+module.exports = [{"label":"Nama Lengkap","field":"name"},{"label":"Email","field":"email"},{"label":"","field":"resetButton"}]
 
 /***/ }),
 /* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(238);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(19)("7afb2708", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25355f50\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminNavbar.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25355f50\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminNavbar.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 238 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 239 */
-/***/ (function(module, exports) {
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-// export default {
-//
-// }
-
-/***/ }),
-/* 240 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    { staticClass: "navbar navbar-expand-md bg-primary navbar-dark" },
-    [
-      _c(
-        "a",
-        { staticClass: "navbar-brand font-weight-bold", attrs: { href: "#" } },
-        [_vm._v("UPT PMO")]
-      ),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "collapse navbar-collapse text-center justify-content-end",
-          attrs: { id: "navbar2SupportedContent" }
-        },
-        [
-          _c(
-            "a",
-            { staticClass: "btn navbar-btn btn-primary ml-2 text-white" },
-            [
-              _c("span", {
-                staticClass: "oi oi-person",
-                attrs: { title: "user icon", "aria-hidden": "true" }
-              }),
-              _vm._v("\n            " + _vm._s(_vm.username) + "\n        ")
-            ]
-          )
-        ]
-      )
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarNavDropdown",
-          "aria-controls": "navbarNavDropdown",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-25355f50", module.exports)
-  }
-}
-
-/***/ }),
-/* 241 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(234)
+  __webpack_require__(238)
 }
 var normalizeComponent = __webpack_require__(13)
 /* script */
-var __vue_script__ = __webpack_require__(236)
+var __vue_script__ = __webpack_require__(240)
 /* template */
-var __vue_template__ = __webpack_require__(237)
+var __vue_template__ = __webpack_require__(241)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68285,13 +68010,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 234 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(235);
+var content = __webpack_require__(239);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -68311,7 +68036,7 @@ if(false) {
 }
 
 /***/ }),
-/* 235 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)(false);
@@ -68325,7 +68050,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
 
 /***/ }),
-/* 236 */
+/* 240 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68355,7 +68080,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 237 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68430,7 +68155,7 @@ if (false) {
 }
 
 /***/ }),
-/* 238 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68444,7 +68169,23 @@ var render = function() {
       "main",
       { staticClass: "container", attrs: { role: "main" } },
       [
-        _vm._m(0),
+        _c("section", [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-3 p-2" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary m-1",
+                    attrs: { type: "button" },
+                    on: { click: _vm.redirectAddUser }
+                  },
+                  [_vm._v("Tambah User")]
+                )
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("data-table", {
           attrs: {
@@ -68461,26 +68202,7 @@ var render = function() {
     _c("footer")
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-3 p-2" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary m-1", attrs: { type: "button" } },
-              [_vm._v("Add User")]
-            )
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -68491,11 +68213,7 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< HEAD
-/* 242 */
-=======
-/* 239 */
->>>>>>> 70f1b14ac73704eaec8db7f56333fefdb0820215
+/* 243 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

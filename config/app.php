@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'PMO'),
 
     /*
     |--------------------------------------------------------------------------
@@ -178,6 +178,7 @@ return [
 
     'aliases' => [
 
+        'auth.password.tokens' => Illuminate\Auth\Passwords\TokenRepositoryInterface::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,

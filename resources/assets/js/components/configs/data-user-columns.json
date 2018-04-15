@@ -1,0 +1,14 @@
+[
+  {
+    "label": "Nama Lengkap",
+    "field": "name"
+  },
+  {
+    "label": "Email",
+    "field": "email"
+  },
+  {
+    "label": "",
+    "field": "resetButton"
+  }
+]

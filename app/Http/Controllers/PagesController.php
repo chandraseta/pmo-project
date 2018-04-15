@@ -17,4 +17,8 @@ class PagesController extends Controller
     public function admin() {
         return view('pages.admin')->with('page', 'admin');
     }
+
+    public function addUser() {
+        return view('pages.admin.adduser')->with('page', 'addUser');
+    }
 }
