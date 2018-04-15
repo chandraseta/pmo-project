@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -25,7 +30,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -35,5 +40,30 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function resetPassword($user, $password) {
+
+        $user->password = Hash::make($password);
+        $user->setRememberToken(Str::random(60));
+        $user->save();
+
+        event(new PasswordReset($user));
+    }
+
+    public function showResetForm(Request $request, $token = null)
+    {
+        $dbTokens = DB::table('password_resets')->get();
+        $email = '';
+        foreach($dbTokens as $dbToken) {
+            if(Hash::check($token, $dbToken->token)) {
+                $email = $dbToken->email;
+                break;
+            }
+        }
+
+        return view('auth.passwords.reset')->with(
+            ['token' => $token, 'email' => $email]
+        );
     }
 }
