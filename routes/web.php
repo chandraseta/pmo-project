@@ -20,3 +20,5 @@ Route::get('/pages/pmo', 'PagesController@pmo');
 Route::get('/pages/admin', 'PagesController@admin');
 
 Route::get('/profile', 'ProfileController@index');
+
+Route::get('/pages/admin/adduser', 'PagesController@addUser');
