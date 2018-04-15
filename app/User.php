@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -26,6 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token', 'created_at', 'updated_at',
     ];
+
+    public static function generatePassword() {
+        return bcrypt(str_random(30));
+    }
+
+    public static function sendWelcomeEmail($token) {
+
+    }
 
     public function sendPasswordResetNotification($token) {
         $this->notify(new ResetPassword($token));
