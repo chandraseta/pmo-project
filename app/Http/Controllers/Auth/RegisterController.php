@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Notification\WelcomeEmail;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
@@ -86,5 +87,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make(User::generatePassword()),
         ]);
+    }
+
+    protected function registered(Request $request, $user) {
+        $token = app('auth.password.broker')->createToken($user);
+        $user->notify(new WelcomeEmail($token));
     }
 }

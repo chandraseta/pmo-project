@@ -6,8 +6,7 @@
  * Time: 00:27
  */
 
-namespace App;
-
+namespace App\Notification;
 
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;

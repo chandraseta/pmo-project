@@ -2,6 +2,9 @@
 
 namespace App;
 
+
+use App\Notification\ResetPassword;
+use App\Notification\WelcomeEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -29,10 +32,6 @@ class User extends Authenticatable
 
     public static function generatePassword() {
         return bcrypt(str_random(30));
-    }
-
-    public static function sendWelcomeEmail($token) {
-
     }
 
     public function sendPasswordResetNotification($token) {
