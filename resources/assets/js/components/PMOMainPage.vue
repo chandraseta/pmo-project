@@ -54,7 +54,7 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="form-group" v-for="column in columns" v-if="column.label != ''">
+                            <div class="form-group" v-for="column in columns" v-if="column.fillable">
                                 <label :for="column.field">{{ column.label }}</label>
                                 <input class="form-control"
                                        :type="column.type == 'number' || 'date' ? column.type : 'text'"
