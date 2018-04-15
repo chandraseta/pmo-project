@@ -8,7 +8,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3 p-2">
-                            <button type="button" class="btn btn-primary m-1">Add User</button>
+                            <button type="button"
+                                    class="btn btn-primary m-1"
+                                    @click="redirectAddUser">Tambah User</button>
                         </div>
                     </div>
                 </div>
@@ -42,6 +44,13 @@
                 columns: [],
                 rows: [],
                 dataUser: [],
+            }
+        },
+
+        methods: {
+            redirectAddUser: function() {
+                let url = '/pages/admin/adduser';
+                window.location.href = url;
             }
         },
 

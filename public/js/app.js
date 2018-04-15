@@ -67869,7 +67869,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -67882,6 +67882,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+//
+//
 //
 //
 //
@@ -67929,6 +67931,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+
+    methods: {
+        redirectAddUser: function redirectAddUser() {
+            var url = '/pages/admin/adduser';
+            window.location.href = url;
+        }
+    },
 
     created: function created() {
         var _this = this;
@@ -68160,7 +68169,23 @@ var render = function() {
       "main",
       { staticClass: "container", attrs: { role: "main" } },
       [
-        _vm._m(0),
+        _c("section", [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-3 p-2" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary m-1",
+                    attrs: { type: "button" },
+                    on: { click: _vm.redirectAddUser }
+                  },
+                  [_vm._v("Tambah User")]
+                )
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("data-table", {
           attrs: {
@@ -68177,26 +68202,7 @@ var render = function() {
     _c("footer")
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-3 p-2" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary m-1", attrs: { type: "button" } },
-              [_vm._v("Tambah User")]
-            )
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
