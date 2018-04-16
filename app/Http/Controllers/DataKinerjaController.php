@@ -51,7 +51,13 @@ class DataKinerjaController extends APIBaseController
      */
     public function show($id)
     {
-        //
+        $data = Kinerja::find($id);
+
+        if (is_null($data)) {
+            return $this->sendError('Data Kinerja tidak ditemukan.');
+        }
+
+        return $this->sendResponse($data, 'Data Kinerja berhasil ditemukan');
     }
 
     /**
