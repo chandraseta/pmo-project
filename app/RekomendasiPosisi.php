@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id_rekomendasi_posisi
  * @property int $id_pegawai
+ * @property int $id_unit_kerja
  * @property int $id_posisi
  * @property Pegawai $pegawai
  * @property Posisi $posisi
+ * @property UnitKerja $unitKerja
  */
 class RekomendasiPosisi extends Model
 {
@@ -30,7 +32,7 @@ class RekomendasiPosisi extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_pegawai', 'id_posisi'];
+    protected $fillable = ['id_pegawai', 'id_unit_kerja', 'id_posisi'];
 
     /**
      * Indicates if the model should be timestamped.
@@ -53,5 +55,13 @@ class RekomendasiPosisi extends Model
     public function posisi()
     {
         return $this->belongsTo('App\Posisi', 'id_posisi', 'id_posisi');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function unitKerja()
+    {
+        return $this->belongsTo('App\UnitKerja', 'id_unit_kerja', 'id_unit_kerja');
     }
 }

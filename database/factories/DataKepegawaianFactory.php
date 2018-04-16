@@ -7,9 +7,8 @@ $factory->define(App\DataKepegawaian::class, function (Faker $faker) {
 
     return [
         'id_pegawai' => App\Pegawai::pluck('id_user')->random(),
-        'kompetensi' => $faker->company(),
-        'unit_kerja' => $faker->company(),
-        'posisi' => $faker->jobTitle(),
+        'id_unit_kerja' => App\UnitKerja::pluck('id_unit_kerja')->random(),
+        'id_posisi' => App\Posisi::pluck('id_posisi')->random(),
         'tahun_masuk' => min($year),
         'tahun_keluar' => $faker->boolean($chanceOfGettingTrue = 90) ? max($year) : NULL,
     ];

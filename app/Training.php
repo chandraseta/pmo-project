@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id_training
  * @property string $nama_training
- * @property string $penyelenggara
- * @property string $bidang
  * @property RekomendasiTraining[] $rekomendasiTrainings
  */
 class Training extends Model
@@ -30,7 +28,7 @@ class Training extends Model
     /**
      * @var array
      */
-    protected $fillable = ['nama_training', 'penyelenggara', 'bidang'];
+    protected $fillable = ['nama_training'];
 
     /**
      * Indicates if the model should be timestamped.
