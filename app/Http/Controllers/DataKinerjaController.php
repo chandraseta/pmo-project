@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Kinerja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class DataKinerjaController extends APIBaseController
 {
@@ -80,7 +81,29 @@ class DataKinerjaController extends APIBaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'tahun' => 'required',
+            'semester' => 'required',
+            'nilai' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Gagal menyimpan data kinerja.', $validator->errors());
+        }
+
+        $data = Kinerja::find($id);
+        if (is_null($data)) {
+            $this->sendError('Data Kinerja dengan id = '.$id.' tidak ditemukan.');
+        }
+
+        $data->tahun = $input['tahun'];
+        $data->semester = $input['semester'];
+        $data->nilai = $input['nilai'];
+        $data->save();
+
+        return $this->sendResponse($data, 'Data kinerja berhasil disimpan.');
     }
 
     /**
