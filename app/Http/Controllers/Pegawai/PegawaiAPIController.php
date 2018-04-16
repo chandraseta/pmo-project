@@ -11,6 +11,7 @@ use App\Pegawai;
 use App\RiwayatPendidikan;
 use App\RiwayatPekerjaan;
 use App\DataKepegawaian;
+use App\Sertifikat;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -43,40 +44,55 @@ class PegawaiAPIController extends APIBaseController
         $input = $request->all();
 
 
-        $validator = Validator::make($input, [
-            'email' => 'required',
-            'password' => 'required',
-            'nama' => 'required',
-            'nip' => 'required',
-            'id_pengubah' => 'required',
-        ]);
+        // $validator = Validator::make($input, [
+        //     'email' => 'required',
+        //     'password' => 'required',
+        //     'nama' => 'required',
+        //     'nip' => 'required',
+        //     'id_pengubah' => 'required',
+        // ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
-        }
+        // if($validator->fails()){
+        //     return $this->sendError('Validation Error.', $validator->errors());       
+        // }
 
-        $find = User::where('email', $input['email'])->count();
+        // $find = User::where('email', $input['email'])->count();
 
-        if($find != 0){
-            return $this->sendError('Email Already Exist');
-        }
+        // if($find != 0){
+        //     return $this->sendError('Email Already Exist');
+        // }
 
-        $postUser = User::create([
-            'name' => $input['nama'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
-        ]);
+        // $postUser = User::create([
+        //     'name' => $input['nama'],
+        //     'email' => $input['email'],
+        //     'password' => Hash::make($input['password']),
+        // ]);
 
         $user = User::where('email', $input['email'])->first();
 
-        $postPegawai = Pegawai::create([
-            'id_user' => $user->id,
-            'nama' => $input['nama'],
-            'nip' => $input['nip'],
-            'id_pengubah' => $user->id,
+        // $postPegawai = Pegawai::create([
+        //     'id_user' => $user->id,
+        //     'nama' => $input['nama'],
+        //     'nip' => $input['nip'],
+        //     'id_pengubah' => $user->id,
+        // ]);
+
+        // $post = array_merge($postUser->toArray(), $postPegawai->toArray());
+
+
+        $photoTimeAsName = time().'.'.$input['user_photo']->getClientOriginalExtension();
+        $input['user_photo']->user_photo->move(public_path('avatars'), $photoTimeAsName);
+
+
+        $post = Sertifikat::create([
+            'id_pegawai' => $user->id,
+            'nama_file' => $input['nama_file'],
+            'judul' => $input['judul'],
+            'lembaga' => $input['lembaga'],
+            'tahun_diterbitkan' => $input['tahun_diterbitkan'],
+            'catatan' => $input['catatan'],
         ]);
 
-        $post = array_merge($postUser->toArray(), $postPegawai->toArray());
 
         return $this->sendResponse($post, 'User created successfully.');
     }
