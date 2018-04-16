@@ -44,39 +44,36 @@ class PegawaiAPIController extends APIBaseController
 
 
         $validator = Validator::make($input, [
-            'username' => 'required',
             'email' => 'required',
             'password' => 'required',
             'nama' => 'required',
             'nip' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
+            'id_pengubah' => 'required',
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
 
-        $find = User::where('username', $input['username'])->count();
+        $find = User::where('email', $input['email'])->count();
 
         if($find != 0){
-            return $this->sendError('Username Already Exist');
+            return $this->sendError('Email Already Exist');
         }
 
         $postUser = User::create([
-            'username' => $input['username'],
+            'name' => $input['nama'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
 
-        $user = User::where('username', $input['username'])->first();
+        $user = User::where('email', $input['email'])->first();
 
         $postPegawai = Pegawai::create([
             'id_user' => $user->id,
             'nama' => $input['nama'],
             'nip' => $input['nip'],
-            'tempat_lahir' => $input['tempat_lahir'],
-            'tanggal_lahir' => $input['tanggal_lahir'],
+            'id_pengubah' => $user->id,
         ]);
 
         $post = array_merge($postUser->toArray(), $postPegawai->toArray());
