@@ -83,12 +83,7 @@ class DataKinerjaController extends APIBaseController
     {
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'tahun' => 'required',
-            'semester' => 'required',
-            'nilai' => 'required'
-        ]);
-
+        $validator = $this->validateDataKinerja($input);
         if ($validator->fails()) {
             return $this->sendError('Gagal menyimpan data kinerja.', $validator->errors());
         }
@@ -98,9 +93,7 @@ class DataKinerjaController extends APIBaseController
             $this->sendError('Data Kinerja dengan id = '.$id.' tidak ditemukan.');
         }
 
-        $data->tahun = $input['tahun'];
-        $data->semester = $input['semester'];
-        $data->nilai = $input['nilai'];
+        $data = $this->updateDataKinerja($data, $input);
         $data->save();
 
         return $this->sendResponse($data, 'Data kinerja berhasil disimpan.');
@@ -115,5 +108,23 @@ class DataKinerjaController extends APIBaseController
     public function destroy($id)
     {
         //
+    }
+
+    private function validateDataKinerja($input) {
+        return Validator::make($input, [
+            'tahun' => 'required',
+            'semester' => 'required',
+            'nilai' => 'required'
+        ]);
+    }
+
+    private function updateDataKinerja($oldData, $newDataInput) {
+        $newData = $oldData;
+
+        $newData->tahun = $newDataInput['tahun'];
+        $newData->semester = $newDataInput['semester'];
+        $newData->nilai = $newDataInput['nilai'];
+
+        return $newData;
     }
 }
