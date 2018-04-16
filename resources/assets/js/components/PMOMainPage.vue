@@ -136,6 +136,7 @@
         data() {
             return {
                 title: 'Data Pegawai',
+                currentTab: 'pegawai',
                 columns: [],
                 rows: [],
                 dataPegawai: [],
@@ -148,6 +149,7 @@
         methods: {
             changeTable: function (payload) {
                 this.title = payload.label;
+                this.currentTab = payload.name;
                 this.rows = this[payload.name];
                 this.columns = this.$options[payload.name + 'Columns'];
 
@@ -155,7 +157,14 @@
             },
             saveData: function (payload) {
                 console.log(payload);
-                let url = '/api/kompetensi/' + payload.id_kompetensi;
+
+                let url;
+                if (this.currentTab === 'dataKompetensi') {
+                    url = '/api/kompetensi/' + payload.id_kompetensi;
+                } else if (this.currentTab === 'dataKinerja') {
+                    url = '/api/kinerja/' + payload.id_kinerja;
+                }
+
                 let data = payload;
                 let config = {
                     headers: {
@@ -172,7 +181,14 @@
             },
             addData: function () {
                 console.log(this.newData);
-                let url = '/api/kompetensi';
+
+                let url;
+                if (this.currentTab === 'dataKompetensi') {
+                    url = '/api/kompetensi';
+                } else if (this.currentTab === 'dataKinerja') {
+                    url = '/api/kinerja';
+                }
+
                 let data = this.newData;
                 let config = {
                     headers: {
