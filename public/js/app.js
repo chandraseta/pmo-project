@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66683,6 +66683,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     dataPegawaiColumns: __webpack_require__(221),
@@ -66701,6 +66710,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dataPegawai: [],
             dataKinerja: [],
             dataKompetensi: [],
+            newData: {},
             disableTambahDataButton: true
         };
     },
@@ -66730,12 +66740,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.error.push(e);
             });
         },
-        getPegawai: function getPegawai() {
+        addData: function addData() {
             var _this2 = this;
 
+            console.log(this.newData);
+            var url = '/api/kompetensi';
+            var data = this.newData;
+            var config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            axios.post(url, data, config).then(function (response) {
+                console.log(response.data);
+                _this2.newData = {};
+            }).catch(function (e) {
+                console.log(e.message);
+            });
+        },
+        getPegawai: function getPegawai() {
+            var _this3 = this;
+
             axios.get('/api/pegawai').then(function (response) {
-                _this2.dataPegawai = response.data.data;
-                _this2.dataPegawai.forEach(function (row, index, array) {
+                _this3.dataPegawai = response.data.data;
+                _this3.dataPegawai.forEach(function (row, index, array) {
                     if (row.data_kepegawaians.length > 0) {
                         var data_kepegawaian = row.data_kepegawaians[row.data_kepegawaians.length - 1];
                         array[index].unit_kerja = data_kepegawaian.unit_kerja;
@@ -66748,19 +66776,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         array[index].strata = row.riwayat_pendidikans[row.riwayat_pendidikans.length - 1].strata;
                     }
                 });
-                _this2.columns = _this2.$options.dataPegawaiColumns;
-                _this2.rows = _this2.dataPegawai;
+                _this3.columns = _this3.$options.dataPegawaiColumns;
+                _this3.rows = _this3.dataPegawai;
             }).catch(function (e) {
-                _this2.errors.push(e);
+                _this3.errors.push(e);
             });
         },
         getKompetensi: function getKompetensi() {
-            var _this3 = this;
+            var _this4 = this;
 
             axios.get('/api/kompetensi').then(function (response) {
-                _this3.dataKompetensi = response.data.data;
+                _this4.dataKompetensi = response.data.data;
             }).catch(function (e) {
-                _this3.errors.push(e);
+                _this4.errors.push(e);
             });
         },
         downloadTemplate: function downloadTemplate() {
@@ -67542,24 +67570,196 @@ var render = function() {
                             _vm._v(_vm._s(column.label))
                           ]),
                           _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type:
-                                column.type == "number" || "date"
+                          column.type == "number"
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model.number",
+                                    value: _vm.newData[column.field],
+                                    expression: "newData[column.field]",
+                                    modifiers: { number: true }
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type:
+                                    column.type == "number" || "date"
+                                      ? column.type
+                                      : "text",
+                                  id: column.field,
+                                  placeholder: column.label
+                                },
+                                domProps: { value: _vm.newData[column.field] },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.newData,
+                                      column.field,
+                                      _vm._n($event.target.value)
+                                    )
+                                  },
+                                  blur: function($event) {
+                                    _vm.$forceUpdate()
+                                  }
+                                }
+                              })
+                            : (column.type == "number" || "date"
+                                ? column.type
+                                : "text") === "checkbox"
+                              ? _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.newData[column.field],
+                                      expression: "newData[column.field]"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    id: column.field,
+                                    placeholder: column.label,
+                                    type: "checkbox"
+                                  },
+                                  domProps: {
+                                    checked: Array.isArray(
+                                      _vm.newData[column.field]
+                                    )
+                                      ? _vm._i(
+                                          _vm.newData[column.field],
+                                          null
+                                        ) > -1
+                                      : _vm.newData[column.field]
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$a = _vm.newData[column.field],
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = null,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            _vm.$set(
+                                              _vm.newData,
+                                              column.field,
+                                              $$a.concat([$$v])
+                                            )
+                                        } else {
+                                          $$i > -1 &&
+                                            _vm.$set(
+                                              _vm.newData,
+                                              column.field,
+                                              $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1))
+                                            )
+                                        }
+                                      } else {
+                                        _vm.$set(_vm.newData, column.field, $$c)
+                                      }
+                                    }
+                                  }
+                                })
+                              : (column.type == "number" || "date"
                                   ? column.type
-                                  : "text",
-                              id: column.field,
-                              placeholder: column.label
-                            }
-                          })
+                                  : "text") === "radio"
+                                ? _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.newData[column.field],
+                                        expression: "newData[column.field]"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      id: column.field,
+                                      placeholder: column.label,
+                                      type: "radio"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.newData[column.field],
+                                        null
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        _vm.$set(
+                                          _vm.newData,
+                                          column.field,
+                                          null
+                                        )
+                                      }
+                                    }
+                                  })
+                                : _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.newData[column.field],
+                                        expression: "newData[column.field]"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      id: column.field,
+                                      placeholder: column.label,
+                                      type:
+                                        column.type == "number" || "date"
+                                          ? column.type
+                                          : "text"
+                                    },
+                                    domProps: {
+                                      value: _vm.newData[column.field]
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.newData,
+                                          column.field,
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
                         ])
                       : _vm._e()
                   })
                 )
               ]),
               _vm._v(" "),
-              _vm._m(2)
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Batal")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.addData }
+                  },
+                  [_vm._v("Simpan")]
+                )
+              ])
             ])
           ]
         )
@@ -67612,17 +67812,17 @@ var render = function() {
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(2)
               ]),
               _vm._v(" "),
-              _vm._m(4)
+              _vm._m(3)
             ])
           ]
         )
       ]
     ),
     _vm._v(" "),
-    _vm._m(5)
+    _vm._m(4)
   ])
 }
 var staticRenderFns = [
@@ -67682,27 +67882,6 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Batal")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Simpan")]
-      )
-    ])
   },
   function() {
     var _vm = this

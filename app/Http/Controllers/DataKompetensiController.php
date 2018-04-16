@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pegawai;
 use Illuminate\Http\Request;
 use App\Http\Controllers\APIBaseController;
 use App\Kompetensi;
@@ -50,9 +51,17 @@ class DataKompetensiController extends APIBaseController
             return $this->sendError('Gagal menambahkan data kompetensi.', $validator->errors());
         }
 
+        $nip = $input['nip'];
+        $pegawai = Pegawai::where('nip', '=', $nip)->first();
+
+        if (is_null($pegawai)) {
+            return $this->sendError('Pegawai dengan NIP: '.$nip.' tidak ditemukan.');
+        }
+
         $data = new Kompetensi;
         $data = $this->updateDataKompetensi($data, $input);
-        $data.save();
+        $data->pegawai()->associate($pegawai);
+        $data->save();
 
         return $this->sendResponse($data, 'Data kompetensi berhasil ditambahkan.');
     }
@@ -125,7 +134,6 @@ class DataKompetensiController extends APIBaseController
 
     private function validateDataKompetensi($input) {
         return Validator::make($input, [
-            'id_pegawai' => 'required',
             'tanggal' => 'required',
             'kognitif_efisiensi_kecerdasan' => 'required',
             'kognitif_daya_nalar' => 'required',
@@ -157,7 +165,6 @@ class DataKompetensiController extends APIBaseController
     private function updateDataKompetensi($oldData, $newDataInput) {
         $newData = $oldData;
 
-        $newData->id_pegawai = $newDataInput['id_pegawai'];
         $newData->tanggal = $newDataInput['tanggal'];
         $newData->kognitif_efisiensi_kecerdasan = $newDataInput['kognitif_efisiensi_kecerdasan'];
         $newData->kognitif_daya_nalar = $newDataInput['kognitif_daya_nalar'];

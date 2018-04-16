@@ -58,13 +58,22 @@
                                 <label :for="column.field">{{ column.label }}</label>
                                 <input class="form-control"
                                        :type="column.type == 'number' || 'date' ? column.type : 'text'"
-                                       :id="column.field" :placeholder="column.label">
+                                       :id="column.field"
+                                       :placeholder="column.label"
+                                       v-if="column.type == 'number'"
+                                       v-model.number="newData[column.field]">
+                                <input class="form-control"
+                                       :type="column.type == 'number' || 'date' ? column.type : 'text'"
+                                       :id="column.field"
+                                       :placeholder="column.label"
+                                       v-else
+                                       v-model="newData[column.field]">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-primary" @click="addData">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -139,6 +148,7 @@
                 dataPegawai: [],
                 dataKinerja: [],
                 dataKompetensi: [],
+                newData: {},
                 disableTambahDataButton: true,
             }
         },
@@ -166,6 +176,24 @@
                     .catch(e => {
                         this.error.push(e);
                     });
+            },
+            addData: function () {
+                console.log(this.newData);
+                let url = '/api/kompetensi';
+                let data = this.newData;
+                let config = {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                axios.post(url, data, config)
+                    .then(response => {
+                        console.log(response.data);
+                        this.newData = {};
+                    })
+                    .catch(e => {
+                        console.log(e.message);
+                    })
             },
             getPegawai: function () {
                 axios.get('/api/pegawai')
