@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66560,7 +66560,6 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -67570,46 +67569,66 @@ var render = function() {
                             _vm._v(_vm._s(column.label))
                           ]),
                           _vm._v(" "),
-                          column.type == "number"
+                          (column.type == "number" || "date"
+                            ? column.type
+                            : "text") === "checkbox"
                             ? _c("input", {
                                 directives: [
                                   {
                                     name: "model",
-                                    rawName: "v-model.number",
+                                    rawName: "v-model",
                                     value: _vm.newData[column.field],
-                                    expression: "newData[column.field]",
-                                    modifiers: { number: true }
+                                    expression: "newData[column.field]"
                                   }
                                 ],
                                 staticClass: "form-control",
                                 attrs: {
-                                  type:
-                                    column.type == "number" || "date"
-                                      ? column.type
-                                      : "text",
                                   id: column.field,
-                                  placeholder: column.label
+                                  placeholder: column.label,
+                                  type: "checkbox"
                                 },
-                                domProps: { value: _vm.newData[column.field] },
+                                domProps: {
+                                  checked: Array.isArray(
+                                    _vm.newData[column.field]
+                                  )
+                                    ? _vm._i(_vm.newData[column.field], null) >
+                                      -1
+                                    : _vm.newData[column.field]
+                                },
                                 on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
+                                  change: function($event) {
+                                    var $$a = _vm.newData[column.field],
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            _vm.newData,
+                                            column.field,
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            _vm.newData,
+                                            column.field,
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(_vm.newData, column.field, $$c)
                                     }
-                                    _vm.$set(
-                                      _vm.newData,
-                                      column.field,
-                                      _vm._n($event.target.value)
-                                    )
-                                  },
-                                  blur: function($event) {
-                                    _vm.$forceUpdate()
                                   }
                                 }
                               })
                             : (column.type == "number" || "date"
                                 ? column.type
-                                : "text") === "checkbox"
+                                : "text") === "radio"
                               ? _c("input", {
                                   directives: [
                                     {
@@ -67623,117 +67642,54 @@ var render = function() {
                                   attrs: {
                                     id: column.field,
                                     placeholder: column.label,
-                                    type: "checkbox"
+                                    type: "radio"
                                   },
                                   domProps: {
-                                    checked: Array.isArray(
-                                      _vm.newData[column.field]
+                                    checked: _vm._q(
+                                      _vm.newData[column.field],
+                                      null
                                     )
-                                      ? _vm._i(
-                                          _vm.newData[column.field],
-                                          null
-                                        ) > -1
-                                      : _vm.newData[column.field]
                                   },
                                   on: {
                                     change: function($event) {
-                                      var $$a = _vm.newData[column.field],
-                                        $$el = $event.target,
-                                        $$c = $$el.checked ? true : false
-                                      if (Array.isArray($$a)) {
-                                        var $$v = null,
-                                          $$i = _vm._i($$a, $$v)
-                                        if ($$el.checked) {
-                                          $$i < 0 &&
-                                            _vm.$set(
-                                              _vm.newData,
-                                              column.field,
-                                              $$a.concat([$$v])
-                                            )
-                                        } else {
-                                          $$i > -1 &&
-                                            _vm.$set(
-                                              _vm.newData,
-                                              column.field,
-                                              $$a
-                                                .slice(0, $$i)
-                                                .concat($$a.slice($$i + 1))
-                                            )
-                                        }
-                                      } else {
-                                        _vm.$set(_vm.newData, column.field, $$c)
-                                      }
+                                      _vm.$set(_vm.newData, column.field, null)
                                     }
                                   }
                                 })
-                              : (column.type == "number" || "date"
-                                  ? column.type
-                                  : "text") === "radio"
-                                ? _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.newData[column.field],
-                                        expression: "newData[column.field]"
+                              : _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.newData[column.field],
+                                      expression: "newData[column.field]"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    id: column.field,
+                                    placeholder: column.label,
+                                    type:
+                                      column.type == "number" || "date"
+                                        ? column.type
+                                        : "text"
+                                  },
+                                  domProps: {
+                                    value: _vm.newData[column.field]
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
                                       }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      id: column.field,
-                                      placeholder: column.label,
-                                      type: "radio"
-                                    },
-                                    domProps: {
-                                      checked: _vm._q(
-                                        _vm.newData[column.field],
-                                        null
+                                      _vm.$set(
+                                        _vm.newData,
+                                        column.field,
+                                        $event.target.value
                                       )
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        _vm.$set(
-                                          _vm.newData,
-                                          column.field,
-                                          null
-                                        )
-                                      }
                                     }
-                                  })
-                                : _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.newData[column.field],
-                                        expression: "newData[column.field]"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      id: column.field,
-                                      placeholder: column.label,
-                                      type:
-                                        column.type == "number" || "date"
-                                          ? column.type
-                                          : "text"
-                                    },
-                                    domProps: {
-                                      value: _vm.newData[column.field]
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.newData,
-                                          column.field,
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
+                                  }
+                                })
                         ])
                       : _vm._e()
                   })

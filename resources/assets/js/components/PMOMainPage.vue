@@ -60,13 +60,6 @@
                                        :type="column.type == 'number' || 'date' ? column.type : 'text'"
                                        :id="column.field"
                                        :placeholder="column.label"
-                                       v-if="column.type == 'number'"
-                                       v-model.number="newData[column.field]">
-                                <input class="form-control"
-                                       :type="column.type == 'number' || 'date' ? column.type : 'text'"
-                                       :id="column.field"
-                                       :placeholder="column.label"
-                                       v-else
                                        v-model="newData[column.field]">
                             </div>
                         </form>
