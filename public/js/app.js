@@ -17170,7 +17170,11 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(70);
+<<<<<<< HEAD
 module.exports = __webpack_require__(242);
+=======
+module.exports = __webpack_require__(243);
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 
 
 /***/ }),
@@ -66800,7 +66804,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 221 */
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 module.exports = [{"label":"","field":"viewButton"},{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit_kerja"},{"label":"Jabatan","field":"jabatan"},{"label":"Tahun Menjabat","field":"tahun_masuk","type":"number"},{"label":"Kelompok Kompetensi","field":"kompetensi"},{"label":"No. Telp.","field":"phone"},{"label":"Pendidikan","field":"strata"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true}]
+=======
+module.exports = [{"label":"","field":"viewButton"},{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit"},{"label":"Jabatan","field":"position"},{"label":"Tahun Menjabat","field":"startYear","type":"number"},{"label":"Kelompok Kompetensi","field":"competencyGroup"},{"label":"No. Telp.","field":"phone"},{"label":"Pendidikan","field":"education"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true}]
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 
 /***/ }),
 /* 222 */
@@ -67936,7 +67944,11 @@ var normalizeComponent = __webpack_require__(13)
 /* script */
 var __vue_script__ = __webpack_require__(235)
 /* template */
+<<<<<<< HEAD
 var __vue_template__ = __webpack_require__(241)
+=======
+var __vue_template__ = __webpack_require__(242)
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68009,7 +68021,11 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
+<<<<<<< HEAD
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+=======
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 
 // exports
 
@@ -68049,31 +68065,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    dataUserColumns: __webpack_require__(236),
     name: 'admin-main-page',
     components: {
+<<<<<<< HEAD
         'admin-navbar': __webpack_require__(236),
+=======
+        'admin-navbar': __webpack_require__(237),
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
         'data-table': __webpack_require__(68)
     },
     data: function data() {
         return {
             title: 'Data User',
-            rows: [{ name: 'Andrew Ng', email: 'andrew@ng.com' }, { name: 'Nathanael', email: 'nathanael@bic.com' }, { name: 'Jonathan', email: 'jona@than.com' }, { name: 'Iriana', email: 'iriana@google.com' }, { name: 'Rando', email: 'rando@wis.com' }],
-            columns: [{
-                label: 'Nama Lengkap',
-                field: 'name'
-            }, {
-                label: 'E-mail',
-                field: 'email'
-            }]
+            columns: [],
+            rows: [],
+            dataUser: []
         };
     },
 
 
+<<<<<<< HEAD
     created: function created() {
         // this.getData();
     },
@@ -68087,16 +68106,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //     })
         //         .catch(error => console.log(error));
         // }
+=======
+    methods: {
+        redirectAddUser: function redirectAddUser() {
+            var url = '/pages/admin/adduser';
+            window.location.href = url;
+        }
+    },
+
+    created: function created() {
+        var _this = this;
+
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/user').then(function (response) {
+            _this.dataUser = response.data.data;
+            _this.columns = _this.$options.dataUserColumns;
+            _this.rows = _this.dataUser;
+        }).catch(function (e) {
+            _this.errors.push(e);
+        });
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
     }
 });
 
 /***/ }),
 /* 236 */
+<<<<<<< HEAD
+=======
+/***/ (function(module, exports) {
+
+module.exports = [{"label":"Nama Lengkap","field":"name"},{"label":"Email","field":"email"},{"label":"","field":"resetButton"}]
+
+/***/ }),
+/* 237 */
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
+<<<<<<< HEAD
   __webpack_require__(237)
 }
 var normalizeComponent = __webpack_require__(13)
@@ -68104,6 +68152,15 @@ var normalizeComponent = __webpack_require__(13)
 var __vue_script__ = __webpack_require__(239)
 /* template */
 var __vue_template__ = __webpack_require__(240)
+=======
+  __webpack_require__(238)
+}
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(240)
+/* template */
+var __vue_template__ = __webpack_require__(241)
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68142,13 +68199,21 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 237 */
+=======
+/* 238 */
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
+<<<<<<< HEAD
 var content = __webpack_require__(238);
+=======
+var content = __webpack_require__(239);
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -68168,7 +68233,11 @@ if(false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 238 */
+=======
+/* 239 */
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)(false);
@@ -68182,7 +68251,11 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 239 */
+=======
+/* 240 */
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68212,7 +68285,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< HEAD
 /* 240 */
+=======
+/* 241 */
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68287,7 +68364,11 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 241 */
+=======
+/* 242 */
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68301,7 +68382,23 @@ var render = function() {
       "main",
       { staticClass: "container", attrs: { role: "main" } },
       [
-        _vm._m(0),
+        _c("section", [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-3 p-2" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary m-1",
+                    attrs: { type: "button" },
+                    on: { click: _vm.redirectAddUser }
+                  },
+                  [_vm._v("Tambah User")]
+                )
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("data-table", {
           attrs: {
@@ -68318,26 +68415,7 @@ var render = function() {
     _c("footer")
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-3 p-2" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary m-1", attrs: { type: "button" } },
-              [_vm._v("Add User")]
-            )
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -68348,7 +68426,11 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 242 */
+=======
+/* 243 */
+>>>>>>> d09239a8a60c3b17da480ecba67afd8c50799752
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

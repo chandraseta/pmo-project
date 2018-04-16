@@ -8,7 +8,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3 p-2">
-                            <button type="button" class="btn btn-primary m-1">Add User</button>
+                            <button type="button"
+                                    class="btn btn-primary m-1"
+                                    @click="redirectAddUser">Tambah User</button>
                         </div>
                     </div>
                 </div>
@@ -30,6 +32,7 @@
     import axios from 'axios'
 
     export default {
+        dataUserColumns: require('./configs/data-user-columns.json'),
         name: 'admin-main-page',
         components: {
             'admin-navbar': require('./AdminNavbar.vue'),
@@ -38,39 +41,29 @@
         data() {
             return {
                 title: 'Data User',
-                rows: [
-                    {name: 'Andrew Ng', email:'andrew@ng.com'},
-                    {name: 'Nathanael', email:'nathanael@bic.com'},
-                    {name: 'Jonathan', email:'jona@than.com'},
-                    {name: 'Iriana', email:'iriana@google.com'},
-                    {name: 'Rando', email:'rando@wis.com'}
-                ],
-                columns: [
-                    {
-                        label: 'Nama Lengkap',
-                        field: 'name'
-                    },
-                    {
-                        label: 'E-mail',
-                        field: 'email'
-                    },
-                ],
+                columns: [],
+                rows: [],
+                dataUser: [],
+            }
+        },
+
+        methods: {
+            redirectAddUser: function() {
+                let url = '/pages/admin/adduser';
+                window.location.href = url;
             }
         },
 
         created: function() {
-            // this.getData();
-        },
-
-        methods:{
-            // getData() {
-            //     axios.get('/api/user')
-            //         .then(response => {
-            //             this.rows.name.push(response.data.name);
-            //             this.rows.email.push(response.data.email);
-            //     })
-            //         .catch(error => console.log(error));
-            // }
+            axios.get('/api/user')
+                .then(response => {
+                    this.dataUser = response.data.data;
+                    this.columns = this.$options.dataUserColumns;
+                    this.rows = this.dataUser;
+                })
+                .catch(e => {
+                    this.errors.push(e);
+                })
         }
     }
 </script>
