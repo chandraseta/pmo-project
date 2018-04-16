@@ -167,7 +167,7 @@
                         console.log(response.data);
                     })
                     .catch(e => {
-                        this.error.push(e);
+                        this.errors.push(e);
                     });
             },
             addData: function () {
@@ -222,6 +222,15 @@
                         this.errors.push(e);
                     });
             },
+            getKinerja: function () {
+                axios.get('/api/kinerja')
+                    .then(response => {
+                        this.dataKinerja = response.data.data;
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                    })
+            },
             downloadTemplate: function() {
                 let url = '/api/templates/template.xlsx';
                 window.open(url);
@@ -230,6 +239,7 @@
         created: function () {
             this.getPegawai();
             this.getKompetensi();
+            this.getKinerja();
         }
     }
 </script>

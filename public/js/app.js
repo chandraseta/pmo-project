@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66730,7 +66730,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.put(url, data, config).then(function (response) {
                 console.log(response.data);
             }).catch(function (e) {
-                _this.error.push(e);
+                _this.errors.push(e);
             });
         },
         addData: function addData() {
@@ -66784,6 +66784,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this4.errors.push(e);
             });
         },
+        getKinerja: function getKinerja() {
+            var _this5 = this;
+
+            axios.get('/api/kinerja').then(function (response) {
+                _this5.dataKinerja = response.data.data;
+            }).catch(function (e) {
+                _this5.errors.push(e);
+            });
+        },
         downloadTemplate: function downloadTemplate() {
             var url = '/api/templates/template.xlsx';
             window.open(url);
@@ -66792,6 +66801,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         this.getPegawai();
         this.getKompetensi();
+        this.getKinerja();
     }
 });
 
@@ -66811,7 +66821,7 @@ module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","fie
 /* 223 */
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true},{"label":"Unit Kerja","field":"unit","immutable":true},{"label":"Tingkat Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"jabatan","immutable":true},{"label":"Tahun","field":"tahun","type":"number","fillable":true},{"label":"Semester","field":"semester","type":"number","fillable":true},{"label":"Skor Kinerja","field":"skor_kinerja","type":"number","fillable":true}]
+module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true},{"label":"Unit Kerja","field":"unit","immutable":true},{"label":"Tingkat Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"jabatan","immutable":true},{"label":"Tahun","field":"tahun","type":"number","fillable":true},{"label":"Semester","field":"semester","type":"number","fillable":true},{"label":"Skor Kinerja","field":"nilai","type":"number","fillable":true}]
 
 /***/ }),
 /* 224 */

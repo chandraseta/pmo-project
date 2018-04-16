@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Kinerja;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DataKinerjaController extends APIBaseController
 {
@@ -14,7 +15,10 @@ class DataKinerjaController extends APIBaseController
      */
     public function index()
     {
-        $data = Kinerja::all();
+//        $data = Kinerja::all();
+        $data = DB::table('kinerja')
+            ->join('pegawai', 'kinerja.id_pegawai', '=', 'pegawai.id_user')
+            ->get();
         return $this->sendResponse($data, 'Data Kinerja retrieved successfully.');
     }
 

@@ -48,7 +48,7 @@
   },
   {
     "label": "Skor Kinerja",
-    "field": "skor_kinerja",
+    "field": "nilai",
     "type": "number",
     "fillable": true
   }
