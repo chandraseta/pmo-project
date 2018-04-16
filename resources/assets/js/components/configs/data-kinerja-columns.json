@@ -11,7 +11,8 @@
   {
     "label": "NIP",
     "field": "nip",
-    "immutable": true
+    "immutable": true,
+    "fillable": true
   },
   {
     "label": "Unit Kerja",
@@ -36,16 +37,19 @@
   {
     "label": "Tahun",
     "field": "tahun",
-    "type": "number"
+    "type": "number",
+    "fillable": true
   },
   {
     "label": "Semester",
     "field": "semester",
-    "type": "number"
+    "type": "number",
+    "fillable": true
   },
   {
     "label": "Skor Kinerja",
     "field": "skor_kinerja",
-    "type": "number"
+    "type": "number",
+    "fillable": true
   }
 ]
