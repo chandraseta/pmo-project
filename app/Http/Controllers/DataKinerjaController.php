@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kinerja;
+use App\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -41,7 +42,26 @@ class DataKinerjaController extends APIBaseController
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $validator = $this->validateDataKinerja($input);
+        if($validator->fails()) {
+            return $this->sendError('Gagal menambahkan data kinerja', $validator->errors());
+        }
+
+        $nip = $input['nip'];
+        $pegawai = Pegawai::where('nip', '=', $nip)->first();
+
+        if (is_null($pegawai)) {
+            return $this->sendError('Pegawai dengan NIP: '.$nip.' tidak ditemukan.');
+        }
+
+        $data = new Kinerja;
+        $data = $this->updateDataKinerja($data, $input);
+        $data->pegawai()->associate($pegawai);
+        $data->save();
+
+        return $this->sendResponse($data, 'Data kinerja berhasil ditambahkan.');
     }
 
     /**
