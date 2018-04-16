@@ -11,7 +11,7 @@
                             <button type="button"
                                     class="btn btn-primary m-1"
                                     data-toggle="modal"
-                                    data-target="#addDataModal">
+                                    data-target="#addDataModal" :disabled="disableTambahDataButton">
                                 Tambah Data
                             </button>
                         </div>
@@ -54,17 +54,19 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="form-group" v-for="column in columns" v-if="column.label != ''">
+                            <div class="form-group" v-for="column in columns" v-if="column.fillable">
                                 <label :for="column.field">{{ column.label }}</label>
                                 <input class="form-control"
                                        :type="column.type == 'number' || 'date' ? column.type : 'text'"
-                                       :id="column.field" :placeholder="column.label">
+                                       :id="column.field"
+                                       :placeholder="column.label"
+                                       v-model="newData[column.field]">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-primary" @click="addData">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -139,6 +141,8 @@
                 dataPegawai: [],
                 dataKinerja: [],
                 dataKompetensi: [],
+                newData: {},
+                disableTambahDataButton: true,
             }
         },
         methods: {
@@ -146,6 +150,8 @@
                 this.title = payload.label;
                 this.rows = this[payload.name];
                 this.columns = this.$options[payload.name + 'Columns'];
+
+                this.disableTambahDataButton = payload.name === "dataPegawai";
             },
             saveData: function (payload) {
                 console.log(payload);
@@ -164,14 +170,48 @@
                         this.error.push(e);
                     });
             },
+            addData: function () {
+                console.log(this.newData);
+                let url = '/api/kompetensi';
+                let data = this.newData;
+                let config = {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                axios.post(url, data, config)
+                    .then(response => {
+                        console.log(response.data);
+                        this.newData = {};
+                    })
+                    .catch(e => {
+                        console.log(e.message);
+                    })
+            },
             getPegawai: function () {
-                 axios.get('/api/pegawai')
+                axios.get('/api/pegawai')
                     .then(response => {
                         this.dataPegawai = response.data.data;
+                        this.dataPegawai.forEach(function (row, index, array) {
+                            if (row.data_kepegawaians.length > 0) {
+                                let data_kepegawaian = row.data_kepegawaians[row.data_kepegawaians.length - 1];
+                                array[index].unit_kerja = data_kepegawaian.unit_kerja;
+                                array[index].kompetensi = data_kepegawaian.kompetensi;
+                                array[index].jabatan = data_kepegawaian.posisi;
+                                array[index].tahun_masuk = data_kepegawaian.tahun_masuk;
+                            }
+
+                            if (row.riwayat_pendidikans.length > 0) {
+                                array[index].strata = row.riwayat_pendidikans[row.riwayat_pendidikans.length - 1].strata;
+                            }
+                        });
+                        this.columns = this.$options.dataPegawaiColumns;
+                        this.rows = this.dataPegawai;
                     })
                     .catch(e => {
                         this.errors.push(e);
                     });
+
             },
             getKompetensi: function () {
                  axios.get('/api/kompetensi')
@@ -188,16 +228,7 @@
             }
         },
         created: function () {
-            axios.get('/api/pegawai')
-                .then(response => {
-                    this.dataPegawai = response.data.data;
-                    this.columns = this.$options.dataPegawaiColumns;
-                    this.rows = this.dataPegawai;
-                })
-                .catch(e => {
-                    this.errors.push(e);
-                });
-
+            this.getPegawai();
             this.getKompetensi();
         }
     }

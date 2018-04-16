@@ -15,20 +15,20 @@
   },
   {
     "label": "Unit Kerja",
-    "field": "unit"
+    "field": "unit_kerja"
   },
   {
     "label": "Jabatan",
-    "field": "position"
+    "field": "jabatan"
   },
   {
     "label": "Tahun Menjabat",
-    "field": "startYear",
+    "field": "tahun_masuk",
     "type": "number"
   },
   {
     "label": "Kelompok Kompetensi",
-    "field": "competencyGroup"
+    "field": "kompetensi"
   },
   {
     "label": "No. Telp.",
@@ -36,7 +36,7 @@
   },
   {
     "label": "Pendidikan",
-    "field": "education"
+    "field": "strata"
   },
   {
     "label": "Tanggal Lahir",
