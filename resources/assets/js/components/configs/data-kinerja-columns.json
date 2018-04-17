@@ -20,7 +20,7 @@
     "immutable": true
   },
   {
-    "label": "Tingkat Pendidikan",
+    "label": "Pendidikan",
     "field": "pendidikan_terakhir",
     "immutable": true
   },

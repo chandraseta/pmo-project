@@ -17,9 +17,7 @@ class DataKinerjaController extends APIBaseController
      */
     public function index()
     {
-//        $data = DB::table('kinerja')
-//            ->join('pegawai', 'kinerja.id_pegawai', '=', 'pegawai.id_user')
-//            ->get();
+
         $data = Kinerja::all();
         $data->transform(function($item, $key) {
             $pegawai = $item->pegawai()->first();
@@ -44,7 +42,6 @@ class DataKinerjaController extends APIBaseController
             return $item;
         });
 
-//        return dd($data);
         return $this->sendResponse($data, 'Data Kinerja retrieved successfully.');
     }
 
