@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id_kompetensi
  * @property int $id_pegawai
+ * @property string $tujuan
  * @property string $tanggal
  * @property float $kognitif_efisiensi_kecerdasan
  * @property float $kognitif_daya_nalar
@@ -42,7 +43,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $profil_loyalitas_terhadap_tugas
  * @property float $profil_efektivitas_manajerial
  * @property float $profil
- * @property char $indeks
+ * @property string $indeks
  * @property Pegawai $pegawai
  */
 class Kompetensi extends Model
@@ -66,6 +67,7 @@ class Kompetensi extends Model
      */
     protected $fillable = [
         'id_pegawai',
+        'tujuan',
         'tanggal',
         'kognitif_efisiensi_kecerdasan',
         'kognitif_daya_nalar',
