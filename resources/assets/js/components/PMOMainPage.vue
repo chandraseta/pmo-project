@@ -151,7 +151,7 @@
         data() {
             return {
                 title: 'Data Pegawai',
-                currentTab: 'pegawai',
+                currentTab: 'dataPegawai',
                 columns: [],
                 rows: [],
                 dataPegawai: [],
@@ -230,10 +230,13 @@
                 console.log(this.newData);
 
                 let url;
+                let getData;
                 if (this.currentTab === 'dataKompetensi') {
                     url = '/api/kompetensi';
+                    getData = this.getKompetensi;
                 } else if (this.currentTab === 'dataKinerja') {
                     url = '/api/kinerja';
+                    getData = this.getKinerja;
                 }
 
                 let data = this.newData;
@@ -247,6 +250,7 @@
                         console.log(response.data);
                         this.newData = {};
                         this.setAlert('success', response.data.message);
+                        getData();
                     })
                     .catch(e => {
                         console.log(e.message);
@@ -283,6 +287,7 @@
                  axios.get('/api/kompetensi')
                     .then(response => {
                         this.dataKompetensi = response.data.data;
+                        this.rows = this[this.currentTab];
                     })
                     .catch(e => {
                         this.errors.push(e);
@@ -292,6 +297,7 @@
                 axios.get('/api/kinerja')
                     .then(response => {
                         this.dataKinerja = response.data.data;
+                        this.rows = this[this.currentTab];
                     })
                     .catch(e => {
                         this.errors.push(e);
