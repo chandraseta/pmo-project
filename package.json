@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "open-iconic": "^1.1.1",
+        "pretty-checkbox": "^3.0.3",
         "vue-good-table": "^2.0.5"
     }
 }

@@ -12,7 +12,7 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Lengkap') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Alamat Email') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
@@ -38,6 +38,43 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="checkbox-admin" class="col-md-4 col-form-label text-md-right">{{ __('Administrator') }}</label>
+                                <div class="col-md-6">
+                                    <div class="pretty p-default p-round p-smooth">
+                                        <input id="checkbox-admin" type="checkbox" name="isAdmin">
+                                        <div class="state p-primary">
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="checkbox-pmo" class="col-md-4 col-form-label text-md-right">{{ __('Anggota PMO') }}</label>
+                                <div class="col-md-6">
+                                    <div class="pretty p-default p-round p-smooth">
+                                        <input id="checkbox-pmo" type="checkbox" name="isPMO">
+                                        <div class="state p-primary">
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="checkbox-pegawai" class="col-md-4 col-form-label text-md-right">{{ __('Pegawai') }}</label>
+                                <div class="col-md-6">
+                                    <div class="pretty p-default p-round p-smooth">
+                                        <input id="checkbox-pegawai" type="checkbox" name="isPegawai" checked>
+                                        <div class="state p-primary">
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

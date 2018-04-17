@@ -56,8 +56,12 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
+        // TODO: Check if at least one isAdmin, isPMO, or isPegawai is checked
+
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());
+
+        // TODO: Display success/error message
     }
 
     /**
@@ -82,6 +86,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // TODO: Insert into pegawai, pmo, and/or admin
+
+        // TODO: Add role to each user
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
