@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66685,6 +66685,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     dataPegawaiColumns: __webpack_require__(221),
@@ -66705,7 +66713,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dataKinerja: [],
             dataKompetensi: [],
             newData: {},
-            disableTambahDataButton: true
+            disableTambahDataButton: true,
+            disableUploadDataButton: true
         };
     },
 
@@ -66717,6 +66726,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.columns = this.$options[payload.name + 'Columns'];
 
             this.disableTambahDataButton = payload.name === "dataPegawai";
+            this.disableUploadDataButton = payload.name === "dataPegawai";
         },
         saveData: function saveData(payload) {
             var _this = this;
@@ -67238,7 +67248,7 @@ var render = function() {
           },
           paginationOptions: {
             enabled: true,
-            perPage: 5
+            perPage: 8
           },
           styleClass: "vgt-table striped condensed bordered text-nowrap"
         },
@@ -67507,30 +67517,67 @@ var render = function() {
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-md-3 p-2" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary m-1",
-                    attrs: {
-                      type: "button",
-                      "data-toggle": "modal",
-                      "data-target": "#addDataModal",
-                      disabled: _vm.disableTambahDataButton
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Tambah Data\n                        "
+                !_vm.disableTambahDataButton
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary m-1",
+                        attrs: {
+                          type: "button",
+                          "data-toggle": "modal",
+                          "data-target": "#addDataModal"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Tambah Data\n                        "
+                        )
+                      ]
                     )
-                  ]
-                )
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-3 p-2" }),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-3 p-2" }),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "col-md-3 p-2" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary float-md-right m-1",
+                    attrs: {
+                      type: "button",
+                      "data-toggle": "modal",
+                      "data-target": "#downloadModal"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Download Data\n                        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                !_vm.disableUploadDataButton
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary float-md-right m-1",
+                        attrs: {
+                          type: "button",
+                          "data-toggle": "modal",
+                          "data-target": "#uploadModal"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Upload Data\n                        "
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ])
             ])
           ])
         ]),
@@ -67576,7 +67623,7 @@ var render = function() {
                   [_vm._v("Entri " + _vm._s(_vm.title) + " Baru")]
                 ),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm._m(0)
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -67760,7 +67807,16 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _vm._v("\n                    Upload Data\n                ")
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "uploadModalLabel" }
+                  },
+                  [_vm._v("Upload " + _vm._s(_vm.title))]
+                ),
+                _vm._v(" "),
+                _vm._m(1)
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -67798,7 +67854,44 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(4)
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "downloadModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "downloadModalLabel" }
+                  },
+                  [_vm._v("Download " + _vm._s(_vm.title))]
+                ),
+                _vm._v(" "),
+                _vm._m(4)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }),
+              _vm._v(" "),
+              _vm._m(5)
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -67806,41 +67899,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 p-2" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-primary float-md-right m-1",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#downloadModal"
-          }
-        },
-        [
-          _vm._v(
-            "\n                            Download Hasil\n                        "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-primary float-md-right m-1",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#uploadModal"
-          }
-        },
-        [
-          _vm._v(
-            "\n                            Upload Data\n                        "
-          )
-        ]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   },
   function() {
     var _vm = this
@@ -67902,41 +67972,32 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "div",
+      "button",
       {
-        staticClass: "modal fade",
+        staticClass: "close",
         attrs: {
-          id: "downloadModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
         }
       },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Batal")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Batal")]
+      )
+    ])
   }
 ]
 render._withStripped = true

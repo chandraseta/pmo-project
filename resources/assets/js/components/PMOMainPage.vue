@@ -9,9 +9,10 @@
                     <div class="row">
                         <div class="col-md-3 p-2">
                             <button type="button"
-                                    class="btn btn-primary m-1"
+                                    class="btn btn-secondary m-1"
                                     data-toggle="modal"
-                                    data-target="#addDataModal" :disabled="disableTambahDataButton">
+                                    data-target="#addDataModal"
+                                    v-if="!disableTambahDataButton">
                                 Tambah Data
                             </button>
                         </div>
@@ -19,15 +20,16 @@
                         <div class="col-md-3 p-2"></div>
                         <div class="col-md-3 p-2">
                             <button type="button"
-                                    class="btn btn-outline-primary float-md-right m-1"
+                                    class="btn btn-primary float-md-right m-1"
                                     data-toggle="modal"
                                     data-target="#downloadModal">
-                                Download Hasil
+                                Download Data
                             </button>
                             <button type="button"
-                                    class="btn btn-outline-primary float-md-right m-1"
+                                    class="btn btn-secondary float-md-right m-1"
                                     data-toggle="modal"
-                                    data-target="#uploadModal">
+                                    data-target="#uploadModal"
+                                    v-if="!disableUploadDataButton">
                                 Upload Data
                             </button>
                         </div>
@@ -76,7 +78,10 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        Upload Data
+                        <h5 class="modal-title" id="uploadModalLabel">Upload {{ title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="container">
@@ -109,7 +114,10 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-
+                        <h5 class="modal-title" id="downloadModalLabel">Download {{ title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
 
@@ -144,6 +152,7 @@
                 dataKompetensi: [],
                 newData: {},
                 disableTambahDataButton: true,
+                disableUploadDataButton: true
             }
         },
         methods: {
@@ -154,6 +163,7 @@
                 this.columns = this.$options[payload.name + 'Columns'];
 
                 this.disableTambahDataButton = payload.name === "dataPegawai";
+                this.disableUploadDataButton = payload.name === "dataPegawai";
             },
             saveData: function (payload) {
                 console.log(payload);

@@ -12,7 +12,7 @@
                 }"
                 :paginationOptions="{
                     enabled: true,
-                    perPage: 5
+                    perPage: 8
                 }"
                 styleClass="vgt-table striped condensed bordered text-nowrap">
             <template slot="table-row" slot-scope="props">
