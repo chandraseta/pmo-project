@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id_data_kepegawaian
  * @property int $id_pegawai
- * @property string $kompetensi
- * @property string $unit_kerja
- * @property string $posisi
+ * @property int $id_unit_kerja
+ * @property int $id_posisi
  * @property string $tahun_masuk
  * @property string $tahun_keluar
  * @property Pegawai $pegawai
+ * @property Posisi $posisi
+ * @property UnitKerja $unitKerja
  */
 class DataKepegawaian extends Model
 {
@@ -33,7 +34,7 @@ class DataKepegawaian extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_pegawai', 'kompetensi', 'unit_kerja', 'posisi', 'tahun_masuk', 'tahun_keluar'];
+    protected $fillable = ['id_pegawai', 'id_unit_kerja', 'id_posisi', 'tahun_masuk', 'tahun_keluar'];
 
     /**
      * Indicates if the model should be timestamped.
@@ -48,5 +49,21 @@ class DataKepegawaian extends Model
     public function pegawai()
     {
         return $this->belongsTo('App\Pegawai', 'id_pegawai', 'id_user');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function posisi()
+    {
+        return $this->belongsTo('App\Posisi', 'id_posisi', 'id_posisi');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function unitKerja()
+    {
+        return $this->belongsTo('App\UnitKerja', 'id_unit_kerja', 'id_unit_kerja');
     }
 }

@@ -5,31 +5,31 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id_posisi
- * @property string $nama_posisi
+ * @property int $id_unit_kerja
+ * @property string $nama_unit_kerja
  * @property DataKepegawaian[] $dataKepegawaians
  * @property RekomendasiPosisi[] $rekomendasiPosisis
  */
-class Posisi extends Model
+class UnitKerja extends Model
 {
     /**
      * The table associated with the model.
      * 
      * @var string
      */
-    protected $table = 'posisi';
+    protected $table = 'unit_kerja';
 
     /**
      * The primary key for the model.
      * 
      * @var string
      */
-    protected $primaryKey = 'id_posisi';
+    protected $primaryKey = 'id_unit_kerja';
 
     /**
      * @var array
      */
-    protected $fillable = ['nama_posisi'];
+    protected $fillable = ['nama_unit_kerja'];
 
     /**
      * Indicates if the model should be timestamped.
@@ -43,7 +43,7 @@ class Posisi extends Model
      */
     public function dataKepegawaians()
     {
-        return $this->hasMany('App\DataKepegawaian', 'id_posisi', 'id_posisi');
+        return $this->hasMany('App\DataKepegawaian', 'id_unit_kerja', 'id_unit_kerja');
     }
 
     /**
@@ -51,6 +51,6 @@ class Posisi extends Model
      */
     public function rekomendasiPosisis()
     {
-        return $this->hasMany('App\RekomendasiPosisi', 'id_posisi', 'id_posisi');
+        return $this->hasMany('App\RekomendasiPosisi', 'id_unit_kerja', 'id_unit_kerja');
     }
 }

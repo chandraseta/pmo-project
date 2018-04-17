@@ -16,11 +16,11 @@ class CreateSertifikatTable extends Migration
         Schema::create('sertifikat', function (Blueprint $table) {
             $table->increments('id_sertifikat');
             $table->unsignedInteger('id_pegawai')->index();
-            $table->string('nama_file');
             $table->string('judul')->nullable();
             $table->string('lembaga')->nullable();
             $table->year('tahun_diterbitkan')->nullable();
             $table->text('catatan')->nullable();
+            $table->string('nama_file')->unique();
             $table->timestamps();
 
             $table->foreign('id_pegawai')

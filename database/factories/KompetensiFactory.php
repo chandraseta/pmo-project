@@ -9,6 +9,7 @@ $factory->define(App\Kompetensi::class, function (Faker $faker) {
 
     return [
         'id_pegawai' => App\Pegawai::pluck('id_user')->random(),
+        'tujuan' => $faker->sentence,
         'tanggal' => $faker->date,
         'kognitif_efisiensi_kecerdasan' => $randomScore(),
         'kognitif_daya_nalar' => $randomScore(),

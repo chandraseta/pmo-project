@@ -28,7 +28,6 @@ class PegawaiAPIController extends APIBaseController
         // $user = User::with(Pegawai::with(['riwayat_pendidikan', 'riwayat_pekerjaan', 'data_kepegawaian']));
         $user = Pegawai::with(['user','riwayatPendidikans','riwayatPekerjaans','dataKepegawaians'])->get();
 
-        
         return $this->sendResponse($user, 'Profiles retrieved successfully.');
     }
 
@@ -43,7 +42,6 @@ class PegawaiAPIController extends APIBaseController
     {
         $input = $request->all();
 
-
         $validator = Validator::make($input, [
             'email' => 'required',
             'password' => 'required',
@@ -53,7 +51,7 @@ class PegawaiAPIController extends APIBaseController
         ]);
 
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $find = User::where('email', $input['email'])->count();
@@ -79,8 +77,6 @@ class PegawaiAPIController extends APIBaseController
 
         $post = array_merge($postUser->toArray(), $postPegawai->toArray());
 
-
-
         return $this->sendResponse($post, 'User created successfully.');
     }
 
@@ -93,7 +89,6 @@ class PegawaiAPIController extends APIBaseController
      */
     public function show($id)
     {
-
         $pegawai = Pegawai::find($id);
 
         if (is_null($pegawai)) {
@@ -139,9 +134,8 @@ class PegawaiAPIController extends APIBaseController
         ]);
 
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return $this->sendError('Validation Error.', $validator->errors());
         }
-        
 
         $pegawai = Pegawai::where('id_user', $id)->first();
 
@@ -157,7 +151,6 @@ class PegawaiAPIController extends APIBaseController
             return $this->sendError('Email Already Exist');
         }
 
-
         $user->name = $input['nama'];
         $user->email = $input['email'];
         $user->password = Hash::make($input['password']);
@@ -165,7 +158,6 @@ class PegawaiAPIController extends APIBaseController
         $pegawai->nip = $input['nip'];
         $pegawai->tempat_lahir = $input['tempat_lahir'];
         $pegawai->tanggal_lahir = $input['tanggal_lahir'];
-
 
         $pendidikan = RiwayatPendidikan::where('id_pegawai', $id);
 
@@ -184,10 +176,9 @@ class PegawaiAPIController extends APIBaseController
             ]);
         }
 
-
         $pekerjaan = RiwayatPekerjaan::where('id_pegawai', $id);
 
-        if($pekerjaan->count() > 0){
+        if ($pekerjaan->count() > 0){
             $pekerjaan->delete();
         }
 
@@ -201,10 +192,9 @@ class PegawaiAPIController extends APIBaseController
             ]);
         }
 
-
         $kepegawaian = DataKepegawaian::where('id_pegawai', $id);
 
-        if($kepegawaian->count() > 0){
+        if ($kepegawaian->count() > 0){
             $kepegawaian->delete();
         }
 
@@ -219,14 +209,13 @@ class PegawaiAPIController extends APIBaseController
             ]);
         }
 
-
         $sertifikat = Sertifikat::where('id_pegawai', $id);
 
-        if($sertifikat->count() > 0){
+        if ($sertifikat->count() > 0){
             $sertifikat->delete();
         }
 
-        for($i = 1; $i <= $input['sertifikat_counter']; $i++){
+        for ($i = 1; $i <= $input['sertifikat_counter']; $i++) {
             $photoTimeAsName = time().'.'.$input['sertifikat_user_photo_' . $i]->getClientOriginalExtension();
             $input['sertifikat_user_photo_' . $i]->move(public_path('avatars'), $photoTimeAsName);
 
@@ -240,7 +229,6 @@ class PegawaiAPIController extends APIBaseController
             ]);
         }
 
-
         $user->save();
         $pegawai->save();
 
@@ -252,7 +240,6 @@ class PegawaiAPIController extends APIBaseController
             $kepegawaian->get()->toArray(),
             $sertifikat->get()->toArray()
         );
-
 
         return $this->sendResponse($data, 'Profile updated successfully.');
     }
@@ -272,13 +259,11 @@ class PegawaiAPIController extends APIBaseController
             return $this->sendError('Profile not found.');
         }
 
-
         $pendidikan = RiwayatPendidikan::where('id_pegawai', $id);
 
-        if($pendidikan->count() > 0){
+        if ($pendidikan->count() > 0){
             $pendidikan->delete();
         }
-
 
         $pekerjaan = RiwayatPekerjaan::where('id_pegawai', $id);
 
@@ -286,19 +271,16 @@ class PegawaiAPIController extends APIBaseController
             $pekerjaan->delete();
         }
 
-
         $kepegawaian = DataKepegawaian::where('id_pegawai', $id);
 
-        if($kepegawaian->count() > 0){
+        if ($kepegawaian->count() > 0){
             $kepegawaian->delete();
         }
-
 
         $pegawai = Pegawai::where('id_user', $id);
         $pegawai->delete();
 
         $user->delete();
-
 
         return $this->sendResponse($id, 'Tag deleted successfully.');
     }

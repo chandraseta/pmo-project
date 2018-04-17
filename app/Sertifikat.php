@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $lembaga
  * @property string $tahun_diterbitkan
  * @property string $catatan
+ * @property string $nama_file
  * @property string $created_at
  * @property string $updated_at
  * @property Pegawai $pegawai
@@ -34,7 +35,7 @@ class Sertifikat extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_pegawai', 'nama_file', 'judul', 'lembaga', 'tahun_diterbitkan', 'catatan'];
+    protected $fillable = ['id_pegawai', 'judul', 'lembaga', 'tahun_diterbitkan', 'catatan', 'nama_file'];
 
     /**
      * Indicates if the model should be timestamped.
