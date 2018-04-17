@@ -23,9 +23,24 @@ class DataKinerjaController extends APIBaseController
         $data = Kinerja::all();
         $data->transform(function($item, $key) {
             $pegawai = $item->pegawai()->first();
+            $riwayatPekerjaan = $pegawai
+                ->dataKepegawaians()
+                ->get()
+                ->sortBy('tahun_masuk')
+                ->last();
+            $riwayatPendidikan = $pegawai
+                ->riwayatPendidikans()
+                ->get()
+                ->sortBy('tahun_keluar')
+                ->last();
+
             $item->nama = $pegawai->nama;
             $item->nip = $pegawai->nip;
             $item->tanggal_lahir = $pegawai->tanggal_lahir;
+            $item->jabatan = $riwayatPekerjaan['posisi'];
+            $item->unit = $riwayatPekerjaan['unit_kerja'];
+            $item->pendidikan_terakhir = $riwayatPendidikan['strata'];
+
             return $item;
         });
 
