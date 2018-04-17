@@ -11,7 +11,9 @@
   {
     "label": "NIP",
     "field": "nip",
-    "immutable": true
+    "immutable": true,
+    "fillable": true,
+    "required": true
   },
   {
     "label": "Unit Kerja",
@@ -19,7 +21,7 @@
     "immutable": true
   },
   {
-    "label": "Tingkat Pendidikan",
+    "label": "Pendidikan",
     "field": "pendidikan_terakhir",
     "immutable": true
   },
@@ -36,16 +38,19 @@
   {
     "label": "Tahun",
     "field": "tahun",
-    "type": "number"
+    "type": "number",
+    "fillable": true
   },
   {
     "label": "Semester",
     "field": "semester",
-    "type": "number"
+    "type": "number",
+    "fillable": true
   },
   {
     "label": "Skor Kinerja",
-    "field": "skor_kinerja",
-    "type": "number"
+    "field": "nilai",
+    "type": "number",
+    "fillable": true
   }
 ]

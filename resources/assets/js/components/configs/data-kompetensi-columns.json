@@ -12,7 +12,8 @@
     "label": "NIP",
     "field": "nip",
     "immutable": true,
-    "fillable": true
+    "fillable": true,
+    "required": true
   },
   {
     "label": "Unit Kerja",
@@ -20,7 +21,7 @@
     "immutable": true
   },
   {
-    "label": "Tingkat Pendidikan",
+    "label": "Pendidikan",
     "field": "pendidikan_terakhir",
     "immutable": true
   },
