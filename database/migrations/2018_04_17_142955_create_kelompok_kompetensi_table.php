@@ -15,11 +15,11 @@ class CreateKelompokKompetensiTable extends Migration
     {
         Schema::create('kelompok_kompetensi', function (Blueprint $table) {
             $table->increments('id_kelompok_kompetensi');
-            $table->string('nama_kelompok_kompetensi')->nullable()->index();
+            $table->string('nama_kelompok_kompetensi')->index();
         });
 
         Schema::table('pegawai', function (Blueprint $table) {
-            $table->unsignedInteger('id_kelompok_kompetensi')->after('no_telp')->index();
+            $table->unsignedInteger('id_kelompok_kompetensi')->after('no_telp')->nullable()->index();
 
             $table->foreign('id_kelompok_kompetensi')
                   ->references('id_kelompok_kompetensi')->on('kelompok_kompetensi')
