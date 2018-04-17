@@ -14,6 +14,8 @@ use App\DataKepegawaian;
 use App\Sertifikat;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Excel;
 
 
 class PegawaiAPIController extends APIBaseController
@@ -267,7 +269,7 @@ class PegawaiAPIController extends APIBaseController
 
         $pekerjaan = RiwayatPekerjaan::where('id_pegawai', $id);
 
-        if($pekerjaan->count() > 0){
+        if ($pekerjaan->count() > 0){
             $pekerjaan->delete();
         }
 
@@ -283,5 +285,102 @@ class PegawaiAPIController extends APIBaseController
         $user->delete();
 
         return $this->sendResponse($id, 'Tag deleted successfully.');
+    }
+
+    public function export() {
+        $pegawai_rows = \DB::select(\DB::raw('
+            WITH partitioned_data_kepegawaian AS (
+                SELECT data_kepegawaian.*, 
+                    ROW_NUMBER() OVER ( 
+                        PARTITION BY id_pegawai 
+                        ORDER BY CASE 
+                            WHEN tahun_keluar IS NULL 
+                                THEN 1 
+                                ELSE 0 
+                            END DESC, 
+                            tahun_masuk DESC 
+                    ) AS rn 
+                FROM data_kepegawaian 
+            ), 
+            last_data_kepegawaian AS ( 
+                SELECT id_pegawai, id_unit_kerja, id_posisi, tahun_masuk 
+                FROM partitioned_data_kepegawaian 
+                WHERE rn = 1 
+                ORDER BY id_pegawai
+            ), 
+            retrieved_data_kepegawaian AS (
+                SELECT id_pegawai, nama_unit_kerja, nama_posisi, tahun_masuk 
+                FROM last_data_kepegawaian 
+                    NATURAL JOIN unit_kerja 
+                    NATURAL JOIN posisi 
+                ORDER BY id_pegawai
+            ), 
+            partitioned_riwayat_pendidikan AS (
+                SELECT riwayat_pendidikan.*, 
+                    ROW_NUMBER() OVER ( 
+                        PARTITION BY id_pegawai 
+                        ORDER BY CASE 
+                            WHEN tahun_keluar IS NULL 
+                                THEN 1 
+                                ELSE 0 
+                            END DESC, 
+                            tahun_masuk DESC 
+                    ) AS rn 
+                FROM riwayat_pendidikan 
+            ), 
+            last_riwayat_pendidikan AS ( 
+                SELECT id_pegawai, strata 
+                FROM partitioned_riwayat_pendidikan 
+                WHERE rn = 1
+            ) 
+            SELECT nip, nama, nama_unit_kerja, nama_posisi, tahun_masuk, strata, no_telp, tanggal_lahir  
+            FROM pegawai 
+                LEFT OUTER JOIN retrieved_data_kepegawaian 
+                    ON pegawai.id_user = retrieved_data_kepegawaian.id_pegawai 
+                LEFT OUTER JOIN last_riwayat_pendidikan 
+                    ON pegawai.id_user = last_riwayat_pendidikan.id_pegawai 
+            ORDER BY nip;
+        '));
+
+        $pegawai_array = [];
+
+        // Row headers
+        $pegawai_array[] = [
+            'NIP',
+            'Nama Lengkap',
+            'Unit Kerja',
+            'Jabatan',
+            'Tahun Menjabat',
+            'Pendidikan',
+            'No. Telp.',
+            'Tanggal Lahir'
+        ];
+
+        foreach ($pegawai_rows as $pegawai_row) {
+            $pegawai_array[] = get_object_vars($pegawai_row);
+        }
+
+        $timestamp = Carbon::now()->toDateTimeString();
+        $filename = 'pegawai_' . $timestamp;
+        Excel::create($filename, function($excel) use ($pegawai_array, $timestamp) {
+            $excel->setTitle('Data Pegawai '. $timestamp)
+                  ->setCreator('UPT PMO ITB')
+                  ->setCompany('UPT PMO ITB')
+                  ->setDescription('Data pegawai UPT PMO ITB pada ' . $timestamp);
+
+            $excel->sheet('sheet1', function($sheet) use ($pegawai_array) {
+                $sheet->fromArray($pegawai_array, null, 'A1', false, false);
+
+                $sheet->row(1, function($row) {
+                    $row->setFontWeight('bold')
+                        ->setBorder(array(
+                            'bottom' => array(
+                                'style' => 'solid'
+                            )
+                          ));
+                });
+                $sheet->freezeFirstRow();
+            });
+        })->download('xlsx');
     }
 }
