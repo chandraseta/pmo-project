@@ -11,6 +11,7 @@ use App\Pegawai;
 use App\RiwayatPendidikan;
 use App\RiwayatPekerjaan;
 use App\DataKepegawaian;
+use App\Sertifikat;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,7 +28,6 @@ class PegawaiAPIController extends APIBaseController
         // $user = User::with(Pegawai::with(['riwayat_pendidikan', 'riwayat_pekerjaan', 'data_kepegawaian']));
         $user = Pegawai::with(['user','riwayatPendidikans','riwayatPekerjaans','dataKepegawaians'])->get();
 
-        
         return $this->sendResponse($user, 'Profiles retrieved successfully.');
     }
 
@@ -42,7 +42,6 @@ class PegawaiAPIController extends APIBaseController
     {
         $input = $request->all();
 
-
         $validator = Validator::make($input, [
             'email' => 'required',
             'password' => 'required',
@@ -52,7 +51,7 @@ class PegawaiAPIController extends APIBaseController
         ]);
 
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $find = User::where('email', $input['email'])->count();
@@ -90,7 +89,6 @@ class PegawaiAPIController extends APIBaseController
      */
     public function show($id)
     {
-
         $pegawai = Pegawai::find($id);
 
         if (is_null($pegawai)) {
@@ -127,7 +125,6 @@ class PegawaiAPIController extends APIBaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'username' => 'required',
             'email' => 'required',
             'password' => 'required',
             'nama' => 'required',
@@ -137,9 +134,8 @@ class PegawaiAPIController extends APIBaseController
         ]);
 
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return $this->sendError('Validation Error.', $validator->errors());
         }
-        
 
         $pegawai = Pegawai::where('id_user', $id)->first();
 
@@ -147,23 +143,21 @@ class PegawaiAPIController extends APIBaseController
             return $this->sendError('Profile not found.');
         }
 
-        $find = User::where('username', $input['username']);
-
-        if($find->count() != 0 && $find->first()->username != $user->username){
-            return $this->sendError('Username Already Exist');
-        }
-
-
+        $find = User::where('email', $input['email']);
         $user = User::find($id);
 
-        $user->username = $input['username'];
+
+        if($find->count() != 0 && $find->first()->email != $user->email){
+            return $this->sendError('Email Already Exist');
+        }
+
+        $user->name = $input['nama'];
         $user->email = $input['email'];
         $user->password = Hash::make($input['password']);
         $pegawai->nama = $input['nama'];
         $pegawai->nip = $input['nip'];
         $pegawai->tempat_lahir = $input['tempat_lahir'];
         $pegawai->tanggal_lahir = $input['tanggal_lahir'];
-
 
         $pendidikan = RiwayatPendidikan::where('id_pegawai', $id);
 
@@ -182,10 +176,9 @@ class PegawaiAPIController extends APIBaseController
             ]);
         }
 
-
         $pekerjaan = RiwayatPekerjaan::where('id_pegawai', $id);
 
-        if($pekerjaan->count() > 0){
+        if ($pekerjaan->count() > 0){
             $pekerjaan->delete();
         }
 
@@ -199,10 +192,9 @@ class PegawaiAPIController extends APIBaseController
             ]);
         }
 
-
         $kepegawaian = DataKepegawaian::where('id_pegawai', $id);
 
-        if($kepegawaian->count() > 0){
+        if ($kepegawaian->count() > 0){
             $kepegawaian->delete();
         }
 
@@ -217,6 +209,25 @@ class PegawaiAPIController extends APIBaseController
             ]);
         }
 
+        $sertifikat = Sertifikat::where('id_pegawai', $id);
+
+        if ($sertifikat->count() > 0){
+            $sertifikat->delete();
+        }
+
+        for ($i = 1; $i <= $input['sertifikat_counter']; $i++) {
+            $photoTimeAsName = time().'.'.$input['sertifikat_user_photo_' . $i]->getClientOriginalExtension();
+            $input['sertifikat_user_photo_' . $i]->move(public_path('avatars'), $photoTimeAsName);
+
+            $postSertifikat = Sertifikat::create([
+                'id_pegawai' => $id,
+                'nama_file' => $photoTimeAsName,
+                'judul' => $input['sertifikat_judul_' . $i],
+                'lembaga' => $input['sertifikat_lembaga_' . $i],
+                'tahun_diterbitkan' => $input['sertifikat_tahun_diterbitkan_' . $i],
+                'catatan' => $input['sertifikat_catatan_' . $i],
+            ]);
+        }
 
         $user->save();
         $pegawai->save();
@@ -226,9 +237,9 @@ class PegawaiAPIController extends APIBaseController
             $pegawai->toArray(),
             $pendidikan->get()->toArray(),
             $pekerjaan->get()->toArray(),
-            $kepegawaian->get()->toArray()
+            $kepegawaian->get()->toArray(),
+            $sertifikat->get()->toArray()
         );
-
 
         return $this->sendResponse($data, 'Profile updated successfully.');
     }
@@ -248,13 +259,11 @@ class PegawaiAPIController extends APIBaseController
             return $this->sendError('Profile not found.');
         }
 
-
         $pendidikan = RiwayatPendidikan::where('id_pegawai', $id);
 
-        if($pendidikan->count() > 0){
+        if ($pendidikan->count() > 0){
             $pendidikan->delete();
         }
-
 
         $pekerjaan = RiwayatPekerjaan::where('id_pegawai', $id);
 
@@ -262,19 +271,16 @@ class PegawaiAPIController extends APIBaseController
             $pekerjaan->delete();
         }
 
-
         $kepegawaian = DataKepegawaian::where('id_pegawai', $id);
 
-        if($kepegawaian->count() > 0){
+        if ($kepegawaian->count() > 0){
             $kepegawaian->delete();
         }
-
 
         $pegawai = Pegawai::where('id_user', $id);
         $pegawai->delete();
 
         $user->delete();
-
 
         return $this->sendResponse($id, 'Tag deleted successfully.');
     }
