@@ -67,7 +67,7 @@ class DataKinerjaController extends APIBaseController
 
         $validator = $this->validateDataKinerja($input);
         if($validator->fails()) {
-            return $this->sendError('Gagal menambahkan data kinerja', $validator->errors());
+            return $this->sendError('Gagal menambahkan data kinerja.', $validator->errors());
         }
 
         $nip = $input['nip'];

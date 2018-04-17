@@ -12,7 +12,8 @@
     "label": "NIP",
     "field": "nip",
     "immutable": true,
-    "fillable": true
+    "fillable": true,
+    "required": true
   },
   {
     "label": "Unit Kerja",
