@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Admin;
 use App\Notification\WelcomeEmail;
 use App\Pegawai;
 use App\PMO;
@@ -99,23 +100,23 @@ class RegisterController extends Controller
             'password' => Hash::make(User::generatePassword()),
         ]);
 
-//        if ($data['isAdmin']) {
-//            $pegawai = Pegawai::create([
-//                'id_user' => $new_user->id_user,
-//            ]);
-//        }
-//
-//        if ($data['isPMO']) {
-//            $pmo = PMO::create([
-//                'id_user' => $new_user->id_user,
-//            ]);
-//        }
-//
-//        if ($data['isPegawai']) {
-//            $pegawai = Pegawai::create([
-//                'id_user' => $new_user->id_user,
-//                'nama' => $new_user->name,
-//            ]);
+        if (isset($data['isAdmin'])) {
+            $pegawai = Admin::create([
+                'id_user' => $new_user->id,
+            ]);
+        }
+
+        if (isset($data['isPMO'])) {
+            $pmo = PMO::create([
+                'id_user' => $new_user->id,
+            ]);
+        }
+
+        if (isset($data['isPegawai'])) {
+            $pegawai = Pegawai::create([
+                'id_user' => $new_user->id,
+                'nama' => $new_user->name,
+            ]);
         }
 
         return $new_user;
