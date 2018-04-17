@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66693,6 +66693,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     dataPegawaiColumns: __webpack_require__(221),
@@ -66714,10 +66718,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dataKompetensi: [],
             newData: {},
             disableTambahDataButton: true,
-            disableUploadDataButton: true
+            disableUploadDataButton: true,
+            isFormInvalid: {}
         };
     },
 
+    watch: {
+        newData: {
+            handler: function handler(oldVal, newVal) {
+                var isInvalid = {};
+                this.columns.forEach(function (column) {
+                    if (column.required) {
+                        isInvalid[column.field] = newVal[column.field] == '';
+                    }
+                });
+                this.isFormInvalid = isInvalid;
+                console.log(this.isFormInvalid);
+            },
+            deep: true
+        }
+    },
     methods: {
         changeTable: function changeTable(payload) {
             this.title = payload.label;
@@ -66822,6 +66842,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         downloadTemplate: function downloadTemplate() {
             var url = '/api/templates/template.xlsx';
             window.open(url);
+        },
+        validate: function validate(column) {
+            if (column.required) {
+                this.isFormInvalid[column.field] = this.newData[column.field] == '';
+            }
         }
     },
     created: function created() {
@@ -66847,7 +66872,7 @@ module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","fie
 /* 223 */
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true},{"label":"Unit Kerja","field":"unit","immutable":true},{"label":"Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"jabatan","immutable":true},{"label":"Tahun","field":"tahun","type":"number","fillable":true},{"label":"Semester","field":"semester","type":"number","fillable":true},{"label":"Skor Kinerja","field":"nilai","type":"number","fillable":true}]
+module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true,"required":true},{"label":"Unit Kerja","field":"unit","immutable":true},{"label":"Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"jabatan","immutable":true},{"label":"Tahun","field":"tahun","type":"number","fillable":true},{"label":"Semester","field":"semester","type":"number","fillable":true},{"label":"Skor Kinerja","field":"nilai","type":"number","fillable":true}]
 
 /***/ }),
 /* 224 */
@@ -67649,6 +67674,9 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.isFormInvalid[column.field]
+                                },
                                 attrs: {
                                   id: column.field,
                                   placeholder: column.label,
@@ -67706,6 +67734,10 @@ var render = function() {
                                     }
                                   ],
                                   staticClass: "form-control",
+                                  class: {
+                                    "is-invalid":
+                                      _vm.isFormInvalid[column.field]
+                                  },
                                   attrs: {
                                     id: column.field,
                                     placeholder: column.label,
@@ -67733,6 +67765,10 @@ var render = function() {
                                     }
                                   ],
                                   staticClass: "form-control",
+                                  class: {
+                                    "is-invalid":
+                                      _vm.isFormInvalid[column.field]
+                                  },
                                   attrs: {
                                     id: column.field,
                                     placeholder: column.label,
@@ -67756,7 +67792,15 @@ var render = function() {
                                       )
                                     }
                                   }
-                                })
+                                }),
+                          _vm._v(" "),
+                          column.required
+                            ? _c("div", { staticClass: "invalid-feedback" }, [
+                                _vm._v(
+                                  "\n                                NIP diperlukan untuk membuat data baru.\n                            "
+                                )
+                              ])
+                            : _vm._e()
                         ])
                       : _vm._e()
                   })

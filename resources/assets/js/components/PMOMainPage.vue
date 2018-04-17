@@ -59,10 +59,14 @@
                             <div class="form-group" v-for="column in columns" v-if="column.fillable">
                                 <label :for="column.field">{{ column.label }}</label>
                                 <input class="form-control"
+                                       :class="{'is-invalid': isFormInvalid[column.field]}"
                                        :type="column.type == 'number' || 'date' ? column.type : 'text'"
                                        :id="column.field"
                                        :placeholder="column.label"
                                        v-model="newData[column.field]">
+                                <div v-if="column.required" class="invalid-feedback">
+                                    NIP diperlukan untuk membuat data baru.
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -152,7 +156,23 @@
                 dataKompetensi: [],
                 newData: {},
                 disableTambahDataButton: true,
-                disableUploadDataButton: true
+                disableUploadDataButton: true,
+                isFormInvalid: {}
+            }
+        },
+        watch: {
+            newData: {
+                handler: function (oldVal, newVal) {
+                    let isInvalid = {};
+                    this.columns.forEach(function (column) {
+                        if (column.required) {
+                            isInvalid[column.field] = newVal[column.field] == '';
+                        }
+                    });
+                    this.isFormInvalid = isInvalid;
+                    console.log(this.isFormInvalid);
+                },
+                deep: true
             }
         },
         methods: {
@@ -260,6 +280,11 @@
             downloadTemplate: function() {
                 let url = '/api/templates/template.xlsx';
                 window.open(url);
+            },
+            validate: function (column) {
+                if (column.required) {
+                    this.isFormInvalid[column.field] = this.newData[column.field] == '';
+                }
             }
         },
         created: function () {
