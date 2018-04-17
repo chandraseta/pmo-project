@@ -17,10 +17,19 @@ class DataKinerjaController extends APIBaseController
      */
     public function index()
     {
-//        $data = Kinerja::all();
-        $data = DB::table('kinerja')
-            ->join('pegawai', 'kinerja.id_pegawai', '=', 'pegawai.id_user')
-            ->get();
+//        $data = DB::table('kinerja')
+//            ->join('pegawai', 'kinerja.id_pegawai', '=', 'pegawai.id_user')
+//            ->get();
+        $data = Kinerja::all();
+        $data->transform(function($item, $key) {
+            $pegawai = $item->pegawai()->first();
+            $item->nama = $pegawai->nama;
+            $item->nip = $pegawai->nip;
+            $item->tanggal_lahir = $pegawai->tanggal_lahir;
+            return $item;
+        });
+
+//        return dd($data);
         return $this->sendResponse($data, 'Data Kinerja retrieved successfully.');
     }
 
