@@ -10,6 +10,6 @@ $factory->define(App\Pegawai::class, function (Faker $faker) {
         'nip' => $faker->unique()->regexify('\d{18}'),
         'tempat_lahir' => $faker->city(),
         'tanggal_lahir' => $faker->date(),
-        'id_pengubah' => $id
+        'no_telp' => $faker->phoneNumber(),
     ];
 });

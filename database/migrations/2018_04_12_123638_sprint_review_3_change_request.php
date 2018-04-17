@@ -14,9 +14,20 @@ class SprintReview3ChangeRequest extends Migration
     public function up()
     {
         Schema::table('pegawai', function (Blueprint $table) {
-            $table->unsignedInteger('id_pengubah')->index();
+            $table->unsignedInteger('id_pengubah')->nullable()->index();
             $table->timestamps();
         });
+
+        DB::unprepared('
+            CREATE TRIGGER tr_pegawai_def_id_pengubah
+            BEFORE INSERT ON `pegawai`
+            FOR EACH ROW
+            BEGIN
+                IF NEW.id_pengubah IS NULL THEN
+                    SET NEW.id_pengubah := NEW.id_user;
+                END IF;
+            END
+        ');
 
         Schema::table('pegawai', function (Blueprint $table) {
             $table->foreign('id_pengubah')
@@ -42,6 +53,8 @@ class SprintReview3ChangeRequest extends Migration
      */
     public function down()
     {
+        DB::unprepared('DROP TRIGGER `tr_pegawai_def_id_pengubah`');
+
         Schema::table('pegawai', function (Blueprint $table) {
             $table->dropForeign(['id_pengubah']);
             $table->dropIndex(['id_pengubah']);
