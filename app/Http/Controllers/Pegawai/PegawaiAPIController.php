@@ -11,6 +11,7 @@ use App\Pegawai;
 use App\RiwayatPendidikan;
 use App\RiwayatPekerjaan;
 use App\DataKepegawaian;
+use App\Sertifikat;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -44,42 +45,41 @@ class PegawaiAPIController extends APIBaseController
 
 
         $validator = Validator::make($input, [
-            'username' => 'required',
             'email' => 'required',
             'password' => 'required',
             'nama' => 'required',
             'nip' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
+            'id_pengubah' => 'required',
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
 
-        $find = User::where('username', $input['username'])->count();
+        $find = User::where('email', $input['email'])->count();
 
         if($find != 0){
-            return $this->sendError('Username Already Exist');
+            return $this->sendError('Email Already Exist');
         }
 
         $postUser = User::create([
-            'username' => $input['username'],
+            'name' => $input['nama'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
 
-        $user = User::where('username', $input['username'])->first();
+        $user = User::where('email', $input['email'])->first();
 
         $postPegawai = Pegawai::create([
             'id_user' => $user->id,
             'nama' => $input['nama'],
             'nip' => $input['nip'],
-            'tempat_lahir' => $input['tempat_lahir'],
-            'tanggal_lahir' => $input['tanggal_lahir'],
+            'id_pengubah' => $user->id,
         ]);
 
         $post = array_merge($postUser->toArray(), $postPegawai->toArray());
+
+
 
         return $this->sendResponse($post, 'User created successfully.');
     }
@@ -130,7 +130,6 @@ class PegawaiAPIController extends APIBaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'username' => 'required',
             'email' => 'required',
             'password' => 'required',
             'nama' => 'required',
@@ -150,16 +149,16 @@ class PegawaiAPIController extends APIBaseController
             return $this->sendError('Profile not found.');
         }
 
-        $find = User::where('username', $input['username']);
+        $find = User::where('email', $input['email']);
+        $user = User::find($id);
 
-        if($find->count() != 0 && $find->first()->username != $user->username){
-            return $this->sendError('Username Already Exist');
+
+        if($find->count() != 0 && $find->first()->email != $user->email){
+            return $this->sendError('Email Already Exist');
         }
 
 
-        $user = User::find($id);
-
-        $user->username = $input['username'];
+        $user->name = $input['nama'];
         $user->email = $input['email'];
         $user->password = Hash::make($input['password']);
         $pegawai->nama = $input['nama'];
@@ -221,6 +220,27 @@ class PegawaiAPIController extends APIBaseController
         }
 
 
+        $sertifikat = Sertifikat::where('id_pegawai', $id);
+
+        if($sertifikat->count() > 0){
+            $sertifikat->delete();
+        }
+
+        for($i = 1; $i <= $input['sertifikat_counter']; $i++){
+            $photoTimeAsName = time().'.'.$input['sertifikat_user_photo_' . $i]->getClientOriginalExtension();
+            $input['sertifikat_user_photo_' . $i]->move(public_path('avatars'), $photoTimeAsName);
+
+            $postSertifikat = Sertifikat::create([
+                'id_pegawai' => $id,
+                'nama_file' => $photoTimeAsName,
+                'judul' => $input['sertifikat_judul_' . $i],
+                'lembaga' => $input['sertifikat_lembaga_' . $i],
+                'tahun_diterbitkan' => $input['sertifikat_tahun_diterbitkan_' . $i],
+                'catatan' => $input['sertifikat_catatan_' . $i],
+            ]);
+        }
+
+
         $user->save();
         $pegawai->save();
 
@@ -229,7 +249,8 @@ class PegawaiAPIController extends APIBaseController
             $pegawai->toArray(),
             $pendidikan->get()->toArray(),
             $pekerjaan->get()->toArray(),
-            $kepegawaian->get()->toArray()
+            $kepegawaian->get()->toArray(),
+            $sertifikat->get()->toArray()
         );
 
 

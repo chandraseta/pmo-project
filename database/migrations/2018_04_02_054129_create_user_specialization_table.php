@@ -35,8 +35,8 @@ class CreateUserSpecializationTable extends Migration
             $table->unsignedInteger('id_user')->primary();
             $table->string('nama');
             $table->char('nip', 18)->unique();
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
 
             $table->foreign('id_user')
                   ->references('id')->on('users')

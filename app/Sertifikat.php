@@ -34,7 +34,7 @@ class Sertifikat extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_pegawai', 'judul', 'lembaga', 'tahun_diterbitkan', 'catatan'];
+    protected $fillable = ['id_pegawai', 'nama_file', 'judul', 'lembaga', 'tahun_diterbitkan', 'catatan'];
 
     /**
      * Indicates if the model should be timestamped.
