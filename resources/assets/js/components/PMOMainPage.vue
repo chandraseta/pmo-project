@@ -221,9 +221,11 @@
                 axios.put(url, data, config)
                     .then(response => {
                         console.log(response.data);
+                        alert(response.data.message);
                     })
                     .catch(e => {
                         this.errors.push(e);
+                        alert(e.response.data.message);
                     });
             },
             addData: function () {
