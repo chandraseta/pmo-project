@@ -18,10 +18,29 @@ class DataKompetensiController extends APIBaseController
      */
     public function index()
     {
-        //$data = Kompetensi::all();
-        $data = DB::table('kompetensi')
-            ->join('pegawai', 'kompetensi.id_pegawai', '=', 'pegawai.id_user')
-            ->get();
+        $data = Kompetensi::all();
+        $data->transform(function ($item, $key) {
+            $pegawai = $item->pegawai()->first();
+            $riwayatPekerjaan = $pegawai
+                ->dataKepegawaians()
+                ->get()
+                ->sortBy('tahun_masuk')
+                ->last();
+            $riwayatPendidikan = $pegawai
+                ->riwayatPendidikans()
+                ->get()
+                ->sortBy('tahun_keluar')
+                ->last();
+
+            $item->nama = $pegawai->nama;
+            $item->nip = $pegawai->nip;
+            $item->tanggal_lahir = $pegawai->tanggal_lahir;
+            $item->jabatan = $riwayatPekerjaan['posisi'];
+            $item->unit = $riwayatPekerjaan['unit_kerja'];
+            $item->pendidikan_terakhir = $riwayatPendidikan['strata'];
+
+            return $item;
+        });
 
         return $this->sendResponse($data->toArray(), 'Data Kompetensi retrieved successfully');
     }
