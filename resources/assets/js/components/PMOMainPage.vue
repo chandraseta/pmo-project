@@ -69,10 +69,13 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="alert" :class="'alert-' + statusAlert.type" role="alert" v-if="statusAlert.display">
+                            {{ statusAlert.message }}
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary" @click="addData">Simpan</button>
+                        <button type="button" class="btn btn-primary" @click="addData" :disabled="!isFormValid">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -157,7 +160,22 @@
                 newData: {},
                 disableTambahDataButton: true,
                 disableUploadDataButton: true,
-                isFormInvalid: {}
+                isFormInvalid: {},
+                statusAlert: {
+                    display: false,
+                    message: '',
+                    type: ''
+                }
+            }
+        },
+        computed: {
+            isFormValid: function () {
+                let validity;
+                let isInvalid = this.isFormInvalid
+                for (let field in isInvalid) {
+                    validity |= isInvalid[field];
+                }
+                return !validity;
             }
         },
         watch: {
@@ -170,7 +188,6 @@
                         }
                     });
                     this.isFormInvalid = isInvalid;
-                    console.log(this.isFormInvalid);
                 },
                 deep: true
             }
@@ -229,9 +246,12 @@
                     .then(response => {
                         console.log(response.data);
                         this.newData = {};
+                        this.setAlert('success', response.data.message);
                     })
                     .catch(e => {
                         console.log(e.message);
+                        console.log(e.response.data.message);
+                        this.setAlert('danger', e.response.data.message);
                     })
             },
             getPegawai: function () {
@@ -281,10 +301,10 @@
                 let url = '/api/templates/template.xlsx';
                 window.open(url);
             },
-            validate: function (column) {
-                if (column.required) {
-                    this.isFormInvalid[column.field] = this.newData[column.field] == '';
-                }
+            setAlert: function (type, message) {
+                this.statusAlert.display = true;
+                this.statusAlert.message = message;
+                this.statusAlert.type = type;
             }
         },
         created: function () {

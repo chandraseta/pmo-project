@@ -66516,7 +66516,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66697,6 +66697,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     dataPegawaiColumns: __webpack_require__(221),
@@ -66719,10 +66722,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             newData: {},
             disableTambahDataButton: true,
             disableUploadDataButton: true,
-            isFormInvalid: {}
+            isFormInvalid: {},
+            statusAlert: {
+                display: false,
+                message: '',
+                type: ''
+            }
         };
     },
 
+    computed: {
+        isFormValid: function isFormValid() {
+            var validity = void 0;
+            var isInvalid = this.isFormInvalid;
+            for (var field in isInvalid) {
+                validity |= isInvalid[field];
+            }
+            return !validity;
+        }
+    },
     watch: {
         newData: {
             handler: function handler(oldVal, newVal) {
@@ -66733,7 +66751,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 });
                 this.isFormInvalid = isInvalid;
-                console.log(this.isFormInvalid);
             },
             deep: true
         }
@@ -66793,8 +66810,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post(url, data, config).then(function (response) {
                 console.log(response.data);
                 _this2.newData = {};
+                _this2.setAlert('success', response.data.message);
             }).catch(function (e) {
                 console.log(e.message);
+                console.log(e.response.data.message);
+                _this2.setAlert('danger', e.response.data.message);
             });
         },
         getPegawai: function getPegawai() {
@@ -66843,10 +66863,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var url = '/api/templates/template.xlsx';
             window.open(url);
         },
-        validate: function validate(column) {
-            if (column.required) {
-                this.isFormInvalid[column.field] = this.newData[column.field] == '';
-            }
+        setAlert: function setAlert(type, message) {
+            this.statusAlert.display = true;
+            this.statusAlert.message = message;
+            this.statusAlert.type = type;
         }
     },
     created: function created() {
@@ -67804,7 +67824,25 @@ var render = function() {
                         ])
                       : _vm._e()
                   })
-                )
+                ),
+                _vm._v(" "),
+                _vm.statusAlert.display
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "alert",
+                        class: "alert-" + _vm.statusAlert.type,
+                        attrs: { role: "alert" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.statusAlert.message) +
+                            "\n                    "
+                        )
+                      ]
+                    )
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
@@ -67821,7 +67859,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
+                    attrs: { type: "button", disabled: !_vm.isFormValid },
                     on: { click: _vm.addData }
                   },
                   [_vm._v("Simpan")]
