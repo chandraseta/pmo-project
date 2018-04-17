@@ -10,6 +10,10 @@ class PagesController extends Controller
         return view('welcome');
     }
 
+    public function landing() {
+        return view('pages');
+    }
+
     public function pmo() {
         return view('pages.pmo')->with('page', 'pmo');
     }
