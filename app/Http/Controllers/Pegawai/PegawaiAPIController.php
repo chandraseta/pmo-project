@@ -130,7 +130,6 @@ class PegawaiAPIController extends APIBaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'username' => 'required',
             'email' => 'required',
             'password' => 'required',
             'nama' => 'required',
@@ -150,16 +149,16 @@ class PegawaiAPIController extends APIBaseController
             return $this->sendError('Profile not found.');
         }
 
-        $find = User::where('username', $input['username']);
+        $find = User::where('email', $input['email']);
+        $user = User::find($id);
 
-        if($find->count() != 0 && $find->first()->username != $user->username){
-            return $this->sendError('Username Already Exist');
+
+        if($find->count() != 0 && $find->first()->email != $user->email){
+            return $this->sendError('Email Already Exist');
         }
 
 
-        $user = User::find($id);
-
-        $user->username = $input['username'];
+        $user->name = $input['nama'];
         $user->email = $input['email'];
         $user->password = Hash::make($input['password']);
         $pegawai->nama = $input['nama'];
