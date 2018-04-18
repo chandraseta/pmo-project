@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Admin;
 use App\Notification\WelcomeEmail;
+use App\Pegawai;
+use App\PMO;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
@@ -54,14 +57,19 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
-
-        // TODO: Check if at least one isAdmin, isPMO, or isPegawai is checked
-
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
-
-        // TODO: Display success/error message
+        if ($request->has('isAdmin') or $request->has('isPMO') or $request->has('isPegawai')) {
+            event(new Registered($user = $this->create($request->all())));
+            if ($this->registered($request, $user)) {
+                $request->session()->flash('alert-success', 'Pengguna berhasil ditambahkan');
+            }
+            else {
+                $request->session()->flash('alert-warning', 'Terjadi kesalahan dalam penambahan pengguna');
+            }
+        }
+        else {
+            $request->session()->flash('alert-warning', 'Pengguna baru harus memiliki setidaknya 1 peran (Administrator, Anggota PMO, atau Pegawai)');
+        }
+        return redirect($this->redirectPath());
     }
 
     /**
@@ -86,19 +94,37 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // TODO: Insert into pegawai, pmo, and/or admin
-
-        // TODO: Add role to each user
-
-        return User::create([
+        $new_user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make(User::generatePassword()),
         ]);
+
+        if (isset($data['isAdmin'])) {
+            $pegawai = Admin::create([
+                'id_user' => $new_user->id,
+            ]);
+        }
+
+        if (isset($data['isPMO'])) {
+            $pmo = PMO::create([
+                'id_user' => $new_user->id,
+            ]);
+        }
+
+        if (isset($data['isPegawai'])) {
+            $pegawai = Pegawai::create([
+                'id_user' => $new_user->id,
+                'nama' => $new_user->name,
+            ]);
+        }
+
+        return $new_user;
     }
 
     protected function registered(Request $request, $user) {
         $token = app('auth.password.broker')->createToken($user);
         $user->notify(new WelcomeEmail($token));
+        return true;
     }
 }
