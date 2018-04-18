@@ -27,14 +27,18 @@ class PegawaiAPIController extends APIBaseController
     public function index()
     {
 
-        // $id = Auth::user()->id;
-        return $this->sendResponse(Auth::user(), 'Profiles retrieved successfully.');
+        if (Auth::check()) {
+            $id = Auth::user()->id;
+        }else{
+            return $this->sendError('You are not authenticated.');
+        }
 
         $auth = User::find($id);
 
         if (is_null($auth)) {
             return $this->sendError('You are not authenticated.');
         }
+        
 
         $user = Pegawai::with(['user','riwayatPendidikans','riwayatPekerjaans','dataKepegawaians'])->get();
 

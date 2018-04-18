@@ -19,10 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('templates/{template}', 'FileDownloadController@downloadTemplate');
 
-Route::group(['middleware' => 'web'], function () {
-    // your routes
-	Route::resource('pegawai', 'Pegawai\PegawaiAPIController');
-});
+Route::resource('pegawai', 'Pegawai\PegawaiAPIController');
 
 Route::resource('user', 'User\UserAPIController');
 
