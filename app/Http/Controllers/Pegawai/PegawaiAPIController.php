@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pegawai;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\APIBaseController as APIBaseController;
 use App\User;
 use App\Pegawai;
@@ -25,7 +26,16 @@ class PegawaiAPIController extends APIBaseController
      */
     public function index()
     {
-        // $user = User::with(Pegawai::with(['riwayat_pendidikan', 'riwayat_pekerjaan', 'data_kepegawaian']));
+
+        // $id = Auth::user()->id;
+        return $this->sendResponse(Auth::user(), 'Profiles retrieved successfully.');
+
+        $auth = User::find($id);
+
+        if (is_null($auth)) {
+            return $this->sendError('You are not authenticated.');
+        }
+
         $user = Pegawai::with(['user','riwayatPendidikans','riwayatPekerjaans','dataKepegawaians'])->get();
 
         
