@@ -261,24 +261,26 @@
                     })
             },
             getPegawai: function () {
-                axios.get('/api/pegawai')
+                axios.get('/api/pegawai-denormalized')
                     .then(response => {
+//                        this.dataPegawai = response.data.data;
+//                        this.dataPegawai.forEach(function (row, index, array) {
+//                            if (row.data_kepegawaians.length > 0) {
+//                                let data_kepegawaian = row.data_kepegawaians[row.data_kepegawaians.length - 1];
+//                                array[index].unit_kerja = data_kepegawaian.unit_kerja;
+//                                array[index].kompetensi = data_kepegawaian.kompetensi;
+//                                array[index].jabatan = data_kepegawaian.posisi;
+//                                array[index].tahun_masuk = data_kepegawaian.tahun_masuk;
+//                            }
+//
+//                            if (row.riwayat_pendidikans.length > 0) {
+//                                array[index].strata = row.riwayat_pendidikans[row.riwayat_pendidikans.length - 1].strata;
+//                            }
+//                        });
+//                        this.columns = this.$options.dataPegawaiColumns;
+//                        this.rows = this.dataPegawai;
                         this.dataPegawai = response.data.data;
-                        this.dataPegawai.forEach(function (row, index, array) {
-                            if (row.data_kepegawaians.length > 0) {
-                                let data_kepegawaian = row.data_kepegawaians[row.data_kepegawaians.length - 1];
-                                array[index].unit_kerja = data_kepegawaian.unit_kerja;
-                                array[index].kompetensi = data_kepegawaian.kompetensi;
-                                array[index].jabatan = data_kepegawaian.posisi;
-                                array[index].tahun_masuk = data_kepegawaian.tahun_masuk;
-                            }
-
-                            if (row.riwayat_pendidikans.length > 0) {
-                                array[index].strata = row.riwayat_pendidikans[row.riwayat_pendidikans.length - 1].strata;
-                            }
-                        });
-                        this.columns = this.$options.dataPegawaiColumns;
-                        this.rows = this.dataPegawai;
+                        this.rows = this[this.currentTab];
                     })
                     .catch(e => {
                         this.errors.push(e);
@@ -316,6 +318,7 @@
             }
         },
         created: function () {
+            this.columns = this.$options.dataPegawaiColumns;
             this.getPegawai();
             this.getKompetensi();
             this.getKinerja();
