@@ -48,6 +48,20 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="nip" class="col-md-4 col-form-label text-md-right">{{ __('NIP') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="nip" type="text" class="form-control{{ $errors->has('nip') ? ' is-invalid' : '' }}" name="nip" required>
+
+                                    @if ($errors->has('nip'))
+                                        <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('nip') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="checkbox-admin" class="col-md-4 col-form-label text-md-right">{{ __('Administrator') }}</label>
                                 <div class="col-md-6">
                                     <div class="pretty p-default p-round p-smooth">
