@@ -28,17 +28,17 @@ class PegawaiAPIController extends APIBaseController
     {
 
         if (Auth::check()) {
-            $id = Auth::user()->id;
+            $session_id = Auth::user()->id;
         }else{
             return $this->sendError('You are not authenticated.');
         }
 
-        $auth = User::find($id);
+        $auth = User::find($session_id);
 
         if (is_null($auth)) {
             return $this->sendError('You are not authenticated.');
         }
-        
+
 
         $user = Pegawai::with(['user','riwayatPendidikans','riwayatPekerjaans','dataKepegawaians'])->get();
 
@@ -55,6 +55,20 @@ class PegawaiAPIController extends APIBaseController
      */
     public function store(Request $request)
     {
+
+        if (Auth::check()) {
+            $session_id = Auth::user()->id;
+        }else{
+            return $this->sendError('You are not authenticated.');
+        }
+
+        $auth = User::find($session_id);
+
+        if (is_null($auth)) {
+            return $this->sendError('You are not authenticated.');
+        }
+
+
         $input = $request->all();
 
 
@@ -108,6 +122,19 @@ class PegawaiAPIController extends APIBaseController
     public function show($id)
     {
 
+        if (Auth::check()) {
+            $session_id = Auth::user()->id;
+        }else{
+            return $this->sendError('You are not authenticated.');
+        }
+
+        $auth = User::find($session_id);
+
+        if (is_null($auth)) {
+            return $this->sendError('You are not authenticated.');
+        }
+
+
         $pegawai = Pegawai::find($id);
 
         if (is_null($pegawai)) {
@@ -141,6 +168,20 @@ class PegawaiAPIController extends APIBaseController
      */
     public function update(Request $request, $id)
     {
+
+        if (Auth::check()) {
+            $session_id = Auth::user()->id;
+        }else{
+            return $this->sendError('You are not authenticated.');
+        }
+
+        $auth = User::find($session_id);
+
+        if (is_null($auth)) {
+            return $this->sendError('You are not authenticated.');
+        }
+
+
         $input = $request->all();
 
         $validator = Validator::make($input, [
@@ -280,6 +321,20 @@ class PegawaiAPIController extends APIBaseController
      */
     public function destroy($id)
     {
+
+        if (Auth::check()) {
+            $session_id = Auth::user()->id;
+        }else{
+            return $this->sendError('You are not authenticated.');
+        }
+
+        $auth = User::find($session_id);
+
+        if (is_null($auth)) {
+            return $this->sendError('You are not authenticated.');
+        }
+
+
         $user = User::find($id);
 
         if (is_null($user)) {
