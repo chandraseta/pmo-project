@@ -83,7 +83,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'nip' => 'required|string|min:18|max:18|unique:pegawai'
+            'nip' => 'required|string|min:18|max:18|unique:pegawai',
         ]);
     }
 

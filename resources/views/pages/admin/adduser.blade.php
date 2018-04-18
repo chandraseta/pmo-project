@@ -89,7 +89,8 @@
                                 <label for="checkbox-pegawai" class="col-md-4 col-form-label text-md-right">{{ __('Pegawai') }}</label>
                                 <div class="col-md-6">
                                     <div class="pretty p-default p-round p-smooth">
-                                        <input id="checkbox-pegawai" type="checkbox" name="isPegawai" checked>
+                                        <input name="isPegawai" type="hidden" value="on">
+                                        <input id="checkbox-pegawai" type="checkbox" name="dummyIsPegawai" disabled="disabled" checked>
                                         <div class="state p-primary">
                                             <label></label>
                                         </div>
