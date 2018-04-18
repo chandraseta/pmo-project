@@ -21,6 +21,8 @@ class DataKompetensiAPITest extends TestCase
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
+        factory(User::class, 10)->create();
+        factory(Pegawai::class, 8)->create();
     }
 
     /**
@@ -44,9 +46,7 @@ class DataKompetensiAPITest extends TestCase
        $method = 'POST';
        $uri = $this->baseUri;
        $data = factory(Kompetensi::class)->make();
-       var_dump($data);
        unset($data->id_pegawai);
-       var_dump($data);
 
        $response = $this->actingAs($this->user)
            ->json($method, $uri, $data)
@@ -54,7 +54,6 @@ class DataKompetensiAPITest extends TestCase
 
        $randomUser = User::inRandomOrder()->first();
        $data->nip = $randomUser->nip;
-       var_dump($data);
 
        $response = $this->actingAs($this->user)
            ->json($method, $uri, $data)
