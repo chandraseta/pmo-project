@@ -17,7 +17,7 @@
   },
   {
     "label": "Unit Kerja",
-    "field": "unit",
+    "field": "unit_kerja",
     "immutable": true
   },
   {
@@ -32,7 +32,7 @@
   },
   {
     "label": "Jabatan",
-    "field": "jabatan",
+    "field": "posisi",
     "immutable": true
   },
   {
