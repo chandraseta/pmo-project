@@ -91,27 +91,34 @@ class CreateDenormalizedPegawaiTable extends Migration
         DB::unprepared('
             CREATE PROCEDURE proc_data_kepegawaian_denormalize (IN in_id_pegawai int(10))
             BEGIN
+                DECLARE v_id_unit_kerja INT DEFAULT 1;
+                DECLARE v_id_posisi INT DEFAULT 1;
+
                 DECLARE v_unit_kerja VARCHAR(191);
                 DECLARE v_posisi VARCHAR(191);
                 DECLARE v_tahun_masuk VARCHAR(191);
 
-                WITH latest_data_kepegawaian AS (
-                    SELECT * 
-                    FROM data_kepegawaian 
-                    WHERE data_kepegawaian.id_pegawai = in_id_pegawai 
-                    ORDER BY CASE 
-                        WHEN tahun_keluar IS NULL 
-                            THEN 1 
-                            ELSE 0 
-                        END DESC, 
-                        tahun_masuk DESC 
-                    LIMIT 1
-                ) 
-                SELECT tahun_masuk, nama_unit_kerja, nama_posisi 
-                INTO v_tahun_masuk, v_unit_kerja, v_posisi 
-                FROM latest_data_kepegawaian 
-                    NATURAL JOIN unit_kerja 
-                    NATURAL JOIN posisi;
+                SELECT id_unit_kerja, id_posisi, tahun_masuk 
+                INTO v_id_unit_kerja, v_id_posisi, v_tahun_masuk 
+                FROM data_kepegawaian 
+                WHERE data_kepegawaian.id_pegawai = in_id_pegawai 
+                ORDER BY CASE 
+                    WHEN tahun_keluar IS NULL 
+                        THEN 1 
+                        ELSE 0 
+                    END DESC, 
+                    tahun_masuk DESC 
+                LIMIT 1;
+
+                SELECT nama_unit_kerja 
+                INTO v_unit_kerja 
+                FROM unit_kerja 
+                WHERE unit_kerja.id_unit_kerja = v_id_unit_kerja;
+
+                SELECT nama_posisi 
+                INTO v_posisi 
+                FROM posisi 
+                WHERE posisi.id_posisi = v_id_posisi;
 
                 UPDATE denormalized_pegawai 
                 SET denormalized_pegawai.unit_kerja = v_unit_kerja, 
@@ -245,6 +252,6 @@ class CreateDenormalizedPegawaiTable extends Migration
         DB::unprepared('DROP TRIGGER `tr_pegawai_denomarlize_update`');
         DB::unprepared('DROP TRIGGER `tr_pegawai_denomarlize_insert`');
         
-        // Schema::dropIfExists('denormalized_pegawai');
+        Schema::dropIfExists('denormalized_pegawai');
     }
 }
