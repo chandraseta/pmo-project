@@ -29,6 +29,8 @@ Route::get('kompetensi/export', 'DataKompetensiController@export');
 
 Route::resource('kompetensi', 'DataKompetensiController');
 
+Route::get('kinerja/export', 'DataKinerjaController@export');
+
 Route::resource('kinerja', 'DataKinerjaController');
 
 Route::resource('pegawai-denormalized', 'DataPegawaiController');

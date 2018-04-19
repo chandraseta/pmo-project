@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Pegawai;
-use App\PMO;
 use App\Admin;
-use Illuminate\Http\Request;
+use App\DenormalizedPegawai;
 use App\Http\Controllers\APIBaseController;
 use App\Kompetensi;
-use Validator;
-use Illuminate\Support\Facades\DB;
-use App\DenormalizedPegawai;
-use Excel;
+use App\Pegawai;
+use App\PMO;
+use App\User;
 use Carbon\Carbon;
+use Excel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Validator;
 
 class DataKompetensiController extends APIBaseController
 {
