@@ -295,7 +295,7 @@ class DataKompetensiController extends APIBaseController
             $excel->sheet('sheet1', function ($sheet) use ($kompetensi_array) {
                 $sheet->fromArray($kompetensi_array, null, 'A3', false, false);
             });
-        })->setDescription('Data kompetensi pegawai UPT PMO ITB pada ' . $timestamp)->setFilename('kompetensi_' . $timestamp)->download('xlsx');
+        })->setFilename('kompetensi_' . $timestamp)->download('xlsx');
     }
 
     private function authenticate($role)
