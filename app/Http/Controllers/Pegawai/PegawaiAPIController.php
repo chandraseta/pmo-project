@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 
@@ -329,44 +330,23 @@ class PegawaiAPIController extends APIBaseController
 
         $pegawai_array = [];
 
-        // Row headers
-        $pegawai_array[] = [
-            'NIP',
-            'Nama Lengkap',
-            'Unit Kerja',
-            'Jabatan',
-            'Tahun Menjabat',
-            'Pendidikan',
-            'No. Telp.',
-            'Tanggal Lahir'
-        ];
-
         foreach ($pegawai_rows as $pegawai_row) {
             $pegawai_array[] = get_object_vars($pegawai_row);
         }
 
         $timestamp = Carbon::now()->toDateTimeString();
         $filename = 'pegawai_' . $timestamp;
-        Excel::create($filename, function ($excel) use ($pegawai_array, $timestamp) {
-            $excel->setTitle('Data Pegawai ' . $timestamp)
-                ->setCreator('UPT PMO ITB')
-                ->setCompany('UPT PMO ITB')
-                ->setDescription('Data pegawai UPT PMO ITB pada ' . $timestamp);
+
+        $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+        $path = $storagePath . 'templates/pegawai_template_export.xlsx';
+
+        Excel::load($path, function ($excel) use ($pegawai_array, $timestamp) {
+            $excel->setTitle('Data Pegawai ' . $timestamp);
 
             $excel->sheet('sheet1', function ($sheet) use ($pegawai_array) {
-                $sheet->fromArray($pegawai_array, null, 'A1', false, false);
-
-                $sheet->row(1, function ($row) {
-                    $row->setFontWeight('bold')
-                        ->setBorder(array(
-                            'bottom' => array(
-                                'style' => 'solid'
-                            )
-                        ));
-                });
-                $sheet->freezeFirstRow();
+                $sheet->fromArray($pegawai_array, null, 'A2', false, false);
             });
-        })->download('xlsx');
+        })->setFilename('pegawai_' . $timestamp)->download('xlsx');
     }
 
     private function authenticate($role)
