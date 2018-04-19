@@ -21,8 +21,7 @@
                         <div class="col-md-3 p-2">
                             <button type="button"
                                     class="btn btn-primary float-md-right m-1"
-                                    data-toggle="modal"
-                                    data-target="#downloadModal">
+                                    @click="downloadData">
                                 Download Data
                             </button>
                             <button type="button"
@@ -104,33 +103,15 @@
                         <br>
                         <form>
                             <div class="form-group container">
-                                <label for="uploadFile">Upload data menggunakan file excel: </label>
-                                <input type="file" class="form-control-file" id="uploadFile">
+                                <label for="upload-file">Upload data menggunakan file excel: </label>
+                                <input type="file" class="form-control-file" id="upload-file">
                                 <small class="text-muted">Harap gunakan file Excel dengan format yang telah disediakan di atas.</small>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="downloadModalLabel">Download {{ title }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="uploadFile">Upload</button>
                     </div>
                 </div>
             </div>
@@ -171,7 +152,7 @@
         computed: {
             isFormValid: function () {
                 let validity;
-                let isInvalid = this.isFormInvalid
+                let isInvalid = this.isFormInvalid;
                 for (let field in isInvalid) {
                     validity |= isInvalid[field];
                 }
@@ -206,10 +187,13 @@
                 console.log(payload);
 
                 let url;
+                let getData;
                 if (this.currentTab === 'dataKompetensi') {
                     url = '/api/kompetensi/' + payload.id_kompetensi;
+                    getData = this.getKompetensi;
                 } else if (this.currentTab === 'dataKinerja') {
                     url = '/api/kinerja/' + payload.id_kinerja;
+                    getData = this.getKinerja;
                 }
 
                 let data = payload;
@@ -222,6 +206,7 @@
                     .then(response => {
                         console.log(response.data);
                         alert(response.data.message);
+                        getData();
                     })
                     .catch(e => {
                         this.errors.push(e);
@@ -293,7 +278,40 @@
             },
             downloadTemplate: function() {
                 let url = '/api/templates/template.xlsx';
+                switch (this.currentTab) {
+                    case 'dataKompetensi': url = '/api/templates/kompetensi_template.xlsx'; break;
+                    case 'dataKinerja': url = '/api/templates/kinerja_template.xlsx'; break;
+                }
                 window.open(url);
+            },
+            downloadData: function () {
+                let url;
+                switch (this.currentTab) {
+                    case 'dataPegawai': url = '/api/pegawai/export'; break;
+                    case 'dataKompetensi': url = '/api/kompetensi/export'; break;
+                    case 'dataKinerja': url = '/api/kinerja/export'; break;
+                }
+                window.open(url);
+            },
+            uploadFile: function () {
+                let url;
+                switch (this.currentTab) {
+                    case 'dataKompetensi': url = '/api/kompetensi/import'; break;
+                    case 'dataKinerja': url = '/api/kinerja/import'; break;
+                }
+
+                let excelFile = document.getElementById('upload-file').files[0];
+                let formData = new FormData;
+                formData.append('excel', excelFile);
+
+                axios.post(url, formData)
+                    .then(response => {
+                        console.log("Import successful");
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                        console.log(e.response.message);
+                    })
             },
             setAlert: function (type, message) {
                 this.statusAlert.display = true;

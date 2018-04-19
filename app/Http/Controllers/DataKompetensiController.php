@@ -77,6 +77,7 @@ class DataKompetensiController extends APIBaseController
 
         $data = new Kompetensi;
         $data = $this->updateDataKompetensi($data, $request->all());
+        $data = $this->computeDataAverage($data);
         $data->pegawai()->associate($pegawai);
         $data->save();
 
@@ -144,6 +145,7 @@ class DataKompetensiController extends APIBaseController
         }
 
         $data = $this->updateDataKompetensi($data, $input);
+        $data = $this->computeDataAverage($data);
         $data->save();
 
         return $this->sendResponse($data, 'Data kompetensi berhasil disimpan.');
@@ -226,6 +228,71 @@ class DataKompetensiController extends APIBaseController
         $newData->manajerial_kekuatan_pengawasan = $newDataInput['manajerial_kekuatan_pengawasan'];
 
         return $newData;
+    }
+
+    private function computeDataAverage(Kompetensi $input) {
+        $data = collect($input->toArray());
+
+        $aspects = collect([
+            'kognitif',
+            'interaksional',
+            'emosional',
+            'sikap_kerja',
+            'manajerial']);
+
+        $aspectAverages = $aspects->map(function ($item, $key) use ($data, $input) {
+            $aspectItems = $data->filter(function ($value, $key) use ($item) {
+                return str_contains($key, $item.'_');
+            });
+            $input[$item] = $aspectItems->avg();
+            return $aspectItems->avg();
+        });
+
+        $aspectAverages = $aspects->combine($aspectAverages);
+        $input->profil_potensi_keberhasilan = (
+            2 * $aspectAverages['kognitif'] +
+            2 * $aspectAverages['emosional'] +
+            1 * $aspectAverages['sikap_kerja'])/5;
+
+        $input->profil_potensi_pengembangan_diri = (
+            2 * $aspectAverages['kognitif'] +
+            2 * $aspectAverages['sikap_kerja'] +
+            1 * $aspectAverages['interaksional'])/5;
+
+        $input->profil_loyalitas_terhadap_tugas = (
+            2 * $aspectAverages['emosional'] +
+            2 * $aspectAverages['sikap_kerja'] +
+            1 * $aspectAverages['kognitif'])/5;
+
+        $input->profil_efektivitas_manajerial = (
+            2 * $aspectAverages['emosional'] +
+            2 * $aspectAverages['manajerial'] +
+            1 * $aspectAverages['kognitif'])/5;
+
+        $data = collect($input->toArray());
+        $nilaiPrediksi = $data->filter(function ($value, $key) {
+            return str_contains($key, 'profil_');
+        })->avg();
+        $input->profil = $nilaiPrediksi;
+        $input->indeks = $this->getIndeks($nilaiPrediksi);
+
+        return $input;
+    }
+
+    private function getIndeks($nilaiPrediksi) {
+        if ($nilaiPrediksi >= 5) {
+            return 'A';
+        } elseif ($nilaiPrediksi >= 3) {
+            return 'B';
+        } elseif ($nilaiPrediksi >= 2.75) {
+            return 'C';
+        } elseif ($nilaiPrediksi >= 2.5) {
+            return 'D';
+        } elseif ($nilaiPrediksi >= 1) {
+            return 'E';
+        } else {
+            return 'ADA YANG SALAH';
+        }
     }
 
     public function export()
@@ -348,7 +415,7 @@ class DataKompetensiController extends APIBaseController
                             $model->save();
                         }
                         return response('Data inserted', 200);
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                         return response('Failed in inserting data. Check data correctness', 400);
                     }
                 } else {
@@ -390,7 +457,15 @@ class DataKompetensiController extends APIBaseController
                     $auth = Pegawai::find($session_id);
                 }
                 break;
+
             case 5:
+                $auth = PMO::find($session_id);
+                if (is_null($auth)) {
+                    $auth = Admin::find($session_id);
+                }
+                break;
+
+            case 6:
                 $auth = User::find($session_id);
                 break;
         }

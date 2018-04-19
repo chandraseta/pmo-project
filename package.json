@@ -22,6 +22,6 @@
     "dependencies": {
         "open-iconic": "^1.1.1",
         "pretty-checkbox": "^3.0.3",
-        "vue-good-table": "^2.4.0"
+        "vue-good-table": "^2.4.1"
     }
 }
