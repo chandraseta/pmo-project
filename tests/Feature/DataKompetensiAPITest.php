@@ -2,17 +2,21 @@
 
 namespace Tests\Feature;
 
+use App\Exceptions\Handler;
 use App\Kinerja;
 use App\Kompetensi;
 use App\Pegawai;
+use App\PMO;
 use App\User;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DataKompetensiAPITest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     private $user;
     private $baseUri = 'api/kompetensi';
@@ -20,48 +24,91 @@ class DataKompetensiAPITest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
-        factory(User::class, 10)->create();
-        factory(Pegawai::class, 8)->create();
+        $pmo = factory(PMO::class)->create();
+        $this->user = User::find($pmo->id_user);
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testItFetchesDataKompetensi()
     {
+        $data = Kompetensi::all();
         $response = $this->actingAs($this->user)
             ->get($this->baseUri)
             ->assertStatus(200)
             ->assertJson([
-                'success' => true
+                'success' => true,
+                'data' => $data->toArray()
             ]);
 
     }
 
-   public function testItStoresDataKompetensiToDatabase()
-   {
+    public function testItFetchesParticularDataKompetensi()
+    {
+        $randomData = Kompetensi::inRandomOrder()->first();
+        $existingId = $randomData->id_kompetensi;
+        $uri = $this->baseUri.'/'.$existingId;
+        $response = $this->actingAs($this->user)
+            ->get($uri)
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => $randomData->toArray()
+            ]);
+
+        $nonExistingId = Kompetensi::all()->max('id_kompetensi') + 1;
+        $uri = $this->baseUri.'/'.$nonExistingId;
+        $response = $this->actingAs($this->user)
+            ->get($uri)
+            ->assertStatus(404);
+    }
+
+    public function testItStoresDataKompetensiToDatabase()
+    {
        $method = 'POST';
        $uri = $this->baseUri;
        $data = factory(Kompetensi::class)->make();
        unset($data->id_pegawai);
 
+       $payload = $data;
        $response = $this->actingAs($this->user)
-           ->json($method, $uri, $data)
+           ->json($method, $uri, $payload->toArray())
            ->assertStatus(404);
 
-       $randomUser = User::inRandomOrder()->first();
+       $randomUser = Pegawai::inRandomOrder()->first();
        $data->nip = $randomUser->nip;
 
+       $payload = $data->toArray();
+       unset($data->nip);
        $response = $this->actingAs($this->user)
-           ->json($method, $uri, $data)
+           ->json($method, $uri, $payload)
            ->assertStatus(200)
            ->assertJson([
-               'data' => $data
+               'data' => $data->toArray()
            ]);
 
-       $this->assertDatabaseHas('kompetensi', $data);
-   }
+       $this->assertDatabaseHas('kompetensi', $data->toArray());
+    }
+
+    public function testItUpdatesDataKompetensi() {
+        $data = Kompetensi::inRandomOrder()->first();
+        $newData = factory(Kompetensi::class)->make();
+        $newData->id_kompetensi = $data->id_kompetensi;
+        $newData->id_pegawai = $data->id_pegawai;
+
+        $method = 'PUT';
+        $uri = $this->baseUri.'/'.$newData->id_kompetensi;
+        $payload = $newData->toArray();
+        $response = $this->actingAs($this->user)
+            ->json($method, $uri, $payload)
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => $payload
+            ]);
+
+        $nonExistId = Kompetensi::all()->max('id_kompetensi') + 1;
+        $newData->id_kompetensi = $nonExistId;
+        $uri = $this->baseUri.'/'.$newData->id_kompetensi;
+        $payload = $newData->toArray();
+        $response = $this->actingAs($this->user)
+            ->json($method, $uri, $payload)
+            ->assertStatus(404);
+    }
 }
