@@ -97,8 +97,8 @@
                                     <b v-if="!isEditProfile" v-text="pegawai.unitKerja"></b>
 
                                     <div v-if="isEditProfile" id="edit-unit-kerja" class="form-group">
-                                        <input v-model="pegawai.unitKerja" type="text" class="form-control">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <input v-model="pegawai.unitKerja" type="text" class="form-control" disabled>
+                                        <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
                                     </div>
                                 </div>
                             </div>
@@ -113,8 +113,8 @@
                                     <b v-if="!isEditProfile" v-text="pegawai.posisi"></b>
 
                                     <div v-if="isEditProfile" id="edit-posisi" class="form-group">
-                                        <input v-model="pegawai.posisi" type="text" class="form-control">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <input v-model="pegawai.posisi" type="text" class="form-control" disabled>
+                                        <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
                                     </div>
                                 </div>
                             </div>
@@ -139,14 +139,14 @@
 
                             <div class="row">
                                 <div class="col-sm-3 text-right">
-                                    Tahun Masuk
+                                    Tahun Mulai Jabatan Saat Ini
                                 </div>
                                 <div class="col-sm-9">
                                     <b v-if="!isEditProfile" v-text="pegawai.tahunMasuk"></b>
 
                                     <div v-if="isEditProfile" id="edit-tahun-masuk" class="form-group">
-                                        <input v-model="pegawai.tahunMasuk" type="text" class="form-control">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <input v-model="pegawai.tahunMasuk" type="text" class="form-control" disabled>
+                                        <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
                                     </div>
                                 </div>
                             </div>
@@ -184,8 +184,8 @@
                             <tr>
                                 <th scope="col">Unit Kerja</th>
                                 <th scope="col">Posisi</th>
-                                <th scope="col">Tahun Masuk</th>
-                                <th scope="col">Tahun Keluar</th>
+                                <th scope="col">Tahun Mulai</th>
+                                <th scope="col">Tahun Selesai</th>
                             </tr>
                             </thead>
                             <tbody v-for="dk in dataKepegawaian">
@@ -331,7 +331,7 @@
                 isEditProfile: false,
                 isEditKepegawaian: false,
                 isEditRiwayat: false,
-                cachedpegawai: null,
+                cachedPegawai: null,
                 cachedDataKepegawaian: null,
                 cachedRiwayatPendidikan: null,
                 cachedRiwayatPekerjaan: null,
@@ -359,40 +359,74 @@
                 .then((response) => {
                     //get data from api response
                     var responsePegawai = response.data["data"];
+
+                    this.dataKepegawaian = responsePegawai["kepegawaian"];
+                    this.riwayatPendidikan = responsePegawai["pendidikan"];
+
+                    this.riwayatPekerjaan = responsePegawai["pekerjaan"];
+                    this.updateDataKepegawaian();
+
                     this.pegawai.nama = responsePegawai["user"]["name"];
                     this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
                     this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
                     this.pegawai.email = responsePegawai["user"]["email"];
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
-                    this.dataKepegawaian = responsePegawai["kepegawaian"];
-                    this.riwayatPendidikan = responsePegawai["pendidikan"];
-                    this.riwayatPekerjaan = responsePegawai["pekerjaan"];
+                    this.pegawai.kompetensi = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
+
+
+                    //chacing
+                    this.cachedPegawai = Object.assign({}, this.pegawai);
+                    this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
 
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
 
-            this.cachedpegawai = Object.assign({}, this.pegawai);
+            
+            
         },
+
         methods: {
-            disableEditToggle() {
-                this.disableEdit = !this.disableEdit;
+            updateDataKepegawaian() {
+                //sort
+                this.dataKepegawaian.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+
+                //update relevan
+                var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length-1];
+                this.pegawai.unitKerja = lastDataPegawai["id_unit_kerja"];
+                this.pegawai.posisi = lastDataPegawai["id_posisi"];
+                this.pegawai.tahunMasuk = lastDataPegawai["tahun_masuk"];
+            },
+
+            disableEditButton() {
+                this.disableEdit = true;
+            },
+
+            enableEditButton() {
+                this.disableEdit = false;
             },
 
             editProfilPegawai() {
                 this.isEditProfile = true;
-                this.disableEditToggle();
+                this.disableEditButton();
             },
 
             editDataKepegawaian() {
                 this.isEditKepegawaian = true;
-                this.disableEditToggle();
+                this.disableEditButton();
             },
 
             editRiwayatPegawai() {
                 this.isEditRiwayat = true;
-                this.disableEditToggle();
+                this.disableEditButton();
             },
 
             addDataKepegawaian() {
@@ -413,7 +447,7 @@
             },
 
             saveProfilPegawai() {
-                this.disableEditToggle();
+                this.enableEditButton();
                 this.cachedUser = Object.assign({}, this.user);
                 this.isEditProfile = false;
 
@@ -433,32 +467,34 @@
             },
 
             saveDataKepegawaian() {
-                this.disableEditToggle();
+                this.enableEditButton();
                 this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
                 this.isEditKepegawaian = false;
+
+                this.updateDataKepegawaian();
             },
 
             saveRiwayatPegawai() {
-                this.disableEditToggle();
+                this.enableEditButton();
                 this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
                 this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
                 this.isEditRiwayat = false;
             },
 
             cancelProfilPegawai() {
-                this.disableEditToggle();
+                this.enableEditButton();
                 this.user = Object.assign({}, this.cachedUser);
                 this.isEditProfile = false;
             },
 
             cancelDataKepegawaian() {
-                this.disableEditToggle();
+                this.enableEditButton();
                 this.dataKepegawaian = Object.assign({}, this.cachedDataKepegawaian);
                 this.isEditKepegawaian = false;
             },
 
             cancelRiwayatPegawai() {
-                this.disableEditToggle();
+                this.enableEditButton();
                 this.riwayatPendidikan = Object.assign({}, this.cachedRiwayatPendidikan);
                 this.riwayatPekerjaan = Object.assign({}, this.cachedRiwayatPekerjaan);
                 this.isEditRiwayat = false;
