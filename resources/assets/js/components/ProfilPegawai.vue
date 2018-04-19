@@ -164,7 +164,7 @@
 
         <br>
 
-        <div class="card" >
+        <div class="card" id="data-kepegawaian">
             <div class="card-header">
                 Data Kepegawaian<button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">Edit</button>
             </div>
@@ -184,21 +184,48 @@
                             <tr>
                                 <th scope="col">Unit Kerja</th>
                                 <th scope="col">Posisi</th>
-                                <!-- <th scope="col">Kompetensi</th> -->
                                 <th scope="col">Tahun Masuk</th>
                                 <th scope="col">Tahun Keluar</th>
                             </tr>
                             </thead>
                             <tbody v-for="dk in dataKepegawaian">
-                            <tr>
+                            <tr v-if="!isEditKepegawaian">
                                 <td v-text="dk.id_unit_kerja" ></td>
                                 <td v-text="dk.id_posisi" ></td>
-                                <!-- <td v-text="dk.kompetensi" ></td> -->
                                 <td v-text="dk.tahun_masuk" ></td>
                                 <td v-text="dk.tahun_keluar" ></td>
-                                <td v-if="isEditKepegawaian"><button class="btn btn-danger" type="button">Hapus</button></td>
+                            </tr>
+                            <tr v-if="isEditKepegawaian">
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.id_unit_kerja" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.id_posisi" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.tahun_masuk" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.tahun_keluar" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button v-bind:id="dataKepegawaian.indexOf(dk)" v-on:click="delDataKepegawaian($event)" class="btn btn-danger" type="button">Hapus</button>
+                                </td>
                             </tr>
                             </tbody>
+                            <button v-if="isEditKepegawaian" class="btn btn-primary float-sm-left" v-on:click="addDataKepegawaian">Tambah</button>
                         </table>
 
                     </div>
@@ -206,6 +233,10 @@
                     <br>
 
                 </div>
+            </div>
+            <div class="card-footer text-muted" v-if="isEditKepegawaian">
+                <a href="#data-kepegawaian" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveDataKepegawaian">Simpan</a>
+                <a href="#data-kepegawaian" class="btn btn-danger float-sm-right" v-on:click="cancelDataKepegawaian">Batal</a>
             </div>
         </div>
 
@@ -351,21 +382,38 @@
 
             editProfilPegawai() {
                 this.isEditProfile = true;
-                disableEditToggle();
+                this.disableEditToggle();
             },
 
             editDataKepegawaian() {
                 this.isEditKepegawaian = true;
-                disableEditToggle();
+                this.disableEditToggle();
             },
 
             editRiwayatPegawai() {
                 this.isEditRiwayat = true;
-                disableEditToggle();
+                this.disableEditToggle();
+            },
+
+            addDataKepegawaian() {
+                var newData = {
+                    id_data_kepegawaian : "",
+                    id_pegawai : "",
+                    id_unit_kerja : "",
+                    id_posisi : "",
+                    tahun_masuk : "",
+                    tahun_keluar : ""
+                };
+                this.dataKepegawaian.push(newData);
+            },
+
+            delDataKepegawaian(event) {
+                var targetIndex = event.currentTarget.id;
+                this.dataKepegawaian.splice(targetIndex, 1);
             },
 
             saveProfilPegawai() {
-                disableEditToggle();
+                this.disableEditToggle();
                 this.cachedUser = Object.assign({}, this.user);
                 this.isEditProfile = false;
 
@@ -385,32 +433,32 @@
             },
 
             saveDataKepegawaian() {
-                disableEditToggle();
+                this.disableEditToggle();
                 this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
                 this.isEditKepegawaian = false;
             },
 
             saveRiwayatPegawai() {
-                disableEditToggle();
+                this.disableEditToggle();
                 this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
                 this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
                 this.isEditRiwayat = false;
             },
 
             cancelProfilPegawai() {
-                disableEditToggle();
+                this.disableEditToggle();
                 this.user = Object.assign({}, this.cachedUser);
                 this.isEditProfile = false;
             },
 
             cancelDataKepegawaian() {
-                disableEditToggle();
+                this.disableEditToggle();
                 this.dataKepegawaian = Object.assign({}, this.cachedDataKepegawaian);
                 this.isEditKepegawaian = false;
             },
 
             cancelRiwayatPegawai() {
-                disableEditToggle();
+                this.disableEditToggle();
                 this.riwayatPendidikan = Object.assign({}, this.cachedRiwayatPendidikan);
                 this.riwayatPekerjaan = Object.assign({}, this.cachedRiwayatPekerjaan);
                 this.isEditRiwayat = false;
