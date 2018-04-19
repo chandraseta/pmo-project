@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Kinerja;
 use App\Kompetensi;
 use App\Pegawai;
+use App\PMO;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -21,7 +22,8 @@ class DataKinerjaAPITest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
+        $pmo = factory(PMO::class)->create();
+        $this->user = User::find($pmo->id_user);
     }
 
     public function testItFetchesDataKinerja() {

@@ -6,6 +6,7 @@ use App\Exceptions\Handler;
 use App\Kinerja;
 use App\Kompetensi;
 use App\Pegawai;
+use App\PMO;
 use App\User;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -23,7 +24,8 @@ class DataKompetensiAPITest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
+        $pmo = factory(PMO::class)->create();
+        $this->user = User::find($pmo->id_user);
     }
 
     public function testItFetchesDataKompetensi()
