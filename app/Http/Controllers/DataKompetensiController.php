@@ -313,6 +313,9 @@ class DataKompetensiController extends APIBaseController
                     try {
                         // Insert each row
                         foreach ($objs as $obj) {
+                            if (!isset($obj->nip)) {
+                                continue;
+                            }
                             $arr = [
                                 'id_pegawai' => Pegawai::where('nip', $obj->nip)->first()->id_user,
                                 'tujuan' => $obj->tujuan_pemeriksaan,
