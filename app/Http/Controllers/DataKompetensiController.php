@@ -14,6 +14,7 @@ use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class DataKompetensiController extends APIBaseController
@@ -278,79 +279,23 @@ class DataKompetensiController extends APIBaseController
 
         $kompetensi_array = [];
 
-        // Row headers
-        $kompetensi_array[] = [
-            "NIP",
-            "Nama Lengkap",
-            "Unit Kerja",
-            "Jabatan",
-            "Pendidikan",
-            "Tanggal Lahir",
-            "Tujuan Pemeriksaan",
-            "Tanggal Pelaksanaan",
-            "Efisiensi Kecerdasan",
-            "Daya Nalar",
-            "Daya Asosiasi",
-            "Daya Analitis",
-            "Daya Antisipasi",
-            "Kemandirian Berpikir",
-            "Fleksibilitas",
-            "Daya Tangkap",
-            "Rata-rata Kognitif",
-            "Penempatan Diri",
-            "Percaya Diri",
-            "Daya Kooperatif",
-            "Penyesuaian Perasaan",
-            "Rata-rata Interaksional",
-            "Stabilitas Emosi",
-            "Toleransi terhadap Stress",
-            "Pengendalian Diri",
-            "Kemantapan Konsentrasi",
-            "Rata-rata Emosional",
-            "Hasrat Berprestasi",
-            "Daya Tahan",
-            "Keteraturan Kerja",
-            "Pengerahan Energi Kerja",
-            "Rata-rata Sikap Kerja",
-            "Efektivitas Perencanaan",
-            "Pengorganisasian Pelaksanaan",
-            "Intensitas Pengarahan",
-            "Kekuatan Pengawasan",
-            "Rata-rata Manajerial",
-            "Potensi Keberhasilan",
-            "Potensi Pengembangan Diri",
-            "Loyalitas Terhadap Tugas",
-            "Efektivitas Manajerial",
-            "Nilai Prediksi",
-            "Rekomendasi"
-        ];
-
         foreach ($kompetensi_rows as $kompetensi_row) {
             $kompetensi_array[] = get_object_vars($kompetensi_row);
         }
 
         $timestamp = Carbon::now()->toDateTimeString();
         $filename = 'kompetensi_' . $timestamp;
-        Excel::create($filename, function ($excel) use ($kompetensi_array, $timestamp) {
-            $excel->setTitle('Data Kompetensi ' . $timestamp)
-                ->setCreator('UPT PMO ITB')
-                ->setCompany('UPT PMO ITB')
-                ->setDescription('Data kompetensi pegawai UPT PMO ITB pada ' . $timestamp);
+
+        $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+        $path = $storagePath . 'templates/kompetensi_template_export.xlsx';
+
+        Excel::load($path, function ($excel) use ($kompetensi_array, $timestamp) {
+            $excel->setTitle('Data Kompetensi ' . $timestamp);
 
             $excel->sheet('sheet1', function ($sheet) use ($kompetensi_array) {
-                $sheet->fromArray($kompetensi_array, null, 'A1', false, false);
-
-                $sheet->row(1, function ($row) {
-                    $row->setFontWeight('bold')
-                        ->setBorder(array(
-                            'bottom' => array(
-                                'style' => 'solid'
-                            )
-                        ));
-                });
-                $sheet->freezeFirstRow();
+                $sheet->fromArray($kompetensi_array, null, 'A3', false, false);
             });
-        })->download('xlsx');
+        })->setFilename('kompetensi_' . $timestamp)->download('xlsx');
     }
 
     private function authenticate($role)

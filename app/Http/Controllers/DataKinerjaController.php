@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class DataKinerjaController extends APIBaseController
@@ -172,45 +173,22 @@ class DataKinerjaController extends APIBaseController
 
         $kinerja_array = [];
 
-        // Row headers
-        $kinerja_array[] = [
-            "NIP",
-            "Nama Lengkap",
-            "Unit Kerja",
-            "Jabatan",
-            "Pendidikan",
-            "Tanggal Lahir",
-            "Tahun Pemeriksaan",
-            "Semester",
-            "Skor Kinerja",
-            "Catatan"
-        ];
-
         foreach ($kinerja_rows as $kinerja_row) {
             $kinerja_array[] = get_object_vars($kinerja_row);
         }
 
         $timestamp = Carbon::now()->toDateTimeString();
         $filename = 'kinerja_' . $timestamp;
-        Excel::create($filename, function ($excel) use ($kinerja_array, $timestamp) {
-            $excel->setTitle('Data Kinerja ' . $timestamp)
-                ->setCreator('UPT PMO ITB')
-                ->setCompany('UPT PMO ITB')
-                ->setDescription('Data kinerja pegawai UPT PMO ITB pada ' . $timestamp);
+
+        $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+        $path = $storagePath . 'templates/kinerja_template_export.xlsx';
+
+        Excel::load($path, function ($excel) use ($kinerja_array, $timestamp) {
+            $excel->setTitle('Data Kinerja ' . $timestamp);
 
             $excel->sheet('sheet1', function ($sheet) use ($kinerja_array) {
-                $sheet->fromArray($kinerja_array, null, 'A1', false, false);
-
-                $sheet->row(1, function ($row) {
-                    $row->setFontWeight('bold')
-                        ->setBorder(array(
-                            'bottom' => array(
-                                'style' => 'solid'
-                            )
-                        ));
-                });
-                $sheet->freezeFirstRow();
+                $sheet->fromArray($kinerja_array, null, 'A2', false, false);
             });
-        })->download('xlsx');
+        })->setFilename('kinerja_' . $timestamp)->download('xlsx');
     }
 }
