@@ -43,22 +43,20 @@ class DataKompetensiController extends APIBaseController
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-
-        $validator = $this->validateDataKompetensi($input);
+        $validator = $this->validateDataKompetensi($request);
         if ($validator->fails()) {
-            return $this->sendError('Gagal menambahkan data kompetensi.', $validator->errors());
+            return $this->sendError('Gagal menambahkan data kompetensi.', 400);
         }
 
-        $nip = $input['nip'];
+        $nip = $request->input('nip', 'undefined');
         $pegawai = Pegawai::where('nip', '=', $nip)->first();
 
         if (is_null($pegawai)) {
-            return $this->sendError('Pegawai dengan NIP: '.$nip.' tidak ditemukan.');
+            return $this->sendError('Pegawai dengan NIP: '.$nip.' tidak ditemukan.', 404);
         }
 
         $data = new Kompetensi;
-        $data = $this->updateDataKompetensi($data, $input);
+        $data = $this->updateDataKompetensi($data, $request->all());
         $data->pegawai()->associate($pegawai);
         $data->save();
 
@@ -106,7 +104,7 @@ class DataKompetensiController extends APIBaseController
 
         $validator = $this->validateDataKompetensi($input);
         if($validator->fails()){
-            return $this->sendError('Gagal menyimpan data kompetensi.', $validator->errors());
+            return $this->sendError('Gagal menyimpan data kompetensi.', 400);
         }
 
         $data = Kompetensi::find($id);
@@ -131,7 +129,8 @@ class DataKompetensiController extends APIBaseController
         //
     }
 
-    private function validateDataKompetensi($input) {
+    private function validateDataKompetensi(Request $request) {
+        $input = $request->all();
         return Validator::make($input, [
             'tanggal' => 'required',
             'kognitif_efisiensi_kecerdasan' => 'required',
@@ -165,6 +164,7 @@ class DataKompetensiController extends APIBaseController
         $newData = $oldData;
 
         $newData->tanggal = $newDataInput['tanggal'];
+        $newData->tujuan = $newDataInput['tujuan'];
         $newData->kognitif_efisiensi_kecerdasan = $newDataInput['kognitif_efisiensi_kecerdasan'];
         $newData->kognitif_daya_nalar = $newDataInput['kognitif_daya_nalar'];
         $newData->kognitif_daya_asosiasi = $newDataInput['kognitif_daya_asosiasi'];

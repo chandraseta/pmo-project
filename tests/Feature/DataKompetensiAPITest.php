@@ -2,10 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Exceptions\Handler;
 use App\Kinerja;
 use App\Kompetensi;
 use App\Pegawai;
 use App\User;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -52,17 +54,18 @@ class DataKompetensiAPITest extends TestCase
            ->json($method, $uri, $payload->toArray())
            ->assertStatus(404);
 
-       $randomUser = User::inRandomOrder()->first();
+       $randomUser = Pegawai::inRandomOrder()->first();
        $data->nip = $randomUser->nip;
 
-       $payload = $data;
+       $payload = $data->toArray();
+       unset($data->nip);
        $response = $this->actingAs($this->user)
-           ->json($method, $uri, $payload->toArray())
+           ->json($method, $uri, $payload)
            ->assertStatus(200)
            ->assertJson([
-               'data' => $data
+               'data' => $data->toArray()
            ]);
 
-       $this->assertDatabaseHas('kompetensi', $data);
+       $this->assertDatabaseHas('kompetensi', $data->toArray());
    }
 }
