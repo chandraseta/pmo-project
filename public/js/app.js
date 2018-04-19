@@ -50450,7 +50450,7 @@ if (document.getElementById('admin-page')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_clone__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_clone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_clone__);
 /**
- * vue-good-table v2.4.0
+ * vue-good-table v2.4.1
  * (c) 2018-present xaksis <shay@crayonbits.com>
  * https://github.com/xaksis/vue-good-table
  * Released under the MIT License.
@@ -51268,7 +51268,7 @@ var GoodTable = { render: function () {
             var ref = this$1.columns[this$1.sortColumn];
             var sortFn = ref.sortFn;
             if (sortFn && typeof sortFn === 'function') {
-              return sortFn(xvalue, yvalue, this$1.columns[this$1.sortColumn]) * (this$1.sortType === 'desc' ? -1 : 1);
+              return sortFn(xvalue, yvalue, this$1.columns[this$1.sortColumn], x, y) * (this$1.sortType === 'desc' ? -1 : 1);
             }
 
             // built in sort
@@ -66622,7 +66622,7 @@ exports = module.exports = __webpack_require__(23)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66666,7 +66666,6 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -66966,6 +66965,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         downloadTemplate: function downloadTemplate() {
             var url = '/api/templates/template.xlsx';
             window.open(url);
+        },
+        downloadData: function downloadData() {
+            var url = void 0;
+            switch (this.currentTab) {
+                case 'dataPegawai':
+                    url = '/api/pegawai/export';break;
+                case 'dataKompetensi':
+                    url = '/api/kompetensi/export';break;
+                case 'dataKinerja':
+                    url = '/api/kinerja/export';break;
+            }
+            window.open(url);
+            //                axios.get(url)
+            //                    .then(response => {
+            //                        console.log(response.data);
+            //                    })
+            //                    .catch(e => {
+            //                        this.errors.push(e);
+            //                    })
         },
         setAlert: function setAlert(type, message) {
             this.statusAlert.display = true;
@@ -67691,11 +67709,8 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary float-md-right m-1",
-                    attrs: {
-                      type: "button",
-                      "data-toggle": "modal",
-                      "data-target": "#downloadModal"
-                    }
+                    attrs: { type: "button" },
+                    on: { click: _vm.downloadData }
                   },
                   [
                     _vm._v(
@@ -68128,7 +68143,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("small", { staticClass: "text-muted" }, [
           _vm._v(
-            "Harap gunakan file excel dengan format yang telah disediakan di atas."
+            "Harap gunakan file Excel dengan format yang telah disediakan di atas."
           )
         ])
       ])

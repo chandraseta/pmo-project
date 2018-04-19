@@ -21,8 +21,7 @@
                         <div class="col-md-3 p-2">
                             <button type="button"
                                     class="btn btn-primary float-md-right m-1"
-                                    data-toggle="modal"
-                                    data-target="#downloadModal">
+                                    @click="downloadData">
                                 Download Data
                             </button>
                             <button type="button"
@@ -109,25 +108,6 @@
                                 <small class="text-muted">Harap gunakan file Excel dengan format yang telah disediakan di atas.</small>
                             </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="downloadModalLabel">Download {{ title }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
@@ -297,6 +277,15 @@
             },
             downloadTemplate: function() {
                 let url = '/api/templates/template.xlsx';
+                window.open(url);
+            },
+            downloadData: function () {
+                let url;
+                switch (this.currentTab) {
+                    case 'dataPegawai': url = '/api/pegawai/export'; break;
+                    case 'dataKompetensi': url = '/api/kompetensi/export'; break;
+                    case 'dataKinerja': url = '/api/kinerja/export'; break;
+                }
                 window.open(url);
             },
             setAlert: function (type, message) {
