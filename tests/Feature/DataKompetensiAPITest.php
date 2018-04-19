@@ -42,8 +42,27 @@ class DataKompetensiAPITest extends TestCase
 
     }
 
-   public function testItStoresDataKompetensiToDatabase()
-   {
+    public function testItFetchesParticularDataKompetensi()
+    {
+        $randomData = Kompetensi::inRandomOrder()->first();
+        $existingId = $randomData->id_kompetensi;
+        $uri = $this->baseUri.'/'.$existingId;
+        $response = $this->actingAs($this->user)
+            ->get($uri)
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => $randomData->toArray()
+            ]);
+
+        $nonExistingId = Kompetensi::all()->max('id_kompetensi') + 1;
+        $uri = $this->baseUri.'/'.$nonExistingId;
+        $response = $this->actingAs($this->user)
+            ->get($uri)
+            ->assertStatus(404);
+    }
+
+    public function testItStoresDataKompetensiToDatabase()
+    {
        $method = 'POST';
        $uri = $this->baseUri;
        $data = factory(Kompetensi::class)->make();
@@ -67,9 +86,9 @@ class DataKompetensiAPITest extends TestCase
            ]);
 
        $this->assertDatabaseHas('kompetensi', $data->toArray());
-   }
+    }
 
-   public function testItUpdatesDataKompetensi() {
+    public function testItUpdatesDataKompetensi() {
         $data = Kompetensi::inRandomOrder()->first();
         $newData = factory(Kompetensi::class)->make();
         $newData->id_kompetensi = $data->id_kompetensi;
@@ -92,5 +111,5 @@ class DataKompetensiAPITest extends TestCase
         $response = $this->actingAs($this->user)
             ->json($method, $uri, $payload)
             ->assertStatus(404);
-   }
+    }
 }
