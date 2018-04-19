@@ -14,6 +14,7 @@ use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 
@@ -296,6 +297,69 @@ class DataKompetensiController extends APIBaseController
                 $sheet->fromArray($kompetensi_array, null, 'A3', false, false);
             });
         })->setFilename('kompetensi_' . $timestamp)->download('xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        if ($request->hasFile('excel')) {
+            $extension = File::extension($request->excel->getClientOriginalName());
+            if ($extension == "xlsx" || $extension == "xls" || $extension == "csv") {
+                // Load data from Excel file
+                $path = $request->excel->getRealPath();
+                $objs = Excel::load($path, null)->get();
+
+                // Parse data
+                if (!empty($objs) && $objs->count()) {
+                    try {
+                        // Insert each row
+                        foreach ($objs as $obj) {
+                            $arr = [
+                                'id_pegawai' => Pegawai::where('nip', $obj->nip)->first()->id_user,
+                                'tujuan' => $obj->tujuan_pemeriksaan,
+                                'tanggal' => $obj->tanggal_pelaksanaan,
+                                'kognitif_efisiensi_kecerdasan' => $obj->efisiensi_kecerdasan,
+                                'kognitif_daya_nalar' => $obj->daya_nalar,
+                                'kognitif_daya_asosiasi' => $obj->daya_asosiasi,
+                                'kognitif_daya_analitis' => $obj->daya_analitis,
+                                'kognitif_daya_antisipasi' => $obj->daya_antisipasi,
+                                'kognitif_kemandirian_berpikir' => $obj->kemandirian_berpikir,
+                                'kognitif_fleksibilitas' => $obj->fleksibilitas,
+                                'kognitif_daya_tangkap' => $obj->daya_tangkap,
+                                'interaksional_penempatan_diri' => $obj->penempatan_diri,
+                                'interaksional_percaya_diri' => $obj->percaya_diri,
+                                'interaksional_daya_kooperatif' => $obj->daya_kooperatif,
+                                'interaksional_penyesuaian_perasaan' => $obj->penyesuaian_perasaan,
+                                'emosional_stabilitas_emosi' => $obj->stabilitas_emosi,
+                                'emosional_toleransi_stres' => $obj->toleransi_terhadap_stress,
+                                'emosional_pengendalian_diri' => $obj->pengendalian_diri,
+                                'emosional_kemantapan_konsentrasi' => $obj->kemantapan_konsentrasi,
+                                'sikap_kerja_hasrat_berprestasi' => $obj->hasrat_berprestasi,
+                                'sikap_kerja_daya_tahan' => $obj->daya_tahan,
+                                'sikap_kerja_keteraturan_kerja' => $obj->keteraturan_kerja,
+                                'sikap_kerja_pengerahan_energi_kerja' => $obj->pengerahan_energi_kerja,
+                                'manajerial_efektivitas_perencanaan' => $obj->efektivitas_perencanaan,
+                                'manajerial_pengorganisasian_pelaksanaan' => $obj->pengorganisasian_pelaksanaan,
+                                'manajerial_intensitas_pengarahan' => $obj->intensitas_pengarahan,
+                                'manajerial_kekuatan_pengawasan' => $obj->kekuatan_pengawasan,
+                            ];
+
+                            $model = new Kompetensi;
+                            $model->fill($arr);
+                            $model->save();
+                        }
+                        return response('Data inserted', 200);
+                    } catch (Exception $e) {
+                        return response('Failed in inserting data. Check data correctness', 400);
+                    }
+                } else {
+                    return response('Empty file', 400);
+                }
+            } else {
+                return response('Wrong file format', 400);
+            }
+        } else {
+            return response('File not found', 400);
+        }
     }
 
     private function authenticate($role)
