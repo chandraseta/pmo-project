@@ -1,7 +1,8 @@
 [
   {
     "label": "",
-    "field": "viewButton"
+    "field": "viewButton",
+    "href": "/pages/profile"
   },
   {
     "label": "NIP",
