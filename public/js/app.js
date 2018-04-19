@@ -50382,7 +50382,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\DataTable.vue"
+Component.options.__file = "resources/assets/js/components/DataTable.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -50391,9 +50391,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7f7ae246", Component.options)
+    hotAPI.createRecord("data-v-66f0941d", Component.options)
   } else {
-    hotAPI.reload("data-v-7f7ae246", Component.options)
+    hotAPI.reload("data-v-66f0941d", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -50483,7 +50483,7 @@ if (document.getElementById('admin-page')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_clone__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_clone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_clone__);
 /**
- * vue-good-table v2.0.5
+ * vue-good-table v2.4.1
  * (c) 2018-present xaksis <shay@crayonbits.com>
  * https://github.com/xaksis/vue-good-table
  * Released under the MIT License.
@@ -50702,6 +50702,7 @@ var VgtGlobalSearch = { render: function () {
   methods: {
     updateValue: function updateValue(value) {
       this.$emit('input', value);
+      this.$emit('on-keyup', value);
     },
     entered: function entered(value) {
       this.$emit('on-enter', value);
@@ -50710,7 +50711,7 @@ var VgtGlobalSearch = { render: function () {
 };
 
 var VgtFilterRow = { render: function () {
-    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _vm.hasFilterRow ? _c('tr', [_vm.lineNumbers ? _c('th') : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, index) {
+    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _vm.hasFilterRow ? _c('tr', [_vm.lineNumbers ? _c('th') : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th') : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, index) {
       return !column.hidden ? _c('th', { key: index, staticClass: "filter-th" }, [_vm.isFilterable(column) ? _c('div', [!_vm.isDropdown(column) ? _c('input', { staticClass: "vgt-input", attrs: { "type": "text", "placeholder": _vm.getPlaceholder(column) }, domProps: { "value": _vm.columnFilters[column.field] }, on: { "input": function ($event) {
             _vm.updateFilters(column, $event.target.value);
           } } }) : _vm._e(), _vm._v(" "), _vm.isDropdownArray(column) ? _c('select', { staticClass: "vgt-select", domProps: { "value": _vm.columnFilters[column.field] }, on: { "input": function ($event) {
@@ -50725,7 +50726,7 @@ var VgtFilterRow = { render: function () {
     })], 2) : _vm._e();
   }, staticRenderFns: [], _scopeId: 'data-v-2949d74f',
   name: 'VgtFilterRow',
-  props: ['lineNumbers', 'columns', 'typedColumns', 'globalSearchEnabled'],
+  props: ['lineNumbers', 'columns', 'typedColumns', 'globalSearchEnabled', 'selectable'],
   watch: {
     columns: {
       handler: function handler() {
@@ -50919,25 +50920,59 @@ __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(Object.keys(coreDataTypes
 });
 
 var GoodTable = { render: function () {
-    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', { staticClass: "vgt-wrap", class: { 'rtl': _vm.rtl, 'nocturnal': _vm.theme === 'nocturnal' } }, [_vm.paginate && _vm.paginateOnTop ? _c('vue-good-pagination', { ref: "paginationTop", attrs: { "perPage": _vm.perPage, "rtl": _vm.rtl, "total": _vm.totalRows || _vm.totalRowCount, "nextText": _vm.nextText, "prevText": _vm.prevText, "rowsPerPageText": _vm.rowsPerPageText, "customRowsPerPageDropdown": _vm.customRowsPerPageDropdown, "paginateDropdownAllowAll": _vm.paginateDropdownAllowAll, "ofText": _vm.ofText, "allText": _vm.allText }, on: { "page-changed": _vm.pageChanged, "per-page-changed": _vm.perPageChanged } }) : _vm._e(), _vm._v(" "), _c('vgt-global-search', { attrs: { "search-enabled": _vm.searchEnabled && _vm.externalSearchQuery == null, "global-search-placeholder": _vm.searchPlaceholder }, on: { "on-enter": _vm.searchTable }, model: { value: _vm.globalSearchTerm, callback: function ($$v) {
+    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', { staticClass: "vgt-wrap", class: { 'rtl': _vm.rtl, 'nocturnal': _vm.theme === 'nocturnal' } }, [_vm.paginate && _vm.paginateOnTop ? _c('vue-good-pagination', { ref: "paginationTop", attrs: { "perPage": _vm.perPage, "rtl": _vm.rtl, "total": _vm.totalRows || _vm.totalRowCount, "nextText": _vm.nextText, "prevText": _vm.prevText, "rowsPerPageText": _vm.rowsPerPageText, "customRowsPerPageDropdown": _vm.customRowsPerPageDropdown, "paginateDropdownAllowAll": _vm.paginateDropdownAllowAll, "ofText": _vm.ofText, "allText": _vm.allText }, on: { "page-changed": _vm.pageChanged, "per-page-changed": _vm.perPageChanged } }) : _vm._e(), _vm._v(" "), _c('vgt-global-search', { attrs: { "search-enabled": _vm.searchEnabled && _vm.externalSearchQuery == null, "global-search-placeholder": _vm.searchPlaceholder }, on: { "on-keyup": _vm.searchTable, "on-enter": _vm.searchTable }, model: { value: _vm.globalSearchTerm, callback: function ($$v) {
           _vm.globalSearchTerm = $$v;
-        }, expression: "globalSearchTerm" } }, [_c('template', { slot: "internal-table-actions" }, [_vm._t("table-actions")], 2)], 2), _vm._v(" "), _c('div', { class: { 'vgt-responsive': _vm.responsive } }, [_c('table', { ref: "table", class: _vm.tableStyleClasses }, [_c('thead', [_c('tr', [_vm.lineNumbers ? _c('th', { staticClass: "line-numbers" }) : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, index$$1) {
+        }, expression: "globalSearchTerm" } }, [_c('template', { slot: "internal-table-actions" }, [_vm._t("table-actions")], 2)], 2), _vm._v(" "), _vm.selectedRowCount ? _c('div', { staticClass: "vgt-selection-info-row clearfix", class: _vm.selectionInfoClass }, [_vm._v(" " + _vm._s(_vm.selectionInfo) + " "), _c('a', { attrs: { "href": "" }, on: { "click": function ($event) {
+          $event.preventDefault();_vm.unselectAll();_vm.unselectAllInternal();
+        } } }, [_vm._v(" " + _vm._s(_vm.clearSelectionText) + " ")]), _vm._v(" "), _c('div', { staticClass: "vgt-selection-info-row__actions vgt-pull-right" }, [_vm._t("selected-row-actions")], 2)]) : _vm._e(), _vm._v(" "), _c('div', { class: { 'vgt-responsive': _vm.responsive } }, [_c('table', { ref: "table", class: _vm.tableStyleClasses }, [_c('thead', [_c('tr', [_vm.lineNumbers ? _c('th', { staticClass: "line-numbers" }) : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th', { staticClass: "vgt-checkbox-col" }, [_c('input', { directives: [{ name: "model", rawName: "v-model", value: _vm.allSelected, expression: "allSelected" }], attrs: { "type": "checkbox" }, domProps: { "checked": Array.isArray(_vm.allSelected) ? _vm._i(_vm.allSelected, null) > -1 : _vm.allSelected }, on: { "change": [function ($event) {
+          var $$a = _vm.allSelected,
+              $$el = $event.target,
+              $$c = $$el.checked ? true : false;if (Array.isArray($$a)) {
+            var $$v = null,
+                $$i = _vm._i($$a, $$v);if ($$el.checked) {
+              $$i < 0 && (_vm.allSelected = $$a.concat([$$v]));
+            } else {
+              $$i > -1 && (_vm.allSelected = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+            }
+          } else {
+            _vm.allSelected = $$c;
+          }
+        }, _vm.toggleSelectAll] } })]) : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, index$$1) {
       return !column.hidden ? _c('th', { key: index$$1, class: _vm.getHeaderClasses(column, index$$1), style: { width: column.width ? column.width : 'auto' }, on: { "click": function ($event) {
             _vm.sort(index$$1);
           } } }, [_vm._t("table-column", [_c('span', [_vm._v(_vm._s(column.label))])], { column: column })], 2) : _vm._e();
-    })], 2), _vm._v(" "), _c("vgt-filter-row", { tag: "tr", attrs: { "global-search-enabled": _vm.searchEnabled, "line-numbers": _vm.lineNumbers, "columns": _vm.columns, "typed-columns": _vm.typedColumns }, on: { "filter-changed": _vm.filterRows } })]), _vm._v(" "), _vm._l(_vm.paginated, function (headerRow, index$$1) {
-      return _c('tbody', { key: index$$1 }, [_vm.groupHeaderOnTop ? _c('tr', [headerRow.mode === 'span' ? _c('th', { staticClass: "vgt-left-align vgt-row-header", attrs: { "colspan": _vm.columns.length } }, [_vm._v(" " + _vm._s(headerRow.label) + " ")]) : _vm._l(_vm.columns, function (column, i) {
-        return _c('th', { key: i, staticClass: "vgt-row-header", class: _vm.getClasses(i, 'td') }, [_vm._v(" " + _vm._s(_vm.collectFormatted(headerRow, column, true)) + " ")]);
+    })], 2), _vm._v(" "), _c("vgt-filter-row", { tag: "tr", attrs: { "global-search-enabled": _vm.searchEnabled, "line-numbers": _vm.lineNumbers, "selectable": _vm.selectable, "columns": _vm.columns, "typed-columns": _vm.typedColumns }, on: { "filter-changed": _vm.filterRows } })]), _vm._v(" "), _vm._l(_vm.paginated, function (headerRow, index$$1) {
+      return _c('tbody', { key: index$$1 }, [_vm.groupHeaderOnTop ? _c('tr', [headerRow.mode === 'span' ? _c('th', { staticClass: "vgt-left-align vgt-row-header", attrs: { "colspan": _vm.fullColspan } }, [_vm._v(" " + _vm._s(headerRow.label) + " ")]) : _vm._e(), _vm._v(" "), headerRow.mode !== 'span' && _vm.lineNumbers ? _c('th', { staticClass: "vgt-row-header" }) : _vm._e(), _vm._v(" "), headerRow.mode !== 'span' && _vm.selectable ? _c('th', { staticClass: "vgt-row-header" }) : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, i) {
+        return headerRow.mode !== 'span' ? _c('th', { key: i, staticClass: "vgt-row-header", class: _vm.getClasses(i, 'td') }, [_vm._v(" " + _vm._s(_vm.collectFormatted(headerRow, column, true)) + " ")]) : _vm._e();
       })], 2) : _vm._e(), _vm._v(" "), _vm._l(headerRow.children, function (row, index$$1) {
-        return _c('tr', { key: index$$1, class: _vm.getRowStyleClass(row), on: { "click": function ($event) {
+        return _c('tr', { key: row.originalIndex, class: _vm.getRowStyleClass(row), on: { "mouseenter": function ($event) {
+              _vm.onMouseenter(row, index$$1);
+            }, "mouseleave": function ($event) {
+              _vm.onMouseleave(row, index$$1);
+            }, "click": function ($event) {
               _vm.click(row, index$$1);
-            } } }, [_vm.lineNumbers ? _c('th', { staticClass: "line-numbers" }, [_vm._v(" " + _vm._s(_vm.getCurrentIndex(index$$1)) + " ")]) : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, i) {
-          return !column.hidden && column.field ? _c('td', { key: i, class: _vm.getClasses(i, 'td') }, [_vm._t("table-row", [!column.html ? _c('span', [_vm._v(" " + _vm._s(_vm.collectFormatted(row, column)) + " ")]) : _vm._e(), _vm._v(" "), column.html ? _c('span', { domProps: { "innerHTML": _vm._s(_vm.collect(row, column.field)) } }) : _vm._e()], { row: row, column: column, formattedRow: _vm.formattedRow(row), index: index$$1 })], 2) : _vm._e();
+            } } }, [_vm.lineNumbers ? _c('th', { staticClass: "line-numbers" }, [_vm._v(" " + _vm._s(_vm.getCurrentIndex(index$$1)) + " ")]) : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th', { staticClass: "vgt-checkbox-col" }, [_c('input', { directives: [{ name: "model", rawName: "v-model", value: row.vgtSelected, expression: "row.vgtSelected" }], attrs: { "type": "checkbox" }, domProps: { "checked": Array.isArray(row.vgtSelected) ? _vm._i(row.vgtSelected, null) > -1 : row.vgtSelected }, on: { "change": function ($event) {
+              var $$a = row.vgtSelected,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false;if (Array.isArray($$a)) {
+                var $$v = null,
+                    $$i = _vm._i($$a, $$v);if ($$el.checked) {
+                  $$i < 0 && _vm.$set(row, "vgtSelected", $$a.concat([$$v]));
+                } else {
+                  $$i > -1 && _vm.$set(row, "vgtSelected", $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+                }
+              } else {
+                _vm.$set(row, "vgtSelected", $$c);
+              }
+            } } })]) : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, i) {
+          return !column.hidden && column.field ? _c('td', { key: i, class: _vm.getClasses(i, 'td'), on: { "click": function ($event) {
+                _vm.onCellClicked(row, column, index$$1);
+              } } }, [_vm._t("table-row", [!column.html ? _c('span', [_vm._v(" " + _vm._s(_vm.collectFormatted(row, column)) + " ")]) : _vm._e(), _vm._v(" "), column.html ? _c('span', { domProps: { "innerHTML": _vm._s(_vm.collect(row, column.field)) } }) : _vm._e()], { row: row, column: column, formattedRow: _vm.formattedRow(row), index: index$$1 })], 2) : _vm._e();
         })], 2);
-      }), _vm._v(" "), _vm.groupHeaderOnBottom ? _c('tr', [headerRow.mode === 'span' ? _c('th', { staticClass: "vgt-left-align vgt-row-header", attrs: { "colspan": _vm.columns.length } }, [_vm._v(" " + _vm._s(headerRow.label) + " ")]) : _vm._l(_vm.columns, function (column, i) {
-        return _c('th', { key: i, staticClass: "vgt-row-header", class: _vm.getClasses(i, 'td') }, [_vm._v(" " + _vm._s(_vm.collectFormatted(headerRow, column, true)) + " ")]);
+      }), _vm._v(" "), _vm.groupHeaderOnBottom ? _c('tr', [headerRow.mode === 'span' ? _c('th', { staticClass: "vgt-left-align vgt-row-header", attrs: { "colspan": _vm.columns.length } }, [_vm._v(" " + _vm._s(headerRow.label) + " ")]) : _vm._e(), _vm._v(" "), headerRow.mode !== 'span' && _vm.lineNumbers ? _c('th', { staticClass: "vgt-row-header" }) : _vm._e(), _vm._v(" "), headerRow.mode !== 'span' && _vm.selectable ? _c('th', { staticClass: "vgt-row-header" }) : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, i) {
+        return headerRow.mode !== 'span' ? _c('th', { key: i, staticClass: "vgt-row-header", class: _vm.getClasses(i, 'td') }, [_vm._v(" " + _vm._s(_vm.collectFormatted(headerRow, column, true)) + " ")]) : _vm._e();
       })], 2) : _vm._e()], 2);
-    }), _vm._v(" "), !_vm.paginated.length ? _c('tbody', [_c('tr', [_c('td', { attrs: { "colspan": _vm.columns.length } }, [_vm._t("emptystate", [_c('div', { staticClass: "vgt-center-align vgt-text-disabled" }, [_vm._v(" No data for table ")])])], 2)])]) : _vm._e()], 2)]), _vm._v(" "), _vm.paginate && !_vm.paginateOnTop ? _c('vue-good-pagination', { ref: "paginationBottom", attrs: { "perPage": _vm.perPage, "rtl": _vm.rtl, "total": _vm.totalRows || _vm.totalRowCount, "nextText": _vm.nextText, "prevText": _vm.prevText, "rowsPerPageText": _vm.rowsPerPageText, "customRowsPerPageDropdown": _vm.customRowsPerPageDropdown, "paginateDropdownAllowAll": _vm.paginateDropdownAllowAll, "ofText": _vm.ofText, "allText": _vm.allText }, on: { "page-changed": _vm.pageChanged, "per-page-changed": _vm.perPageChanged } }) : _vm._e()], 1);
+    }), _vm._v(" "), !_vm.paginated.length ? _c('tbody', [_c('tr', [_c('td', { attrs: { "colspan": _vm.fullColspan } }, [_vm._t("emptystate", [_c('div', { staticClass: "vgt-center-align vgt-text-disabled" }, [_vm._v(" No data for table ")])])], 2)])]) : _vm._e()], 2)]), _vm._v(" "), _vm.paginate && _vm.paginateOnBottom ? _c('vue-good-pagination', { ref: "paginationBottom", attrs: { "perPage": _vm.perPage, "rtl": _vm.rtl, "total": _vm.totalRows || _vm.totalRowCount, "nextText": _vm.nextText, "prevText": _vm.prevText, "rowsPerPageText": _vm.rowsPerPageText, "customRowsPerPageDropdown": _vm.customRowsPerPageDropdown, "paginateDropdownAllowAll": _vm.paginateDropdownAllowAll, "ofText": _vm.ofText, "allText": _vm.allText }, on: { "page-changed": _vm.pageChanged, "per-page-changed": _vm.perPageChanged } }) : _vm._e()], 1);
   }, staticRenderFns: [],
   name: 'vue-good-table',
   props: {
@@ -50947,7 +50982,6 @@ var GoodTable = { render: function () {
     styleClass: { default: 'vgt-table bordered' },
     columns: {},
     rows: {},
-    onClick: {},
     lineNumbers: { default: false },
     responsive: { default: true },
     rtl: { default: false },
@@ -50961,9 +50995,20 @@ var GoodTable = { render: function () {
       }
     },
 
+    selectOptions: {
+      default: function default$2$$1() {
+        return {
+          enabled: false,
+          selectionInfoClass: '',
+          selectionText: 'rows selected',
+          clearSelectionText: 'clear'
+        };
+      }
+    },
+
     // sort
     sortOptions: {
-      default: function default$2$$1() {
+      default: function default$3$$1() {
         return {
           enabled: true,
           initialSortBy: {}
@@ -50973,7 +51018,7 @@ var GoodTable = { render: function () {
 
     // pagination
     paginationOptions: {
-      default: function default$3$$1() {
+      default: function default$4$$1() {
         return {
           enabled: false,
           perPage: 10,
@@ -50985,7 +51030,7 @@ var GoodTable = { render: function () {
     },
 
     searchOptions: {
-      default: function default$4$$1() {
+      default: function default$5$$1() {
         return {
           enabled: false,
           trigger: null,
@@ -51005,6 +51050,12 @@ var GoodTable = { render: function () {
     ofText: 'of',
     allText: 'All',
 
+    // internal select options
+    selectable: false,
+    selectionInfoClass: '',
+    selectionText: 'rows selected',
+    clearSelectionText: 'clear',
+
     // internal sort options
     sortable: true,
     defaultSortBy: null,
@@ -51020,6 +51071,7 @@ var GoodTable = { render: function () {
     perPage: null,
     paginate: false,
     paginateOnTop: false,
+    paginateOnBottom: true,
     customRowsPerPageDropdown: [],
     paginateDropdownAllowAll: true,
 
@@ -51032,7 +51084,10 @@ var GoodTable = { render: function () {
     columnFilters: {},
     forceSearch: false,
     sortChanged: false,
-    dataTypes: dataTypes || {}
+    dataTypes: dataTypes || {},
+
+    // to keep track of select-all
+    allSelected: false
   }); },
 
   watch: {
@@ -51042,6 +51097,15 @@ var GoodTable = { render: function () {
       },
       deep: true
     },
+
+    selectOptions: {
+      handler: function handler() {
+        this.initializeSelect();
+      },
+      deep: true,
+      immediate: true
+    },
+
     paginationOptions: {
       handler: function handler() {
         this.initializePagination();
@@ -51068,6 +51132,32 @@ var GoodTable = { render: function () {
   },
 
   computed: {
+    selectionInfo: function selectionInfo() {
+      return ((this.selectedRowCount) + " " + (this.selectionText));
+    },
+
+    selectedRowCount: function selectedRowCount() {
+      return this.selectedRows.length;
+    },
+
+    selectedRows: function selectedRows() {
+      var selectedRows = [];
+      __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(this.processedRows, function (headerRow) {
+        __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(headerRow.children, function (row) {
+          if (row.vgtSelected) {
+            selectedRows.push(row);
+          }
+        });
+      });
+      return selectedRows;
+    },
+
+    fullColspan: function fullColspan() {
+      var fullColspan = this.columns.length;
+      if (this.lineNumbers) { fullColspan++; }
+      if (this.selectable) { fullColspan++; }
+      return fullColspan;
+    },
     groupHeaderOnTop: function groupHeaderOnTop() {
       if (this.groupOptions && this.groupOptions.enabled && this.groupOptions.headerPosition && this.groupOptions.headerPosition === 'bottom') {
         return false;
@@ -51124,10 +51214,6 @@ var GoodTable = { render: function () {
     processedRows: function processedRows() {
       var this$1 = this;
 
-      // every time we process rows, we want to set current page
-      // to 1
-      this.changePage(1);
-
       // we only process rows when mode is local
       var computedRows = this.filteredRows;
       if (this.mode === 'remote') {
@@ -51137,7 +51223,7 @@ var GoodTable = { render: function () {
       // take care of the global filter here also
       if (this.globalSearchAllowed) {
         // here also we need to de-construct and then
-        // re-construct the rows, lets see.
+        // re-construct the rows.
         var allRows = [];
         __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(this.filteredRows, function (headerRow) {
           allRows.push.apply(allRows, headerRow.children);
@@ -51162,7 +51248,6 @@ var GoodTable = { render: function () {
                 if (typeof tableValue !== 'undefined' && tableValue !== null) {
                   // table value
                   tableValue = __WEBPACK_IMPORTED_MODULE_4_diacriticless___default()(String(tableValue).toLowerCase());
-
                   // search term
                   var searchTerm = __WEBPACK_IMPORTED_MODULE_4_diacriticless___default()(this$1.searchTerm.toLowerCase());
 
@@ -51186,7 +51271,8 @@ var GoodTable = { render: function () {
         // here we need to reconstruct the nested structure
         // of rows
         computedRows = [];
-        __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(this.filteredRows, function (headerRow, i) {
+        __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(this.filteredRows, function (headerRow) {
+          var i = headerRow.vgt_header_id;
           var children = __WEBPACK_IMPORTED_MODULE_3_lodash_filter___default()(filteredRows, ['vgt_id', i]);
           if (children.length) {
             var newHeaderRow = __WEBPACK_IMPORTED_MODULE_2_lodash_clonedeep___default()(headerRow);
@@ -51215,7 +51301,7 @@ var GoodTable = { render: function () {
             var ref = this$1.columns[this$1.sortColumn];
             var sortFn = ref.sortFn;
             if (sortFn && typeof sortFn === 'function') {
-              return sortFn(xvalue, yvalue, this$1.columns[this$1.sortColumn]) * (this$1.sortType === 'desc' ? -1 : 1);
+              return sortFn(xvalue, yvalue, this$1.columns[this$1.sortColumn], x, y) * (this$1.sortType === 'desc' ? -1 : 1);
             }
 
             // built in sort
@@ -51238,16 +51324,16 @@ var GoodTable = { render: function () {
     paginated: function paginated() {
       if (!this.processedRows.length) { return []; }
 
+      if (this.mode === 'remote') {
+        return this.processedRows;
+      }
+
       // for every group, extract the child rows
       // to cater to paging
       var paginatedRows = [];
       __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(this.processedRows, function (childRows) {
         paginatedRows.push.apply(paginatedRows, childRows.children);
       });
-
-      if (this.mode === 'remote') {
-        return paginatedRows;
-      }
 
       if (this.paginate) {
         var pageStart = (this.currentPage - 1) * this.currentPerPage;
@@ -51272,7 +51358,8 @@ var GoodTable = { render: function () {
       }
       // reconstruct paginated rows here
       var reconstructedRows = [];
-      __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(this.processedRows, function (headerRow, i) {
+      __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(this.processedRows, function (headerRow) {
+        var i = headerRow.vgt_header_id;
         var children = __WEBPACK_IMPORTED_MODULE_3_lodash_filter___default()(paginatedRows, ['vgt_id', i]);
         if (children.length) {
           var newHeaderRow = __WEBPACK_IMPORTED_MODULE_2_lodash_clonedeep___default()(headerRow);
@@ -51280,7 +51367,6 @@ var GoodTable = { render: function () {
           reconstructedRows.push(newHeaderRow);
         }
       });
-
       return reconstructedRows;
     },
 
@@ -51316,10 +51402,63 @@ var GoodTable = { render: function () {
         column.typeDef = this$1.dataTypes[column.type] || defaultType;
       }
       return columns;
+    },
+
+    hasRowClickListener: function hasRowClickListener() {
+      return this.$listeners && this.$listeners['on-row-click'];
     }
   },
 
   methods: {
+    emitSelectNone: function emitSelectNone() {
+      this.$emit('on-select-all', {
+        selected: false,
+        selectedRows: []
+      });
+    },
+
+    unselectAllInternal: function unselectAllInternal() {
+      var this$1 = this;
+
+      this.emitSelectNone();
+      __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(this.originalRows, function (headerRow, i) {
+        __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(headerRow.children, function (row, j) {
+          this$1.$set(row, 'vgtSelected', false);
+        });
+      });
+    },
+
+    unselectAll: function unselectAll() {
+      if (this.selectable && this.allSelected) {
+        this.allSelected = false;
+        // this.unselectAllInternal();
+      }
+    },
+
+    toggleSelectAll: function toggleSelectAll() {
+      var this$1 = this;
+
+      if (!this.allSelected) {
+        this.unselectAllInternal();
+        return;
+      }
+      __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(this.paginated, function (headerRow) {
+        __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(headerRow.children, function (row) {
+          this$1.$set(row, 'vgtSelected', true);
+        });
+      });
+      var selectedRows = [];
+      if (this.groupOptions.enabled) {
+        selectedRows = __WEBPACK_IMPORTED_MODULE_2_lodash_clonedeep___default()(this.paginated);
+      } else {
+        selectedRows = __WEBPACK_IMPORTED_MODULE_2_lodash_clonedeep___default()(this.paginated[0].children);
+      }
+      this.$emit('on-select-all', {
+        selected: this.allSelected,
+        selectedRows: selectedRows
+      });
+    },
+
     changePage: function changePage(value) {
       if (this.paginationOptions.enabled) {
         var paginationWidget = this.$refs.paginationBottom;
@@ -51344,6 +51483,8 @@ var GoodTable = { render: function () {
     },
 
     pageChanged: function pageChanged(pagination) {
+      // every time we change page we have to unselect all
+      this.unselectAll();
       this.currentPage = pagination.currentPage;
       var pageChangedEvent = this.pageChangedEvent();
       this.$emit('on-page-change', pageChangedEvent);
@@ -51370,6 +51511,10 @@ var GoodTable = { render: function () {
         columnIndex: this.sortColumn
       });
 
+      this.unselectAll();
+      // every time we change sort we need to reset to page 1
+      this.changePage(1);
+
       // if the mode is remote, we don't need to do anything
       // after this.
       if (this.mode === 'remote') { return; }
@@ -51377,13 +51522,50 @@ var GoodTable = { render: function () {
     },
 
     click: function click(row, index$$1) {
-      this.$emit('on-row-click', { row: row, index: index$$1 });
-      if (this.onClick) {
-        this.onClick(row, index$$1);
+      var selected = false;
+      if (this.selectable) {
+        selected = !row.vgtSelected;
+        this.$set(row, 'vgtSelected', selected);
+        if (!selected) {
+          // if we're unselecting a row, we need to unselect
+          // selectall
+          this.unselectAll();
+        }
       }
+      this.$emit('on-row-click', {
+        row: row,
+        pageIndex: index$$1,
+        selected: selected
+      });
+    },
+
+    onCellClicked: function onCellClicked(row, column, rowIndex) {
+      this.$emit('on-cell-click', {
+        row: row,
+        column: column,
+        rowIndex: rowIndex
+      });
+    },
+
+    onMouseenter: function onMouseenter(row, index$$1) {
+      this.$emit('on-row-mouseenter', {
+        row: row,
+        pageIndex: index$$1
+      });
+    },
+
+    onMouseleave: function onMouseleave(row, index$$1) {
+      this.$emit('on-row-mouseleave', {
+        row: row,
+        pageIndex: index$$1
+      });
     },
 
     searchTable: function searchTable() {
+      this.unselectAll();
+      this.unselectAllInternal();
+      // every time we searchTable
+      this.changePage(1);
       if (this.searchTrigger === 'enter') {
         // we reset the filteredRows here because
         // we want to search across everything.
@@ -51499,6 +51681,10 @@ var GoodTable = { render: function () {
       // do we have a filter to care about?
       // if not we don't need to do anything
       if (this.columnFilters && Object.keys(this.columnFilters).length) {
+        // every time we filter rows, we need to set current page
+        // to 1
+        this.changePage(1);
+        this.unselectAll();
         // if mode is remote, we don't do any filtering here.
         // we need to emit an event and that's that.
         // but this only needs to be invoked if filter is changing
@@ -51540,7 +51726,7 @@ var GoodTable = { render: function () {
 
     getRowStyleClass: function getRowStyleClass(row) {
       var classes = '';
-      if (this.onClick) { classes += 'clickable'; }
+      if (this.hasRowClickListener) { classes += 'clickable'; }
       var rowStyleClasses;
       if (typeof this.rowStyleClass === 'function') {
         rowStyleClasses = this.rowStyleClass(row);
@@ -51555,6 +51741,7 @@ var GoodTable = { render: function () {
 
     handleGrouped: function handleGrouped(originalRows) {
       __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(originalRows, function (headerRow, i) {
+        headerRow.vgt_header_id = i;
         __WEBPACK_IMPORTED_MODULE_0_lodash_foreach___default()(headerRow.children, function (childRow) {
           childRow.vgt_id = i;
         });
@@ -51599,6 +51786,10 @@ var GoodTable = { render: function () {
 
       if (position === 'top') {
         this.paginateOnTop = true; // default is false
+        this.paginateOnBottom = false; // default is true
+      } else if (position === 'both') {
+        this.paginateOnTop = true;
+        this.paginateOnBottom = true;
       }
 
       if (Array.isArray(perPageDropdown) && perPageDropdown.length) {
@@ -51676,6 +51867,30 @@ var GoodTable = { render: function () {
 
       if (typeof initialSortBy === 'object') {
         this.defaultSortBy = initialSortBy;
+      }
+    },
+
+    initializeSelect: function initializeSelect() {
+      var ref = this.selectOptions;
+      var enabled = ref.enabled;
+      var selectionInfoClass = ref.selectionInfoClass;
+      var selectionText = ref.selectionText;
+      var clearSelectionText = ref.clearSelectionText;
+
+      if (typeof enabled === 'boolean') {
+        this.selectable = enabled;
+      }
+
+      if (typeof selectionInfoClass === 'string') {
+        this.selectionInfoClass = selectionInfoClass;
+      }
+
+      if (typeof selectionText === 'string') {
+        this.selectionText = selectionText;
+      }
+
+      if (typeof clearSelectionText === 'string') {
+        this.clearSelectionText = clearSelectionText;
       }
     }
   },
@@ -65895,7 +66110,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "/* Utility styles\n************************************************/\n.vgt-right-align {\n  text-align: right; }\n\n.vgt-left-align {\n  text-align: left; }\n\n.vgt-center-align {\n  text-align: center; }\n\n.vgt-pull-left {\n  float: left !important; }\n\n.vgt-pull-right {\n  float: right !important; }\n\n.vgt-clearfix::after {\n  display: block;\n  content: \"\";\n  clear: both; }\n\n.vgt-responsive {\n  width: 100%;\n  overflow-x: auto; }\n\n.vgt-text-disabled {\n  color: #909399; }\n\ntable.vgt-table {\n  border-collapse: collapse;\n  background-color: transparent;\n  width: 100%;\n  max-width: 100%;\n  table-layout: auto;\n  border: 1px solid #DCDFE6; }\n  table.vgt-table td {\n    padding: .75rem .75rem .75rem .75rem;\n    vertical-align: top;\n    border-bottom: 1px solid #DCDFE6;\n    color: #606266; }\n  table.vgt-table tr.clickable {\n    cursor: pointer; }\n    table.vgt-table tr.clickable:hover {\n      background-color: #F1F5FD; }\n\n.vgt-table th:not(.line-numbers) {\n  padding: .75rem 1.5rem .75rem .75rem;\n  vertical-align: top; }\n  .vgt-table th:not(.line-numbers).sorting:hover:after {\n    display: inline-block;\n    border-bottom-color: #73b8ff; }\n\n.vgt-table th.line-numbers {\n  color: #606266;\n  border-right: 1px solid #DCDFE6;\n  padding-left: 5px;\n  padding-right: 5px;\n  word-wrap: break-word;\n  max-width: 45px;\n  text-align: center;\n  background: linear-gradient(#F4F5F8, #F1F3F6); }\n\n.vgt-table th.filter-th {\n  padding: .75rem .75rem .75rem .75rem; }\n\n.vgt-table th.vgt-row-header {\n  border-bottom: 2px solid #DCDFE6;\n  border-top: 2px solid #DCDFE6;\n  background-color: #fafafb; }\n\n.vgt-table thead th {\n  color: #606266;\n  vertical-align: bottom;\n  border-bottom: 1px solid #DCDFE6;\n  padding-right: 1.5rem;\n  background: linear-gradient(#F4F5F8, #F1F3F6); }\n  .vgt-table thead th.sorting-asc, .vgt-table thead th.sorting-desc {\n    color: #3b3c3f;\n    position: relative; }\n    .vgt-table thead th.sorting-asc:after, .vgt-table thead th.sorting-desc:after {\n      content: '';\n      display: block;\n      position: absolute;\n      height: 0px;\n      width: 0px;\n      right: 6px;\n      top: 50%;\n      margin-top: -3px;\n      border-left: 6px solid transparent;\n      border-right: 6px solid transparent;\n      border-bottom: 6px solid #409eff; }\n  .vgt-table thead th.sorting-desc:after {\n    border-top: 6px solid #409eff;\n    border-left: 6px solid transparent;\n    border-right: 6px solid transparent;\n    border-bottom: none; }\n\n.vgt-input, .vgt-select {\n  width: 100%;\n  height: 32px;\n  line-height: 1;\n  display: block;\n  font-size: 14px;\n  font-weight: regular;\n  padding: 6px 12px;\n  color: #606266;\n  border-radius: 4px;\n  box-sizing: border-box;\n  background-image: none;\n  background-color: #fff;\n  border: 1px solid #DCDFE6;\n  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1); }\n  .vgt-input::placeholder, .vgt-select::placeholder {\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #606266;\n    opacity: 0.3;\n    /* Firefox */ }\n  .vgt-input:focus, .vgt-select:focus {\n    outline: none;\n    border-color: #409eff; }\n\n.vgt-table.bordered td, .vgt-table.bordered th {\n  border: 1px solid #DCDFE6; }\n\n.vgt-table.bordered th.vgt-row-header {\n  border-bottom: 3px solid #DCDFE6; }\n\n.vgt-table.striped tbody tr:nth-of-type(odd) {\n  background-color: rgba(51, 68, 109, 0.03); }\n\n.vgt-wrap.rtl {\n  direction: rtl; }\n  .vgt-wrap.rtl .vgt-table td, .vgt-wrap.rtl .vgt-table th:not(.line-numbers) {\n    padding: .75rem .75rem .75rem 1.5rem; }\n  .vgt-wrap.rtl .vgt-table thead th, .vgt-wrap.rtl .vgt-table.condensed thead th {\n    padding-left: 1.5rem;\n    padding-right: .75rem; }\n  .vgt-wrap.rtl .vgt-table th.sorting:after,\n  .vgt-wrap.rtl .vgt-table th.sorting-asc:after {\n    margin-right: 5px;\n    margin-left: 0px; }\n\n.vgt-table.condensed td, .vgt-table.condensed th.vgt-row-header {\n  padding: .4rem .4rem .4rem .4rem; }\n\n.vgt-global-search {\n  padding: 5px 0px;\n  display: flex;\n  flex-wrap: no-wrap;\n  align-items: stretch;\n  border: 1px solid #DCDFE6;\n  border-bottom: 0px;\n  background: linear-gradient(#F4F5F8, #F1F3F6); }\n\n.vgt-global-search__input {\n  position: relative;\n  padding-left: 40px;\n  flex-grow: 1; }\n  .vgt-global-search__input .input__icon {\n    position: absolute;\n    left: 0px;\n    max-width: 32px; }\n    .vgt-global-search__input .input__icon .magnifying-glass {\n      margin-top: 3px;\n      margin-left: 8px;\n      display: block;\n      width: 16px;\n      height: 16px;\n      border: 2px solid #d6dae2;\n      position: relative;\n      border-radius: 50%; }\n      .vgt-global-search__input .input__icon .magnifying-glass:before {\n        content: \"\";\n        display: block;\n        position: absolute;\n        right: -7px;\n        bottom: -5px;\n        background: #d6dae2;\n        width: 8px;\n        height: 4px;\n        border-radius: 2px;\n        transform: rotate(45deg);\n        -webkit-transform: rotate(45deg);\n        -moz-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n        -o-transform: rotate(45deg); }\n\n.vgt-global-search__actions {\n  margin-left: 10px; }\n\n.vgt-wrap__footer {\n  color: #606266;\n  padding: 1rem;\n  border: 1px solid #DCDFE6;\n  background: linear-gradient(#F4F5F8, #F1F3F6); }\n  .vgt-wrap__footer .footer__row-count__label, .vgt-wrap__footer .footer__row-count__select {\n    display: inline-block;\n    vertical-align: middle; }\n  .vgt-wrap__footer .footer__row-count__label {\n    font-size: 14px;\n    color: #909399; }\n  .vgt-wrap__footer .footer__row-count__select {\n    background-color: transparent;\n    width: auto;\n    padding: 0;\n    border: 0;\n    border-radius: 0;\n    height: auto;\n    font-size: 14px;\n    margin-left: 8px;\n    color: #606266;\n    font-weight: bold; }\n    .vgt-wrap__footer .footer__row-count__select:focus {\n      outline: none;\n      border-color: #409eff; }\n  .vgt-wrap__footer .footer__navigation {\n    font-size: 14px; }\n    .vgt-wrap__footer .footer__navigation__page-btn, .vgt-wrap__footer .footer__navigation__info {\n      display: inline-block;\n      vertical-align: middle; }\n    .vgt-wrap__footer .footer__navigation__page-btn {\n      text-decoration: none;\n      color: #606266;\n      font-weight: bold;\n      white-space: nowrap; }\n      .vgt-wrap__footer .footer__navigation__page-btn:focus {\n        outline: none;\n        border: 0; }\n      .vgt-wrap__footer .footer__navigation__page-btn.disabled, .vgt-wrap__footer .footer__navigation__page-btn.disabled:hover {\n        opacity: 0.5;\n        cursor: not-allowed; }\n        .vgt-wrap__footer .footer__navigation__page-btn.disabled .chevron.left:after, .vgt-wrap__footer .footer__navigation__page-btn.disabled:hover .chevron.left:after {\n          border-right-color: #606266; }\n        .vgt-wrap__footer .footer__navigation__page-btn.disabled .chevron.right:after, .vgt-wrap__footer .footer__navigation__page-btn.disabled:hover .chevron.right:after {\n          border-left-color: #606266; }\n      .vgt-wrap__footer .footer__navigation__page-btn .chevron {\n        width: 24px;\n        height: 24px;\n        border-radius: 15%;\n        position: relative;\n        margin: 0px 8px; }\n        .vgt-wrap__footer .footer__navigation__page-btn .chevron:after {\n          content: '';\n          position: absolute;\n          display: block;\n          left: 50%;\n          top: 50%;\n          margin-top: -6px;\n          border-top: 6px solid transparent;\n          border-bottom: 6px solid transparent; }\n        .vgt-wrap__footer .footer__navigation__page-btn .chevron.left::after {\n          border-right: 6px solid #409eff;\n          margin-left: -3px; }\n        .vgt-wrap__footer .footer__navigation__page-btn .chevron.right::after {\n          border-left: 6px solid #409eff;\n          margin-left: -3px; }\n    .vgt-wrap__footer .footer__navigation__info {\n      color: #909399;\n      margin: 0px 16px; }\n\n@media only screen and (max-width: 750px) {\n  /* on small screens hide the info */\n  .vgt-wrap__footer .footer__navigation__info {\n    display: none; }\n  .vgt-wrap__footer .footer__navigation__page-btn {\n    margin-left: 16px; } }\n\n.vgt-table.nocturnal {\n  border: 1px solid #435169;\n  background-color: #324057; }\n  .vgt-table.nocturnal tr.clickable:hover {\n    background-color: #445168; }\n  .vgt-table.nocturnal td {\n    border-bottom: 1px solid #435169;\n    color: #C7CED8; }\n  .vgt-table.nocturnal th.line-numbers {\n    color: #C7CED8;\n    border-right: 1px solid #435169;\n    background: linear-gradient(#2C394F, #2C394F); }\n  .vgt-table.nocturnal thead th {\n    color: #C7CED8;\n    border-bottom: 1px solid #435169;\n    background: linear-gradient(#2C394F, #2C394F); }\n    .vgt-table.nocturnal thead th.sorting-asc, .vgt-table.nocturnal thead th.sorting-desc {\n      color: #9aa7b9; }\n  .vgt-table.nocturnal.bordered td, .vgt-table.nocturnal.bordered th {\n    border: 1px solid #435169; }\n  .vgt-table.nocturnal .vgt-input, .vgt-table.nocturnal .vgt-select {\n    color: #C7CED8;\n    background-color: #232d3f;\n    border: 1px solid #435169; }\n    .vgt-table.nocturnal .vgt-input::placeholder, .vgt-table.nocturnal .vgt-select::placeholder {\n      /* Chrome, Firefox, Opera, Safari 10.1+ */\n      color: #C7CED8;\n      opacity: 0.3;\n      /* Firefox */ }\n\n.vgt-wrap.nocturnal .vgt-wrap__footer {\n  color: #C7CED8;\n  border: 1px solid #435169;\n  background: linear-gradient(#2C394F, #2C394F); }\n  .vgt-wrap.nocturnal .vgt-wrap__footer .footer__row-count__label {\n    color: #8290A7; }\n  .vgt-wrap.nocturnal .vgt-wrap__footer .footer__row-count__select {\n    color: #C7CED8; }\n    .vgt-wrap.nocturnal .vgt-wrap__footer .footer__row-count__select:focus {\n      border-color: #409eff; }\n  .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__page-btn {\n    color: #C7CED8; }\n    .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__page-btn.disabled .chevron.left:after, .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__page-btn.disabled:hover .chevron.left:after {\n      border-right-color: #C7CED8; }\n    .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__page-btn.disabled .chevron.right:after, .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__page-btn.disabled:hover .chevron.right:after {\n      border-left-color: #C7CED8; }\n  .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__info {\n    color: #8290A7; }\n\n.vgt-wrap.nocturnal .vgt-global-search {\n  border: 1px solid #435169;\n  background: linear-gradient(#2C394F, #2C394F); }\n\n.vgt-wrap.nocturnal .vgt-global-search__input .input__icon .magnifying-glass {\n  border: 2px solid #3f4c63; }\n  .vgt-wrap.nocturnal .vgt-global-search__input .input__icon .magnifying-glass:before {\n    background: #3f4c63; }\n\n.vgt-wrap.nocturnal .vgt-global-search__input .vgt-input, .vgt-wrap.nocturnal .vgt-global-search__input .vgt-select {\n  color: #C7CED8;\n  background-color: #232d3f;\n  border: 1px solid #435169; }\n  .vgt-wrap.nocturnal .vgt-global-search__input .vgt-input::placeholder, .vgt-wrap.nocturnal .vgt-global-search__input .vgt-select::placeholder {\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #C7CED8;\n    opacity: 0.3;\n    /* Firefox */ }\n", ""]);
+exports.push([module.i, "/* Utility styles\n************************************************/\n.vgt-right-align {\n  text-align: right; }\n\n.vgt-left-align {\n  text-align: left; }\n\n.vgt-center-align {\n  text-align: center; }\n\n.vgt-pull-left {\n  float: left !important; }\n\n.vgt-pull-right {\n  float: right !important; }\n\n.vgt-clearfix::after {\n  display: block;\n  content: \"\";\n  clear: both; }\n\n.vgt-responsive {\n  width: 100%;\n  overflow-x: auto; }\n\n.vgt-text-disabled {\n  color: #909399; }\n\ntable.vgt-table {\n  border-collapse: collapse;\n  background-color: transparent;\n  width: 100%;\n  max-width: 100%;\n  table-layout: auto;\n  border: 1px solid #DCDFE6; }\n  table.vgt-table td {\n    padding: .75rem .75rem .75rem .75rem;\n    vertical-align: top;\n    border-bottom: 1px solid #DCDFE6;\n    color: #606266; }\n  table.vgt-table tr.clickable {\n    cursor: pointer; }\n    table.vgt-table tr.clickable:hover {\n      background-color: #F1F5FD; }\n\n.vgt-table th {\n  padding: .75rem 1.5rem .75rem .75rem;\n  vertical-align: middle; }\n  .vgt-table th.sorting:hover:after {\n    display: inline-block;\n    border-bottom-color: #73b8ff; }\n\n.vgt-table th.line-numbers, .vgt-table th.vgt-checkbox-col {\n  padding: 0 .75rem 0 .75rem;\n  color: #606266;\n  border-right: 1px solid #DCDFE6;\n  word-wrap: break-word;\n  width: 25px;\n  text-align: center;\n  background: linear-gradient(#F4F5F8, #F1F3F6); }\n\n.vgt-table th.filter-th {\n  padding: .75rem .75rem .75rem .75rem; }\n\n.vgt-table th.vgt-row-header {\n  border-bottom: 2px solid #DCDFE6;\n  border-top: 2px solid #DCDFE6;\n  background-color: #fafafb; }\n\n.vgt-table thead th {\n  color: #606266;\n  vertical-align: bottom;\n  border-bottom: 1px solid #DCDFE6;\n  padding-right: 1.5rem;\n  background: linear-gradient(#F4F5F8, #F1F3F6); }\n  .vgt-table thead th.vgt-checkbox-col {\n    vertical-align: middle; }\n  .vgt-table thead th.sorting-asc, .vgt-table thead th.sorting-desc {\n    color: #3b3c3f;\n    position: relative; }\n    .vgt-table thead th.sorting-asc:after, .vgt-table thead th.sorting-desc:after {\n      content: '';\n      display: block;\n      position: absolute;\n      height: 0px;\n      width: 0px;\n      right: 6px;\n      top: 50%;\n      margin-top: -3px;\n      border-left: 6px solid transparent;\n      border-right: 6px solid transparent;\n      border-bottom: 6px solid #409eff; }\n  .vgt-table thead th.sorting-desc:after {\n    border-top: 6px solid #409eff;\n    border-left: 6px solid transparent;\n    border-right: 6px solid transparent;\n    border-bottom: none; }\n\n.vgt-input, .vgt-select {\n  width: 100%;\n  height: 32px;\n  line-height: 1;\n  display: block;\n  font-size: 14px;\n  font-weight: regular;\n  padding: 6px 12px;\n  color: #606266;\n  border-radius: 4px;\n  box-sizing: border-box;\n  background-image: none;\n  background-color: #fff;\n  border: 1px solid #DCDFE6;\n  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1); }\n  .vgt-input::placeholder, .vgt-select::placeholder {\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #606266;\n    opacity: 0.3;\n    /* Firefox */ }\n  .vgt-input:focus, .vgt-select:focus {\n    outline: none;\n    border-color: #409eff; }\n\n.vgt-table.bordered td, .vgt-table.bordered th {\n  border: 1px solid #DCDFE6; }\n\n.vgt-table.bordered th.vgt-row-header {\n  border-bottom: 3px solid #DCDFE6; }\n\n.vgt-table.striped tbody tr:nth-of-type(odd) {\n  background-color: rgba(51, 68, 109, 0.03); }\n\n.vgt-wrap.rtl {\n  direction: rtl; }\n  .vgt-wrap.rtl .vgt-table td, .vgt-wrap.rtl .vgt-table th:not(.line-numbers) {\n    padding: .75rem .75rem .75rem 1.5rem; }\n  .vgt-wrap.rtl .vgt-table thead th, .vgt-wrap.rtl .vgt-table.condensed thead th {\n    padding-left: 1.5rem;\n    padding-right: .75rem; }\n  .vgt-wrap.rtl .vgt-table th.sorting:after,\n  .vgt-wrap.rtl .vgt-table th.sorting-asc:after {\n    margin-right: 5px;\n    margin-left: 0px; }\n\n.vgt-table.condensed td, .vgt-table.condensed th.vgt-row-header {\n  padding: .4rem .4rem .4rem .4rem; }\n\n.vgt-global-search {\n  padding: 5px 0px;\n  display: flex;\n  flex-wrap: no-wrap;\n  align-items: stretch;\n  border: 1px solid #DCDFE6;\n  border-bottom: 0px;\n  background: linear-gradient(#F4F5F8, #F1F3F6); }\n\n.vgt-global-search__input {\n  position: relative;\n  padding-left: 40px;\n  flex-grow: 1; }\n  .vgt-global-search__input .input__icon {\n    position: absolute;\n    left: 0px;\n    max-width: 32px; }\n    .vgt-global-search__input .input__icon .magnifying-glass {\n      margin-top: 3px;\n      margin-left: 8px;\n      display: block;\n      width: 16px;\n      height: 16px;\n      border: 2px solid #d6dae2;\n      position: relative;\n      border-radius: 50%; }\n      .vgt-global-search__input .input__icon .magnifying-glass:before {\n        content: \"\";\n        display: block;\n        position: absolute;\n        right: -7px;\n        bottom: -5px;\n        background: #d6dae2;\n        width: 8px;\n        height: 4px;\n        border-radius: 2px;\n        transform: rotate(45deg);\n        -webkit-transform: rotate(45deg);\n        -moz-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n        -o-transform: rotate(45deg); }\n\n.vgt-global-search__actions {\n  margin-left: 10px; }\n\n.vgt-selection-info-row {\n  background: #fdf9e8;\n  padding: 5px 16px;\n  font-size: 13px;\n  border-top: 1px solid #DCDFE6;\n  border-left: 1px solid #DCDFE6;\n  border-right: 1px solid #DCDFE6;\n  color: #d3aa3b;\n  font-weight: bold; }\n  .vgt-selection-info-row a {\n    font-weight: bold;\n    display: inline-block;\n    margin-left: 10px; }\n\n.vgt-wrap__footer {\n  color: #606266;\n  padding: 1rem;\n  border: 1px solid #DCDFE6;\n  background: linear-gradient(#F4F5F8, #F1F3F6); }\n  .vgt-wrap__footer .footer__row-count__label, .vgt-wrap__footer .footer__row-count__select {\n    display: inline-block;\n    vertical-align: middle; }\n  .vgt-wrap__footer .footer__row-count__label {\n    font-size: 14px;\n    color: #909399; }\n  .vgt-wrap__footer .footer__row-count__select {\n    background-color: transparent;\n    width: auto;\n    padding: 0;\n    border: 0;\n    border-radius: 0;\n    height: auto;\n    font-size: 14px;\n    margin-left: 8px;\n    color: #606266;\n    font-weight: bold; }\n    .vgt-wrap__footer .footer__row-count__select:focus {\n      outline: none;\n      border-color: #409eff; }\n  .vgt-wrap__footer .footer__navigation {\n    font-size: 14px; }\n    .vgt-wrap__footer .footer__navigation__page-btn, .vgt-wrap__footer .footer__navigation__info {\n      display: inline-block;\n      vertical-align: middle; }\n    .vgt-wrap__footer .footer__navigation__page-btn {\n      text-decoration: none;\n      color: #606266;\n      font-weight: bold;\n      white-space: nowrap; }\n      .vgt-wrap__footer .footer__navigation__page-btn:focus {\n        outline: none;\n        border: 0; }\n      .vgt-wrap__footer .footer__navigation__page-btn.disabled, .vgt-wrap__footer .footer__navigation__page-btn.disabled:hover {\n        opacity: 0.5;\n        cursor: not-allowed; }\n        .vgt-wrap__footer .footer__navigation__page-btn.disabled .chevron.left:after, .vgt-wrap__footer .footer__navigation__page-btn.disabled:hover .chevron.left:after {\n          border-right-color: #606266; }\n        .vgt-wrap__footer .footer__navigation__page-btn.disabled .chevron.right:after, .vgt-wrap__footer .footer__navigation__page-btn.disabled:hover .chevron.right:after {\n          border-left-color: #606266; }\n      .vgt-wrap__footer .footer__navigation__page-btn .chevron {\n        width: 24px;\n        height: 24px;\n        border-radius: 15%;\n        position: relative;\n        margin: 0px 8px; }\n        .vgt-wrap__footer .footer__navigation__page-btn .chevron:after {\n          content: '';\n          position: absolute;\n          display: block;\n          left: 50%;\n          top: 50%;\n          margin-top: -6px;\n          border-top: 6px solid transparent;\n          border-bottom: 6px solid transparent; }\n        .vgt-wrap__footer .footer__navigation__page-btn .chevron.left::after {\n          border-right: 6px solid #409eff;\n          margin-left: -3px; }\n        .vgt-wrap__footer .footer__navigation__page-btn .chevron.right::after {\n          border-left: 6px solid #409eff;\n          margin-left: -3px; }\n    .vgt-wrap__footer .footer__navigation__info {\n      color: #909399;\n      margin: 0px 16px; }\n\n@media only screen and (max-width: 750px) {\n  /* on small screens hide the info */\n  .vgt-wrap__footer .footer__navigation__info {\n    display: none; }\n  .vgt-wrap__footer .footer__navigation__page-btn {\n    margin-left: 16px; } }\n\n.vgt-table.nocturnal {\n  border: 1px solid #435169;\n  background-color: #324057; }\n  .vgt-table.nocturnal tr.clickable:hover {\n    background-color: #445168; }\n  .vgt-table.nocturnal td {\n    border-bottom: 1px solid #435169;\n    color: #C7CED8; }\n  .vgt-table.nocturnal th.line-numbers {\n    color: #C7CED8;\n    border-right: 1px solid #435169;\n    background: linear-gradient(#2C394F, #2C394F); }\n  .vgt-table.nocturnal thead th {\n    color: #C7CED8;\n    border-bottom: 1px solid #435169;\n    background: linear-gradient(#2C394F, #2C394F); }\n    .vgt-table.nocturnal thead th.sorting-asc, .vgt-table.nocturnal thead th.sorting-desc {\n      color: #9aa7b9; }\n  .vgt-table.nocturnal.bordered td, .vgt-table.nocturnal.bordered th {\n    border: 1px solid #435169; }\n  .vgt-table.nocturnal .vgt-input, .vgt-table.nocturnal .vgt-select {\n    color: #C7CED8;\n    background-color: #232d3f;\n    border: 1px solid #435169; }\n    .vgt-table.nocturnal .vgt-input::placeholder, .vgt-table.nocturnal .vgt-select::placeholder {\n      /* Chrome, Firefox, Opera, Safari 10.1+ */\n      color: #C7CED8;\n      opacity: 0.3;\n      /* Firefox */ }\n\n.vgt-wrap.nocturnal .vgt-wrap__footer {\n  color: #C7CED8;\n  border: 1px solid #435169;\n  background: linear-gradient(#2C394F, #2C394F); }\n  .vgt-wrap.nocturnal .vgt-wrap__footer .footer__row-count__label {\n    color: #8290A7; }\n  .vgt-wrap.nocturnal .vgt-wrap__footer .footer__row-count__select {\n    color: #C7CED8; }\n    .vgt-wrap.nocturnal .vgt-wrap__footer .footer__row-count__select:focus {\n      border-color: #409eff; }\n  .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__page-btn {\n    color: #C7CED8; }\n    .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__page-btn.disabled .chevron.left:after, .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__page-btn.disabled:hover .chevron.left:after {\n      border-right-color: #C7CED8; }\n    .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__page-btn.disabled .chevron.right:after, .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__page-btn.disabled:hover .chevron.right:after {\n      border-left-color: #C7CED8; }\n  .vgt-wrap.nocturnal .vgt-wrap__footer .footer__navigation__info {\n    color: #8290A7; }\n\n.vgt-wrap.nocturnal .vgt-global-search {\n  border: 1px solid #435169;\n  background: linear-gradient(#2C394F, #2C394F); }\n\n.vgt-wrap.nocturnal .vgt-global-search__input .input__icon .magnifying-glass {\n  border: 2px solid #3f4c63; }\n  .vgt-wrap.nocturnal .vgt-global-search__input .input__icon .magnifying-glass:before {\n    background: #3f4c63; }\n\n.vgt-wrap.nocturnal .vgt-global-search__input .vgt-input, .vgt-wrap.nocturnal .vgt-global-search__input .vgt-select {\n  color: #C7CED8;\n  background-color: #232d3f;\n  border: 1px solid #435169; }\n  .vgt-wrap.nocturnal .vgt-global-search__input .vgt-input::placeholder, .vgt-wrap.nocturnal .vgt-global-search__input .vgt-select::placeholder {\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #C7CED8;\n    opacity: 0.3;\n    /* Firefox */ }\n", ""]);
 
 // exports
 
@@ -66384,7 +66599,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\PMOMainPage.vue"
+Component.options.__file = "resources/assets/js/components/PMOMainPage.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66393,9 +66608,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e5d14d1a", Component.options)
+    hotAPI.createRecord("data-v-40590eb3", Component.options)
   } else {
-    hotAPI.reload("data-v-e5d14d1a", Component.options)
+    hotAPI.reload("data-v-40590eb3", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66416,13 +66631,13 @@ var content = __webpack_require__(219);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(12)("f2467798", content, false, {});
+var update = __webpack_require__(12)("7a2d00fd", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e5d14d1a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMOMainPage.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e5d14d1a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMOMainPage.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-40590eb3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMOMainPage.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-40590eb3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMOMainPage.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -66440,7 +66655,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66451,25 +66666,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -66662,10 +66858,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(payload);
 
             var url = void 0;
+            var getData = void 0;
             if (this.currentTab === 'dataKompetensi') {
                 url = '/api/kompetensi/' + payload.id_kompetensi;
+                getData = this.getKompetensi;
             } else if (this.currentTab === 'dataKinerja') {
                 url = '/api/kinerja/' + payload.id_kinerja;
+                getData = this.getKinerja;
             }
 
             var data = payload;
@@ -66677,6 +66876,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.put(url, data, config).then(function (response) {
                 console.log(response.data);
                 alert(response.data.message);
+                getData();
             }).catch(function (e) {
                 _this.errors.push(e);
                 alert(e.response.data.message);
@@ -66746,7 +66946,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         downloadTemplate: function downloadTemplate() {
             var url = '/api/templates/template.xlsx';
+            switch (this.currentTab) {
+                case 'dataKompetensi':
+                    url = '/api/templates/kompetensi_template.xlsx';break;
+                case 'dataKinerja':
+                    url = '/api/templates/kinerja_template.xlsx';break;
+            }
             window.open(url);
+        },
+        downloadData: function downloadData() {
+            var url = void 0;
+            switch (this.currentTab) {
+                case 'dataPegawai':
+                    url = '/api/pegawai/export';break;
+                case 'dataKompetensi':
+                    url = '/api/kompetensi/export';break;
+                case 'dataKinerja':
+                    url = '/api/kinerja/export';break;
+            }
+            window.open(url);
+        },
+        uploadFile: function uploadFile() {
+            var _this6 = this;
+
+            var url = void 0;
+            switch (this.currentTab) {
+                case 'dataKompetensi':
+                    url = '/api/kompetensi/import';break;
+                case 'dataKinerja':
+                    url = '/api/kinerja/import';break;
+            }
+
+            var excelFile = document.getElementById('upload-file').files[0];
+            var formData = new FormData();
+            formData.append('excel', excelFile);
+
+            axios.post(url, formData).then(function (response) {
+                console.log("Import successful");
+            }).catch(function (e) {
+                _this6.errors.push(e);
+                console.log(e.response.message);
+            });
         },
         setAlert: function setAlert(type, message) {
             this.statusAlert.display = true;
@@ -66766,19 +67006,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 221 */
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"","field":"viewButton"},{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit_kerja"},{"label":"Jabatan","field":"posisi"},{"label":"Tahun Menjabat","field":"tahun_masuk_kerja","type":"number"},{"label":"Kelompok Kompetensi","field":"kelompok_kompetensi"},{"label":"No. Telp.","field":"no_telp"},{"label":"Pendidikan","field":"pendidikan_terakhir"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true}]
+module.exports = [{"label":"","field":"viewButton","href":"/pages/profile"},{"label":"NIP","field":"nip","immutable":true},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"Unit Kerja","field":"unit_kerja"},{"label":"Jabatan","field":"posisi"},{"label":"Tahun Menjabat","field":"tahun_masuk_kerja","type":"number"},{"label":"Kelompok Kompetensi","field":"kelompok_kompetensi"},{"label":"No. Telp.","field":"no_telp"},{"label":"Pendidikan","field":"pendidikan_terakhir"},{"label":"Tanggal Lahir","field":"tanggal_lahir","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","immutable":true}]
 
 /***/ }),
 /* 222 */
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true,"required":true},{"label":"Unit Kerja","field":"unit_kerja","immutable":true},{"label":"Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"posisi","immutable":true},{"label":"Tujuan Pemeriksaan","field":"tujuan","fillable":true},{"label":"Tanggal Pelaksanaan","field":"tanggal","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","fillable":true},{"label":"Efisiensi Kecerdasan","field":"kognitif_efisiensi_kecerdasan","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Daya Nalar","field":"kognitif_daya_nalar","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Daya Asosiasi","field":"kognitif_daya_asosiasi","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Daya Analitis","field":"kognitif_daya_analitis","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Daya Antisipasi","field":"kognitif_daya_antisipasi","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Kemandirian Berpikir","field":"kognitif_kemandirian_berpikir","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Fleksibilitas","field":"kognitif_fleksibilitas","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Daya Tangkap","field":"kognitif_daya_tangkap","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Rata-rata Kognitif","field":"kognitif","type":"decimal","immutable":true,"thClass":"text-center fungsi-kognitif-group"},{"label":"Penempatan Diri","field":"interaksional_penempatan_diri","type":"number","thClass":"text-center fungsi-interaksional-group","fillable":true},{"label":"Percaya Diri","field":"interaksional_percaya_diri","type":"number","thClass":"text-center fungsi-interaksional-group","fillable":true},{"label":"Daya Kooperatif","field":"interaksional_daya_kooperatif","type":"number","thClass":"text-center fungsi-interaksional-group","fillable":true},{"label":"Penyesuaian Perasaan","field":"interaksional_penyesuaian_perasaan","type":"number","thClass":"text-center fungsi-interaksional-group","fillable":true},{"label":"Rata-rata Interaksional","field":"interaksional","type":"decimal","immutable":true,"thClass":"text-center fungsi-interaksional-group"},{"label":"Stabilitas Emosi","field":"emosional_stabilitas_emosi","type":"number","thClass":"text-center fungsi-emosional-group","fillable":true},{"label":"Toleransi terhadap Stress","field":"emosional_toleransi_stres","type":"number","thClass":"text-center fungsi-emosional-group","fillable":true},{"label":"Pengendalian Diri","field":"emosional_pengendalian_diri","type":"number","thClass":"text-center fungsi-emosional-group","fillable":true},{"label":"Kemantapan Konsentrasi","field":"emosional_kemantapan_konsentrasi","type":"number","thClass":"text-center fungsi-emosional-group","fillable":true},{"label":"Rata-rata Emosional","field":"emosional_kemantapan_konsentrasi","type":"decimal","immutable":true,"thClass":"text-center fungsi-emosional-group"},{"label":"Hasrat Berprestasi","field":"sikap_kerja_hasrat_berprestasi","type":"number","thClass":"text-center fungsi-sikap-kerja-group","fillable":true},{"label":"Daya Tahan","field":"sikap_kerja_daya_tahan","type":"number","thClass":"text-center fungsi-sikap-kerja-group","fillable":true},{"label":"Keteraturan Kerja","field":"sikap_kerja_keteraturan_kerja","type":"number","thClass":"text-center fungsi-sikap-kerja-group","fillable":true},{"label":"Pengerahan Energi Kerja","field":"sikap_kerja_pengerahan_energi_kerja","type":"number","thClass":"text-center fungsi-sikap-kerja-group","fillable":true},{"label":"Rata-rata Sikap Kerja","field":"sikap_kerja","type":"decimal","immutable":true,"thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Efektivitas Perencanaan","field":"manajerial_efektivitas_perencanaan","type":"number","thClass":"text-center fungsi-manajerial-group","fillable":true},{"label":"Pengorganisasian Pelaksanaan","field":"manajerial_pengorganisasian_pelaksanaan","type":"number","thClass":"text-center fungsi-manajerial-group","fillable":true},{"label":"Intensitas Pengarahan","field":"manajerial_intensitas_pengarahan","type":"number","thClass":"text-center fungsi-manajerial-group","fillable":true},{"label":"Kekuatan Pengawasan","field":"manajerial_kekuatan_pengawasan","type":"number","thClass":"text-center fungsi-manajerial-group","fillable":true},{"label":"Rata-rata Manajerial","field":"manajerial","type":"decimal","immutable":true,"thClass":"text-center fungsi-manajerial-group"},{"label":"Potensi Keberhasilan","field":"profil_potensi_keberhasilan","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Potensi Pengembangan Diri","field":"profil_potensi_pengembangan_diri","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Loyalitas Terhadap Tugas","field":"profil_loyalitas_terhadap_tugas","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Efektivitas Manajerial","field":"profil_efektivitas_manajerial","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Nilai Prediksi","field":"profil","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Rekomendasi","field":"indeks","immutable":true,"thClass":"text-center"}]
+module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true,"required":true},{"label":"Unit Kerja","field":"unit_kerja","immutable":true},{"label":"Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"posisi","immutable":true},{"label":"Tujuan Pemeriksaan","field":"tujuan","fillable":true},{"label":"Tanggal Pelaksanaan","field":"tanggal","type":"date","dateInputFormat":"YYYY-MM-DD","dateOutputFormat":"DD-MM-YYYY","fillable":true},{"label":"Efisiensi Kecerdasan","field":"kognitif_efisiensi_kecerdasan","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Daya Nalar","field":"kognitif_daya_nalar","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Daya Asosiasi","field":"kognitif_daya_asosiasi","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Daya Analitis","field":"kognitif_daya_analitis","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Daya Antisipasi","field":"kognitif_daya_antisipasi","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Kemandirian Berpikir","field":"kognitif_kemandirian_berpikir","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Fleksibilitas","field":"kognitif_fleksibilitas","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Daya Tangkap","field":"kognitif_daya_tangkap","type":"number","thClass":"text-center fungsi-kognitif-group","fillable":true},{"label":"Rata-rata Kognitif","field":"kognitif","type":"decimal","immutable":true,"thClass":"text-center fungsi-kognitif-group"},{"label":"Penempatan Diri","field":"interaksional_penempatan_diri","type":"number","thClass":"text-center fungsi-interaksional-group","fillable":true},{"label":"Percaya Diri","field":"interaksional_percaya_diri","type":"number","thClass":"text-center fungsi-interaksional-group","fillable":true},{"label":"Daya Kooperatif","field":"interaksional_daya_kooperatif","type":"number","thClass":"text-center fungsi-interaksional-group","fillable":true},{"label":"Penyesuaian Perasaan","field":"interaksional_penyesuaian_perasaan","type":"number","thClass":"text-center fungsi-interaksional-group","fillable":true},{"label":"Rata-rata Interaksional","field":"interaksional","type":"decimal","immutable":true,"thClass":"text-center fungsi-interaksional-group"},{"label":"Stabilitas Emosi","field":"emosional_stabilitas_emosi","type":"number","thClass":"text-center fungsi-emosional-group","fillable":true},{"label":"Toleransi terhadap Stress","field":"emosional_toleransi_stres","type":"number","thClass":"text-center fungsi-emosional-group","fillable":true},{"label":"Pengendalian Diri","field":"emosional_pengendalian_diri","type":"number","thClass":"text-center fungsi-emosional-group","fillable":true},{"label":"Kemantapan Konsentrasi","field":"emosional_kemantapan_konsentrasi","type":"number","thClass":"text-center fungsi-emosional-group","fillable":true},{"label":"Rata-rata Emosional","field":"emosional_kemantapan_konsentrasi","type":"decimal","immutable":true,"thClass":"text-center fungsi-emosional-group"},{"label":"Hasrat Berprestasi","field":"sikap_kerja_hasrat_berprestasi","type":"number","thClass":"text-center fungsi-sikap-kerja-group","fillable":true},{"label":"Daya Tahan","field":"sikap_kerja_daya_tahan","type":"number","thClass":"text-center fungsi-sikap-kerja-group","fillable":true},{"label":"Keteraturan Kerja","field":"sikap_kerja_keteraturan_kerja","type":"number","thClass":"text-center fungsi-sikap-kerja-group","fillable":true},{"label":"Pengerahan Energi Kerja","field":"sikap_kerja_pengerahan_energi_kerja","type":"number","thClass":"text-center fungsi-sikap-kerja-group","fillable":true},{"label":"Rata-rata Sikap Kerja","field":"sikap_kerja","type":"decimal","immutable":true,"thClass":"text-center fungsi-sikap-kerja-group"},{"label":"Efektivitas Perencanaan","field":"manajerial_efektivitas_perencanaan","type":"number","thClass":"text-center fungsi-manajerial-group","fillable":true},{"label":"Pengorganisasian Pelaksanaan","field":"manajerial_pengorganisasian_pelaksanaan","type":"number","thClass":"text-center fungsi-manajerial-group","fillable":true},{"label":"Intensitas Pengarahan","field":"manajerial_intensitas_pengarahan","type":"number","thClass":"text-center fungsi-manajerial-group","fillable":true},{"label":"Kekuatan Pengawasan","field":"manajerial_kekuatan_pengawasan","type":"number","thClass":"text-center fungsi-manajerial-group","fillable":true},{"label":"Rata-rata Manajerial","field":"manajerial","type":"decimal","immutable":true,"thClass":"text-center fungsi-manajerial-group"},{"label":"Potensi Keberhasilan","field":"profil_potensi_keberhasilan","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Potensi Pengembangan Diri","field":"profil_potensi_pengembangan_diri","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Loyalitas Terhadap Tugas","field":"profil_loyalitas_terhadap_tugas","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Efektivitas Manajerial","field":"profil_efektivitas_manajerial","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Nilai Prediksi","field":"profil","type":"decimal","immutable":true,"thClass":"text-center"},{"label":"Rekomendasi","field":"indeks","immutable":true,"thClass":"text-center"},{"label":"","field":"editButton"}]
 
 /***/ }),
 /* 223 */
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true,"required":true},{"label":"Unit Kerja","field":"unit_kerja","immutable":true},{"label":"Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"posisi","immutable":true},{"label":"Tahun","field":"tahun","type":"number","fillable":true},{"label":"Semester","field":"semester","type":"number","fillable":true},{"label":"Skor Kinerja","field":"nilai","type":"number","fillable":true}]
+module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true,"required":true},{"label":"Unit Kerja","field":"unit_kerja","immutable":true},{"label":"Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"posisi","immutable":true},{"label":"Tahun","field":"tahun","type":"number","fillable":true},{"label":"Semester","field":"semester","type":"number","fillable":true},{"label":"Skor Kinerja","field":"nilai","type":"number","fillable":true},{"label":"","field":"editButton"}]
 
 /***/ }),
 /* 224 */
@@ -66810,7 +67050,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\PMONavbar.vue"
+Component.options.__file = "resources/assets/js/components/PMONavbar.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66819,9 +67059,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ae2e2b4a", Component.options)
+    hotAPI.createRecord("data-v-4f96ef9b", Component.options)
   } else {
-    hotAPI.reload("data-v-ae2e2b4a", Component.options)
+    hotAPI.reload("data-v-4f96ef9b", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66842,13 +67082,13 @@ var content = __webpack_require__(226);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(12)("a8aaff2a", content, false, {});
+var update = __webpack_require__(12)("1f6b3010", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ae2e2b4a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMONavbar.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ae2e2b4a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMONavbar.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4f96ef9b\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMONavbar.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4f96ef9b\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PMONavbar.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -67059,7 +67299,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-ae2e2b4a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-4f96ef9b", module.exports)
   }
 }
 
@@ -67143,7 +67383,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.rowBeingEdited = -1;
             this.dataBeingEdited = {};
         },
-        viewProfile: function viewProfile(props) {}
+        viewProfile: function viewProfile(props) {
+            console.log(props);
+        }
     }
 });
 
@@ -67224,7 +67466,8 @@ var render = function() {
                           {
                             staticClass: "btn btn-sm btn-default",
                             attrs: {
-                              href: "/api/pegawai/" + props.row["id_user"]
+                              href:
+                                props.column.href + "/" + props.row["id_user"]
                             },
                             on: {
                               click: function($event) {
@@ -67413,7 +67656,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7f7ae246", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-66f0941d", module.exports)
   }
 }
 
@@ -67469,11 +67712,8 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary float-md-right m-1",
-                    attrs: {
-                      type: "button",
-                      "data-toggle": "modal",
-                      "data-target": "#downloadModal"
-                    }
+                    attrs: { type: "button" },
+                    on: { click: _vm.downloadData }
                   },
                   [
                     _vm._v(
@@ -67807,46 +68047,26 @@ var render = function() {
                 _vm._m(2)
               ]),
               _vm._v(" "),
-              _vm._m(3)
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "downloadModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
+              _c("div", { staticClass: "modal-footer" }, [
                 _c(
-                  "h5",
+                  "button",
                   {
-                    staticClass: "modal-title",
-                    attrs: { id: "downloadModalLabel" }
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-dismiss": "modal" }
                   },
-                  [_vm._v("Download " + _vm._s(_vm.title))]
+                  [_vm._v("Batal")]
                 ),
                 _vm._v(" "),
-                _vm._m(4)
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }),
-              _vm._v(" "),
-              _vm._m(5)
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.uploadFile }
+                  },
+                  [_vm._v("Upload")]
+                )
+              ])
             ])
           ]
         )
@@ -67895,68 +68115,21 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("form", [
       _c("div", { staticClass: "form-group container" }, [
-        _c("label", { attrs: { for: "uploadFile" } }, [
+        _c("label", { attrs: { for: "upload-file" } }, [
           _vm._v("Upload data menggunakan file excel: ")
         ]),
         _vm._v(" "),
         _c("input", {
           staticClass: "form-control-file",
-          attrs: { type: "file", id: "uploadFile" }
+          attrs: { type: "file", id: "upload-file" }
         }),
         _vm._v(" "),
         _c("small", { staticClass: "text-muted" }, [
           _vm._v(
-            "Harap gunakan file excel dengan format yang telah disediakan di atas."
+            "Harap gunakan file Excel dengan format yang telah disediakan di atas."
           )
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Batal")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Batal")]
-      )
     ])
   }
 ]
@@ -67965,7 +68138,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-e5d14d1a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-40590eb3", module.exports)
   }
 }
 
@@ -67999,7 +68172,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\AdminPage.vue"
+Component.options.__file = "resources/assets/js/components/AdminPage.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -68008,9 +68181,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f12c33d2", Component.options)
+    hotAPI.createRecord("data-v-2e17eb57", Component.options)
   } else {
-    hotAPI.reload("data-v-f12c33d2", Component.options)
+    hotAPI.reload("data-v-2e17eb57", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -68031,13 +68204,13 @@ var content = __webpack_require__(234);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(12)("9fb912be", content, false, {});
+var update = __webpack_require__(12)("62b3436f", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f12c33d2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminPage.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f12c33d2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminPage.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2e17eb57\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminPage.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2e17eb57\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminPage.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -68174,7 +68347,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\AdminNavbar.vue"
+Component.options.__file = "resources/assets/js/components/AdminNavbar.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -68183,9 +68356,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3a239b18", Component.options)
+    hotAPI.createRecord("data-v-25355f50", Component.options)
   } else {
-    hotAPI.reload("data-v-3a239b18", Component.options)
+    hotAPI.reload("data-v-25355f50", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -68206,13 +68379,13 @@ var content = __webpack_require__(239);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(12)("3d8ce7d4", content, false, {});
+var update = __webpack_require__(12)("7afb2708", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3a239b18\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminNavbar.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3a239b18\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminNavbar.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25355f50\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminNavbar.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25355f50\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminNavbar.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -68336,7 +68509,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3a239b18", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-25355f50", module.exports)
   }
 }
 
@@ -68394,7 +68567,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-f12c33d2", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2e17eb57", module.exports)
   }
 }
 

@@ -31,7 +31,7 @@
                 </span>
                 <span v-else-if="props.column.field == 'viewButton'">
                     <a class="btn btn-sm btn-default"
-                       :href="'/api/pegawai/' + props.row['id_user']"
+                        :href="props.column.href + '/' +  props.row['id_user']"
                        @click="viewProfile(props)">
                         View
                     </a>
@@ -76,7 +76,7 @@
                 this.dataBeingEdited = {};
             },
             viewProfile(props) {
-
+                console.log(props);
             }
         }
     };
