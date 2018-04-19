@@ -342,7 +342,7 @@ class DataKompetensiController extends APIBaseController
                                 'manajerial_intensitas_pengarahan' => $obj->intensitas_pengarahan,
                                 'manajerial_kekuatan_pengawasan' => $obj->kekuatan_pengawasan,
                             ];
-    
+
                             $model = new Kompetensi;
                             $model->fill($arr);
                             $model->save();

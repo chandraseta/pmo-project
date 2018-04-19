@@ -220,7 +220,7 @@ class DataKinerjaController extends APIBaseController
                                 'nilai' => $obj->skor_kinerja,
                                 'catatan' => $obj->catatan,
                             ];
-    
+
                             $model = new Kinerja;
                             $model->fill($arr);
                             $model->save();
