@@ -33,7 +33,7 @@ class PagesController extends APIBaseController
     }
 
     public function addUser() {
-        if(!$this->authenticate(3)){return $this->sendError('You are not authenticated.');}
+//        if(!$this->authenticate(3)){return $this->sendError('You are not authenticated.');}
         return view('pages.admin.adduser')->with('page', 'addUser');
     }
 
