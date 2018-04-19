@@ -2,7 +2,7 @@
     <div id="pegawai">
         <div class="card" id="profil-pegawai">
             <div class="card-header">
-                Profil Pegawai<a href="#profil-pegawai" class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai">Edit</a>
+                Profil Pegawai<button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">Edit</button>
             </div>
 
             <div class="card-body">
@@ -164,9 +164,9 @@
 
         <br>
 
-        <div class="card">
+        <div class="card" >
             <div class="card-header">
-                Data Kepegawaian<a href="#" class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian">Edit</a>
+                Data Kepegawaian<button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">Edit</button>
             </div>
 
             <div class="card-body">
@@ -213,7 +213,7 @@
 
         <div class="card">
             <div class="card-header">
-                Riwayat Pendidikan dan Pekerjaan<a href="#" class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai">Edit</a>
+                Riwayat Pendidikan dan Pekerjaan<button class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai" v-bind:disabled="disableEdit">Edit</button>
             </div>
 
             <div class="card-body">
@@ -296,6 +296,7 @@
 
         data() {
             return {
+                disableEdit: false,
                 isEditProfile: false,
                 isEditKepegawaian: false,
                 isEditRiwayat: false,
@@ -344,28 +345,36 @@
             this.cachedpegawai = Object.assign({}, this.pegawai);
         },
         methods: {
+            disableEditToggle() {
+                this.disableEdit = !this.disableEdit;
+            },
+
             editProfilPegawai() {
-            this.isEditProfile = true;
-        },
+                this.isEditProfile = true;
+                disableEditToggle();
+            },
 
-        editDataKepegawaian() {
-            this.isEditKepegawaian = true;
-        },
+            editDataKepegawaian() {
+                this.isEditKepegawaian = true;
+                disableEditToggle();
+            },
 
-        editRiwayatPegawai() {
-            this.isEditRiwayat = true;
-        },
+            editRiwayatPegawai() {
+                this.isEditRiwayat = true;
+                disableEditToggle();
+            },
 
-        saveProfilPegawai() {
-            this.cachedUser = Object.assign({}, this.user);
-            this.isEditProfile = false;
+            saveProfilPegawai() {
+                disableEditToggle();
+                this.cachedUser = Object.assign({}, this.user);
+                this.isEditProfile = false;
 
-            axios.patch('/api/pegawai/4', {
-                name: this.user.nama,
-                email: this.user.email,
-                password: '1234',
-                nip: this.user.nopeg
-            })
+                axios.patch('/api/pegawai/4', {
+                    name: this.user.nama,
+                    email: this.user.email,
+                    password: '1234',
+                    nip: this.user.nopeg
+                })
                 .then(function (response) {
                     alert(response);
                 })
@@ -376,27 +385,32 @@
             },
 
             saveDataKepegawaian() {
+                disableEditToggle();
                 this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
                 this.isEditKepegawaian = false;
             },
 
             saveRiwayatPegawai() {
+                disableEditToggle();
                 this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
                 this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
                 this.isEditRiwayat = false;
             },
 
             cancelProfilPegawai() {
+                disableEditToggle();
                 this.user = Object.assign({}, this.cachedUser);
                 this.isEditProfile = false;
             },
 
             cancelDataKepegawaian() {
+                disableEditToggle();
                 this.dataKepegawaian = Object.assign({}, this.cachedDataKepegawaian);
                 this.isEditKepegawaian = false;
             },
 
             cancelRiwayatPegawai() {
+                disableEditToggle();
                 this.riwayatPendidikan = Object.assign({}, this.cachedRiwayatPendidikan);
                 this.riwayatPekerjaan = Object.assign({}, this.cachedRiwayatPekerjaan);
                 this.isEditRiwayat = false;
