@@ -1,8 +1,5 @@
 <template>
     <div>
-        <header>
-            <admin-navbar></admin-navbar>
-        </header>
         <main role="main" class="container">
             <section>
                 <div class="container">
