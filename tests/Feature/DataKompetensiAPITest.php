@@ -6,13 +6,14 @@ use App\Kinerja;
 use App\Kompetensi;
 use App\Pegawai;
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DataKompetensiAPITest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     private $user;
     private $baseUri = 'api/kompetensi';
@@ -21,8 +22,6 @@ class DataKompetensiAPITest extends TestCase
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
-        factory(User::class, 10)->create();
-        factory(Pegawai::class, 8)->create();
     }
 
     /**
@@ -48,15 +47,17 @@ class DataKompetensiAPITest extends TestCase
        $data = factory(Kompetensi::class)->make();
        unset($data->id_pegawai);
 
+       $payload = $data;
        $response = $this->actingAs($this->user)
-           ->json($method, $uri, $data)
+           ->json($method, $uri, $payload->toArray())
            ->assertStatus(404);
 
        $randomUser = User::inRandomOrder()->first();
        $data->nip = $randomUser->nip;
 
+       $payload = $data;
        $response = $this->actingAs($this->user)
-           ->json($method, $uri, $data)
+           ->json($method, $uri, $payload->toArray())
            ->assertStatus(200)
            ->assertJson([
                'data' => $data
