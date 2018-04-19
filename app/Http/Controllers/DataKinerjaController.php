@@ -8,8 +8,11 @@ use Carbon\Carbon;
 use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+
+use Exception;
 
 class DataKinerjaController extends APIBaseController
 {
@@ -52,7 +55,7 @@ class DataKinerjaController extends APIBaseController
             return $this->sendError('Gagal menambahkan data kinerja.', $validator->errors());
         }
 
-        $nip = $input['nip'];
+        $nip = $request->input('nip', 'undefined');
         $pegawai = Pegawai::where('nip', '=', $nip)->first();
 
         if (is_null($pegawai)) {
@@ -113,7 +116,7 @@ class DataKinerjaController extends APIBaseController
 
         $data = Kinerja::find($id);
         if (is_null($data)) {
-            $this->sendError('Data Kinerja dengan id = ' . $id . ' tidak ditemukan.');
+            return $this->sendError('Data Kinerja dengan id = ' . $id . ' tidak ditemukan.');
         }
 
         $data = $this->updateDataKinerja($data, $input);
@@ -149,12 +152,14 @@ class DataKinerjaController extends APIBaseController
         $newData->tahun = $newDataInput['tahun'];
         $newData->semester = $newDataInput['semester'];
         $newData->nilai = $newDataInput['nilai'];
+        $newData->catatan = $newDataInput['catatan'];
 
         return $newData;
     }
 
     public function export()
     {
+        // Retrieve exported data from database
         $kinerja_rows = DB::table('denormalized_pegawai')
             ->join('kinerja', 'denormalized_pegawai.id_user', '=', 'kinerja.id_pegawai')
             ->select([
@@ -170,18 +175,21 @@ class DataKinerjaController extends APIBaseController
                 'kinerja.catatan',
             ])->get();
 
+        // Convert StdObj to array
         $kinerja_array = [];
-
         foreach ($kinerja_rows as $kinerja_row) {
             $kinerja_array[] = get_object_vars($kinerja_row);
         }
 
+        // Add filename
         $timestamp = Carbon::now()->toDateTimeString();
         $filename = 'kinerja_' . $timestamp;
 
+        // Load template
         $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         $path = $storagePath . 'templates/kinerja_template_export.xlsx';
 
+        // Generate Excel file
         Excel::load($path, function ($excel) use ($kinerja_array, $timestamp) {
             $excel->setTitle('Data Kinerja ' . $timestamp);
 
@@ -189,5 +197,43 @@ class DataKinerjaController extends APIBaseController
                 $sheet->fromArray($kinerja_array, null, 'A2', false, false);
             });
         })->setFilename('kinerja_' . $timestamp)->download('xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        if ($request->hasFile('excel')) {
+            $extension = File::extension($request->excel->getClientOriginalName());
+            if ($extension == "xlsx" || $extension == "xls" || $extension == "csv") {
+                $path = $request->excel->getRealPath();
+                $objs = Excel::load($path, null)->get();
+
+                if (!empty($objs) && $objs->count()) {
+                    try {
+                        foreach ($objs as $obj) {
+                            $arr = [
+                                'id_pegawai' => Pegawai::where('nip', $obj->nip)->first()->id_user,
+                                'tahun' => $obj->tahun_pemeriksaan,
+                                'semester' => $obj->semester,
+                                'nilai' => $obj->skor_kinerja,
+                                'catatan' => $obj->catatan,
+                            ];
+    
+                            $model = new Kinerja;
+                            $model->fill($arr);
+                            $model->save();
+                        }
+                    } catch (Exception $e) {
+                        return response('Failed in inserting data. Check data correctness', 400);
+                    }
+                    return response('Data inserted', 200);
+                } else {
+                    return response('Empty file', 400);
+                }
+            } else {
+                return response('Wrong file format', 400);
+            }
+        } else {
+            return response('File not found', 400);
+        }
     }
 }

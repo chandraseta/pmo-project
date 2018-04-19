@@ -9,7 +9,7 @@ $factory->define(App\Kinerja::class, function (Faker $faker) {
     return [
         'id_pegawai' => App\Pegawai::pluck('id_user')->random(),
         'tahun' => $faker->year,
-        'semester' => $faker->boolean,
+        'semester' => $faker->boolean ? 2 : 1,
         'nilai' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 6),
         'catatan' => $faker->paragraph,
     ];
