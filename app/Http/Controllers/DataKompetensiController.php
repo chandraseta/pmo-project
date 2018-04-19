@@ -12,6 +12,9 @@ use App\Http\Controllers\APIBaseController;
 use App\Kompetensi;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use App\DenormalizedPegawai;
+use Excel;
+use Carbon\Carbon;
 
 class DataKompetensiController extends APIBaseController
 {
@@ -22,7 +25,9 @@ class DataKompetensiController extends APIBaseController
      */
     public function index()
     {
-        if(!$this->authenticate(4)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(4)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
         //$data = Kompetensi::all();
         $data = DB::table('kompetensi')
@@ -40,7 +45,9 @@ class DataKompetensiController extends APIBaseController
     public function create()
     {
         //
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
+        }
     }
 
     /**
@@ -51,7 +58,9 @@ class DataKompetensiController extends APIBaseController
      */
     public function store(Request $request)
     {
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
         $input = $request->all();
 
@@ -64,7 +73,7 @@ class DataKompetensiController extends APIBaseController
         $pegawai = Pegawai::where('nip', '=', $nip)->first();
 
         if (is_null($pegawai)) {
-            return $this->sendError('Pegawai dengan NIP: '.$nip.' tidak ditemukan.');
+            return $this->sendError('Pegawai dengan NIP: ' . $nip . ' tidak ditemukan.');
         }
 
         $data = new Kompetensi;
@@ -83,7 +92,9 @@ class DataKompetensiController extends APIBaseController
      */
     public function show($id)
     {
-        if(!$this->authenticate(4)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(4)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
         $data = Kompetensi::find($id);
 
@@ -103,7 +114,9 @@ class DataKompetensiController extends APIBaseController
     public function edit($id)
     {
         //
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
+        }
     }
 
     /**
@@ -115,18 +128,20 @@ class DataKompetensiController extends APIBaseController
      */
     public function update(Request $request, $id)
     {
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
         $input = $request->all();
 
         $validator = $this->validateDataKompetensi($input);
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $this->sendError('Gagal menyimpan data kompetensi.', $validator->errors());
         }
 
         $data = Kompetensi::find($id);
         if (is_null($data)) {
-            $this->sendError('Data Kompetensi dengan id = '.$id.' tidak ditemukan.');
+            $this->sendError('Data Kompetensi dengan id = ' . $id . ' tidak ditemukan.');
         }
 
         $data = $this->updateDataKompetensi($data, $input);
@@ -143,11 +158,13 @@ class DataKompetensiController extends APIBaseController
      */
     public function destroy($id)
     {
-        //
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
+        }
     }
 
-    private function validateDataKompetensi($input) {
+    private function validateDataKompetensi($input)
+    {
         return Validator::make($input, [
             'tanggal' => 'required',
             'kognitif_efisiensi_kecerdasan' => 'required',
@@ -177,7 +194,8 @@ class DataKompetensiController extends APIBaseController
         ]);
     }
 
-    private function updateDataKompetensi($oldData, $newDataInput) {
+    private function updateDataKompetensi($oldData, $newDataInput)
+    {
         $newData = $oldData;
 
         $newData->tanggal = $newDataInput['tanggal'];
@@ -209,19 +227,147 @@ class DataKompetensiController extends APIBaseController
         return $newData;
     }
 
-    private function authenticate($role){
+    public function export()
+    {
+        $kompetensi_rows = DB::table('denormalized_pegawai')
+            ->join('kompetensi', 'denormalized_pegawai.id_user', '=', 'kompetensi.id_pegawai')
+            ->select([
+                'denormalized_pegawai.nip',
+                'denormalized_pegawai.nama',
+                'denormalized_pegawai.unit_kerja',
+                'denormalized_pegawai.posisi',
+                'denormalized_pegawai.pendidikan_terakhir',
+                'denormalized_pegawai.tanggal_lahir',
+                'tujuan',
+                'tanggal',
+                'kognitif_efisiensi_kecerdasan',
+                'kognitif_daya_nalar',
+                'kognitif_daya_asosiasi',
+                'kognitif_daya_analitis',
+                'kognitif_daya_antisipasi',
+                'kognitif_kemandirian_berpikir',
+                'kognitif_fleksibilitas',
+                'kognitif_daya_tangkap',
+                'kognitif',
+                'interaksional_penempatan_diri',
+                'interaksional_percaya_diri',
+                'interaksional_daya_kooperatif',
+                'interaksional_penyesuaian_perasaan',
+                'interaksional',
+                'emosional_stabilitas_emosi',
+                'emosional_toleransi_stres',
+                'emosional_pengendalian_diri',
+                'emosional_kemantapan_konsentrasi',
+                'emosional',
+                'sikap_kerja_hasrat_berprestasi',
+                'sikap_kerja_daya_tahan',
+                'sikap_kerja_keteraturan_kerja',
+                'sikap_kerja_pengerahan_energi_kerja',
+                'sikap_kerja',
+                'manajerial_efektivitas_perencanaan',
+                'manajerial_pengorganisasian_pelaksanaan',
+                'manajerial_intensitas_pengarahan',
+                'manajerial_kekuatan_pengawasan',
+                'manajerial',
+                'profil_potensi_keberhasilan',
+                'profil_potensi_pengembangan_diri',
+                'profil_loyalitas_terhadap_tugas',
+                'profil_efektivitas_manajerial',
+                'profil',
+                'indeks',
+            ])->get();
+
+        $kompetensi_array = [];
+
+        // Row headers
+        $kompetensi_array[] = [
+            "NIP",
+            "Nama Lengkap",
+            "Unit Kerja",
+            "Jabatan",
+            "Pendidikan",
+            "Tanggal Lahir",
+            "Tujuan Pemeriksaan",
+            "Tanggal Pelaksanaan",
+            "Efisiensi Kecerdasan",
+            "Daya Nalar",
+            "Daya Asosiasi",
+            "Daya Analitis",
+            "Daya Antisipasi",
+            "Kemandirian Berpikir",
+            "Fleksibilitas",
+            "Daya Tangkap",
+            "Rata-rata Kognitif",
+            "Penempatan Diri",
+            "Percaya Diri",
+            "Daya Kooperatif",
+            "Penyesuaian Perasaan",
+            "Rata-rata Interaksional",
+            "Stabilitas Emosi",
+            "Toleransi terhadap Stress",
+            "Pengendalian Diri",
+            "Kemantapan Konsentrasi",
+            "Rata-rata Emosional",
+            "Hasrat Berprestasi",
+            "Daya Tahan",
+            "Keteraturan Kerja",
+            "Pengerahan Energi Kerja",
+            "Rata-rata Sikap Kerja",
+            "Efektivitas Perencanaan",
+            "Pengorganisasian Pelaksanaan",
+            "Intensitas Pengarahan",
+            "Kekuatan Pengawasan",
+            "Rata-rata Manajerial",
+            "Potensi Keberhasilan",
+            "Potensi Pengembangan Diri",
+            "Loyalitas Terhadap Tugas",
+            "Efektivitas Manajerial",
+            "Nilai Prediksi",
+            "Rekomendasi"
+        ];
+
+        foreach ($kompetensi_rows as $kompetensi_row) {
+            $kompetensi_array[] = get_object_vars($kompetensi_row);
+        }
+
+        $timestamp = Carbon::now()->toDateTimeString();
+        $filename = 'kompetensi_' . $timestamp;
+        Excel::create($filename, function ($excel) use ($kompetensi_array, $timestamp) {
+            $excel->setTitle('Data Kompetensi ' . $timestamp)
+                ->setCreator('UPT PMO ITB')
+                ->setCompany('UPT PMO ITB')
+                ->setDescription('Data kompetensi pegawai UPT PMO ITB pada ' . $timestamp);
+
+            $excel->sheet('sheet1', function ($sheet) use ($kompetensi_array) {
+                $sheet->fromArray($kompetensi_array, null, 'A1', false, false);
+
+                $sheet->row(1, function ($row) {
+                    $row->setFontWeight('bold')
+                        ->setBorder(array(
+                            'bottom' => array(
+                                'style' => 'solid'
+                            )
+                        ));
+                });
+                $sheet->freezeFirstRow();
+            });
+        })->download('xlsx');
+    }
+
+    private function authenticate($role)
+    {
         if (Auth::check()) {
             $session_id = Auth::user()->id;
-        }else{
+        } else {
             return false;
         }
 
-        $auth = NULL;
+        $auth = null;
         switch ($role) {
             case 1:
                 $auth = Pegawai::find($session_id);
                 break;
-            
+
             case 2:
                 $auth = PMO::find($session_id);
                 break;

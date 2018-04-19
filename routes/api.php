@@ -25,6 +25,8 @@ Route::resource('pegawai', 'Pegawai\PegawaiAPIController');
 
 Route::resource('user', 'User\UserAPIController');
 
+Route::get('kompetensi/export', 'DataKompetensiController@export');
+
 Route::resource('kompetensi', 'DataKompetensiController');
 
 Route::resource('kinerja', 'DataKinerjaController');

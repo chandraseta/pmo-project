@@ -31,10 +31,12 @@ class PegawaiAPIController extends APIBaseController
     public function index()
     {
 
-        if(!$this->authenticate(5)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(5)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
-        $user = Pegawai::with(['user','riwayatPendidikans','riwayatPekerjaans','dataKepegawaians'])->get();
-        
+        $user = Pegawai::with(['user', 'riwayatPendidikans', 'riwayatPekerjaans', 'dataKepegawaians'])->get();
+
         return $this->sendResponse($user, 'Profiles retrieved successfully.');
     }
 
@@ -48,7 +50,9 @@ class PegawaiAPIController extends APIBaseController
     public function store(Request $request)
     {
 
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
 
         $input = $request->all();
@@ -61,13 +65,13 @@ class PegawaiAPIController extends APIBaseController
             'id_pengubah' => 'required',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $find = User::where('email', $input['email'])->count();
 
-        if($find != 0){
+        if ($find != 0) {
             return $this->sendError('Email Already Exist');
         }
 
@@ -100,7 +104,9 @@ class PegawaiAPIController extends APIBaseController
      */
     public function show($id)
     {
-        if(!$this->authenticate(5)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(5)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
         $pegawai = Pegawai::find($id);
 
@@ -116,7 +122,7 @@ class PegawaiAPIController extends APIBaseController
 
         $data = [
             'user' => $user->toArray(),
-            'pegawai'    => $pegawai->toArray(),
+            'pegawai' => $pegawai->toArray(),
             'pendidikan' => $pendidikan->get()->toArray(),
             'pekerjaan' => $pekerjaan->get()->toArray(),
             'kepegawaian' => $kepegawaian->get()->toArray(),
@@ -136,7 +142,9 @@ class PegawaiAPIController extends APIBaseController
     public function update(Request $request, $id)
     {
 
-        if(!$this->authenticate(4)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(4)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
 
         $input = $request->all();
@@ -150,7 +158,7 @@ class PegawaiAPIController extends APIBaseController
             'tanggal_lahir' => 'required',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
@@ -164,7 +172,7 @@ class PegawaiAPIController extends APIBaseController
         $user = User::find($id);
 
 
-        if($find->count() != 0 && $find->first()->email != $user->email){
+        if ($find->count() != 0 && $find->first()->email != $user->email) {
             return $this->sendError('Email Already Exist');
         }
 
@@ -178,11 +186,11 @@ class PegawaiAPIController extends APIBaseController
 
         $pendidikan = RiwayatPendidikan::where('id_pegawai', $id);
 
-        if($pendidikan->count() > 0){
+        if ($pendidikan->count() > 0) {
             $pendidikan->delete();
         }
 
-        for($i = 1; $i <= $input['pendidikan_counter']; $i++){
+        for ($i = 1; $i <= $input['pendidikan_counter']; $i++) {
             $postRiwayatPendidikan = RiwayatPendidikan::create([
                 'id_pegawai' => $id,
                 'nama_institusi' => $input['pendidikan_nama_institusi_' . $i],
@@ -195,11 +203,11 @@ class PegawaiAPIController extends APIBaseController
 
         $pekerjaan = RiwayatPekerjaan::where('id_pegawai', $id);
 
-        if ($pekerjaan->count() > 0){
+        if ($pekerjaan->count() > 0) {
             $pekerjaan->delete();
         }
 
-        for($i = 1; $i <= $input['pekerjaan_counter']; $i++){
+        for ($i = 1; $i <= $input['pekerjaan_counter']; $i++) {
             $postRiwayatPekerjaan = RiwayatPekerjaan::create([
                 'id_pegawai' => $id,
                 'nama_institusi' => $input['pekerjaan_nama_institusi_' . $i],
@@ -211,11 +219,11 @@ class PegawaiAPIController extends APIBaseController
 
         $kepegawaian = DataKepegawaian::where('id_pegawai', $id);
 
-        if ($kepegawaian->count() > 0){
+        if ($kepegawaian->count() > 0) {
             $kepegawaian->delete();
         }
 
-        for($i = 1; $i <= $input['kepegawaian_counter']; $i++){
+        for ($i = 1; $i <= $input['kepegawaian_counter']; $i++) {
             $postDataKepegawaian = DataKepegawaian::create([
                 'id_pegawai' => $id,
                 'kompetensi' => $input['kepegawaian_kompetensi_' . $i],
@@ -228,12 +236,12 @@ class PegawaiAPIController extends APIBaseController
 
         $sertifikat = Sertifikat::where('id_pegawai', $id);
 
-        if ($sertifikat->count() > 0){
+        if ($sertifikat->count() > 0) {
             $sertifikat->delete();
         }
 
         for ($i = 1; $i <= $input['sertifikat_counter']; $i++) {
-            $photoTimeAsName = time().'.'.$input['sertifikat_user_photo_' . $i]->getClientOriginalExtension();
+            $photoTimeAsName = time() . '.' . $input['sertifikat_user_photo_' . $i]->getClientOriginalExtension();
             $input['sertifikat_user_photo_' . $i]->move(public_path('avatars'), $photoTimeAsName);
 
             $postSertifikat = Sertifikat::create([
@@ -261,7 +269,6 @@ class PegawaiAPIController extends APIBaseController
         return $this->sendResponse($data, 'Profile updated successfully.');
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
@@ -271,8 +278,9 @@ class PegawaiAPIController extends APIBaseController
     public function destroy($id)
     {
 
-        if(!$this->authenticate(3)){return $this->sendError('You are not authenticated.');}
-
+        if (!$this->authenticate(3)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
         $user = User::find($id);
 
@@ -282,19 +290,19 @@ class PegawaiAPIController extends APIBaseController
 
         $pendidikan = RiwayatPendidikan::where('id_pegawai', $id);
 
-        if ($pendidikan->count() > 0){
+        if ($pendidikan->count() > 0) {
             $pendidikan->delete();
         }
 
         $pekerjaan = RiwayatPekerjaan::where('id_pegawai', $id);
 
-        if ($pekerjaan->count() > 0){
+        if ($pekerjaan->count() > 0) {
             $pekerjaan->delete();
         }
 
         $kepegawaian = DataKepegawaian::where('id_pegawai', $id);
 
-        if ($kepegawaian->count() > 0){
+        if ($kepegawaian->count() > 0) {
             $kepegawaian->delete();
         }
 
@@ -306,7 +314,8 @@ class PegawaiAPIController extends APIBaseController
         return $this->sendResponse($id, 'Tag deleted successfully.');
     }
 
-    public function export() {
+    public function export()
+    {
         $pegawai_rows = DB::table('denormalized_pegawai')->select([
             'denormalized_pegawai.nip',
             'denormalized_pegawai.nama',
@@ -338,41 +347,42 @@ class PegawaiAPIController extends APIBaseController
 
         $timestamp = Carbon::now()->toDateTimeString();
         $filename = 'pegawai_' . $timestamp;
-        Excel::create($filename, function($excel) use ($pegawai_array, $timestamp) {
-            $excel->setTitle('Data Pegawai '. $timestamp)
-                  ->setCreator('UPT PMO ITB')
-                  ->setCompany('UPT PMO ITB')
-                  ->setDescription('Data pegawai UPT PMO ITB pada ' . $timestamp);
+        Excel::create($filename, function ($excel) use ($pegawai_array, $timestamp) {
+            $excel->setTitle('Data Pegawai ' . $timestamp)
+                ->setCreator('UPT PMO ITB')
+                ->setCompany('UPT PMO ITB')
+                ->setDescription('Data pegawai UPT PMO ITB pada ' . $timestamp);
 
-            $excel->sheet('sheet1', function($sheet) use ($pegawai_array) {
+            $excel->sheet('sheet1', function ($sheet) use ($pegawai_array) {
                 $sheet->fromArray($pegawai_array, null, 'A1', false, false);
 
-                $sheet->row(1, function($row) {
+                $sheet->row(1, function ($row) {
                     $row->setFontWeight('bold')
                         ->setBorder(array(
                             'bottom' => array(
                                 'style' => 'solid'
                             )
-                          ));
+                        ));
                 });
                 $sheet->freezeFirstRow();
             });
         })->download('xlsx');
     }
-    
-    private function authenticate($role){
+
+    private function authenticate($role)
+    {
         if (Auth::check()) {
             $session_id = Auth::user()->id;
-        }else{
+        } else {
             return false;
         }
 
-        $auth = NULL;
+        $auth = null;
         switch ($role) {
             case 1:
                 $auth = Pegawai::find($session_id);
                 break;
-            
+
             case 2:
                 $auth = PMO::find($session_id);
                 break;
