@@ -27,11 +27,13 @@ Route::resource('user', 'User\UserAPIController');
 
 Route::get('kompetensi/export', 'DataKompetensiController@export');
 
+Route::post('kompetensi/import', 'DataKompetensiController@import');
+
 Route::resource('kompetensi', 'DataKompetensiController');
 
 Route::get('kinerja/export', 'DataKinerjaController@export');
 
-Route::post('kinerja/import', 'DataKinerjaController@import')->name('import');
+Route::post('kinerja/import', 'DataKinerjaController@import');
 
 Route::resource('kinerja', 'DataKinerjaController');
 

@@ -170,7 +170,7 @@ class DataKinerjaController extends APIBaseController
                 'denormalized_pegawai.pendidikan_terakhir',
                 'denormalized_pegawai.tanggal_lahir',
                 'kinerja.tahun',
-                DB::raw('kinerja.semester + 1'),
+                'kinerja.semester',
                 'kinerja.nilai',
                 'kinerja.catatan',
             ])->get();
@@ -204,11 +204,14 @@ class DataKinerjaController extends APIBaseController
         if ($request->hasFile('excel')) {
             $extension = File::extension($request->excel->getClientOriginalName());
             if ($extension == "xlsx" || $extension == "xls" || $extension == "csv") {
+                // Load data from Excel file
                 $path = $request->excel->getRealPath();
                 $objs = Excel::load($path, null)->get();
 
+                // Parse data
                 if (!empty($objs) && $objs->count()) {
                     try {
+                        // Insert each row
                         foreach ($objs as $obj) {
                             $arr = [
                                 'id_pegawai' => Pegawai::where('nip', $obj->nip)->first()->id_user,
@@ -222,10 +225,10 @@ class DataKinerjaController extends APIBaseController
                             $model->fill($arr);
                             $model->save();
                         }
+                        return response('Data inserted', 200);
                     } catch (Exception $e) {
                         return response('Failed in inserting data. Check data correctness', 400);
                     }
-                    return response('Data inserted', 200);
                 } else {
                     return response('Empty file', 400);
                 }
