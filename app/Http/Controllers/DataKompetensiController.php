@@ -24,7 +24,6 @@ class DataKompetensiController extends APIBaseController
     {
         if(!$this->authenticate(4)){return $this->sendError('You are not authenticated.');}
 
-        //$data = Kompetensi::all();
         $data = DB::table('kompetensi')
             ->join('denormalized_pegawai', 'kompetensi.id_pegawai', '=', 'denormalized_pegawai.id_user')
             ->get();
@@ -53,9 +52,7 @@ class DataKompetensiController extends APIBaseController
     {
         if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
 
-        $input = $request->all();
-
-        $validator = $this->validateDataKompetensi($input);
+        $validator = $this->validateDataKompetensi($request);
         if ($validator->fails()) {
             return $this->sendError('Gagal menambahkan data kompetensi.', 400);
         }
