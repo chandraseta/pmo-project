@@ -1,24 +1,24 @@
 <?php
 
-
 namespace App\Http\Controllers\Pegawai;
 
-
-use Illuminate\Http\Request;
+use App\Admin;
+use App\DataKepegawaian;
+use App\DenormalizedPegawai;
 use App\Http\Controllers\APIBaseController as APIBaseController;
-use Illuminate\Support\Facades\Auth;
-use App\User;
 use App\Pegawai;
 use App\PMO;
-use App\Admin;
-use App\RiwayatPendidikan;
 use App\RiwayatPekerjaan;
-use App\DataKepegawaian;
+use App\RiwayatPendidikan;
 use App\Sertifikat;
-use Validator;
-use Illuminate\Support\Facades\Hash;
+use App\User;
 use Carbon\Carbon;
 use Excel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Validator;
 
 
 class PegawaiAPIController extends APIBaseController
@@ -307,59 +307,16 @@ class PegawaiAPIController extends APIBaseController
     }
 
     public function export() {
-        $pegawai_rows = \DB::select(\DB::raw('
-            WITH partitioned_data_kepegawaian AS (
-                SELECT data_kepegawaian.*, 
-                    ROW_NUMBER() OVER ( 
-                        PARTITION BY id_pegawai 
-                        ORDER BY CASE 
-                            WHEN tahun_keluar IS NULL 
-                                THEN 1 
-                                ELSE 0 
-                            END DESC, 
-                            tahun_masuk DESC 
-                    ) AS rn 
-                FROM data_kepegawaian 
-            ), 
-            last_data_kepegawaian AS ( 
-                SELECT id_pegawai, id_unit_kerja, id_posisi, tahun_masuk 
-                FROM partitioned_data_kepegawaian 
-                WHERE rn = 1 
-                ORDER BY id_pegawai
-            ), 
-            retrieved_data_kepegawaian AS (
-                SELECT id_pegawai, nama_unit_kerja, nama_posisi, tahun_masuk 
-                FROM last_data_kepegawaian 
-                    NATURAL JOIN unit_kerja 
-                    NATURAL JOIN posisi 
-                ORDER BY id_pegawai
-            ), 
-            partitioned_riwayat_pendidikan AS (
-                SELECT riwayat_pendidikan.*, 
-                    ROW_NUMBER() OVER ( 
-                        PARTITION BY id_pegawai 
-                        ORDER BY CASE 
-                            WHEN tahun_keluar IS NULL 
-                                THEN 1 
-                                ELSE 0 
-                            END DESC, 
-                            tahun_masuk DESC 
-                    ) AS rn 
-                FROM riwayat_pendidikan 
-            ), 
-            last_riwayat_pendidikan AS ( 
-                SELECT id_pegawai, strata 
-                FROM partitioned_riwayat_pendidikan 
-                WHERE rn = 1
-            ) 
-            SELECT nip, nama, nama_unit_kerja, nama_posisi, tahun_masuk, strata, no_telp, tanggal_lahir  
-            FROM pegawai 
-                LEFT OUTER JOIN retrieved_data_kepegawaian 
-                    ON pegawai.id_user = retrieved_data_kepegawaian.id_pegawai 
-                LEFT OUTER JOIN last_riwayat_pendidikan 
-                    ON pegawai.id_user = last_riwayat_pendidikan.id_pegawai 
-            ORDER BY nip;
-        '));
+        $pegawai_rows = DB::table('denormalized_pegawai')->select([
+            'denormalized_pegawai.nip',
+            'denormalized_pegawai.nama',
+            'denormalized_pegawai.unit_kerja',
+            'denormalized_pegawai.posisi',
+            'denormalized_pegawai.tahun_masuk_kerja',
+            'denormalized_pegawai.pendidikan_terakhir',
+            'denormalized_pegawai.no_telp',
+            'denormalized_pegawai.tanggal_lahir'
+        ])->get();
 
         $pegawai_array = [];
 
