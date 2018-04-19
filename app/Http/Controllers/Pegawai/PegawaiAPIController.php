@@ -174,6 +174,10 @@ class PegawaiAPIController extends APIBaseController
         $pegawai->tempat_lahir = $input['tempat_lahir'];
         $pegawai->tanggal_lahir = $input['tanggal_lahir'];
 
+        $photoTimeAsName = $input['nip'].'.'.$input['user_photo']->getClientOriginalExtension();    
+        $input['user_photo']->move(public_path('profile'), $photoTimeAsName);
+
+
         $pendidikan = RiwayatPendidikan::where('id_pegawai', $id);
 
         if($pendidikan->count() > 0){
@@ -232,7 +236,7 @@ class PegawaiAPIController extends APIBaseController
 
         for ($i = 1; $i <= $input['sertifikat_counter']; $i++) {
             $photoTimeAsName = time().'.'.$input['sertifikat_user_photo_' . $i]->getClientOriginalExtension();
-            $input['sertifikat_user_photo_' . $i]->move(public_path('avatars'), $photoTimeAsName);
+            $input['sertifikat_user_photo_' . $i]->move(public_path('sertifikat'), $photoTimeAsName);
 
             $postSertifikat = Sertifikat::create([
                 'id_pegawai' => $id,
