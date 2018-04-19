@@ -1,33 +1,35 @@
 body {
-    padding-top: 5rem;
+  padding-top: 5rem;
 }
+
 .starter-template {
-    padding: 3rem 1.5rem;
-    text-align: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
 }
 
 #img-profile {
-    /*height: 500px;*/
-    /*width: 400px;*/
+  /*height: 500px;*/
+  /*width: 400px;*/
 }
 
 .card-container {
-    padding: 30px 120px;
+  padding: 30px 120px;
 }
 
 footer {
-    margin-top: 100px;
+  margin-top: 100px;
 }
 
 table {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 table td,
-table th{
-    text-align: center;
+table th {
+  text-align: center;
 }
 
 .btn-simpan {
-    margin-left: 10px;
+  margin-left: 10px;
 }
+

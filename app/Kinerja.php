@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id_kinerja
  * @property int $id_pegawai
- * @property string $tanggal
- * @property string $laporan_kinerja
+ * @property string $tahun
+ * @property boolean $semester
+ * @property float $nilai
+ * @property string $catatan
  * @property Pegawai $pegawai
  */
 class Kinerja extends Model
@@ -30,7 +32,7 @@ class Kinerja extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_pegawai', 'tanggal', 'laporan_kinerja'];
+    protected $fillable = ['id_pegawai', 'tahun', 'semester', 'nilai', 'catatan'];
 
     /**
      * Indicates if the model should be timestamped.

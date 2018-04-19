@@ -19,11 +19,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('templates/{template}', 'FileDownloadController@downloadTemplate');
 
+Route::get('pegawai/export', 'Pegawai\PegawaiAPIController@export');
+
 Route::resource('pegawai', 'Pegawai\PegawaiAPIController');
 
 Route::resource('user', 'User\UserAPIController');
 
+Route::get('kompetensi/export', 'DataKompetensiController@export');
+
 Route::resource('kompetensi', 'DataKompetensiController');
+
+Route::get('kinerja/export', 'DataKinerjaController@export');
 
 Route::resource('kinerja', 'DataKinerjaController');
 
