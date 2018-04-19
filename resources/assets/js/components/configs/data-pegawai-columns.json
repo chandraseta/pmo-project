@@ -1,0 +1,50 @@
+[
+  {
+    "label": "",
+    "field": "viewButton",
+    "href": "/pages/profile"
+  },
+  {
+    "label": "NIP",
+    "field": "nip",
+    "immutable": true
+  },
+  {
+    "label": "Nama Lengkap",
+    "field": "nama",
+    "immutable": true
+  },
+  {
+    "label": "Unit Kerja",
+    "field": "unit_kerja"
+  },
+  {
+    "label": "Jabatan",
+    "field": "posisi"
+  },
+  {
+    "label": "Tahun Menjabat",
+    "field": "tahun_masuk_kerja",
+    "type": "number"
+  },
+  {
+    "label": "Kelompok Kompetensi",
+    "field": "kelompok_kompetensi"
+  },
+  {
+    "label": "No. Telp.",
+    "field": "no_telp"
+  },
+  {
+    "label": "Pendidikan",
+    "field": "pendidikan_terakhir"
+  },
+  {
+    "label": "Tanggal Lahir",
+    "field": "tanggal_lahir",
+    "type": "date",
+    "dateInputFormat": "YYYY-MM-DD",
+    "dateOutputFormat": "DD-MM-YYYY",
+    "immutable": true
+  }
+]

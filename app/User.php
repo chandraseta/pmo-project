@@ -2,7 +2,10 @@
 
 namespace App;
 
+
+use App\Notification\ResetPassword;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -24,6 +27,30 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'created_at', 'updated_at',
     ];
+
+    public static function generatePassword() {
+        return bcrypt(str_random(30));
+    }
+
+    public function sendPasswordResetNotification($token) {
+        $this->notify(new ResetPassword($token));
+    }
+
+    public function isAdmin() {
+        return !is_null(Admin::find($this->id));
+    }
+
+    public function isPMO() {
+        return !is_null(PMO::find($this->id));
+    }
+
+    public function isPegawai() {
+        return !is_null(Pegawai::find($this->id));
+    }
+
+    public function isPegawaiOnly() {
+        return ($this->isPegawai() and !$this->isPMO() and !$this->isAdmin());
+    }
 }

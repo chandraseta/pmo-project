@@ -20,7 +20,7 @@
 </head>
 <body>
 <?php if(!isset($page)) {$page = '';}?>
-@if($page === 'pmo')
+@if($page === 'pmo' or $page ==='admin')
     @yield('content')
 @else
     <div id="app">

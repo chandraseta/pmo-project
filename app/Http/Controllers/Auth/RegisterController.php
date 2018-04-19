@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Admin;
+use App\Notification\WelcomeEmail;
+use App\Pegawai;
+use App\PMO;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/pages/admin/adduser';
 
     /**
      * Create a new controller instance.
@@ -38,6 +44,32 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Override register to disable auto login
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        if ($request->has('isAdmin') or $request->has('isPMO') or $request->has('isPegawai')) {
+            event(new Registered($user = $this->create($request->all())));
+            if ($this->registered($request, $user)) {
+                $request->session()->flash('alert-success', 'Pengguna berhasil ditambahkan');
+            }
+            else {
+                $request->session()->flash('alert-warning', 'Terjadi kesalahan dalam penambahan pengguna');
+            }
+        }
+        else {
+            $request->session()->flash('alert-warning', 'Pengguna baru harus memiliki setidaknya 1 peran (Administrator, Anggota PMO, atau Pegawai)');
+        }
+        return redirect($this->redirectPath());
     }
 
     /**
@@ -51,7 +83,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'nip' => 'required|string|min:18|max:18|unique:pegawai',
         ]);
     }
 
@@ -63,10 +95,39 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $new_user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make(User::generatePassword()),
         ]);
+
+        if (isset($data['isAdmin'])) {
+            $pegawai = Admin::create([
+                'id_user' => $new_user->id,
+            ]);
+        }
+
+        if (isset($data['isPMO'])) {
+            $pmo = PMO::create([
+                'id_user' => $new_user->id,
+            ]);
+        }
+
+        if (isset($data['isPegawai'])) {
+            $pegawai = Pegawai::create([
+                'id_user' => $new_user->id,
+                'nama' => $new_user->name,
+                'nip' => $data['nip'],
+                'id_pengubah' => $new_user->id,
+            ]);
+        }
+
+        return $new_user;
+    }
+
+    protected function registered(Request $request, $user) {
+        $token = app('auth.password.broker')->createToken($user);
+        $user->notify(new WelcomeEmail($token));
+        return true;
     }
 }

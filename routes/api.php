@@ -16,3 +16,25 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('templates/{template}', 'FileDownloadController@downloadTemplate');
+
+Route::get('pegawai/export', 'Pegawai\PegawaiAPIController@export');
+
+Route::resource('pegawai', 'Pegawai\PegawaiAPIController');
+
+Route::resource('user', 'User\UserAPIController');
+
+Route::get('kompetensi/export', 'DataKompetensiController@export');
+
+Route::post('kompetensi/import', 'DataKompetensiController@import');
+
+Route::resource('kompetensi', 'DataKompetensiController');
+
+Route::get('kinerja/export', 'DataKinerjaController@export');
+
+Route::post('kinerja/import', 'DataKinerjaController@import');
+
+Route::resource('kinerja', 'DataKinerjaController');
+
+Route::resource('pegawai-denormalized', 'DataPegawaiController');

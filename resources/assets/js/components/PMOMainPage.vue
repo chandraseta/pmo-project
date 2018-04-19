@@ -8,18 +8,34 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3 p-2">
-                            <button type="button" class="btn btn-primary m-1">Add Data</button>
+                            <button type="button"
+                                    class="btn btn-secondary m-1"
+                                    data-toggle="modal"
+                                    data-target="#addDataModal"
+                                    v-if="!disableTambahDataButton">
+                                Tambah Data
+                            </button>
                         </div>
                         <div class="col-md-3 p-2"></div>
                         <div class="col-md-3 p-2"></div>
                         <div class="col-md-3 p-2">
-                            <button type="button" class="btn btn-outline-primary float-md-right m-1">Download</button>
-                            <button type="button" class="btn btn-outline-primary float-md-right m-1">Upload</button>
+                            <button type="button"
+                                    class="btn btn-primary float-md-right m-1"
+                                    @click="downloadData">
+                                Download Data
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary float-md-right m-1"
+                                    data-toggle="modal"
+                                    data-target="#uploadModal"
+                                    v-if="!disableUploadDataButton">
+                                Upload Data
+                            </button>
                         </div>
                     </div>
                 </div>
             </section>
-            <data-table :tableTitle="title"
+            <data-table v-on:dataChange="saveData" :tableTitle="title"
                         :columns="columns"
                         :rows="rows">
             </data-table>
@@ -27,248 +43,287 @@
         <footer>
 
         </footer>
+        <!--Modals-->
+        <div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addDataModalLabel">Entri {{ title }} Baru</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group" v-for="column in columns" v-if="column.fillable">
+                                <label :for="column.field">{{ column.label }}</label>
+                                <input class="form-control"
+                                       :class="{'is-invalid': isFormInvalid[column.field]}"
+                                       :type="column.type == 'number' || 'date' ? column.type : 'text'"
+                                       :id="column.field"
+                                       :placeholder="column.label"
+                                       v-model="newData[column.field]">
+                                <div v-if="column.required" class="invalid-feedback">
+                                    NIP diperlukan untuk membuat data baru.
+                                </div>
+                            </div>
+                        </form>
+                        <div class="alert" :class="'alert-' + statusAlert.type" role="alert" v-if="statusAlert.display">
+                            {{ statusAlert.message }}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary" @click="addData" :disabled="!isFormValid">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadModalLabel">Upload {{ title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <p>
+                                Download format excel di bawah ini terlebih dahulu.
+                            </p>
+                            <button type="button"
+                                    class="btn btn-dark btn-sm"
+                                    @click="downloadTemplate">
+                                Download Format Excel
+                            </button>
+                        </div>
+                        <br>
+                        <form>
+                            <div class="form-group container">
+                                <label for="upload-file">Upload data menggunakan file excel: </label>
+                                <input type="file" class="form-control-file" id="upload-file">
+                                <small class="text-muted">Harap gunakan file Excel dengan format yang telah disediakan di atas.</small>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="uploadFile">Upload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
+        dataPegawaiColumns: require('./configs/data-pegawai-columns.json'),
+        dataKompetensiColumns: require('./configs/data-kompetensi-columns.json'),
+        dataKinerjaColumns: require('./configs/data-kinerja-columns.json'),
         name: 'pmo-main-page',
         components: {
-            'pmo-navbar': require('./Navbar.vue'),
+            'pmo-navbar': require('./PMONavbar.vue'),
             'data-table': require('./DataTable.vue'),
         },
         data() {
             return {
                 title: 'Data Pegawai',
+                currentTab: 'dataPegawai',
                 columns: [],
-                dataPegawaiColumns:[
-                    {
-                        label: 'NIP',
-                        field: 'nip',
-                    },
-                    {
-                        label: 'Nama Lengkap',
-                        field: 'name'
-                    },
-                    {
-                        label: 'Unit Kerja',
-                        field: 'unit'
-                    },
-                    {
-                        label: 'Jabatan',
-                        field: 'position'
-                    },
-                    {
-                        label: 'Tahun Menjabat',
-                        field: 'startYear',
-                        type: 'number'
-                    },
-                    {
-                        label: 'Kelompok Kompetensi',
-                        field: 'competencyGroup'
-                    },
-                    {
-                        label: 'No. Telp.',
-                        field: 'phone'
-                    },
-                    {
-                        label: 'Pendidikan',
-                        field: 'education'
-                    },
-                    {
-                        label: 'Tanggal Lahir',
-                        field: 'birthday'
-                    },
-                ],
-                dataKompetensiColumns:[
-//                    Data Pegawai
-                    {
-                        label: 'NIP',
-                        field: 'nip',
-                    },
-                    {
-                        label: 'Nama Lengkap',
-                        field: 'name'
-                    },
-                    {
-                        label: 'Unit Kerja',
-                        field: 'unit'
-                    },
-//                    Fungsi Kognitif
-                    {
-                        label: 'Efisiensi Kecerdasan',
-                        field: 'efisiensiKecerdasan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Daya Nalar',
-                        field: 'dayaNalar',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Daya Asosiasi',
-                        field: 'dayaAsosiasi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Daya Analitis',
-                        field: 'dayaAnalitis',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Daya Antisipasi',
-                        field: 'dayaAntisipasi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Kemandirian Berpikir',
-                        field: 'kemandirianBerpikir',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Fleksibilitas',
-                        field: 'fleksibilitas',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-                    {
-                        label: 'Daya Tangkap',
-                        field: 'dayaTangkap',
-                        type: 'number',
-                        thClass: 'text-center fungsi-kognitif-group'
-                    },
-//                    Fungsi Interaksional
-                    {
-                        label: 'Penempatan Diri',
-                        field: 'penempatanDiri',
-                        type: 'number',
-                        thClass: 'text-center fungsi-interaksional-group'
-                    },
-                    {
-                        label: 'Percaya Diri',
-                        field: 'percayaDiri',
-                        type: 'number',
-                        thClass: 'text-center fungsi-interaksional-group'
-                    },
-                    {
-                        label: 'Daya Kooperatif',
-                        field: 'dayaKooperatif',
-                        type: 'number',
-                        thClass: 'text-center fungsi-interaksional-group'
-                    },
-                    {
-                        label: 'Penyesuaian Perasaan',
-                        field: 'penyesuaianPerasaan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-interaksional-group'
-                    },
-//                    Fungsi Emosional
-                    {
-                        label: 'Stabilitas Emosi',
-                        field: 'stabilitasEmosi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-emosional-group'
-                    },
-                    {
-                        label: 'Toleransi terhadap Stress',
-                        field: 'toleransiStress',
-                        type: 'number',
-                        thClass: 'text-center fungsi-emosional-group'
-                    },
-                    {
-                        label: 'Pengendalian Diri',
-                        field: 'pengendalianDiri',
-                        type: 'number',
-                        thClass: 'text-center fungsi-emosional-group'
-                    },
-                    {
-                        label: 'Kemantapan Konsentrasi',
-                        field: 'kemantapanKonsentrasi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-emosional-group'
-                    },
-//                    Fungsi Sikap Kerja
-                    {
-                        label: 'Hasrat Berprestasi',
-                        field: 'hasratBerprestasi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-sikap-kerja-group'
-                    },
-                    {
-                        label: 'Daya Tahan',
-                        field: 'dayaTahan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-sikap-kerja-group'
-                    },
-                    {
-                        label: 'Keteraturan Kerja',
-                        field: 'keteraturanKerja',
-                        type: 'number',
-                        thClass: 'text-center fungsi-sikap-kerja-group'
-                    },
-                    {
-                        label: 'Pengerahan Energi Kerja',
-                        field: 'pengerahanEnergi',
-                        type: 'number',
-                        thClass: 'text-center fungsi-sikap-kerja-group'
-                    },
-//                    Fungsi Manajerial
-                    {
-                        label: 'Efektivitas Perencanaan',
-                        field: 'efektivitasPerencanaan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-manajerial-group'
-                    },
-                    {
-                        label: 'Pengorganisasian Pelaksanaan',
-                        field: 'pengorganisasianPelaksanaan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-manajerial-group'
-                    },
-                    {
-                        label: 'Intensitas Pengarahan',
-                        field: 'intensitasPengarahan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-manajerial-group'
-                    },
-                    {
-                        label: 'Kekuatan Pengawasan',
-                        field: 'kekuatanPengawasan',
-                        type: 'number',
-                        thClass: 'text-center fungsi-manajerial-group'
-                    },
-                ],
-                dataKinerjaColumns:[],
                 rows: [],
-                dataPegawai: [
-                    {id:1, nip:"12345678", name:"Iqbal", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:2, nip:"12345634", name:"Al", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                    {id:3, nip:"12345623", name:"Khowarizmi", unit:"UKJ", position:"Ketua", startYear:2015, competencyGroup:"IT", phone: '085600000000', education: "S1", birthday: "18 Juli 1997"},
-                ],
+                dataPegawai: [],
                 dataKinerja: [],
-                dataKompetensi: [
-                    {
-                        id:1, nip:99999999, name:"Al", unit:"Shokenbu"
-                    },
-                ],
+                dataKompetensi: [],
+                newData: {},
+                disableTambahDataButton: true,
+                disableUploadDataButton: true,
+                isFormInvalid: {},
+                statusAlert: {
+                    display: false,
+                    message: '',
+                    type: ''
+                }
+            }
+        },
+        computed: {
+            isFormValid: function () {
+                let validity;
+                let isInvalid = this.isFormInvalid;
+                for (let field in isInvalid) {
+                    validity |= isInvalid[field];
+                }
+                return !validity;
+            }
+        },
+        watch: {
+            newData: {
+                handler: function (oldVal, newVal) {
+                    let isInvalid = {};
+                    this.columns.forEach(function (column) {
+                        if (column.required) {
+                            isInvalid[column.field] = newVal[column.field] == '';
+                        }
+                    });
+                    this.isFormInvalid = isInvalid;
+                },
+                deep: true
             }
         },
         methods: {
             changeTable: function (payload) {
                 this.title = payload.label;
+                this.currentTab = payload.name;
                 this.rows = this[payload.name];
-                this.columns = this[payload.name + 'Columns']
+                this.columns = this.$options[payload.name + 'Columns'];
+
+                this.disableTambahDataButton = payload.name === "dataPegawai";
+                this.disableUploadDataButton = payload.name === "dataPegawai";
+            },
+            saveData: function (payload) {
+                console.log(payload);
+
+                let url;
+                let getData;
+                if (this.currentTab === 'dataKompetensi') {
+                    url = '/api/kompetensi/' + payload.id_kompetensi;
+                    getData = this.getKompetensi;
+                } else if (this.currentTab === 'dataKinerja') {
+                    url = '/api/kinerja/' + payload.id_kinerja;
+                    getData = this.getKinerja;
+                }
+
+                let data = payload;
+                let config = {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                axios.put(url, data, config)
+                    .then(response => {
+                        console.log(response.data);
+                        alert(response.data.message);
+                        getData();
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                        alert(e.response.data.message);
+                    });
+            },
+            addData: function () {
+                console.log(this.newData);
+
+                let url;
+                let getData;
+                if (this.currentTab === 'dataKompetensi') {
+                    url = '/api/kompetensi';
+                    getData = this.getKompetensi;
+                } else if (this.currentTab === 'dataKinerja') {
+                    url = '/api/kinerja';
+                    getData = this.getKinerja;
+                }
+
+                let data = this.newData;
+                let config = {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                axios.post(url, data, config)
+                    .then(response => {
+                        console.log(response.data);
+                        this.newData = {};
+                        this.setAlert('success', response.data.message);
+                        getData();
+                    })
+                    .catch(e => {
+                        console.log(e.message);
+                        console.log(e.response.data.message);
+                        this.setAlert('danger', e.response.data.message);
+                    })
+            },
+            getPegawai: function () {
+                axios.get('/api/pegawai-denormalized')
+                    .then(response => {
+                        this.dataPegawai = response.data.data;
+                        this.rows = this[this.currentTab];
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                    });
+
+            },
+            getKompetensi: function () {
+                 axios.get('/api/kompetensi')
+                    .then(response => {
+                        this.dataKompetensi = response.data.data;
+                        this.rows = this[this.currentTab];
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                    });
+            },
+            getKinerja: function () {
+                axios.get('/api/kinerja')
+                    .then(response => {
+                        this.dataKinerja = response.data.data;
+                        this.rows = this[this.currentTab];
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                    })
+            },
+            downloadTemplate: function() {
+                let url = '/api/templates/template.xlsx';
+                switch (this.currentTab) {
+                    case 'dataKompetensi': url = '/api/templates/kompetensi_template.xlsx'; break;
+                    case 'dataKinerja': url = '/api/templates/kinerja_template.xlsx'; break;
+                }
+                window.open(url);
+            },
+            downloadData: function () {
+                let url;
+                switch (this.currentTab) {
+                    case 'dataPegawai': url = '/api/pegawai/export'; break;
+                    case 'dataKompetensi': url = '/api/kompetensi/export'; break;
+                    case 'dataKinerja': url = '/api/kinerja/export'; break;
+                }
+                window.open(url);
+            },
+            uploadFile: function () {
+                let url;
+                switch (this.currentTab) {
+                    case 'dataKompetensi': url = '/api/kompetensi/import'; break;
+                    case 'dataKinerja': url = '/api/kinerja/import'; break;
+                }
+
+                let excelFile = document.getElementById('upload-file').files[0];
+                let formData = new FormData;
+                formData.append('excel', excelFile);
+
+                axios.post(url, formData)
+                    .then(response => {
+                        console.log("Import successful");
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                        console.log(e.response.message);
+                    })
+            },
+            setAlert: function (type, message) {
+                this.statusAlert.display = true;
+                this.statusAlert.message = message;
+                this.statusAlert.type = type;
             }
         },
         created: function () {
-            this.rows = this.dataPegawai;
-            this.columns = this.dataPegawaiColumns;
+            this.columns = this.$options.dataPegawaiColumns;
+            this.getPegawai();
+            this.getKompetensi();
+            this.getKinerja();
         }
     }
 </script>
