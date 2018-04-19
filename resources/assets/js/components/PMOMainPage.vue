@@ -151,7 +151,7 @@
         computed: {
             isFormValid: function () {
                 let validity;
-                let isInvalid = this.isFormInvalid
+                let isInvalid = this.isFormInvalid;
                 for (let field in isInvalid) {
                     validity |= isInvalid[field];
                 }
