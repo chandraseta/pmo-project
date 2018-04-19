@@ -68,4 +68,29 @@ class DataKompetensiAPITest extends TestCase
 
        $this->assertDatabaseHas('kompetensi', $data->toArray());
    }
+
+   public function testItUpdatesDataKompetensi() {
+        $data = Kompetensi::inRandomOrder()->first();
+        $newData = factory(Kompetensi::class)->make();
+        $newData->id_kompetensi = $data->id_kompetensi;
+        $newData->id_pegawai = $data->id_pegawai;
+
+        $method = 'PUT';
+        $uri = $this->baseUri.'/'.$newData->id_kompetensi;
+        $payload = $newData->toArray();
+        $response = $this->actingAs($this->user)
+            ->json($method, $uri, $payload)
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => $payload
+            ]);
+
+        $nonExistId = Kompetensi::all()->max('id_kompetensi') + 1;
+        $newData->id_kompetensi = $nonExistId;
+        $uri = $this->baseUri.'/'.$newData->id_kompetensi;
+        $payload = $newData->toArray();
+        $response = $this->actingAs($this->user)
+            ->json($method, $uri, $payload)
+            ->assertStatus(404);
+   }
 }

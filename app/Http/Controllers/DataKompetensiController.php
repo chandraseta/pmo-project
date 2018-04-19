@@ -102,14 +102,14 @@ class DataKompetensiController extends APIBaseController
     {
         $input = $request->all();
 
-        $validator = $this->validateDataKompetensi($input);
+        $validator = $this->validateDataKompetensi($request);
         if($validator->fails()){
             return $this->sendError('Gagal menyimpan data kompetensi.', 400);
         }
 
         $data = Kompetensi::find($id);
         if (is_null($data)) {
-            $this->sendError('Data Kompetensi dengan id = '.$id.' tidak ditemukan.');
+            return $this->sendError('Data Kompetensi dengan id = '.$id.' tidak ditemukan.', 404);
         }
 
         $data = $this->updateDataKompetensi($data, $input);
