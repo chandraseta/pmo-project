@@ -1,164 +1,291 @@
 <template>
-    <div class="card" id="profil-pegawai">
+    <div id="pegawai">
+        <div class="card" id="profil-pegawai">
+            <div class="card-header">
+                Profil Pegawai<a href="#profil-pegawai" class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai">Edit</a>
+            </div>
 
-        <div class="card-header">
-            Profil Pegawai<a href="#profil-pegawai" class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai">Edit</a>
+            <div class="card-body">
+                <div class="card-container">
+                    <div class="row">
+                        <div class="col-sm-3 img-responsive">
+                            <img id="img-profile" v-bind:src="pegawai.imageProfileUrl" class="img-thumbnail">
+                            <br><br>
+                            <button type="button" class="btn btn-primary">Ganti Foto</button>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <div class="col-sm-3 text-right">
+                                    Nama
+                                </div>
+                                <div class="col-sm-9">
+
+                                    <b v-if="!isEditProfile" v-text="pegawai.nama"></b>
+
+                                    <div id="edit-nama" class="form-group" v-if="isEditProfile">
+                                        <input v-model="pegawai.nama" type="text" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3 text-right">
+                                    Tempat, Tanggal Lahir
+                                </div>
+                                <div class="col-sm-9">
+                                    <b v-if="!isEditProfile"><span v-text="pegawai.tempatLahir"></span>, <span v-text="pegawai.tanggalLahir"></span></b>
+
+                                    <div class="form-row" v-if="isEditProfile">
+                                        <div id="edit-tempat-lahir" class="form-group">
+                                            <input v-model="pegawai.tempatLahir" type="text" class="form-control">
+                                            <small class="form-text text-muted">*Tempat lahir. Wajib diisi</small>
+                                        </div>
+                                        <div id="edit-tanggal-lahir" class="form-group">
+                                            <input v-model="pegawai.tanggalLahir" type="date" class="form-control">
+                                            <small class="form-text text-muted">*Tanggal lahir. Wajib diisi</small>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3 text-right">
+                                    Email
+                                </div>
+                                <div class="col-sm-9">
+                                    <b v-if="!isEditProfile" v-text="pegawai.email"></b>
+
+                                    <div v-if="isEditProfile" id="edit-email" class="form-group">
+                                        <input v-model="pegawai.email" type="email" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3 text-right">
+                                    No. Pegawai
+                                </div>
+                                <div class="col-sm-9">
+                                    <b v-if="!isEditProfile" v-text="pegawai.nopeg"></b>
+
+                                    <div v-if="isEditProfile" id="edit-nopeg" class="form-group">
+                                        <input v-model="pegawai.nopeg" type="text" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3 text-right">
+                                    Unit Kerja
+                                </div>
+                                <div class="col-sm-9">
+                                    <b v-if="!isEditProfile" v-text="pegawai.unitKerja"></b>
+
+                                    <div v-if="isEditProfile" id="edit-unit-kerja" class="form-group">
+                                        <input v-model="pegawai.unitKerja" type="text" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3 text-right">
+                                    Jabatan
+                                </div>
+                                <div class="col-sm-9">
+                                    <b v-if="!isEditProfile" v-text="pegawai.posisi"></b>
+
+                                    <div v-if="isEditProfile" id="edit-posisi" class="form-group">
+                                        <input v-model="pegawai.posisi" type="text" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3 text-right">
+                                    Kompetensi
+                                </div>
+                                <div class="col-sm-9">
+                                    <b v-if="!isEditProfile" v-text="pegawai.kompetensi"></b>
+
+                                    <div v-if="isEditProfile" id="edit-kompetensi" class="form-group">
+                                        <input v-model="pegawai.kompetensi" type="text" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3 text-right">
+                                    Tahun Masuk
+                                </div>
+                                <div class="col-sm-9">
+                                    <b v-if="!isEditProfile" v-text="pegawai.tahunMasuk"></b>
+
+                                    <div v-if="isEditProfile" id="edit-tahun-masuk" class="form-group">
+                                        <input v-model="pegawai.tahunMasuk" type="text" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted" v-if="isEditProfile">
+                <a href="#profil-pegawai" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveProfilPegawai">Simpan</a>
+                <a href="#profil-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelProfilPegawai">Batal</a>
+            </div>
         </div>
 
-        <div class="card-body">
-            <div class="card-container">
-                <div class="row">
-                    <div class="col-sm-3 img-responsive">
-                        <img id="img-profile" v-bind:src="pegawai.imageProfileUrl" class="img-thumbnail">
-                        <br><br>
-                        <button type="button" class="btn btn-primary">Ganti Foto</button>
+        <br>
+
+        <div class="card">
+            <div class="card-header">
+                Data Kepegawaian<a href="#" class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian">Edit</a>
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+
+                    <div v-if="dataKepegawaian.length === 0" class="no-data-kepegawaian">
+                        
+                        Belum ditambahkan.
+                        <br>
                     </div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-7">
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                Nama
-                            </div>
-                            <div class="col-sm-9">
 
-                                <b v-if="!isEditProfile" v-text="pegawai.nama"></b>
-
-                                <div id="edit-nama" class="form-group" v-if="isEditProfile">
-                                    <input v-model="pegawai.nama" type="text" class="form-control">
-                                    <small class="form-text text-muted">*Wajib diisi</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                Tempat, Tanggal Lahir
-                            </div>
-                            <div class="col-sm-9">
-                                <b v-if="!isEditProfile"><span v-text="pegawai.tempatLahir"></span>, <span v-text="pegawai.tanggalLahir"></span></b>
-
-                                <div class="form-row" v-if="isEditProfile">
-                                    <div id="edit-tempat-lahir" class="form-group">
-                                        <input v-model="pegawai.tempatLahir" type="text" class="form-control">
-                                        <small class="form-text text-muted">*Tempat lahir. Wajib diisi</small>
-                                    </div>
-                                    <div id="edit-tanggal-lahir" class="form-group">
-                                        <input v-model="pegawai.tanggalLahir" type="date" class="form-control">
-                                        <small class="form-text text-muted">*Tanggal lahir. Wajib diisi</small>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                Email
-                            </div>
-                            <div class="col-sm-9">
-                                <b v-if="!isEditProfile" v-text="pegawai.email"></b>
-
-                                <div v-if="isEditProfile" id="edit-email" class="form-group">
-                                    <input v-model="pegawai.email" type="email" class="form-control">
-                                    <small class="form-text text-muted">*Wajib diisi</small>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                No. Pegawai
-                            </div>
-                            <div class="col-sm-9">
-                                <b v-if="!isEditProfile" v-text="pegawai.nopeg"></b>
-
-                                <div v-if="isEditProfile" id="edit-nopeg" class="form-group">
-                                    <input v-model="pegawai.nopeg" type="text" class="form-control">
-                                    <small class="form-text text-muted">*Wajib diisi</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                Unit Kerja
-                            </div>
-                            <div class="col-sm-9">
-                                <b v-if="!isEditProfile" v-text="pegawai.unitKerja"></b>
-
-                                <div v-if="isEditProfile" id="edit-unit-kerja" class="form-group">
-                                    <input v-model="pegawai.unitKerja" type="text" class="form-control">
-                                    <small class="form-text text-muted">*Wajib diisi</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                Jabatan
-                            </div>
-                            <div class="col-sm-9">
-                                <b v-if="!isEditProfile" v-text="pegawai.posisi"></b>
-
-                                <div v-if="isEditProfile" id="edit-posisi" class="form-group">
-                                    <input v-model="pegawai.posisi" type="text" class="form-control">
-                                    <small class="form-text text-muted">*Wajib diisi</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                Kompetensi
-                            </div>
-                            <div class="col-sm-9">
-                                <b v-if="!isEditProfile" v-text="pegawai.kompetensi"></b>
-
-                                <div v-if="isEditProfile" id="edit-kompetensi" class="form-group">
-                                    <input v-model="pegawai.kompetensi" type="text" class="form-control">
-                                    <small class="form-text text-muted">*Wajib diisi</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                Tahun Masuk
-                            </div>
-                            <div class="col-sm-9">
-                                <b v-if="!isEditProfile" v-text="pegawai.tahunMasuk"></b>
-
-                                <div v-if="isEditProfile" id="edit-tahun-masuk" class="form-group">
-                                    <input v-model="pegawai.tahunMasuk" type="text" class="form-control">
-                                    <small class="form-text text-muted">*Wajib diisi</small>
-                                </div>
-                            </div>
-                        </div>
+                    <div v-if="dataKepegawaian.length !== 0" class="data-kepegawaian">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Unit Kerja</th>
+                                <th scope="col">Posisi</th>
+                                <!-- <th scope="col">Kompetensi</th> -->
+                                <th scope="col">Tahun Masuk</th>
+                                <th scope="col">Tahun Keluar</th>
+                            </tr>
+                            </thead>
+                            <tbody v-for="dk in dataKepegawaian">
+                            <tr>
+                                <td v-text="dk.id_unit_kerja" ></td>
+                                <td v-text="dk.id_posisi" ></td>
+                                <!-- <td v-text="dk.kompetensi" ></td> -->
+                                <td v-text="dk.tahun_masuk" ></td>
+                                <td v-text="dk.tahun_keluar" ></td>
+                                <td v-if="isEditKepegawaian"><button class="btn btn-danger" type="button">Hapus</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
 
                     </div>
+
+                    <br>
+
                 </div>
             </div>
         </div>
 
-        <div class="card-footer text-muted" v-if="isEditProfile">
-            <a href="#profil-pegawai" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveProfilPegawai">Simpan</a>
-            <a href="#profil-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelProfilPegawai">Batal</a>
+        <br>
+
+        <div class="card">
+            <div class="card-header">
+                Riwayat Pendidikan dan Pekerjaan<a href="#" class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai">Edit</a>
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+
+                    <h5>Riwayat Pendidikan</h5>
+
+                    <div v-if="riwayatPendidikan.length === 0" class="no-riwayat-pendidikan">
+                        <hr>
+                        Belum ditambahkan.
+                        <br>
+                    </div>
+
+                    <div v-if="riwayatPendidikan.length !== 0" class="riwayat-pendidikan">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Tingkat Pendidikan</th>
+                                <th scope="col">Nama Institusi</th>
+                                <th scope="col">Jurusan</th>
+                                <th scope="col">Tahun Masuk</th>
+                                <th scope="col">Tahun Keluar</th>
+                            </tr>
+                            </thead>
+                            <tbody v-for="rp in riwayatPendidikan">
+                            <tr>
+                                <td v-text="rp.strata" ></td>
+                                <td v-text="rp.nama_institusi" ></td>
+                                <td v-text="rp.jurusan" ></td>
+                                <td v-text="rp.tahun_masuk" ></td>
+                                <td v-text="rp.tahun_keluar" ></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <br><br>
+
+
+                    <h5>Riwayat Pekerjaan</h5>
+
+                    <div v-if="riwayatPekerjaan.length === 0" class="no-riwayat-pekerjaan">
+                        <hr>
+                        Belum ditambahkan.
+                        <br>
+                    </div>
+
+                    <div v-if="riwayatPekerjaan.length !== 0" class="riwayat-pekerjaan">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Nama Institusi</th>
+                                <th scope="col">Posisi</th>
+                                <th scope="col">Tahun Masuk</th>
+                                <th scope="col">Tahun Keluar</th>
+                            </tr>
+                            </thead>
+                            <tbody v-for="rp in riwayatPekerjaan">
+                            <tr>
+                                <td v-text="rp.nama_institusi" ></td>
+                                <td v-text="rp.posisi" ></td>
+                                <td v-text="rp.tahun_masuk" ></td>
+                                <td v-text="rp.tahun_keluar" ></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -170,6 +297,8 @@
         data() {
             return {
                 isEditProfile: false,
+                isEditKepegawaian: false,
+                isEditRiwayat: false,
                 cachedpegawai: null,
                 cachedDataKepegawaian: null,
                 cachedRiwayatPendidikan: null,
@@ -185,7 +314,10 @@
                     posisi: "",
                     kompetensi: "",
                     tahunMasuk: ""
-                }
+                },
+                dataKepegawaian: [],
+                riwayatPendidikan: [],
+                riwayatPekerjaan: []
             }
                
         },
@@ -193,12 +325,16 @@
 
             axios.get('/api/pegawai/' + this.id)
                 .then((response) => {
+                    //get data from api response
                     var responsePegawai = response.data["data"];
                     this.pegawai.nama = responsePegawai["user"]["name"];
                     this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
                     this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
                     this.pegawai.email = responsePegawai["user"]["email"];
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
+                    this.dataKepegawaian = responsePegawai["kepegawaian"];
+                    this.riwayatPendidikan = responsePegawai["pendidikan"];
+                    this.riwayatPekerjaan = responsePegawai["pekerjaan"];
 
                 })
                 .catch(function (error) {
@@ -209,32 +345,62 @@
         },
         methods: {
             editProfilPegawai() {
-                this.isEditProfile = true;
-            }, 
+            this.isEditProfile = true;
+        },
 
-            saveProfilPegawai() {
-                this.cachedpegawai = Object.assign({}, this.pegawai);
-                this.isEditProfile = false;
+        editDataKepegawaian() {
+            this.isEditKepegawaian = true;
+        },
 
-                axios.patch('/api/pegawai/4', {
-                    name: this.pegawai.nama,
-                    email: this.pegawai.email,
-                    password: '1234',
-                    nip: this.pegawai.nopeg
+        editRiwayatPegawai() {
+            this.isEditRiwayat = true;
+        },
+
+        saveProfilPegawai() {
+            this.cachedUser = Object.assign({}, this.user);
+            this.isEditProfile = false;
+
+            axios.patch('/api/pegawai/4', {
+                name: this.user.nama,
+                email: this.user.email,
+                password: '1234',
+                nip: this.user.nopeg
+            })
+                .then(function (response) {
+                    alert(response);
                 })
-                    .then(function (response) {
-                        alert(response);
-                    })
-                    .catch(function (error) {
-                        alert(error);
-                    });
+                .catch(function (error) {
+                    alert(error);
+                });
 
             },
 
+            saveDataKepegawaian() {
+                this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
+                this.isEditKepegawaian = false;
+            },
+
+            saveRiwayatPegawai() {
+                this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
+                this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
+                this.isEditRiwayat = false;
+            },
+
             cancelProfilPegawai() {
-                this.pegawai = Object.assign({}, this.cachedpegawai);
+                this.user = Object.assign({}, this.cachedUser);
                 this.isEditProfile = false;
-            }
+            },
+
+            cancelDataKepegawaian() {
+                this.dataKepegawaian = Object.assign({}, this.cachedDataKepegawaian);
+                this.isEditKepegawaian = false;
+            },
+
+            cancelRiwayatPegawai() {
+                this.riwayatPendidikan = Object.assign({}, this.cachedRiwayatPendidikan);
+                this.riwayatPekerjaan = Object.assign({}, this.cachedRiwayatPekerjaan);
+                this.isEditRiwayat = false;
+            },
         }
     }
 </script>
