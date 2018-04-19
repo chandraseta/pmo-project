@@ -13,27 +13,27 @@ use App\Admin;
 class PagesController extends APIBaseController
 {
     public function index() {
-        if(!$this->authenticate(6)){return $this->sendError('You are not authenticated.');}
+        if(!$this->authenticate(6)){return view('welcome');}
         return view('welcome');
     }
 
     public function landing() {
-        if(!$this->authenticate(6)){return $this->sendError('You are not authenticated.');}
+        if(!$this->authenticate(6)){return view('welcome');}
         return view('pages');
     }
 
     public function pmo() {
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if(!$this->authenticate(2)){return view('welcome');}
         return view('pages.pmo')->with('page', 'pmo');
     }
 
     public function admin() {
-        if(!$this->authenticate(3)){return $this->sendError('You are not authenticated.');}
+        if(!$this->authenticate(3)){return view('welcome');}
         return view('pages.admin')->with('page', 'admin');
     }
 
     public function addUser() {
-        if(!$this->authenticate(3)){return $this->sendError('You are not authenticated.');}
+        if(!$this->authenticate(3)){return view('welcome');}
         return view('pages.admin.adduser')->with('page', 'addUser');
     }
 
