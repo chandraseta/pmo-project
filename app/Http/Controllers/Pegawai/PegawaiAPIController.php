@@ -6,8 +6,11 @@ namespace App\Http\Controllers\Pegawai;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\APIBaseController as APIBaseController;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Pegawai;
+use App\PMO;
+use App\Admin;
 use App\RiwayatPendidikan;
 use App\RiwayatPekerjaan;
 use App\DataKepegawaian;
@@ -25,9 +28,11 @@ class PegawaiAPIController extends APIBaseController
      */
     public function index()
     {
-        // $user = User::with(Pegawai::with(['riwayat_pendidikan', 'riwayat_pekerjaan', 'data_kepegawaian']));
-        $user = Pegawai::with(['user','riwayatPendidikans','riwayatPekerjaans','dataKepegawaians'])->get();
 
+        if(!$this->authenticate(5)){return $this->sendError('You are not authenticated.');}
+
+        $user = Pegawai::with(['user','riwayatPendidikans','riwayatPekerjaans','dataKepegawaians'])->get();
+        
         return $this->sendResponse($user, 'Profiles retrieved successfully.');
     }
 
@@ -40,6 +45,10 @@ class PegawaiAPIController extends APIBaseController
      */
     public function store(Request $request)
     {
+
+        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+
+
         $input = $request->all();
 
         $validator = Validator::make($input, [
@@ -89,6 +98,8 @@ class PegawaiAPIController extends APIBaseController
      */
     public function show($id)
     {
+        if(!$this->authenticate(5)){return $this->sendError('You are not authenticated.');}
+
         $pegawai = Pegawai::find($id);
 
         if (is_null($pegawai)) {
@@ -122,6 +133,10 @@ class PegawaiAPIController extends APIBaseController
      */
     public function update(Request $request, $id)
     {
+
+        if(!$this->authenticate(4)){return $this->sendError('You are not authenticated.');}
+
+
         $input = $request->all();
 
         $validator = Validator::make($input, [
@@ -253,6 +268,10 @@ class PegawaiAPIController extends APIBaseController
      */
     public function destroy($id)
     {
+
+        if(!$this->authenticate(3)){return $this->sendError('You are not authenticated.');}
+
+
         $user = User::find($id);
 
         if (is_null($user)) {
@@ -283,5 +302,44 @@ class PegawaiAPIController extends APIBaseController
         $user->delete();
 
         return $this->sendResponse($id, 'Tag deleted successfully.');
+    }
+
+    private function authenticate($role){
+        if (Auth::check()) {
+            $session_id = Auth::user()->id;
+        }else{
+            return false;
+        }
+
+        $auth = NULL;
+        switch ($role) {
+            case 1:
+                $auth = Pegawai::find($session_id);
+                break;
+            
+            case 2:
+                $auth = PMO::find($session_id);
+                break;
+
+            case 3:
+                $auth = Admin::find($session_id);
+                break;
+
+            case 4:
+                $auth = PMO::find($session_id);
+                if (is_null($auth)) {
+                    $auth = Pegawai::find($session_id);
+                }
+                break;
+            case 5:
+                $auth = User::find($session_id);
+                break;
+        }
+
+        if (is_null($auth)) {
+            return false;
+        }
+
+        return true;
     }
 }

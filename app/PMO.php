@@ -34,7 +34,7 @@ class PMO extends Model
     /**
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['id_user'];
 
     /**
      * Indicates if the model should be timestamped.
