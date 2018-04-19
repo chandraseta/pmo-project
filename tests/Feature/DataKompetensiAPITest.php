@@ -26,18 +26,15 @@ class DataKompetensiAPITest extends TestCase
         $this->user = factory(User::class)->create();
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testItFetchesDataKompetensi()
     {
+        $data = Kompetensi::all();
         $response = $this->actingAs($this->user)
             ->get($this->baseUri)
             ->assertStatus(200)
             ->assertJson([
-                'success' => true
+                'success' => true,
+                'data' => $data->toArray()
             ]);
 
     }
