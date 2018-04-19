@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-use Exception;
-
 class DataKinerjaController extends APIBaseController
 {
     /**
@@ -213,9 +211,6 @@ class DataKinerjaController extends APIBaseController
                     try {
                         // Insert each row
                         foreach ($objs as $obj) {
-                            if (!isset($obj->nip)) {
-                                continue;
-                            }
                             $arr = [
                                 'id_pegawai' => Pegawai::where('nip', $obj->nip)->first()->id_user,
                                 'tahun' => $obj->tahun_pemeriksaan,
@@ -229,7 +224,7 @@ class DataKinerjaController extends APIBaseController
                             $model->save();
                         }
                         return response('Data inserted', 200);
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                         return response('Failed in inserting data. Check data correctness', 400);
                     }
                 } else {

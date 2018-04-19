@@ -380,9 +380,6 @@ class DataKompetensiController extends APIBaseController
                     try {
                         // Insert each row
                         foreach ($objs as $obj) {
-                            if (!isset($obj->nip)) {
-                                continue;
-                            }
                             $arr = [
                                 'id_pegawai' => Pegawai::where('nip', $obj->nip)->first()->id_user,
                                 'tujuan' => $obj->tujuan_pemeriksaan,
@@ -418,7 +415,7 @@ class DataKompetensiController extends APIBaseController
                             $model->save();
                         }
                         return response('Data inserted', 200);
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                         return response('Failed in inserting data. Check data correctness', 400);
                     }
                 } else {
