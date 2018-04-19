@@ -98,7 +98,7 @@ class PegawaiAPIController extends APIBaseController
      */
     public function show($id)
     {
-        if(!$this->authenticate(5)){return $this->sendError('You are not authenticated.');}
+        if(!$this->authenticate(6)){return $this->sendError('You are not authenticated.');}
 
         $pegawai = Pegawai::find($id);
 
@@ -331,7 +331,15 @@ class PegawaiAPIController extends APIBaseController
                     $auth = Pegawai::find($session_id);
                 }
                 break;
+
             case 5:
+                $auth = PMO::find($session_id);
+                if (is_null($auth)) {
+                    $auth = Admin::find($session_id);
+                }
+                break;
+
+            case 6:
                 $auth = User::find($session_id);
                 break;
         }

@@ -13,7 +13,7 @@ use App\Admin;
 class ProfileController extends APIBaseController
 {
     public function index() {
-    	if(!$this->authenticate(4)){return $this->sendError('You are not authenticated.');}
+    	if(!$this->authenticate(4)){return view('welcome');}
         return view("profile.index");
     }
 

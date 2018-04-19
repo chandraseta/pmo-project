@@ -13,12 +13,12 @@ use App\Admin;
 class PagesController extends APIBaseController
 {
     public function index() {
-        if(!$this->authenticate(5)){return $this->sendError('You are not authenticated.');}
+        if(!$this->authenticate(6)){return $this->sendError('You are not authenticated.');}
         return view('welcome');
     }
 
     public function landing() {
-        if(!$this->authenticate(5)){return $this->sendError('You are not authenticated.');}
+        if(!$this->authenticate(6)){return $this->sendError('You are not authenticated.');}
         return view('pages');
     }
 
@@ -64,7 +64,15 @@ class PagesController extends APIBaseController
                     $auth = Pegawai::find($session_id);
                 }
                 break;
+
             case 5:
+                $auth = PMO::find($session_id);
+                if (is_null($auth)) {
+                    $auth = Admin::find($session_id);
+                }
+                break;
+
+            case 6:
                 $auth = User::find($session_id);
                 break;
         }

@@ -236,7 +236,15 @@ class DataKompetensiController extends APIBaseController
                     $auth = Pegawai::find($session_id);
                 }
                 break;
+
             case 5:
+                $auth = PMO::find($session_id);
+                if (is_null($auth)) {
+                    $auth = Admin::find($session_id);
+                }
+                break;
+
+            case 6:
                 $auth = User::find($session_id);
                 break;
         }
