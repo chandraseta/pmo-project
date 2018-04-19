@@ -18,6 +18,7 @@ class PagesController extends APIBaseController
     }
 
     public function landing() {
+        if(!$this->authenticate(5)){return $this->sendError('You are not authenticated.');}
         return view('pages');
     }
 
