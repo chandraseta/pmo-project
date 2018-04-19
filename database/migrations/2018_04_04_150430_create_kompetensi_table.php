@@ -16,6 +16,7 @@ class CreateKompetensiTable extends Migration
         Schema::create('kompetensi', function (Blueprint $table) {
             $table->increments('id_kompetensi');
             $table->unsignedInteger('id_pegawai')->index();
+            $table->text('tujuan');
             $table->datetime('tanggal');
             
             $table->decimal('kognitif_efisiensi_kecerdasan', 3, 2);

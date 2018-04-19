@@ -1,11 +1,19 @@
 <?php
 
+use App\KelompokKompetensi;
 use App\Posisi;
-use Illuminate\Database\Seeder;
+use App\Training;
 use App\UnitKerja;
+use Illuminate\Database\Seeder;
 
-class PosisiSeeder extends Seeder
+class StaticDataSeeder extends Seeder
 {
+    private $kelompok_kompetensi = [
+        'Administrasi',
+        'Keuangan',
+        'Teknisi',
+    ];
+
     private $posisi = [
         'Direktur Eksekutif',
         'Wakil Direktur Eksekutif',
@@ -72,6 +80,33 @@ class PosisiSeeder extends Seeder
         'Sekolah Pasca Sarjana (SPS)',
     ];
 
+    private $training = [
+        'Achievement Motivation Training',
+        'Achievement Orientation',
+        'Building Commitment',
+        'Change Management',
+        'Continuous Learning and Improvement',
+        'Customer Services Orientation',
+        'Decision Making',
+        'Effective Leadership',
+        'Emphatic Communication',
+        'Extraordinary Productivity',
+        'Group Dynamic',
+        'Group Leadership',
+        'Management by Objective',
+        'Performance Mangement',
+        'Policy Deployment',
+        'Problem Solving',
+        'Quality Management',
+        'Relationship Management',
+        'Risk Management',
+        'Services Excellence',
+        'Strategic Management',
+        'Stress Management',
+        'Team Building',
+        'Time Management',
+    ];
+
     /**
      * Run the database seeds.
      *
@@ -79,13 +114,20 @@ class PosisiSeeder extends Seeder
      */
     public function run()
     {
+        foreach ($this->kelompok_kompetensi as $kelompok_kompetensi) {
+            KelompokKompetensi::firstOrCreate(['nama_kelompok_kompetensi' => $kelompok_kompetensi]);
+        }
+
         foreach ($this->posisi as $posisi) {
             Posisi::firstOrCreate(['nama_posisi' => $posisi]);
         }
+
         foreach ($this->unit_kerja as $unit_kerja) {
             UnitKerja::firstOrCreate(['nama_unit_kerja' => $unit_kerja]);
         }
 
-        factory(App\RekomendasiPosisi::class, 200)->create();
+        foreach ($this->training as $training) {
+            Training::firstOrCreate(['nama_training' => $training]);
+        }
     }
 }

@@ -9,9 +9,10 @@
                     <div class="row">
                         <div class="col-md-3 p-2">
                             <button type="button"
-                                    class="btn btn-primary m-1"
+                                    class="btn btn-secondary m-1"
                                     data-toggle="modal"
-                                    data-target="#addDataModal" :disabled="disableTambahDataButton">
+                                    data-target="#addDataModal"
+                                    v-if="!disableTambahDataButton">
                                 Tambah Data
                             </button>
                         </div>
@@ -19,15 +20,16 @@
                         <div class="col-md-3 p-2"></div>
                         <div class="col-md-3 p-2">
                             <button type="button"
-                                    class="btn btn-outline-primary float-md-right m-1"
+                                    class="btn btn-primary float-md-right m-1"
                                     data-toggle="modal"
                                     data-target="#downloadModal">
-                                Download Hasil
+                                Download Data
                             </button>
                             <button type="button"
-                                    class="btn btn-outline-primary float-md-right m-1"
+                                    class="btn btn-secondary float-md-right m-1"
                                     data-toggle="modal"
-                                    data-target="#uploadModal">
+                                    data-target="#uploadModal"
+                                    v-if="!disableUploadDataButton">
                                 Upload Data
                             </button>
                         </div>
@@ -57,16 +59,23 @@
                             <div class="form-group" v-for="column in columns" v-if="column.fillable">
                                 <label :for="column.field">{{ column.label }}</label>
                                 <input class="form-control"
+                                       :class="{'is-invalid': isFormInvalid[column.field]}"
                                        :type="column.type == 'number' || 'date' ? column.type : 'text'"
                                        :id="column.field"
                                        :placeholder="column.label"
                                        v-model="newData[column.field]">
+                                <div v-if="column.required" class="invalid-feedback">
+                                    NIP diperlukan untuk membuat data baru.
+                                </div>
                             </div>
                         </form>
+                        <div class="alert" :class="'alert-' + statusAlert.type" role="alert" v-if="statusAlert.display">
+                            {{ statusAlert.message }}
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary" @click="addData">Simpan</button>
+                        <button type="button" class="btn btn-primary" @click="addData" :disabled="!isFormValid">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -76,7 +85,10 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        Upload Data
+                        <h5 class="modal-title" id="uploadModalLabel">Upload {{ title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="container">
@@ -109,7 +121,10 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-
+                        <h5 class="modal-title" id="downloadModalLabel">Download {{ title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
 
@@ -136,6 +151,7 @@
         data() {
             return {
                 title: 'Data Pegawai',
+                currentTab: 'dataPegawai',
                 columns: [],
                 rows: [],
                 dataPegawai: [],
@@ -143,19 +159,59 @@
                 dataKompetensi: [],
                 newData: {},
                 disableTambahDataButton: true,
+                disableUploadDataButton: true,
+                isFormInvalid: {},
+                statusAlert: {
+                    display: false,
+                    message: '',
+                    type: ''
+                }
+            }
+        },
+        computed: {
+            isFormValid: function () {
+                let validity;
+                let isInvalid = this.isFormInvalid
+                for (let field in isInvalid) {
+                    validity |= isInvalid[field];
+                }
+                return !validity;
+            }
+        },
+        watch: {
+            newData: {
+                handler: function (oldVal, newVal) {
+                    let isInvalid = {};
+                    this.columns.forEach(function (column) {
+                        if (column.required) {
+                            isInvalid[column.field] = newVal[column.field] == '';
+                        }
+                    });
+                    this.isFormInvalid = isInvalid;
+                },
+                deep: true
             }
         },
         methods: {
             changeTable: function (payload) {
                 this.title = payload.label;
+                this.currentTab = payload.name;
                 this.rows = this[payload.name];
                 this.columns = this.$options[payload.name + 'Columns'];
 
                 this.disableTambahDataButton = payload.name === "dataPegawai";
+                this.disableUploadDataButton = payload.name === "dataPegawai";
             },
             saveData: function (payload) {
                 console.log(payload);
-                let url = '/api/kompetensi/' + payload.id_kompetensi;
+
+                let url;
+                if (this.currentTab === 'dataKompetensi') {
+                    url = '/api/kompetensi/' + payload.id_kompetensi;
+                } else if (this.currentTab === 'dataKinerja') {
+                    url = '/api/kinerja/' + payload.id_kinerja;
+                }
+
                 let data = payload;
                 let config = {
                     headers: {
@@ -165,14 +221,26 @@
                 axios.put(url, data, config)
                     .then(response => {
                         console.log(response.data);
+                        alert(response.data.message);
                     })
                     .catch(e => {
-                        this.error.push(e);
+                        this.errors.push(e);
+                        alert(e.response.data.message);
                     });
             },
             addData: function () {
                 console.log(this.newData);
-                let url = '/api/kompetensi';
+
+                let url;
+                let getData;
+                if (this.currentTab === 'dataKompetensi') {
+                    url = '/api/kompetensi';
+                    getData = this.getKompetensi;
+                } else if (this.currentTab === 'dataKinerja') {
+                    url = '/api/kinerja';
+                    getData = this.getKinerja;
+                }
+
                 let data = this.newData;
                 let config = {
                     headers: {
@@ -183,30 +251,20 @@
                     .then(response => {
                         console.log(response.data);
                         this.newData = {};
+                        this.setAlert('success', response.data.message);
+                        getData();
                     })
                     .catch(e => {
                         console.log(e.message);
+                        console.log(e.response.data.message);
+                        this.setAlert('danger', e.response.data.message);
                     })
             },
             getPegawai: function () {
-                axios.get('/api/pegawai')
+                axios.get('/api/pegawai-denormalized')
                     .then(response => {
                         this.dataPegawai = response.data.data;
-                        this.dataPegawai.forEach(function (row, index, array) {
-                            if (row.data_kepegawaians.length > 0) {
-                                let data_kepegawaian = row.data_kepegawaians[row.data_kepegawaians.length - 1];
-                                array[index].unit_kerja = data_kepegawaian.unit_kerja;
-                                array[index].kompetensi = data_kepegawaian.kompetensi;
-                                array[index].jabatan = data_kepegawaian.posisi;
-                                array[index].tahun_masuk = data_kepegawaian.tahun_masuk;
-                            }
-
-                            if (row.riwayat_pendidikans.length > 0) {
-                                array[index].strata = row.riwayat_pendidikans[row.riwayat_pendidikans.length - 1].strata;
-                            }
-                        });
-                        this.columns = this.$options.dataPegawaiColumns;
-                        this.rows = this.dataPegawai;
+                        this.rows = this[this.currentTab];
                     })
                     .catch(e => {
                         this.errors.push(e);
@@ -217,19 +275,37 @@
                  axios.get('/api/kompetensi')
                     .then(response => {
                         this.dataKompetensi = response.data.data;
+                        this.rows = this[this.currentTab];
                     })
                     .catch(e => {
                         this.errors.push(e);
                     });
             },
+            getKinerja: function () {
+                axios.get('/api/kinerja')
+                    .then(response => {
+                        this.dataKinerja = response.data.data;
+                        this.rows = this[this.currentTab];
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                    })
+            },
             downloadTemplate: function() {
                 let url = '/api/templates/template.xlsx';
                 window.open(url);
+            },
+            setAlert: function (type, message) {
+                this.statusAlert.display = true;
+                this.statusAlert.message = message;
+                this.statusAlert.type = type;
             }
         },
         created: function () {
+            this.columns = this.$options.dataPegawaiColumns;
             this.getPegawai();
             this.getKompetensi();
+            this.getKinerja();
         }
     }
 </script>

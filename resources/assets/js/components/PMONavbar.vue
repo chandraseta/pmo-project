@@ -19,8 +19,7 @@
             </ul>
             <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
                 <a class="btn navbar-btn btn-primary ml-2 text-white">
-                    <span class="oi oi-person" title="user icon" aria-hidden="true"></span>
-                    {{ username }}
+                    Keluar
                 </a>
             </div>
         </div>

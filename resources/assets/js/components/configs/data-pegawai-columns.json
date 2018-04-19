@@ -19,24 +19,24 @@
   },
   {
     "label": "Jabatan",
-    "field": "jabatan"
+    "field": "posisi"
   },
   {
     "label": "Tahun Menjabat",
-    "field": "tahun_masuk",
+    "field": "tahun_masuk_kerja",
     "type": "number"
   },
   {
     "label": "Kelompok Kompetensi",
-    "field": "kompetensi"
+    "field": "kelompok_kompetensi"
   },
   {
     "label": "No. Telp.",
-    "field": "phone"
+    "field": "no_telp"
   },
   {
     "label": "Pendidikan",
-    "field": "strata"
+    "field": "pendidikan_terakhir"
   },
   {
     "label": "Tanggal Lahir",

@@ -12,15 +12,16 @@
     "label": "NIP",
     "field": "nip",
     "immutable": true,
-    "fillable": true
+    "fillable": true,
+    "required": true
   },
   {
     "label": "Unit Kerja",
-    "field": "unit",
+    "field": "unit_kerja",
     "immutable": true
   },
   {
-    "label": "Tingkat Pendidikan",
+    "label": "Pendidikan",
     "field": "pendidikan_terakhir",
     "immutable": true
   },
@@ -31,12 +32,12 @@
   },
   {
     "label": "Jabatan",
-    "field": "jabatan",
+    "field": "posisi",
     "immutable": true
   },
   {
     "label": "Tujuan Pemeriksaan",
-    "field": "tujuan_pemeriksaan",
+    "field": "tujuan",
     "fillable": true
   },
   {
@@ -139,7 +140,7 @@
     "fillable": true
   },
   {
-    "label": "Penyesuaian Perasaan",
+    "label": "Rata-rata Interaksional",
     "field": "interaksional",
     "type": "decimal",
     "immutable": true,

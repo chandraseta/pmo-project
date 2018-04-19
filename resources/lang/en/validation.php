@@ -64,6 +64,7 @@ return [
         'string'  => 'The :attribute must be at least :min characters.',
         'array'   => 'The :attribute must have at least :min items.',
     ],
+    'nip'                  => 'NIP harus memiliki panjang 18 karakter',
     'not_in'               => 'The selected :attribute is invalid.',
     'not_regex'            => 'The :attribute format is invalid.',
     'numeric'              => 'The :attribute must be a number.',

@@ -59,10 +59,13 @@ class ModifyTrainingUnitKerjaPosisiTables extends Migration
      */
     public function down()
     {
-        Schema::create('data_kepegawaian', function (Blueprint $table) {
-            $table->dropForeign(['id_unit_kerja', 'id_posisi']);
-            $table->dropIndex(['id_unit_kerja', 'id_posisi']);
-            $table->dropColumn(['id_unit_kerja', 'id_posisi']);
+        Schema::table('data_kepegawaian', function (Blueprint $table) {
+            $table->dropForeign(['id_unit_kerja']);
+            $table->dropForeign(['id_posisi']);
+            $table->dropIndex(['id_unit_kerja']);
+            $table->dropIndex(['id_posisi']);
+            $table->dropColumn(['id_unit_kerja']);
+            $table->dropColumn(['id_posisi']);
 
             $table->string('kompetensi')->index();
             $table->string('unit_kerja')->index();
