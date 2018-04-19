@@ -206,10 +206,13 @@
                 console.log(payload);
 
                 let url;
+                let getData;
                 if (this.currentTab === 'dataKompetensi') {
                     url = '/api/kompetensi/' + payload.id_kompetensi;
+                    getData = this.getKompetensi;
                 } else if (this.currentTab === 'dataKinerja') {
                     url = '/api/kinerja/' + payload.id_kinerja;
+                    getData = this.getKinerja;
                 }
 
                 let data = payload;
@@ -222,6 +225,7 @@
                     .then(response => {
                         console.log(response.data);
                         alert(response.data.message);
+                        getData();
                     })
                     .catch(e => {
                         this.errors.push(e);
