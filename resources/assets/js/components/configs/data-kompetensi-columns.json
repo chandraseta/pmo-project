@@ -291,5 +291,9 @@
     "field": "indeks",
     "immutable": true,
     "thClass": "text-center"
+  },
+  {
+    "label": "",
+    "field": "editButton"
   }
 ]
