@@ -51,7 +51,7 @@ class DataKinerjaController extends APIBaseController
             return $this->sendError('Gagal menambahkan data kinerja.', $validator->errors());
         }
 
-        $nip = $input['nip'];
+        $nip = $request->input('nip', 'undefined');
         $pegawai = Pegawai::where('nip', '=', $nip)->first();
 
         if (is_null($pegawai)) {
@@ -112,7 +112,7 @@ class DataKinerjaController extends APIBaseController
 
         $data = Kinerja::find($id);
         if (is_null($data)) {
-            $this->sendError('Data Kinerja dengan id = ' . $id . ' tidak ditemukan.');
+            return $this->sendError('Data Kinerja dengan id = ' . $id . ' tidak ditemukan.');
         }
 
         $data = $this->updateDataKinerja($data, $input);
@@ -148,6 +148,7 @@ class DataKinerjaController extends APIBaseController
         $newData->tahun = $newDataInput['tahun'];
         $newData->semester = $newDataInput['semester'];
         $newData->nilai = $newDataInput['nilai'];
+        $newData->catatan = $newDataInput['catatan'];
 
         return $newData;
     }
