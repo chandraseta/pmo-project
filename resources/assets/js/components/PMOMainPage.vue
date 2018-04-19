@@ -103,14 +103,15 @@
                         <br>
                         <form>
                             <div class="form-group container">
-                                <label for="uploadFile">Upload data menggunakan file excel: </label>
-                                <input type="file" class="form-control-file" id="uploadFile">
+                                <label for="upload-file">Upload data menggunakan file excel: </label>
+                                <input type="file" class="form-control-file" id="upload-file">
                                 <small class="text-muted">Harap gunakan file Excel dengan format yang telah disediakan di atas.</small>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="uploadFile">Upload</button>
                     </div>
                 </div>
             </div>
@@ -291,6 +292,26 @@
                     case 'dataKinerja': url = '/api/kinerja/export'; break;
                 }
                 window.open(url);
+            },
+            uploadFile: function () {
+                let url;
+                switch (this.currentTab) {
+                    case 'dataKompetensi': url = '/api/kompetensi/import'; break;
+                    case 'dataKinerja': url = '/api/kinerja/import'; break;
+                }
+
+                let excelFile = document.getElementById('upload-file').files[0];
+                let formData = new FormData;
+                formData.append('excel', excelFile);
+
+                axios.post(url, formData)
+                    .then(response => {
+                        console.log("Import successful");
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                        console.log(e.response.message);
+                    })
             },
             setAlert: function (type, message) {
                 this.statusAlert.display = true;

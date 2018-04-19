@@ -66631,11 +66631,7 @@ var content = __webpack_require__(219);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< HEAD
-var update = __webpack_require__(29)("7a2d00fd", content, false, {});
-=======
-var update = __webpack_require__(12)("f2467798", content, false, {});
->>>>>>> bfa588acbfe61d66867ae4d6ae4718e600247cb7
+var update = __webpack_require__(12)("7a2d00fd", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66659,7 +66655,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66670,6 +66666,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -66969,6 +66966,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             window.open(url);
         },
+        uploadFile: function uploadFile() {
+            var _this6 = this;
+
+            var url = void 0;
+            switch (this.currentTab) {
+                case 'dataKompetensi':
+                    url = '/api/kompetensi/import';break;
+                case 'dataKinerja':
+                    url = '/api/kinerja/import';break;
+            }
+
+            var excelFile = document.getElementById('upload-file').files[0];
+            var formData = new FormData();
+            formData.append('excel', excelFile);
+
+            axios.post(url, formData).then(function (response) {
+                console.log("Import successful");
+            }).catch(function (e) {
+                _this6.errors.push(e);
+                console.log(e.response.message);
+            });
+        },
         setAlert: function setAlert(type, message) {
             this.statusAlert.display = true;
             this.statusAlert.message = message;
@@ -67063,11 +67082,7 @@ var content = __webpack_require__(226);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< HEAD
-var update = __webpack_require__(29)("1f6b3010", content, false, {});
-=======
-var update = __webpack_require__(12)("a8aaff2a", content, false, {});
->>>>>>> bfa588acbfe61d66867ae4d6ae4718e600247cb7
+var update = __webpack_require__(12)("1f6b3010", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -68032,7 +68047,26 @@ var render = function() {
                 _vm._m(2)
               ]),
               _vm._v(" "),
-              _vm._m(3)
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Batal")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.uploadFile }
+                  },
+                  [_vm._v("Upload")]
+                )
+              ])
             ])
           ]
         )
@@ -68081,13 +68115,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("form", [
       _c("div", { staticClass: "form-group container" }, [
-        _c("label", { attrs: { for: "uploadFile" } }, [
+        _c("label", { attrs: { for: "upload-file" } }, [
           _vm._v("Upload data menggunakan file excel: ")
         ]),
         _vm._v(" "),
         _c("input", {
           staticClass: "form-control-file",
-          attrs: { type: "file", id: "uploadFile" }
+          attrs: { type: "file", id: "upload-file" }
         }),
         _vm._v(" "),
         _c("small", { staticClass: "text-muted" }, [
@@ -68096,21 +68130,6 @@ var staticRenderFns = [
           )
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Batal")]
-      )
     ])
   }
 ]
@@ -68185,11 +68204,7 @@ var content = __webpack_require__(234);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< HEAD
-var update = __webpack_require__(29)("62b3436f", content, false, {});
-=======
-var update = __webpack_require__(12)("9fb912be", content, false, {});
->>>>>>> bfa588acbfe61d66867ae4d6ae4718e600247cb7
+var update = __webpack_require__(12)("62b3436f", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -68364,11 +68379,7 @@ var content = __webpack_require__(239);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< HEAD
-var update = __webpack_require__(29)("7afb2708", content, false, {});
-=======
-var update = __webpack_require__(12)("3d8ce7d4", content, false, {});
->>>>>>> bfa588acbfe61d66867ae4d6ae4718e600247cb7
+var update = __webpack_require__(12)("7afb2708", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
