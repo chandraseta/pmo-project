@@ -50483,7 +50483,7 @@ if (document.getElementById('admin-page')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_clone__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_clone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_clone__);
 /**
- * vue-good-table v2.4.0
+ * vue-good-table v2.4.1
  * (c) 2018-present xaksis <shay@crayonbits.com>
  * https://github.com/xaksis/vue-good-table
  * Released under the MIT License.
@@ -51301,7 +51301,7 @@ var GoodTable = { render: function () {
             var ref = this$1.columns[this$1.sortColumn];
             var sortFn = ref.sortFn;
             if (sortFn && typeof sortFn === 'function') {
-              return sortFn(xvalue, yvalue, this$1.columns[this$1.sortColumn]) * (this$1.sortType === 'desc' ? -1 : 1);
+              return sortFn(xvalue, yvalue, this$1.columns[this$1.sortColumn], x, y) * (this$1.sortType === 'desc' ? -1 : 1);
             }
 
             // built in sort

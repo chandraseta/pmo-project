@@ -62,15 +62,15 @@
 
         <div class="content">
             <div class="links">
-                <a href="/pages/profile">I'm a Pegawai</a>
+                <a href="/pages/profile">Halaman Profil</a>
             </div>
 
             <div class="links">
-                <a href="/pages/pmo">I'm a goddamn PMO</a>
+                <a href="/pages/pmo">Halaman PMO</a>
             </div>
 
             <div class="links">
-                <a href="/pages/admin">I'm the almighty Admin</a>
+                <a href="/pages/admin">Halaman Admin</a>
             </div>
         </div>
     </div>
