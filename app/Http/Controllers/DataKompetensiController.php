@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Pegawai;
+use App\PMO;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\APIBaseController;
 use App\Kompetensi;
@@ -18,6 +20,8 @@ class DataKompetensiController extends APIBaseController
      */
     public function index()
     {
+        if(!$this->authenticate()){return $this->sendError('You are not authenticated.');}
+
         //$data = Kompetensi::all();
         $data = DB::table('kompetensi')
             ->join('pegawai', 'kompetensi.id_pegawai', '=', 'pegawai.id_user')
@@ -34,6 +38,7 @@ class DataKompetensiController extends APIBaseController
     public function create()
     {
         //
+        if(!$this->authenticate()){return $this->sendError('You are not authenticated.');}
     }
 
     /**
@@ -44,6 +49,8 @@ class DataKompetensiController extends APIBaseController
      */
     public function store(Request $request)
     {
+        if(!$this->authenticate()){return $this->sendError('You are not authenticated.');}
+
         $input = $request->all();
 
         $validator = $this->validateDataKompetensi($input);
@@ -74,6 +81,8 @@ class DataKompetensiController extends APIBaseController
      */
     public function show($id)
     {
+        if(!$this->authenticate()){return $this->sendError('You are not authenticated.');}
+
         $data = Kompetensi::find($id);
 
         if (is_null($data)) {
@@ -92,6 +101,7 @@ class DataKompetensiController extends APIBaseController
     public function edit($id)
     {
         //
+        if(!$this->authenticate()){return $this->sendError('You are not authenticated.');}
     }
 
     /**
@@ -103,6 +113,8 @@ class DataKompetensiController extends APIBaseController
      */
     public function update(Request $request, $id)
     {
+        if(!$this->authenticate()){return $this->sendError('You are not authenticated.');}
+
         $input = $request->all();
 
         $validator = $this->validateDataKompetensi($input);
@@ -130,6 +142,7 @@ class DataKompetensiController extends APIBaseController
     public function destroy($id)
     {
         //
+        if(!$this->authenticate()){return $this->sendError('You are not authenticated.');}
     }
 
     private function validateDataKompetensi($input) {
@@ -192,5 +205,21 @@ class DataKompetensiController extends APIBaseController
         $newData->manajerial_kekuatan_pengawasan = $newDataInput['manajerial_kekuatan_pengawasan'];
 
         return $newData;
+    }
+
+    private function authenticate(){
+        if (Auth::check()) {
+            $session_id = Auth::user()->id;
+        }else{
+            return false;
+        }
+
+        $auth = PMO::find($session_id);
+
+        if (is_null($auth)) {
+            return false;
+        }
+
+        return true;
     }
 }
