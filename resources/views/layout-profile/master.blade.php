@@ -24,6 +24,7 @@
         @yield('content')
     </div>
 
+
     @include('layout-profile.footer')
     
     <script src="/js/profile.js"></script>
