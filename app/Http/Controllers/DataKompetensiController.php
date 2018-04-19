@@ -214,7 +214,6 @@ class DataKompetensiController extends APIBaseController
     public function computeDataAverage(Kompetensi $input) {
         $data = collect($input->toArray());
 
-        error_log($data);
         $aspects = collect([
             'kognitif',
             'interaksional',
@@ -226,12 +225,55 @@ class DataKompetensiController extends APIBaseController
             $aspectItems = $data->filter(function ($value, $key) use ($item) {
                 return str_contains($key, $item.'_');
             });
-            error_log($aspectItems);
             $input[$item] = $aspectItems->avg();
             return $aspectItems->avg();
         });
 
+        $aspectAverages = $aspects->combine($aspectAverages);
+        $input->profil_potensi_keberhasilan = (
+            2 * $aspectAverages['kognitif'] +
+            2 * $aspectAverages['emosional'] +
+            1 * $aspectAverages['sikap_kerja'])/5;
+
+        $input->profil_potensi_pengembangan_diri = (
+            2 * $aspectAverages['kognitif'] +
+            2 * $aspectAverages['sikap_kerja'] +
+            1 * $aspectAverages['interaksional'])/5;
+
+        $input->profil_loyalitas_terhadap_tugas = (
+            2 * $aspectAverages['emosional'] +
+            2 * $aspectAverages['sikap_kerja'] +
+            1 * $aspectAverages['kognitif'])/5;
+
+        $input->profil_efektivitas_manajerial = (
+            2 * $aspectAverages['emosional'] +
+            2 * $aspectAverages['manajerial'] +
+            1 * $aspectAverages['kognitif'])/5;
+
+        $data = collect($input->toArray());
+        $nilaiPrediksi = $data->filter(function ($value, $key) {
+            return str_contains($key, 'profil_');
+        })->avg();
+        $input->profil = $nilaiPrediksi;
+        $input->indeks = $this->getIndeks($nilaiPrediksi);
+
         return $input;
+    }
+
+    private function getIndeks($nilaiPrediksi) {
+        if ($nilaiPrediksi >= 5) {
+            return 'A';
+        } elseif ($nilaiPrediksi >= 3) {
+            return 'B';
+        } elseif ($nilaiPrediksi >= 2.75) {
+            return 'C';
+        } elseif ($nilaiPrediksi >= 2.5) {
+            return 'D';
+        } elseif ($nilaiPrediksi >= 1) {
+            return 'E';
+        } else {
+            return 'ADA YANG SALAH';
+        }
     }
 
     private function authenticate($role){
