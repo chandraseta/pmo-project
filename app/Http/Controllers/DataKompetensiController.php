@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Pegawai;
-use App\PMO;
 use App\Admin;
-use Illuminate\Http\Request;
+use App\DenormalizedPegawai;
 use App\Http\Controllers\APIBaseController;
 use App\Kompetensi;
-use Validator;
+use App\Pegawai;
+use App\PMO;
+use App\User;
+use Carbon\Carbon;
+use Excel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class DataKompetensiController extends APIBaseController
 {
@@ -22,9 +26,10 @@ class DataKompetensiController extends APIBaseController
      */
     public function index()
     {
-        if(!$this->authenticate(4)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(4)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
-        //$data = Kompetensi::all();
         $data = DB::table('kompetensi')
             ->join('denormalized_pegawai', 'kompetensi.id_pegawai', '=', 'denormalized_pegawai.id_user')
             ->get();
@@ -40,7 +45,9 @@ class DataKompetensiController extends APIBaseController
     public function create()
     {
         //
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
+        }
     }
 
     /**
@@ -51,24 +58,24 @@ class DataKompetensiController extends APIBaseController
      */
     public function store(Request $request)
     {
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
-
-        $input = $request->all();
-
-        $validator = $this->validateDataKompetensi($input);
-        if ($validator->fails()) {
-            return $this->sendError('Gagal menambahkan data kompetensi.', $validator->errors());
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
         }
 
-        $nip = $input['nip'];
+        $validator = $this->validateDataKompetensi($request);
+        if ($validator->fails()) {
+            return $this->sendError('Gagal menambahkan data kompetensi.', 400);
+        }
+
+        $nip = $request->input('nip', 'undefined');
         $pegawai = Pegawai::where('nip', '=', $nip)->first();
 
         if (is_null($pegawai)) {
-            return $this->sendError('Pegawai dengan NIP: '.$nip.' tidak ditemukan.');
+            return $this->sendError('Pegawai dengan NIP: ' . $nip . ' tidak ditemukan.', 404);
         }
 
         $data = new Kompetensi;
-        $data = $this->updateDataKompetensi($data, $input);
+        $data = $this->updateDataKompetensi($data, $request->all());
         $data->pegawai()->associate($pegawai);
         $data->save();
 
@@ -83,7 +90,9 @@ class DataKompetensiController extends APIBaseController
      */
     public function show($id)
     {
-        if(!$this->authenticate(4)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(4)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
         $data = Kompetensi::find($id);
 
@@ -103,7 +112,9 @@ class DataKompetensiController extends APIBaseController
     public function edit($id)
     {
         //
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
+        }
     }
 
     /**
@@ -115,18 +126,20 @@ class DataKompetensiController extends APIBaseController
      */
     public function update(Request $request, $id)
     {
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
+        }
 
         $input = $request->all();
 
-        $validator = $this->validateDataKompetensi($input);
-        if($validator->fails()){
-            return $this->sendError('Gagal menyimpan data kompetensi.', $validator->errors());
+        $validator = $this->validateDataKompetensi($request);
+        if ($validator->fails()) {
+            return $this->sendError('Gagal menyimpan data kompetensi.', 400);
         }
 
         $data = Kompetensi::find($id);
         if (is_null($data)) {
-            $this->sendError('Data Kompetensi dengan id = '.$id.' tidak ditemukan.');
+            return $this->sendError('Data Kompetensi dengan id = ' . $id . ' tidak ditemukan.', 404);
         }
 
         $data = $this->updateDataKompetensi($data, $input);
@@ -143,11 +156,14 @@ class DataKompetensiController extends APIBaseController
      */
     public function destroy($id)
     {
-        //
-        if(!$this->authenticate(2)){return $this->sendError('You are not authenticated.');}
+        if (!$this->authenticate(2)) {
+            return $this->sendError('You are not authenticated.');
+        }
     }
 
-    private function validateDataKompetensi($input) {
+    private function validateDataKompetensi(Request $request)
+    {
+        $input = $request->all();
         return Validator::make($input, [
             'tanggal' => 'required',
             'kognitif_efisiensi_kecerdasan' => 'required',
@@ -177,10 +193,12 @@ class DataKompetensiController extends APIBaseController
         ]);
     }
 
-    private function updateDataKompetensi($oldData, $newDataInput) {
+    private function updateDataKompetensi($oldData, $newDataInput)
+    {
         $newData = $oldData;
 
         $newData->tanggal = $newDataInput['tanggal'];
+        $newData->tujuan = $newDataInput['tujuan'];
         $newData->kognitif_efisiensi_kecerdasan = $newDataInput['kognitif_efisiensi_kecerdasan'];
         $newData->kognitif_daya_nalar = $newDataInput['kognitif_daya_nalar'];
         $newData->kognitif_daya_asosiasi = $newDataInput['kognitif_daya_asosiasi'];
@@ -209,19 +227,91 @@ class DataKompetensiController extends APIBaseController
         return $newData;
     }
 
-    private function authenticate($role){
+    public function export()
+    {
+        $kompetensi_rows = DB::table('denormalized_pegawai')
+            ->join('kompetensi', 'denormalized_pegawai.id_user', '=', 'kompetensi.id_pegawai')
+            ->select([
+                'denormalized_pegawai.nip',
+                'denormalized_pegawai.nama',
+                'denormalized_pegawai.unit_kerja',
+                'denormalized_pegawai.posisi',
+                'denormalized_pegawai.pendidikan_terakhir',
+                'denormalized_pegawai.tanggal_lahir',
+                'tujuan',
+                'tanggal',
+                'kognitif_efisiensi_kecerdasan',
+                'kognitif_daya_nalar',
+                'kognitif_daya_asosiasi',
+                'kognitif_daya_analitis',
+                'kognitif_daya_antisipasi',
+                'kognitif_kemandirian_berpikir',
+                'kognitif_fleksibilitas',
+                'kognitif_daya_tangkap',
+                'kognitif',
+                'interaksional_penempatan_diri',
+                'interaksional_percaya_diri',
+                'interaksional_daya_kooperatif',
+                'interaksional_penyesuaian_perasaan',
+                'interaksional',
+                'emosional_stabilitas_emosi',
+                'emosional_toleransi_stres',
+                'emosional_pengendalian_diri',
+                'emosional_kemantapan_konsentrasi',
+                'emosional',
+                'sikap_kerja_hasrat_berprestasi',
+                'sikap_kerja_daya_tahan',
+                'sikap_kerja_keteraturan_kerja',
+                'sikap_kerja_pengerahan_energi_kerja',
+                'sikap_kerja',
+                'manajerial_efektivitas_perencanaan',
+                'manajerial_pengorganisasian_pelaksanaan',
+                'manajerial_intensitas_pengarahan',
+                'manajerial_kekuatan_pengawasan',
+                'manajerial',
+                'profil_potensi_keberhasilan',
+                'profil_potensi_pengembangan_diri',
+                'profil_loyalitas_terhadap_tugas',
+                'profil_efektivitas_manajerial',
+                'profil',
+                'indeks',
+            ])->get();
+
+        $kompetensi_array = [];
+
+        foreach ($kompetensi_rows as $kompetensi_row) {
+            $kompetensi_array[] = get_object_vars($kompetensi_row);
+        }
+
+        $timestamp = Carbon::now()->toDateTimeString();
+        $filename = 'kompetensi_' . $timestamp;
+
+        $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+        $path = $storagePath . 'templates/kompetensi_template_export.xlsx';
+
+        Excel::load($path, function ($excel) use ($kompetensi_array, $timestamp) {
+            $excel->setTitle('Data Kompetensi ' . $timestamp);
+
+            $excel->sheet('sheet1', function ($sheet) use ($kompetensi_array) {
+                $sheet->fromArray($kompetensi_array, null, 'A3', false, false);
+            });
+        })->setFilename('kompetensi_' . $timestamp)->download('xlsx');
+    }
+
+    private function authenticate($role)
+    {
         if (Auth::check()) {
             $session_id = Auth::user()->id;
-        }else{
+        } else {
             return false;
         }
 
-        $auth = NULL;
+        $auth = null;
         switch ($role) {
             case 1:
                 $auth = Pegawai::find($session_id);
                 break;
-            
+
             case 2:
                 $auth = PMO::find($session_id);
                 break;

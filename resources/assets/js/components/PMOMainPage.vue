@@ -106,7 +106,7 @@
                             <div class="form-group container">
                                 <label for="uploadFile">Upload data menggunakan file excel: </label>
                                 <input type="file" class="form-control-file" id="uploadFile">
-                                <small class="text-muted">Harap gunakan file excel dengan format yang telah disediakan di atas.</small>
+                                <small class="text-muted">Harap gunakan file Excel dengan format yang telah disediakan di atas.</small>
                             </div>
                         </form>
                     </div>

@@ -11,7 +11,7 @@ class AsesmenSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Kinerja::class, 50)->create();
-        factory(App\Kompetensi::class, 50)->create();
+        factory(App\Kinerja::class, 500)->create();
+        factory(App\Kompetensi::class, 500)->create();
     }
 }
