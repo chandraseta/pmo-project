@@ -277,6 +277,10 @@
             },
             downloadTemplate: function() {
                 let url = '/api/templates/template.xlsx';
+                switch (this.currentTab) {
+                    case 'dataKompetensi': url = '/api/templates/kompetensi_template.xlsx'; break;
+                    case 'dataKinerja': url = '/api/templates/kinerja_template.xlsx'; break;
+                }
                 window.open(url);
             },
             downloadData: function () {
