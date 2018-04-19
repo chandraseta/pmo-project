@@ -14,6 +14,7 @@ use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class DataKompetensiController extends APIBaseController
@@ -29,7 +30,6 @@ class DataKompetensiController extends APIBaseController
             return $this->sendError('You are not authenticated.');
         }
 
-        //$data = Kompetensi::all();
         $data = DB::table('kompetensi')
             ->join('denormalized_pegawai', 'kompetensi.id_pegawai', '=', 'denormalized_pegawai.id_user')
             ->get();
@@ -62,22 +62,20 @@ class DataKompetensiController extends APIBaseController
             return $this->sendError('You are not authenticated.');
         }
 
-        $input = $request->all();
-
-        $validator = $this->validateDataKompetensi($input);
+        $validator = $this->validateDataKompetensi($request);
         if ($validator->fails()) {
-            return $this->sendError('Gagal menambahkan data kompetensi.', $validator->errors());
+            return $this->sendError('Gagal menambahkan data kompetensi.', 400);
         }
 
-        $nip = $input['nip'];
+        $nip = $request->input('nip', 'undefined');
         $pegawai = Pegawai::where('nip', '=', $nip)->first();
 
         if (is_null($pegawai)) {
-            return $this->sendError('Pegawai dengan NIP: ' . $nip . ' tidak ditemukan.');
+            return $this->sendError('Pegawai dengan NIP: ' . $nip . ' tidak ditemukan.', 404);
         }
 
         $data = new Kompetensi;
-        $data = $this->updateDataKompetensi($data, $input);
+        $data = $this->updateDataKompetensi($data, $request->all());
         $data->pegawai()->associate($pegawai);
         $data->save();
 
@@ -134,14 +132,14 @@ class DataKompetensiController extends APIBaseController
 
         $input = $request->all();
 
-        $validator = $this->validateDataKompetensi($input);
+        $validator = $this->validateDataKompetensi($request);
         if ($validator->fails()) {
-            return $this->sendError('Gagal menyimpan data kompetensi.', $validator->errors());
+            return $this->sendError('Gagal menyimpan data kompetensi.', 400);
         }
 
         $data = Kompetensi::find($id);
         if (is_null($data)) {
-            $this->sendError('Data Kompetensi dengan id = ' . $id . ' tidak ditemukan.');
+            return $this->sendError('Data Kompetensi dengan id = ' . $id . ' tidak ditemukan.', 404);
         }
 
         $data = $this->updateDataKompetensi($data, $input);
@@ -163,8 +161,9 @@ class DataKompetensiController extends APIBaseController
         }
     }
 
-    private function validateDataKompetensi($input)
+    private function validateDataKompetensi(Request $request)
     {
+        $input = $request->all();
         return Validator::make($input, [
             'tanggal' => 'required',
             'kognitif_efisiensi_kecerdasan' => 'required',
@@ -199,6 +198,7 @@ class DataKompetensiController extends APIBaseController
         $newData = $oldData;
 
         $newData->tanggal = $newDataInput['tanggal'];
+        $newData->tujuan = $newDataInput['tujuan'];
         $newData->kognitif_efisiensi_kecerdasan = $newDataInput['kognitif_efisiensi_kecerdasan'];
         $newData->kognitif_daya_nalar = $newDataInput['kognitif_daya_nalar'];
         $newData->kognitif_daya_asosiasi = $newDataInput['kognitif_daya_asosiasi'];
@@ -279,79 +279,23 @@ class DataKompetensiController extends APIBaseController
 
         $kompetensi_array = [];
 
-        // Row headers
-        $kompetensi_array[] = [
-            "NIP",
-            "Nama Lengkap",
-            "Unit Kerja",
-            "Jabatan",
-            "Pendidikan",
-            "Tanggal Lahir",
-            "Tujuan Pemeriksaan",
-            "Tanggal Pelaksanaan",
-            "Efisiensi Kecerdasan",
-            "Daya Nalar",
-            "Daya Asosiasi",
-            "Daya Analitis",
-            "Daya Antisipasi",
-            "Kemandirian Berpikir",
-            "Fleksibilitas",
-            "Daya Tangkap",
-            "Rata-rata Kognitif",
-            "Penempatan Diri",
-            "Percaya Diri",
-            "Daya Kooperatif",
-            "Penyesuaian Perasaan",
-            "Rata-rata Interaksional",
-            "Stabilitas Emosi",
-            "Toleransi terhadap Stress",
-            "Pengendalian Diri",
-            "Kemantapan Konsentrasi",
-            "Rata-rata Emosional",
-            "Hasrat Berprestasi",
-            "Daya Tahan",
-            "Keteraturan Kerja",
-            "Pengerahan Energi Kerja",
-            "Rata-rata Sikap Kerja",
-            "Efektivitas Perencanaan",
-            "Pengorganisasian Pelaksanaan",
-            "Intensitas Pengarahan",
-            "Kekuatan Pengawasan",
-            "Rata-rata Manajerial",
-            "Potensi Keberhasilan",
-            "Potensi Pengembangan Diri",
-            "Loyalitas Terhadap Tugas",
-            "Efektivitas Manajerial",
-            "Nilai Prediksi",
-            "Rekomendasi"
-        ];
-
         foreach ($kompetensi_rows as $kompetensi_row) {
             $kompetensi_array[] = get_object_vars($kompetensi_row);
         }
 
         $timestamp = Carbon::now()->toDateTimeString();
         $filename = 'kompetensi_' . $timestamp;
-        Excel::create($filename, function ($excel) use ($kompetensi_array, $timestamp) {
-            $excel->setTitle('Data Kompetensi ' . $timestamp)
-                ->setCreator('UPT PMO ITB')
-                ->setCompany('UPT PMO ITB')
-                ->setDescription('Data kompetensi pegawai UPT PMO ITB pada ' . $timestamp);
+
+        $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+        $path = $storagePath . 'templates/kompetensi_template_export.xlsx';
+
+        Excel::load($path, function ($excel) use ($kompetensi_array, $timestamp) {
+            $excel->setTitle('Data Kompetensi ' . $timestamp);
 
             $excel->sheet('sheet1', function ($sheet) use ($kompetensi_array) {
-                $sheet->fromArray($kompetensi_array, null, 'A1', false, false);
-
-                $sheet->row(1, function ($row) {
-                    $row->setFontWeight('bold')
-                        ->setBorder(array(
-                            'bottom' => array(
-                                'style' => 'solid'
-                            )
-                        ));
-                });
-                $sheet->freezeFirstRow();
+                $sheet->fromArray($kompetensi_array, null, 'A3', false, false);
             });
-        })->download('xlsx');
+        })->setDescription('Data kompetensi pegawai UPT PMO ITB pada ' . $timestamp)->setFilename('kompetensi_' . $timestamp)->download('xlsx');
     }
 
     private function authenticate($role)
