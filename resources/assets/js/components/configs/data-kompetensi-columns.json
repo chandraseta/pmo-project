@@ -140,7 +140,7 @@
     "fillable": true
   },
   {
-    "label": "Penyesuaian Perasaan",
+    "label": "Rata-rata Interaksional",
     "field": "interaksional",
     "type": "decimal",
     "immutable": true,
