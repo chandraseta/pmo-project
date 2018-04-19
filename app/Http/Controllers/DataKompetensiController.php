@@ -76,6 +76,7 @@ class DataKompetensiController extends APIBaseController
 
         $data = new Kompetensi;
         $data = $this->updateDataKompetensi($data, $request->all());
+        $data = $this->computeDataAverage($data);
         $data->pegawai()->associate($pegawai);
         $data->save();
 
@@ -143,6 +144,7 @@ class DataKompetensiController extends APIBaseController
         }
 
         $data = $this->updateDataKompetensi($data, $input);
+        $data = $this->computeDataAverage($data);
         $data->save();
 
         return $this->sendResponse($data, 'Data kompetensi berhasil disimpan.');
@@ -227,7 +229,7 @@ class DataKompetensiController extends APIBaseController
         return $newData;
     }
 
-public function computeDataAverage(Kompetensi $input) {
+    private function computeDataAverage(Kompetensi $input) {
         $data = collect($input->toArray());
 
         $aspects = collect([
