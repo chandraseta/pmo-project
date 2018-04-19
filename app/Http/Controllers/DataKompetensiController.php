@@ -10,6 +10,7 @@ use App\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\APIBaseController;
 use App\Kompetensi;
+use Illuminate\Support\Facades\Log;
 use Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -127,6 +128,7 @@ class DataKompetensiController extends APIBaseController
         }
 
         $data = $this->updateDataKompetensi($data, $input);
+        $data = $this->computeDataAverage($data);
         $data->save();
 
         return $this->sendResponse($data, 'Data kompetensi berhasil disimpan.');
@@ -206,6 +208,29 @@ class DataKompetensiController extends APIBaseController
         $newData->manajerial_kekuatan_pengawasan = $newDataInput['manajerial_kekuatan_pengawasan'];
 
         return $newData;
+    }
+
+    public function computeDataAverage($input) {
+        $data = collect($input->toArray());
+
+        error_log($data);
+        $aspects = collect([
+            'kognitif',
+            'interaksional',
+            'emosional',
+            'sikap_kerja',
+            'manajerial']);
+
+        $aspectAverages = $aspects->map(function ($item, $key) use ($data, $input) {
+            $aspectItems = $data->filter(function ($value, $key) use ($item) {
+                return str_contains($key, $item.'_');
+            });
+            error_log($aspectItems);
+            $input[$item] = $aspectItems->avg();
+            return $aspectItems->avg();
+        });
+
+        return $input;
     }
 
     private function authenticate($role){
