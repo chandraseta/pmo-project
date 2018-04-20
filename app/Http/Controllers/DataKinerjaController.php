@@ -76,7 +76,7 @@ class DataKinerjaController extends APIBaseController
      */
     public function show($id)
     {
-        $data = Kinerja::where('id_pegawai', $id);
+        $data = Kinerja::where('id_pegawai', $id)->get();
 
         if (is_null($data)) {
             return $this->sendError('Data Kinerja tidak ditemukan.');
