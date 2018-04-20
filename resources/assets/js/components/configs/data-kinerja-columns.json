@@ -54,6 +54,11 @@
     "fillable": true
   },
   {
+    "label": "Catatan",
+    "field": "catatan",
+    "fillable": true
+  },
+  {
     "label": "",
     "field": "editButton"
   }

@@ -14242,7 +14242,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -14419,13 +14419,174 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id'],
 
     data: function data() {
         return {
+            disableEdit: false,
             isEditProfile: false,
+            isEditKepegawaian: false,
+            isEditRiwayat: false,
             cachedpegawai: null,
             cachedDataKepegawaian: null,
             cachedRiwayatPendidikan: null,
@@ -14441,19 +14602,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 posisi: "",
                 kompetensi: "",
                 tahunMasuk: ""
-            }
+            },
+            dataKepegawaian: [],
+            riwayatPendidikan: [],
+            riwayatPekerjaan: []
         };
     },
     created: function created() {
         var _this = this;
 
         axios.get('/api/pegawai/' + this.id).then(function (response) {
+            //get data from api response
             var responsePegawai = response.data["data"];
             _this.pegawai.nama = responsePegawai["user"]["name"];
             _this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
             _this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
             _this.pegawai.email = responsePegawai["user"]["email"];
             _this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
+            _this.dataKepegawaian = responsePegawai["kepegawaian"];
+            _this.riwayatPendidikan = responsePegawai["pendidikan"];
+            _this.riwayatPekerjaan = responsePegawai["pekerjaan"];
         }).catch(function (error) {
             console.log(error);
         });
@@ -14462,27 +14630,78 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        disableEditToggle: function disableEditToggle() {
+            this.disableEdit = !this.disableEdit;
+        },
         editProfilPegawai: function editProfilPegawai() {
             this.isEditProfile = true;
+            this.disableEditToggle();
+        },
+        editDataKepegawaian: function editDataKepegawaian() {
+            this.isEditKepegawaian = true;
+            this.disableEditToggle();
+        },
+        editRiwayatPegawai: function editRiwayatPegawai() {
+            this.isEditRiwayat = true;
+            this.disableEditToggle();
+        },
+        addDataKepegawaian: function addDataKepegawaian() {
+            var newData = {
+                id_data_kepegawaian: "",
+                id_pegawai: "",
+                id_unit_kerja: "",
+                id_posisi: "",
+                tahun_masuk: "",
+                tahun_keluar: ""
+            };
+            this.dataKepegawaian.push(newData);
+        },
+        delDataKepegawaian: function delDataKepegawaian(event) {
+            var targetIndex = event.currentTarget.id;
+            this.dataKepegawaian.splice(targetIndex, 1);
         },
         saveProfilPegawai: function saveProfilPegawai() {
-            this.cachedpegawai = Object.assign({}, this.pegawai);
+            this.disableEditToggle();
+            this.cachedUser = Object.assign({}, this.user);
             this.isEditProfile = false;
 
             axios.patch('/api/pegawai/4', {
-                name: this.pegawai.nama,
-                email: this.pegawai.email,
+                name: this.user.nama,
+                email: this.user.email,
                 password: '1234',
-                nip: this.pegawai.nopeg
+                nip: this.user.nopeg
             }).then(function (response) {
                 alert(response);
             }).catch(function (error) {
                 alert(error);
             });
         },
+        saveDataKepegawaian: function saveDataKepegawaian() {
+            this.disableEditToggle();
+            this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
+            this.isEditKepegawaian = false;
+        },
+        saveRiwayatPegawai: function saveRiwayatPegawai() {
+            this.disableEditToggle();
+            this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
+            this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
+            this.isEditRiwayat = false;
+        },
         cancelProfilPegawai: function cancelProfilPegawai() {
-            this.pegawai = Object.assign({}, this.cachedpegawai);
+            this.disableEditToggle();
+            this.user = Object.assign({}, this.cachedUser);
             this.isEditProfile = false;
+        },
+        cancelDataKepegawaian: function cancelDataKepegawaian() {
+            this.disableEditToggle();
+            this.dataKepegawaian = Object.assign({}, this.cachedDataKepegawaian);
+            this.isEditKepegawaian = false;
+        },
+        cancelRiwayatPegawai: function cancelRiwayatPegawai() {
+            this.disableEditToggle();
+            this.riwayatPendidikan = Object.assign({}, this.cachedRiwayatPendidikan);
+            this.riwayatPekerjaan = Object.assign({}, this.cachedRiwayatPekerjaan);
+            this.isEditRiwayat = false;
         }
     }
 });
@@ -14496,125 +14715,63 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card", attrs: { id: "profil-pegawai" } }, [
-    _c("div", { staticClass: "card-header" }, [
-      _vm._v("\n        Profil Pegawai"),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-primary float-sm-right",
-          attrs: { href: "#profil-pegawai" },
-          on: { click: _vm.editProfilPegawai }
-        },
-        [_vm._v("Edit")]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "card-container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-3 img-responsive" }, [
-            _c("img", {
-              staticClass: "img-thumbnail",
-              attrs: { id: "img-profile", src: _vm.pegawai.imageProfileUrl }
-            }),
-            _vm._v(" "),
-            _c("br"),
-            _c("br"),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "button" } },
-              [_vm._v("Ganti Foto")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-1" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-7" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Nama\n                        "
-                )
-              ]),
+  return _c("div", { attrs: { id: "pegawai" } }, [
+    _c("div", { staticClass: "card", attrs: { id: "profil-pegawai" } }, [
+      _c("div", { staticClass: "card-header" }, [
+        _vm._v("\n            Profil Pegawai"),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary float-sm-right",
+            attrs: { disabled: _vm.disableEdit },
+            on: { click: _vm.editProfilPegawai }
+          },
+          [_vm._v("Edit")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "card-container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-3 img-responsive" }, [
+              _c("img", {
+                staticClass: "img-thumbnail",
+                attrs: { id: "img-profile", src: _vm.pegawai.imageProfileUrl }
+              }),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.nama) }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      { staticClass: "form-group", attrs: { id: "edit-nama" } },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.nama,
-                              expression: "pegawai.nama"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.nama },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.pegawai, "nama", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
+              _c("br"),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "btn btn-primary", attrs: { type: "button" } },
+                [_vm._v("Ganti Foto")]
+              )
             ]),
             _vm._v(" "),
-            _c("hr"),
+            _c("div", { staticClass: "col-sm-1" }),
             _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Tempat, Tanggal Lahir\n                        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", [
-                      _c("span", {
-                        domProps: {
-                          textContent: _vm._s(_vm.pegawai.tempatLahir)
-                        }
-                      }),
-                      _vm._v(", "),
-                      _c("span", {
-                        domProps: {
-                          textContent: _vm._s(_vm.pegawai.tanggalLahir)
-                        }
-                      })
-                    ])
-                  : _vm._e(),
+            _c("div", { staticClass: "col-sm-7" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _vm._v(
+                    "\n                                Nama\n                            "
+                  )
+                ]),
                 _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c("div", { staticClass: "form-row" }, [
-                      _c(
+                _c("div", { staticClass: "col-sm-9" }, [
+                  !_vm.isEditProfile
+                    ? _c("b", {
+                        domProps: { textContent: _vm._s(_vm.pegawai.nama) }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditProfile
+                    ? _c(
                         "div",
                         {
                           staticClass: "form-group",
-                          attrs: { id: "edit-tempat-lahir" }
+                          attrs: { id: "edit-nama" }
                         },
                         [
                           _c("input", {
@@ -14622,13 +14779,13 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.pegawai.tempatLahir,
-                                expression: "pegawai.tempatLahir"
+                                value: _vm.pegawai.nama,
+                                expression: "pegawai.nama"
                               }
                             ],
                             staticClass: "form-control",
                             attrs: { type: "text" },
-                            domProps: { value: _vm.pegawai.tempatLahir },
+                            domProps: { value: _vm.pegawai.nama },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
@@ -14636,7 +14793,7 @@ var render = function() {
                                 }
                                 _vm.$set(
                                   _vm.pegawai,
-                                  "tempatLahir",
+                                  "nama",
                                   $event.target.value
                                 )
                               }
@@ -14644,16 +14801,150 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("small", { staticClass: "form-text text-muted" }, [
-                            _vm._v("*Tempat lahir. Wajib diisi")
+                            _vm._v("*Wajib diisi")
                           ])
                         ]
-                      ),
-                      _vm._v(" "),
-                      _c(
+                      )
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _vm._v(
+                    "\n                                Tempat, Tanggal Lahir\n                            "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-9" }, [
+                  !_vm.isEditProfile
+                    ? _c("b", [
+                        _c("span", {
+                          domProps: {
+                            textContent: _vm._s(_vm.pegawai.tempatLahir)
+                          }
+                        }),
+                        _vm._v(", "),
+                        _c("span", {
+                          domProps: {
+                            textContent: _vm._s(_vm.pegawai.tanggalLahir)
+                          }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditProfile
+                    ? _c("div", { staticClass: "form-row" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "form-group",
+                            attrs: { id: "edit-tempat-lahir" }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.pegawai.tempatLahir,
+                                  expression: "pegawai.tempatLahir"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.pegawai.tempatLahir },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.pegawai,
+                                    "tempatLahir",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "form-text text-muted" },
+                              [_vm._v("*Tempat lahir. Wajib diisi")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "form-group",
+                            attrs: { id: "edit-tanggal-lahir" }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.pegawai.tanggalLahir,
+                                  expression: "pegawai.tanggalLahir"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "date" },
+                              domProps: { value: _vm.pegawai.tanggalLahir },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.pegawai,
+                                    "tanggalLahir",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "form-text text-muted" },
+                              [_vm._v("*Tanggal lahir. Wajib diisi")]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _vm._v(
+                    "\n                                Email\n                            "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-9" }, [
+                  !_vm.isEditProfile
+                    ? _c("b", {
+                        domProps: { textContent: _vm._s(_vm.pegawai.email) }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditProfile
+                    ? _c(
                         "div",
                         {
                           staticClass: "form-group",
-                          attrs: { id: "edit-tanggal-lahir" }
+                          attrs: { id: "edit-email" }
                         },
                         [
                           _c("input", {
@@ -14661,13 +14952,13 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.pegawai.tanggalLahir,
-                                expression: "pegawai.tanggalLahir"
+                                value: _vm.pegawai.email,
+                                expression: "pegawai.email"
                               }
                             ],
                             staticClass: "form-control",
-                            attrs: { type: "date" },
-                            domProps: { value: _vm.pegawai.tanggalLahir },
+                            attrs: { type: "email" },
+                            domProps: { value: _vm.pegawai.email },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
@@ -14675,7 +14966,7 @@ var render = function() {
                                 }
                                 _vm.$set(
                                   _vm.pegawai,
-                                  "tanggalLahir",
+                                  "email",
                                   $event.target.value
                                 )
                               }
@@ -14683,399 +14974,794 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("small", { staticClass: "form-text text-muted" }, [
-                            _vm._v("*Tanggal lahir. Wajib diisi")
+                            _vm._v("*Wajib diisi")
                           ])
                         ]
                       )
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Email\n                        "
-                )
+                    : _vm._e()
+                ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.email) }
-                    })
-                  : _vm._e(),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _vm._v(
+                    "\n                                No. Pegawai\n                            "
+                  )
+                ]),
                 _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-email" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.email,
-                              expression: "pegawai.email"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "email" },
-                          domProps: { value: _vm.pegawai.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                _c("div", { staticClass: "col-sm-9" }, [
+                  !_vm.isEditProfile
+                    ? _c("b", {
+                        domProps: { textContent: _vm._s(_vm.pegawai.nopeg) }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditProfile
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          attrs: { id: "edit-nopeg" }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pegawai.nopeg,
+                                expression: "pegawai.nopeg"
                               }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "email",
-                                $event.target.value
-                              )
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.pegawai.nopeg },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pegawai,
+                                  "nopeg",
+                                  $event.target.value
+                                )
+                              }
                             }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            No. Pegawai\n                        "
-                )
+                          }),
+                          _vm._v(" "),
+                          _c("small", { staticClass: "form-text text-muted" }, [
+                            _vm._v("*Wajib diisi")
+                          ])
+                        ]
+                      )
+                    : _vm._e()
+                ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.nopeg) }
-                    })
-                  : _vm._e(),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _vm._v(
+                    "\n                                Unit Kerja\n                            "
+                  )
+                ]),
                 _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-nopeg" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.nopeg,
-                              expression: "pegawai.nopeg"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.nopeg },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                _c("div", { staticClass: "col-sm-9" }, [
+                  !_vm.isEditProfile
+                    ? _c("b", {
+                        domProps: { textContent: _vm._s(_vm.pegawai.unitKerja) }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditProfile
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          attrs: { id: "edit-unit-kerja" }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pegawai.unitKerja,
+                                expression: "pegawai.unitKerja"
                               }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "nopeg",
-                                $event.target.value
-                              )
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.pegawai.unitKerja },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pegawai,
+                                  "unitKerja",
+                                  $event.target.value
+                                )
+                              }
                             }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Unit Kerja\n                        "
-                )
+                          }),
+                          _vm._v(" "),
+                          _c("small", { staticClass: "form-text text-muted" }, [
+                            _vm._v("*Wajib diisi")
+                          ])
+                        ]
+                      )
+                    : _vm._e()
+                ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.unitKerja) }
-                    })
-                  : _vm._e(),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _vm._v(
+                    "\n                                Jabatan\n                            "
+                  )
+                ]),
                 _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-unit-kerja" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.unitKerja,
-                              expression: "pegawai.unitKerja"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.unitKerja },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                _c("div", { staticClass: "col-sm-9" }, [
+                  !_vm.isEditProfile
+                    ? _c("b", {
+                        domProps: { textContent: _vm._s(_vm.pegawai.posisi) }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditProfile
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          attrs: { id: "edit-posisi" }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pegawai.posisi,
+                                expression: "pegawai.posisi"
                               }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "unitKerja",
-                                $event.target.value
-                              )
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.pegawai.posisi },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pegawai,
+                                  "posisi",
+                                  $event.target.value
+                                )
+                              }
                             }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Jabatan\n                        "
-                )
+                          }),
+                          _vm._v(" "),
+                          _c("small", { staticClass: "form-text text-muted" }, [
+                            _vm._v("*Wajib diisi")
+                          ])
+                        ]
+                      )
+                    : _vm._e()
+                ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.posisi) }
-                    })
-                  : _vm._e(),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _vm._v(
+                    "\n                                Kompetensi\n                            "
+                  )
+                ]),
                 _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-posisi" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.posisi,
-                              expression: "pegawai.posisi"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.posisi },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                _c("div", { staticClass: "col-sm-9" }, [
+                  !_vm.isEditProfile
+                    ? _c("b", {
+                        domProps: {
+                          textContent: _vm._s(_vm.pegawai.kompetensi)
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditProfile
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          attrs: { id: "edit-kompetensi" }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pegawai.kompetensi,
+                                expression: "pegawai.kompetensi"
                               }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "posisi",
-                                $event.target.value
-                              )
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.pegawai.kompetensi },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pegawai,
+                                  "kompetensi",
+                                  $event.target.value
+                                )
+                              }
                             }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Kompetensi\n                        "
-                )
+                          }),
+                          _vm._v(" "),
+                          _c("small", { staticClass: "form-text text-muted" }, [
+                            _vm._v("*Wajib diisi")
+                          ])
+                        ]
+                      )
+                    : _vm._e()
+                ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.kompetensi) }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-kompetensi" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.kompetensi,
-                              expression: "pegawai.kompetensi"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.kompetensi },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "kompetensi",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Tahun Masuk\n                        "
-                )
-              ]),
+              _c("hr"),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.tahunMasuk) }
-                    })
-                  : _vm._e(),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _vm._v(
+                    "\n                                Tahun Masuk\n                            "
+                  )
+                ]),
                 _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-tahun-masuk" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.tahunMasuk,
-                              expression: "pegawai.tahunMasuk"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.tahunMasuk },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                _c("div", { staticClass: "col-sm-9" }, [
+                  !_vm.isEditProfile
+                    ? _c("b", {
+                        domProps: {
+                          textContent: _vm._s(_vm.pegawai.tahunMasuk)
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditProfile
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          attrs: { id: "edit-tahun-masuk" }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pegawai.tahunMasuk,
+                                expression: "pegawai.tahunMasuk"
                               }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "tahunMasuk",
-                                $event.target.value
-                              )
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.pegawai.tahunMasuk },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pegawai,
+                                  "tahunMasuk",
+                                  $event.target.value
+                                )
+                              }
                             }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
+                          }),
+                          _vm._v(" "),
+                          _c("small", { staticClass: "form-text text-muted" }, [
+                            _vm._v("*Wajib diisi")
+                          ])
+                        ]
+                      )
+                    : _vm._e()
+                ])
               ])
             ])
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.isEditProfile
+        ? _c("div", { staticClass: "card-footer text-muted" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-success float-sm-right btn-simpan",
+                attrs: { href: "#profil-pegawai" },
+                on: { click: _vm.saveProfilPegawai }
+              },
+              [_vm._v("Simpan")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-danger float-sm-right",
+                attrs: { href: "#profil-pegawai" },
+                on: { click: _vm.cancelProfilPegawai }
+              },
+              [_vm._v("Batal")]
+            )
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _vm.isEditProfile
-      ? _c("div", { staticClass: "card-footer text-muted" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-success float-sm-right btn-simpan",
-              attrs: { href: "#profil-pegawai" },
-              on: { click: _vm.saveProfilPegawai }
-            },
-            [_vm._v("Simpan")]
-          ),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "card", attrs: { id: "data-kepegawaian" } }, [
+      _c("div", { staticClass: "card-header" }, [
+        _vm._v("\n            Data Kepegawaian"),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary float-sm-right",
+            attrs: { disabled: _vm.disableEdit },
+            on: { click: _vm.editDataKepegawaian }
+          },
+          [_vm._v("Edit")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "container" }, [
+          _vm.dataKepegawaian.length === 0
+            ? _c("div", { staticClass: "no-data-kepegawaian" }, [
+                _vm._v(
+                  "\n                    \n                    Belum ditambahkan.\n                    "
+                ),
+                _c("br")
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-danger float-sm-right",
-              attrs: { href: "#profil-pegawai" },
-              on: { click: _vm.cancelProfilPegawai }
-            },
-            [_vm._v("Batal")]
-          )
+          _vm.dataKepegawaian.length !== 0
+            ? _c("div", { staticClass: "data-kepegawaian" }, [
+                _c(
+                  "table",
+                  { staticClass: "table" },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _vm._l(_vm.dataKepegawaian, function(dk) {
+                      return _c("tbody", [
+                        !_vm.isEditKepegawaian
+                          ? _c("tr", [
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(dk.id_unit_kerja)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: { textContent: _vm._s(dk.id_posisi) }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(dk.tahun_masuk)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(dk.tahun_keluar)
+                                }
+                              })
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.isEditKepegawaian
+                          ? _c("tr", [
+                              _c("td", [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: dk.id_unit_kerja,
+                                        expression: "dk.id_unit_kerja"
+                                      }
+                                    ],
+                                    staticClass: "form-control text-center",
+                                    attrs: { type: "text" },
+                                    domProps: { value: dk.id_unit_kerja },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          dk,
+                                          "id_unit_kerja",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "small",
+                                    { staticClass: "form-text text-muted" },
+                                    [_vm._v("*Wajib diisi")]
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: dk.id_posisi,
+                                        expression: "dk.id_posisi"
+                                      }
+                                    ],
+                                    staticClass: "form-control text-center",
+                                    attrs: { type: "text" },
+                                    domProps: { value: dk.id_posisi },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          dk,
+                                          "id_posisi",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "small",
+                                    { staticClass: "form-text text-muted" },
+                                    [_vm._v("*Wajib diisi")]
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: dk.tahun_masuk,
+                                        expression: "dk.tahun_masuk"
+                                      }
+                                    ],
+                                    staticClass: "form-control text-center",
+                                    attrs: { type: "text" },
+                                    domProps: { value: dk.tahun_masuk },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          dk,
+                                          "tahun_masuk",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "small",
+                                    { staticClass: "form-text text-muted" },
+                                    [_vm._v("*Wajib diisi")]
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: dk.tahun_keluar,
+                                        expression: "dk.tahun_keluar"
+                                      }
+                                    ],
+                                    staticClass: "form-control text-center",
+                                    attrs: { type: "text" },
+                                    domProps: { value: dk.tahun_keluar },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          dk,
+                                          "tahun_keluar",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "small",
+                                    { staticClass: "form-text text-muted" },
+                                    [_vm._v("*Wajib diisi")]
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    attrs: {
+                                      id: _vm.dataKepegawaian.indexOf(dk),
+                                      type: "button"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.delDataKepegawaian($event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Hapus")]
+                                )
+                              ])
+                            ])
+                          : _vm._e()
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _vm.isEditKepegawaian
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary float-sm-left",
+                            on: { click: _vm.addDataKepegawaian }
+                          },
+                          [_vm._v("Tambah")]
+                        )
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("br")
         ])
-      : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm.isEditKepegawaian
+        ? _c("div", { staticClass: "card-footer text-muted" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-success float-sm-right btn-simpan",
+                attrs: { href: "#data-kepegawaian" },
+                on: { click: _vm.saveDataKepegawaian }
+              },
+              [_vm._v("Simpan")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-danger float-sm-right",
+                attrs: { href: "#data-kepegawaian" },
+                on: { click: _vm.cancelDataKepegawaian }
+              },
+              [_vm._v("Batal")]
+            )
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _vm._v("\n            Riwayat Pendidikan dan Pekerjaan"),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary float-sm-right",
+            attrs: { disabled: _vm.disableEdit },
+            on: { click: _vm.editRiwayatPegawai }
+          },
+          [_vm._v("Edit")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("h5", [_vm._v("Riwayat Pendidikan")]),
+          _vm._v(" "),
+          _vm.riwayatPendidikan.length === 0
+            ? _c("div", { staticClass: "no-riwayat-pendidikan" }, [
+                _c("hr"),
+                _vm._v(
+                  "\n                    Belum ditambahkan.\n                    "
+                ),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.riwayatPendidikan.length !== 0
+            ? _c("div", { staticClass: "riwayat-pendidikan" }, [
+                _c(
+                  "table",
+                  { staticClass: "table" },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _vm._l(_vm.riwayatPendidikan, function(rp) {
+                      return _c("tbody", [
+                        _c("tr", [
+                          _c("td", {
+                            domProps: { textContent: _vm._s(rp.strata) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(rp.nama_institusi) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(rp.jurusan) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(rp.tahun_masuk) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(rp.tahun_keluar) }
+                          })
+                        ])
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("br"),
+          _c("br"),
+          _vm._v(" "),
+          _c("h5", [_vm._v("Riwayat Pekerjaan")]),
+          _vm._v(" "),
+          _vm.riwayatPekerjaan.length === 0
+            ? _c("div", { staticClass: "no-riwayat-pekerjaan" }, [
+                _c("hr"),
+                _vm._v(
+                  "\n                    Belum ditambahkan.\n                    "
+                ),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.riwayatPekerjaan.length !== 0
+            ? _c("div", { staticClass: "riwayat-pekerjaan" }, [
+                _c(
+                  "table",
+                  { staticClass: "table" },
+                  [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _vm._l(_vm.riwayatPekerjaan, function(rp) {
+                      return _c("tbody", [
+                        _c("tr", [
+                          _c("td", {
+                            domProps: { textContent: _vm._s(rp.nama_institusi) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(rp.posisi) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(rp.tahun_masuk) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(rp.tahun_keluar) }
+                          })
+                        ])
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
+            : _vm._e()
+        ])
+      ])
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Unit Kerja")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Posisi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Masuk")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Keluar")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tingkat Pendidikan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nama Institusi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jurusan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Masuk")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Keluar")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nama Institusi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Posisi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Masuk")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Keluar")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
