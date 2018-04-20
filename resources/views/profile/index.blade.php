@@ -2,27 +2,18 @@
 
 @section('content')
 
-    <profil-pegawai id="{{ Auth::user()->id}}"></profil-pegawai>
+    <br>
+
+    <profil-pegawai id="{{ Auth::user()->id}}" data="{{json_encode($kinerja)}}"></profil-pegawai>
 
     <br>
+
 
     {{-- 
 
     <br>
 
-    <div class="card">
-        <div class="card-header">
-            Hasil Kinerja
-        </div>
-
-        <div class="card-body">
-            <div class="container">
-
-                Belum ditambahkan.
-
-            </div>
-        </div>
-    </div>
+    
 
     <br>
 

@@ -1,5 +1,5 @@
 <template>
-    <div id="pegawai">
+    <div>
         <div class="card" id="profil-pegawai">
             <div class="card-header">
                 Profil Pegawai<button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">Edit</button>
@@ -399,7 +399,85 @@
                 <a href="#riwayat-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelRiwayatPegawai">Batal</a>
             </div>
         </div>
+
+        <br>
+
+        <div class="card" id="data-kinerja">
+            <div class="card-header">
+                Hasil Kinerja<button class="btn btn-primary float-sm-right" v-on:click="editDataKinerja" v-bind:disabled="disableEdit">Edit</button>
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+                    <div v-if="dataKinerja.length === 0" class="no-data-kinerja">
+                        <div v-if="!isEditDataKinerja">
+                            Belum ditambahkan.
+                            <br>
+                        </div>
+                        <button v-if="isEditDataKinerja" class="btn btn-primary float-sm-left" v-on:click="addDataKinerja">Tambah</button>
+                    </div>
+
+                    <div v-if="dataKinerja.length !== 0" class="data-kinerja">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Tahun</th>
+                                <th scope="col">Semester</th>
+                                <th scope="col">Nilai</th>
+                                <th scope="col">Catatan</th>
+                            </tr>
+                            </thead>
+                            <tbody v-for="dk in dataKinerja">
+                            <tr v-if="!isEditDataKinerja">
+                                <td v-text="dk.tahun" ></td>
+                                <td v-text="dk.semester" ></td>
+                                <td v-text="dk.nilai" ></td>
+                                <td v-text="dk.catatan" ></td>
+                            </tr>
+
+                            <tr v-if="isEditDataKinerja">
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.tahun" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.semester" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.nilai" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.catatan" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button v-bind:id="dataKinerja.indexOf(dk)" v-on:click="delDataKinerja($event)" class="btn btn-danger" type="button">Hapus</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <button v-if="isEditDataKinerja" class="btn btn-primary float-sm-left" v-on:click="addDataKinerja">Tambah</button>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted" v-if="isEditDataKinerja">
+                <a href="#data-kinerja" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveDataKinerja">Simpan</a>
+                <a href="#data-kinerja" class="btn btn-danger float-sm-right" v-on:click="cancelDataKinerja">Batal</a>
+            </div>
+        </div>
+
     </div>
+
 </template>
 
 <script>
@@ -408,14 +486,19 @@
 
         data() {
             return {
+                dataKinerja: [
+                    {tahun : 2010, semester:1, nilai:50, catatan:"ini catatan"}
+                    ],
                 disableEdit: false,
                 isEditProfile: false,
                 isEditKepegawaian: false,
                 isEditRiwayat: false,
+                isEditDataKinerja: false,
                 cachedPegawai: null,
                 cachedDataKepegawaian: null,
                 cachedRiwayatPendidikan: null,
                 cachedRiwayatPekerjaan: null,
+                cachedDataKinerja: null,
                 pegawai: {
                     imageProfileUrl: "https://i.pinimg.com/236x/34/ba/c1/34bac13dd65ab3b81267f727e5633549--patrick-dempsey-handsome-man.jpg",
                     nama: "",
@@ -460,17 +543,14 @@
                     this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
                     this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
                     this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
-                    // this.cachedPegawai = Object.assign({}, this.pegawai);
-                    // this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
-                    // this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
-                    // this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
 
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
 
-            
+            //caching others
+            this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
             
         },
 
@@ -518,41 +598,58 @@
                 this.disableEditButton();
             },
 
+            editDataKinerja() {
+                this.isEditDataKinerja = true;
+                this.disableEditButton();
+            },
+
             addDataKepegawaian() {
                 var newData = {
-                    id_data_kepegawaian : "",
-                    id_pegawai : "",
-                    id_unit_kerja : "",
-                    id_posisi : "",
-                    tahun_masuk : "",
-                    tahun_keluar : ""
+                    id_data_kepegawaian : null,
+                    id_pegawai : null,
+                    id_unit_kerja : null,
+                    id_posisi : null,
+                    tahun_masuk : null,
+                    tahun_keluar : null
                 };
                 this.dataKepegawaian.push(newData);
             },
 
             addRiwayatPendidikan() {
                 var newData = {
-                    id_riwayat_pendidikan : "",
-                    id_pegawai : "",
-                    nama_institusi : "",
-                    strata : "",
-                    jurusan : "",
-                    tahun_masuk : "",
-                    tahun_keluar : ""
+                    id_riwayat_pendidikan : null,
+                    id_pegawai : null,
+                    nama_institusi : null,
+                    strata : null,
+                    jurusan : null,
+                    tahun_masuk : null,
+                    tahun_keluar : null
                 };
                 this.riwayatPendidikan.push(newData);
             },
 
             addRiwayatPekerjaan() {
                 var newData = {
-                    id_riwayat_pendidikan : "",
-                    id_pegawai : "",
-                    nama_institusi : "",
-                    posisi : "",
-                    tahun_masuk : "",
-                    tahun_keluar : ""
+                    id_riwayat_pendidikan : null,
+                    id_pegawai : null,
+                    nama_institusi : null,
+                    posisi : null,
+                    tahun_masuk : null,
+                    tahun_keluar : null
                 };
                 this.riwayatPekerjaan.push(newData);
+            },
+
+            addDataKinerja() {
+                var newData = {
+                    id_kinerja : null,
+                    id_pegawai : null,
+                    tahun : null,
+                    semester : null,
+                    nilai : null,
+                    catatan : null
+                };
+                this.dataKinerja.push(newData);
             },
 
             delDataKepegawaian(event) {
@@ -568,6 +665,11 @@
             delRiwayatPekerjaan(event) {
                 var targetIndex = event.currentTarget.id;
                 this.riwayatPekerjaan.splice(targetIndex, 1);
+            },
+
+            delDataKinerja(event) {
+                var targetIndex = event.currentTarget.id;
+                this.dataKinerja.splice(targetIndex, 1);
             },
 
             saveProfilPegawai() {
@@ -601,13 +703,6 @@
             },
 
             saveRiwayatPegawai() {
-                this.enableEditButton();
-                // this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
-                // this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
-                this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
-                this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
-                this.isEditRiwayat = false;
-
                 //sort
                 this.riwayatPendidikan.sort(function(a, b){
                         var keyA = a.tahun_masuk,
@@ -627,30 +722,60 @@
                         if(keyA > keyB) return 1;
                         return 0;
                     });
+
+                this.enableEditButton();
+                // this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
+                // this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
+                this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
+                this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
+                this.isEditRiwayat = false;
+
+                
+            },
+
+            saveDataKinerja() {
+                //sort
+                this.dataKinerja.sort(function(a, b){
+                        var keyA = a.tahun,
+                            keyB = b.tahun;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        if (keyA == keyB) {
+                            if (a.semester < b.semester) return -1;
+                            else return 1;
+                        }
+                    });
+
+                this.enableEditButton();
+                this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
+                this.isEditDataKinerja = false;
             },
 
             cancelProfilPegawai() {
                 this.enableEditButton();
-                // this.pegawai = Object.assign({}, this.cachedPegawai);
                 this.pegawai = JSON.parse(JSON.stringify(this.cachedPegawai));
                 this.isEditProfile = false;
             },
 
             cancelDataKepegawaian() {
                 this.enableEditButton();
-                // this.dataKepegawaian = Object.assign({}, this.cachedDataKepegawaian);
                 this.dataKepegawaian = JSON.parse(JSON.stringify(this.cachedDataKepegawaian));
                 this.isEditKepegawaian = false;
             },
 
             cancelRiwayatPegawai() {
                 this.enableEditButton();
-                // this.riwayatPendidikan = Object.assign({}, this.cachedRiwayatPendidikan);
-                // this.riwayatPekerjaan = Object.assign({}, this.cachedRiwayatPekerjaan);
                 this.riwayatPendidikan = JSON.parse(JSON.stringify(this.cachedRiwayatPendidikan));
                 this.riwayatPekerjaan = JSON.parse(JSON.stringify(this.cachedRiwayatPekerjaan));
                 this.isEditRiwayat = false;
             },
+
+            cancelDataKinerja() {
+                this.enableEditButton();
+                this.dataKinerja = JSON.parse(JSON.stringify(this.cachedDataKinerja));
+                this.isEditDataKinerja = false;
+            }
         }
     }
 </script>
