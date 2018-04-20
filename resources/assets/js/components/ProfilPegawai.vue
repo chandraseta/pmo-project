@@ -2,7 +2,10 @@
     <div>
         <div class="card" id="profil-pegawai">
             <div class="card-header">
-                Profil Pegawai<button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">Edit</button>
+                Profil Pegawai
+                <button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                </button>
             </div>
 
             <div class="card-body">
@@ -11,7 +14,7 @@
                         <div class="col-sm-3 img-responsive">
                             <img id="img-profile" v-bind:src="pegawai.imageProfileUrl" class="img-thumbnail">
                             <br><br>
-                            <button type="button" class="btn btn-primary">Ganti Foto</button>
+                            <button v-if="isEditProfile" type="button" class="btn btn-primary">Ganti Foto</button>
                         </div>
                         <div class="col-sm-1"></div>
                         <div class="col-sm-7">
@@ -157,8 +160,12 @@
             </div>
 
             <div class="card-footer text-muted" v-if="isEditProfile">
-                <a href="#profil-pegawai" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveProfilPegawai">Simpan</a>
-                <a href="#profil-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelProfilPegawai">Batal</a>
+                <a href="#profil-pegawai" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveProfilPegawai">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#profil-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelProfilPegawai">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
             </div>
         </div>
 
@@ -166,7 +173,10 @@
 
         <div class="card" id="data-kepegawaian">
             <div class="card-header">
-                Data Kepegawaian<button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">Edit</button>
+                Data Kepegawaian
+                <button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                </button>
             </div>
 
             <div class="card-body">
@@ -177,7 +187,9 @@
                             Belum ditambahkan.
                             <br>
                         </div>
-                        <button v-if="isEditKepegawaian" class="btn btn-primary float-sm-left" v-on:click="addDataKepegawaian">Tambah</button>
+                        <button v-if="isEditKepegawaian" class="btn btn-primary float-sm-left" v-on:click="addDataKepegawaian">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
                         
                     </div>
 
@@ -224,11 +236,15 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button v-bind:id="dataKepegawaian.indexOf(dk)" v-on:click="delDataKepegawaian($event)" class="btn btn-danger" type="button">Hapus</button>
+                                    <button v-bind:id="dataKepegawaian.indexOf(dk)" v-on:click="delDataKepegawaian($event)" class="btn btn-danger" type="button">
+                                        Hapus <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
-                            <button v-if="isEditKepegawaian" class="btn btn-primary float-sm-left" v-on:click="addDataKepegawaian">Tambah</button>
+                            <button v-if="isEditKepegawaian" class="btn btn-primary float-sm-left" v-on:click="addDataKepegawaian">
+                                Tambah <i class="fas fa-plus"></i>
+                            </button>
                         </table>
 
                     </div>
@@ -238,8 +254,12 @@
                 </div>
             </div>
             <div class="card-footer text-muted" v-if="isEditKepegawaian">
-                <a href="#data-kepegawaian" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveDataKepegawaian">Simpan</a>
-                <a href="#data-kepegawaian" class="btn btn-danger float-sm-right" v-on:click="cancelDataKepegawaian">Batal</a>
+                <a href="#data-kepegawaian" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveDataKepegawaian">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#data-kepegawaian" class="btn btn-danger float-sm-right" v-on:click="cancelDataKepegawaian">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
             </div>
         </div>
 
@@ -247,7 +267,9 @@
 
         <div class="card" id="riwayat-pegawai">
             <div class="card-header">
-                Riwayat Pendidikan dan Pekerjaan<button class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai" v-bind:disabled="disableEdit">Edit</button>
+                Riwayat Pendidikan dan Pekerjaan<button class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                    </button>
             </div>
 
             <div class="card-body">
@@ -261,7 +283,9 @@
                             Belum ditambahkan.
                             <br>
                         </div>
-                        <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPendidikan">Tambah</button>
+                        <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPendidikan">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
                     </div>
 
                     <div v-if="riwayatPendidikan.length !== 0" class="riwayat-pendidikan">
@@ -315,12 +339,16 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button v-bind:id="riwayatPendidikan.indexOf(rp)" v-on:click="delRiwayatPendidikan($event)" class="btn btn-danger" type="button">Hapus</button>
+                                    <button v-bind:id="riwayatPendidikan.indexOf(rp)" v-on:click="delRiwayatPendidikan($event)" class="btn btn-danger" type="button">
+                                        Hapus <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
 
                             </tbody>
-                            <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPendidikan">Tambah</button>
+                            <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPendidikan">
+                                Tambah <i class="fas fa-plus"></i>
+                            </button>
                         </table>
 
                     </div>
@@ -336,7 +364,9 @@
                             Belum ditambahkan.
                             <br>
                         </div>
-                        <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPekerjaan">Tambah</button>
+                        <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPekerjaan">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
                     </div>
 
                     <div v-if="riwayatPekerjaan.length !== 0" class="riwayat-pekerjaan">
@@ -383,11 +413,15 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button v-bind:id="riwayatPekerjaan.indexOf(rp)" v-on:click="delRiwayatPekerjaan($event)" class="btn btn-danger" type="button">Hapus</button>
+                                    <button v-bind:id="riwayatPekerjaan.indexOf(rp)" v-on:click="delRiwayatPekerjaan($event)" class="btn btn-danger" type="button">
+                                        Hapus <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
-                            <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPekerjaan">Tambah</button>
+                            <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPekerjaan">
+                                Tambah <i class="fas fa-plus"></i>
+                            </button>
                         </table>
 
                     </div>
@@ -395,16 +429,39 @@
                 </div>
             </div>
             <div class="card-footer text-muted" v-if="isEditRiwayat">
-                <a href="#riwayat-pegawai" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveRiwayatPegawai">Simpan</a>
-                <a href="#riwayat-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelRiwayatPegawai">Batal</a>
+                <a href="#riwayat-pegawai" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveRiwayatPegawai">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#riwayat-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelRiwayatPegawai">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
             </div>
         </div>
 
         <br>
 
+        <div class="card" id="data-kompetensi">
+            <div class="card-header">
+                Sertifikat
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+
+                    Belum ditambahkan.
+
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+
         <div class="card" id="data-kinerja">
             <div class="card-header">
-                Hasil Kinerja<button class="btn btn-primary float-sm-right" v-on:click="editDataKinerja" v-bind:disabled="disableEdit">Edit</button>
+                Hasil Kinerja<button class="btn btn-primary float-sm-right" v-on:click="editDataKinerja" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                    </button>
             </div>
 
             <div class="card-body">
@@ -414,7 +471,9 @@
                             Belum ditambahkan.
                             <br>
                         </div>
-                        <button v-if="isEditDataKinerja" class="btn btn-primary float-sm-left" v-on:click="addDataKinerja">Tambah</button>
+                        <button v-if="isEditDataKinerja" class="btn btn-primary float-sm-left" v-on:click="addDataKinerja">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
                     </div>
 
                     <div v-if="dataKinerja.length !== 0" class="data-kinerja">
@@ -461,18 +520,93 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button v-bind:id="dataKinerja.indexOf(dk)" v-on:click="delDataKinerja($event)" class="btn btn-danger" type="button">Hapus</button>
+                                    <button v-bind:id="dataKinerja.indexOf(dk)" v-on:click="delDataKinerja($event)" class="btn btn-danger" type="button">
+                                        Hapus <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
-                            <button v-if="isEditDataKinerja" class="btn btn-primary float-sm-left" v-on:click="addDataKinerja">Tambah</button>
+                            <button v-if="isEditDataKinerja" class="btn btn-primary float-sm-left" v-on:click="addDataKinerja">
+                                Tambah <i class="fas fa-plus"></i>
+                            </button>
                         </table>
                     </div>
                 </div>
             </div>
             <div class="card-footer text-muted" v-if="isEditDataKinerja">
-                <a href="#data-kinerja" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveDataKinerja">Simpan</a>
-                <a href="#data-kinerja" class="btn btn-danger float-sm-right" v-on:click="cancelDataKinerja">Batal</a>
+                <a href="#data-kinerja" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveDataKinerja">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#data-kinerja" class="btn btn-danger float-sm-right" v-on:click="cancelDataKinerja">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card" id="data-kompetensi">
+            <div class="card-header">
+                Hasil Kompetensi
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+
+                    Belum ditambahkan.
+
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card" id="rekomendasi">
+            <div class="card-header">
+                Rekomendasi
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+
+                    <h5>Rekomendasi Training</h5>
+
+                    <div v-if="rekomendasiTraining.length === 0" class="no-rekomendasi-trainiing">
+                        <hr>
+                        Belum dimtambahkan.
+                        <br>
+                    </div>
+
+                    <div v-if="rekomendasiTraining.length !== 0" class="rekomendasi-trainiing">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Nama Training</th>
+                                <th scope="col">Penyelenggara</th>
+                                <th scope="col">Bidang</th>
+                            </tr>
+                            </thead>
+                            <tbody v-for="rp in rekomendasiTraining">
+                            <tr>
+                                <td v-text="rp.namaTraining" ></td>
+                                <td v-text="rp.penyelenggara" ></td>
+                                <td v-text="rp.bidang" ></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <br><br>
+
+
+                    <h5>Rekomendasi Lain-lain</h5>
+
+                    <hr>
+
+                    Tidak ada.
+
+                </div>
             </div>
         </div>
 
@@ -482,13 +616,16 @@
 
 <script>
     export default {
-        props: ['id'],
+        props: ['id', 'unitKerja'],
 
         data() {
             return {
+                //dummy
                 dataKinerja: [
-                    {tahun : 2010, semester:1, nilai:50, catatan:"ini catatan"}
+                    {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
                     ],
+                rekomendasiTraining : [],   
+
                 disableEdit: false,
                 isEditProfile: false,
                 isEditKepegawaian: false,

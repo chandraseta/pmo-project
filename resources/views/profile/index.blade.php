@@ -4,32 +4,12 @@
 
     <br>
 
-    <profil-pegawai id="{{ Auth::user()->id}}" data="{{json_encode($kinerja)}}"></profil-pegawai>
+<profil-pegawai id="{{ Auth::user()->id}}" data="{{json_encode($kinerja)}}" unitKerja="{{$unit_kerja}}"></profil-pegawai>
 
     <br>
 
 
     {{-- 
-
-    <br>
-
-    
-
-    <br>
-
-    <div class="card">
-        <div class="card-header">
-            Hasil Kompetensi
-        </div>
-
-        <div class="card-body">
-            <div class="container">
-
-                Belum ditambahkan.
-
-            </div>
-        </div>
-    </div>
 
     <br>
 
