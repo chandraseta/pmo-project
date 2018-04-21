@@ -184,9 +184,11 @@ class PegawaiAPIController extends APIBaseController
         $pegawai->tempat_lahir = $input['tempat_lahir'];
         $pegawai->tanggal_lahir = $input['tanggal_lahir'];
         $pegawai->id_pengubah = $input['id_pengubah'];
+        $pegawai->ekstensi_foto = $input['user_photo']->getClientOriginalExtension();
 
         $photoTimeAsName = $input['nip'].'.'.$input['user_photo']->getClientOriginalExtension();    
         $input['user_photo']->move(public_path('profile'), $photoTimeAsName);
+
 
 
         $pendidikan = RiwayatPendidikan::where('id_pegawai', $id);

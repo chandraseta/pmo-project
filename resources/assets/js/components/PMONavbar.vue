@@ -18,8 +18,8 @@
                 </li>
             </ul>
             <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-                <a class="btn navbar-btn btn-primary ml-2 text-white">
-                    Keluar
+                <a href="/pages" class="btn navbar-btn btn-primary ml-2 text-white">
+                    Kembali
                 </a>
             </div>
         </div>

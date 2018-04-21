@@ -24,7 +24,13 @@ class DataKompetensiAPITest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $pmo = factory(PMO::class)->create();
+        $pmo = PMO::inRandomOrder();
+        if (is_null($pmo)) {
+            factory(User::class)->create();
+            $pmo = factory(PMO::class)->create();
+        } else {
+            $pmo = $pmo->first();
+        }
         $this->user = User::find($pmo->id_user);
     }
 
