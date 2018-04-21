@@ -464,17 +464,124 @@
 
         <br>
 
-        <div class="card" id="data-kompetensi">
+        <div class="card" id="sertificate">
             <div class="card-header">
-                Sertifikat
+                Sertifikat<button class="btn btn-primary float-sm-right" v-on:click="editSertifikat" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                    </button>
             </div>
 
             <div class="card-body">
                 <div class="container">
+                    <div v-if="sertifikat.length === 0" class="no-sertificate">
+                        <div v-if="!isEditSertifikat">
+                            Belum ditambahkan.
+                            <br>
+                        </div>
+                        <button v-if="isEditSertifikat" class="btn btn-primary float-sm-left" v-on:click="addSertifikat">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
 
-                    Belum ditambahkan.
+                    <div v-if="sertifikat.length !== 0" class="sertificate">
+                        <table class="table" align="left">
+                            <tbody v-for="dk in sertifikat">
+                            <div v-if="!isEditSertifikat">
+                                <tr>
+                                    <td rowspan="4">
+                                            <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
+                                    </td>
+                                    <th scope="col">Judul</th>
+                                    <td v-text="dk.judul" ></td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Lembaga</th>
+                                    <td v-text="dk.lembaga" ></td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Tahun Diterbitkan</th>
+                                    <td v-text="dk.tahun_diterbitkan" ></td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Catatan</th>
+                                    <td v-text="dk.catatan" ></td>   
+                                </tr>
+                            </div>
 
+                            <div v-if="isEditSertifikat">
+                            <tr>
+                                <td rowspan="4">
+                                    <div>
+                                        <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-danger" type="button">
+                                            Hapus <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                    <br>
+                                    <div v-if="dk.nama_file !== NULL">
+                                        <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-primary" type="button">
+                                            Ganti Foto
+                                        </button>
+                                    </div>
+                                    <div v-if="dk.nama_file == NULL">
+                                        <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-primary" type="button">
+                                            Tambah Foto
+                                        </button>
+                                    </div>
+                                </td>
+                                <td rowspan="4">
+                                    <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
+                                </td>
+                                <th scope="col">Judul</th>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.judul" type="text" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Lembaga</th>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.lembaga" type="text" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Tahun Diterbitkan</th>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.tahun_diterbitkan" type="text" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Catatan</th>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.catatan" type="text" class="form-control">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                            </tr>
+                            </div>
+                            </tbody>
+                            <button v-if="isEditSertifikat" class="btn btn-primary float-sm-left" v-on:click="addSertifikat">
+                                Tambah <i class="fas fa-plus"></i>
+                            </button>
+                        </table>
+                    </div>
                 </div>
+            </div>
+            <div class="card-footer text-muted" v-if="isEditSertifikat">
+                <a href="#sertificate" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveSertifikat">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#sertificate" class="btn btn-danger float-sm-right" v-on:click="cancelSertifikat">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
             </div>
         </div>
 
@@ -647,18 +754,36 @@
                 //dummy
                 dataKinerja: [
                     {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
-                    ],
+                ],
+                sertifikat: [
+                    {
+                        judul : "Personal Care Worker",
+                        lembaga : "Harvard University",
+                        tahun_diterbitkan : 1990,
+                        catatan: "Ex numquam perspiciatis impedit fugit quam id. Harum et eos iure consequatur. Itaque inventore quia aut velit.",
+                        nama_file: "simage/" + "harvard.jpg",
+                    },
+                    {
+                        judul : "Best Pilot",
+                        lembaga : "NASA",
+                        tahun_diterbitkan : 2010,
+                        catatan: "Ex numquam perspiciatis impedit fugit quam id. Harum et eos iure consequatur. Itaque inventore quia aut velit.",
+                        nama_file: "simage/" + "nasa.jpg",
+                    }
+                ],
                 rekomendasiTraining : [],   
 
                 disableEdit: false,
                 isEditProfile: false,
                 isEditKepegawaian: false,
                 isEditRiwayat: false,
+                isEditSertifikat: false,
                 isEditDataKinerja: false,
                 cachedPegawai: null,
                 cachedDataKepegawaian: null,
                 cachedRiwayatPendidikan: null,
                 cachedRiwayatPekerjaan: null,
+                cachedSertifikat: null,
                 cachedDataKinerja: null,
                 pegawai: {
                     imageProfileUrl: null,
@@ -728,6 +853,7 @@
 
             //caching others
             this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
+            this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
             
         },
 
@@ -830,6 +956,11 @@
                 this.disableEditButton();
             },
 
+            editSertifikat() {
+                this.isEditSertifikat = true;
+                this.disableEditButton();
+            },
+
             editDataKinerja() {
                 this.isEditDataKinerja = true;
                 this.disableEditButton();
@@ -872,6 +1003,13 @@
                 this.riwayatPekerjaan.push(newData);
             },
 
+            addSertifikat() {
+                var newData = {
+
+                };
+                this.sertifikat.push(newData);
+            },
+
             addDataKinerja() {
                 var newData = {
                     id_kinerja : null,
@@ -897,6 +1035,11 @@
             delRiwayatPekerjaan(event) {
                 var targetIndex = event.currentTarget.id;
                 this.riwayatPekerjaan.splice(targetIndex, 1);
+            },
+
+            delSertifikat(event) {
+                var targetIndex = event.currentTarget.id;
+                this.sertifikat.splice(targetIndex, 1);
             },
 
             delDataKinerja(event) {
@@ -970,6 +1113,11 @@
                 
             },
 
+            saveSertifikat() {
+                //sort
+                
+            },
+
             saveDataKinerja() {
                 //sort
                 this.dataKinerja.sort(function(a, b){
@@ -1006,6 +1154,12 @@
                 this.riwayatPendidikan = JSON.parse(JSON.stringify(this.cachedRiwayatPendidikan));
                 this.riwayatPekerjaan = JSON.parse(JSON.stringify(this.cachedRiwayatPekerjaan));
                 this.isEditRiwayat = false;
+            },
+
+            cancelSertifikat() {
+                this.enableEditButton();
+                this.sertifikat = JSON.parse(JSON.stringify(this.cachedSertifikat));
+                this.isEditSertifikat = false;
             },
 
             cancelDataKinerja() {
