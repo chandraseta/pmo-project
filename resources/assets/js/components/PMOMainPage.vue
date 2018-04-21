@@ -108,6 +108,9 @@
                                 <small class="text-muted">Harap gunakan file Excel dengan format yang telah disediakan di atas.</small>
                             </div>
                         </form>
+                        <div class="alert" :class="'alert-' + statusAlert.type" role="alert" v-if="statusAlert.display">
+                            {{ statusAlert.message }}
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
@@ -317,6 +320,11 @@
                 this.statusAlert.display = true;
                 this.statusAlert.message = message;
                 this.statusAlert.type = type;
+                setTimeout(() => document.addEventListener('click', this.unsetAlert), 0);
+            },
+            unsetAlert: function () {
+                this.statusAlert.display = false;
+                document.removeEventListener('click', this.unsetAlert);
             }
         },
         created: function () {
