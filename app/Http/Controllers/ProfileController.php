@@ -13,7 +13,7 @@ use App\Admin;
 class ProfileController extends APIBaseController
 {
     public function index() {
-    	if(!$this->authenticate(4)){return view('welcome');}
+    	if(!$this->authenticate(4)){return redirect('/');}
         return view("profile.index");
     }
 
