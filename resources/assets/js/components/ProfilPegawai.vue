@@ -616,7 +616,7 @@
 
 <script>
     export default {
-        props: ['id'],
+        props: ['id', 'kinerja'],
 
         data() {
             return {
