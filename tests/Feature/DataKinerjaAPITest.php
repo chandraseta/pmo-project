@@ -22,7 +22,7 @@ class DataKinerjaAPITest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $pmo = factory(PMO::class)->create();
+        $pmo = PMO::inRandomOrder()->first();
         $this->user = User::find($pmo->id_user);
     }
 
