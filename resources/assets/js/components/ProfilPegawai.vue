@@ -96,24 +96,17 @@
                                 <div class="col-sm-3 text-right">
                                     Unit Kerja
                                 </div>
-                                <!-- <tbody v-for="dk in dataKepegawaian">
-                                <tr v-if="!isEditKepegawaian">
-                                    <td v-text="dk.id_unit_kerja" ></td>
-                                    <td v-text="dk.id_posisi" ></td>
-                                    <td v-text="dk.tahun_masuk" ></td>
-                                    <td v-text="dk.tahun_keluar" ></td>
-                                </tr> -->
                                 <div class="col-sm-9">
-                                    <b v-if="!isEditProfile" v-text="unitKerja.find(x => x.id_unit_kerja == pegawai.unitKerja).nama_unit_kerja"></b>
+                                    <b v-if="!isEditProfile" v-text="pegawai.unitKerja.text"></b>
 
                                     <div v-if="isEditProfile" id="edit-unit-kerja" class="form-group">
-                                        <select class="form-control" v-model="pegawai.unitKerja">
+                                        <select class="form-control" v-model="pegawai.unitKerja.id">
                                             <option v-for="uk in unitKerja" v-bind:value="uk.id_unit_kerja">
                                                 {{ uk.nama_unit_kerja }}
                                             </option>
                                         </select>
-                                        <!-- <input v-model="pegawai.unitKerja" type="text" class="form-control" disabled> -->
-                                        <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
+                                        <!-- <input v-bind:value="unitKerja.find(x => x.id_unit_kerja == pegawai.unitKerja).nama_unit_kerja" type="text" class="form-control" disabled> -->
+                                        <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </div>
                             </div>
@@ -125,11 +118,16 @@
                                     Jabatan
                                 </div>
                                 <div class="col-sm-9">
-                                    <b v-if="!isEditProfile" v-text="posisi.find(x => x.id_posisi == pegawai.posisi).nama_posisi"></b>
+                                    <b v-if="!isEditProfile" v-text="pegawai.posisi.text"></b>
 
                                     <div v-if="isEditProfile" id="edit-posisi" class="form-group">
-                                        <input v-model="pegawai.posisi" type="text" class="form-control" disabled>
-                                        <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
+                                        <select class="form-control" v-model="pegawai.posisi.id">
+                                            <option v-for="pos in posisi" v-bind:value="pos.id_posisi">
+                                                {{ pos.nama_posisi }}
+                                            </option>
+                                        </select>
+                                        <!-- <input v-bind:value="posisi.find(x => x.id_posisi == pegawai.posisi).nama_posisi" type="text" class="form-control" disabled> -->
+                                        <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </div>
                             </div>
@@ -141,10 +139,15 @@
                                     Kompetensi
                                 </div>
                                 <div class="col-sm-9">
-                                    <b v-if="!isEditProfile" v-text="kelompokKompetensi.find(x => x.id_kelompok_kompetensi == pegawai.kompetensi).nama_kelompok_kompetensi"></b>
+                                    <b v-if="!isEditProfile" v-text="pegawai.kompetensi.text"></b>
 
                                     <div v-if="isEditProfile" id="edit-kompetensi" class="form-group">
-                                        <input v-model="pegawai.kompetensi" type="text" class="form-control">
+                                        <select class="form-control" v-model="pegawai.kompetensi.id">
+                                            <option v-for="kk in kelompokKompetensi" v-bind:value="kk.id_kelompok_kompetensi">
+                                                {{ kk.nama_kelompok_kompetensi }}
+                                            </option>
+                                        </select>
+                                        <!-- <input v-bind:value="kelompokKompetensi.find(x => x.id_kelompok_kompetensi == pegawai.kompetensi).nama_kelompok_kompetensi" type="text" class="form-control"> -->
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </div>
@@ -160,7 +163,7 @@
                                     <b v-if="!isEditProfile" v-text="pegawai.tahunMasuk"></b>
 
                                     <div v-if="isEditProfile" id="edit-tahun-masuk" class="form-group">
-                                        <input v-model="pegawai.tahunMasuk" type="text" class="form-control" disabled>
+                                        <input v-model="pegawai.tahunMasuk" type="text" class="form-control">
                                         <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
                                     </div>
                                 </div>
@@ -217,21 +220,30 @@
                             </thead>
                             <tbody v-for="dk in dataKepegawaian">
                             <tr v-if="!isEditKepegawaian">
-                                <td v-text="dk.id_unit_kerja" ></td>
-                                <td v-text="dk.id_posisi" ></td>
+                                <td v-text="unitKerja.find(x => x.id_unit_kerja == dk.id_unit_kerja).nama_unit_kerja" ></td>
+                                <td v-text="posisi.find(x => x.id_posisi == dk.id_posisi).nama_posisi" ></td>
                                 <td v-text="dk.tahun_masuk" ></td>
                                 <td v-text="dk.tahun_keluar" ></td>
                             </tr>
                             <tr v-if="isEditKepegawaian">
                                 <td>
                                     <div class="form-group">
-                                        <input v-model="dk.id_unit_kerja" type="text" class="form-control text-center">
+                                        <select class="form-control" v-model="dk.id_unit_kerja">
+                                            <option v-for="uk in unitKerja" v-bind:value="uk.id_unit_kerja">
+                                                {{ uk.nama_unit_kerja }}
+                                            </option>
+                                        </select>
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input v-model="dk.id_posisi" type="text" class="form-control text-center">
+                                        <select class="form-control" v-model="dk.id_posisi">
+                                            <option v-for="pos in posisi" v-bind:value="pos.id_posisi">
+                                                {{ pos.nama_posisi }}
+                                            </option>
+                                        </select>
+                                        <!-- <input v-model="dk.id_posisi" type="text" class="form-control text-center"> -->
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </td>
@@ -649,16 +661,25 @@
                 cachedRiwayatPekerjaan: null,
                 cachedDataKinerja: null,
                 pegawai: {
-                    imageProfileUrl: "",
-                    nama: "",
-                    tempatLahir: "",
-                    tanggalLahir: "",
-                    email: "",
-                    nopeg: "",
-                    unitKerja: "",
-                    posisi: "",
-                    kompetensi: "",
-                    tahunMasuk: ""
+                    imageProfileUrl: null,
+                    nama: null,
+                    tempatLahir: null,
+                    tanggalLahir: null,
+                    email: null,
+                    nopeg: null,
+                    unitKerja: {
+                        id: null,
+                        text: null
+                    },
+                    posisi: {
+                        id: null,
+                        text: null   
+                    },
+                    kompetensi: {
+                        id: null,
+                        text: null   
+                    },
+                    tahunMasuk: null
                 },
                 dataKepegawaian: [],
                 riwayatPendidikan: [],
@@ -668,7 +689,7 @@
         },  
 
         mounted() {
-            console.log(this.unitKerja);
+            
         },
 
         created() {
@@ -690,8 +711,9 @@
                     this.pegawai.email = responsePegawai["user"]["email"];
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
                     this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
-                    this.pegawai.kompetensi = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
+                    this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
 
+                    this.updateProfilPegawai();
 
                     //chacing
                     this.cachedPegawai = JSON.parse(JSON.stringify(this.pegawai));
@@ -710,9 +732,37 @@
         },
 
         methods: {
+            updateProfilPegawai() {
+                if (this.pegawai.unitKerja.id != null) {
+                    this.pegawai.unitKerja.text = this.unitKerja.find(x => x.id_unit_kerja == this.pegawai.unitKerja.id).nama_unit_kerja;
+                } else {
+                    this.pegawai.unitKerja.text = null;
+                }
+
+                
+                if (this.pegawai.kompetensi.id != null) {
+                    this.pegawai.kompetensi.text = this.kelompokKompetensi.find(x => x.id_kelompok_kompetensi == this.pegawai.kompetensi.id).nama_kelompok_kompetensi;
+                } else {
+                    this.pegawai.kompetensi.text = null;
+                }
+                    
+                if (this.pegawai.posisi.id != null) {
+                    this.pegawai.posisi.text = this.posisi.find(x => x.id_posisi == this.pegawai.posisi.id).nama_posisi;
+                } else {
+                    this.pegawai.posisi.text = null;
+                }
+            },
+
             updateDataKepegawaian() {
-                //sort
-                this.dataKepegawaian.sort(function(a, b){
+                
+                //update relevan
+                if (this.dataKepegawaian.length == 0) {
+                    this.pegawai.unitKerja.id = null;
+                    this.pegawai.posisi.id = null;
+                    this.pegawai.tahunMasuk = null;
+                } else {
+                    //sort
+                    this.dataKepegawaian.sort(function(a, b){
                         var keyA = a.tahun_masuk,
                             keyB = b.tahun_masuk;
                         // Compare the 2 dates
@@ -720,12 +770,41 @@
                         if(keyA > keyB) return 1;
                         return 0;
                     });
+                    var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length-1];
+                    this.pegawai.unitKerja.id = lastDataPegawai["id_unit_kerja"];
+                    this.pegawai.posisi.id = lastDataPegawai["id_posisi"];
+                    this.pegawai.tahunMasuk = lastDataPegawai["tahun_masuk"];
+                }
+            },
 
+            updateDataKepegawaianAfterEditProfile() {
+                
                 //update relevan
-                var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length-1];
-                this.pegawai.unitKerja = lastDataPegawai["id_unit_kerja"];
-                this.pegawai.posisi = lastDataPegawai["id_posisi"];
-                this.pegawai.tahunMasuk = lastDataPegawai["tahun_masuk"];
+                if (this.dataKepegawaian.length == 0) {
+                    var newData = {
+                        id_data_kepegawaian : null,
+                        id_pegawai : null,
+                        id_unit_kerja : this.pegawai.unitKerja.id,
+                        id_posisi : this.pegawai.posisi.id,
+                        tahun_masuk : this.pegawai.tahunMasuk,
+                        tahun_keluar : null
+                    };
+                    this.dataKepegawaian.push(newData);
+                } else {
+                    //sort
+                    this.dataKepegawaian.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+                    var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length-1];
+                    lastDataPegawai["id_unit_kerja"] = this.pegawai.unitKerja.id;
+                    lastDataPegawai["id_posisi"] = this.pegawai.posisi.id;
+                    lastDataPegawai["tahun_masuk"] = this.pegawai.tahunMasuk;
+                }
             },
 
             disableEditButton() {
@@ -735,8 +814,6 @@
             enableEditButton() {
                 this.disableEdit = false;
             },
-
-
 
             editProfilPegawai() {
                 this.isEditProfile = true;
@@ -830,6 +907,10 @@
             saveProfilPegawai() {
                 this.enableEditButton();
                 // this.cachedPegawai = Object.assign({}, this.pegawai);
+
+                this.updateProfilPegawai();
+                this.updateDataKepegawaianAfterEditProfile();
+
                 this.cachedPegawai = JSON.parse(JSON.stringify(this.pegawai));
                 this.isEditProfile = false;
 
@@ -850,6 +931,7 @@
 
             saveDataKepegawaian() {
                 this.updateDataKepegawaian();
+                this.updateProfilPegawai();
                 this.enableEditButton();
                 // this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
                 this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
