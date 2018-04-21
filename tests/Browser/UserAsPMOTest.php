@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Kinerja;
 use App\Pegawai;
 use App\PMO;
 use App\User;
@@ -84,5 +85,32 @@ class UserAsPMOTest extends DuskTestCase
                     ->assertVisible('@data-table')
                     ->assertVue('tableTitle', 'Data Pegawai', '@data-table');
         });
+    }
+
+    public function testAddDataKinerja() {
+        $nip = Pegawai::inRandomOrder()->first()->nip;
+
+        $initialDataCount = Kinerja::all()->count();
+
+        $this->browse(function (Browser $browser) use ($nip) {
+            $browser->loginAs($this->user)
+                    ->visit('/pages/pmo')
+                    ->click('#dataKinerja')
+                    ->click('@tambah-data-button')
+                    ->whenAvailable('.modal', function ($modal) use ($nip) {
+                        $modal->type('#nip', $nip)
+                            ->type('#tahun', random_int(1945, 2018))
+                            ->type('#semester', random_int(1, 2))
+                            ->type('#nilai', random_int(1, 6))
+                            ->type('#catatan', str_random(30))
+                            ->press('Simpan')
+                            ->waitFor('.alert')
+                            ->press('Batal');
+                    })
+                    ->waitUntilMissing('#addDataModal');
+        });
+
+        $finalDataCount = Kinerja::all()->count();
+        self::assertTrue($finalDataCount == $initialDataCount+1);
     }
 }
