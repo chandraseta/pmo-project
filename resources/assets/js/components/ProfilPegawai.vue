@@ -12,7 +12,7 @@
                 <div class="card-container">
                     <div class="row">
                         <div class="col-sm-3 img-responsive">
-                            <img id="img-profile" src="pimage/1.png" class="img-thumbnail">
+                            <img id="img-profile" v-bind:src="pegawai.imageProfileUrl" class="img-thumbnail">
                             <br><br>
                             <button v-if="isEditProfile" type="button" class="btn btn-primary">Ganti Foto</button>
                         </div>
@@ -637,7 +637,6 @@
                 cachedRiwayatPekerjaan: null,
                 cachedDataKinerja: null,
                 pegawai: {
-                    // imageProfileUrl: "https://i.pinimg.com/236x/34/ba/c1/34bac13dd65ab3b81267f727e5633549--patrick-dempsey-handsome-man.jpg",
                     imageProfileUrl: "",
                     nama: "",
                     tempatLahir: "",
@@ -673,6 +672,7 @@
                     this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
                     this.pegawai.email = responsePegawai["user"]["email"];
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
+                    this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
                     this.pegawai.kompetensi = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
 
 

@@ -14924,6 +14924,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
             _this.pegawai.email = responsePegawai["user"]["email"];
             _this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
+            _this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
             _this.pegawai.kompetensi = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
 
             //chacing
@@ -15169,7 +15170,7 @@ var render = function() {
             _c("div", { staticClass: "col-sm-3 img-responsive" }, [
               _c("img", {
                 staticClass: "img-thumbnail",
-                attrs: { id: "img-profile", src: "pimage/1.png" }
+                attrs: { id: "img-profile", src: _vm.pegawai.imageProfileUrl }
               }),
               _vm._v(" "),
               _c("br"),
