@@ -8,7 +8,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3 p-2">
-                            <button type="button"
+                            <button dusk="tambah-data-button"
+                                    type="button"
                                     class="btn btn-secondary m-1"
                                     data-toggle="modal"
                                     data-target="#addDataModal"
@@ -19,12 +20,14 @@
                         <div class="col-md-3 p-2"></div>
                         <div class="col-md-3 p-2"></div>
                         <div class="col-md-3 p-2">
-                            <button type="button"
+                            <button dusk="download-data-button"
+                                    type="button"
                                     class="btn btn-primary float-md-right m-1"
                                     @click="downloadData">
                                 Download Data
                             </button>
-                            <button type="button"
+                            <button dusk="upload-data-button"
+                                    type="button"
                                     class="btn btn-secondary float-md-right m-1"
                                     data-toggle="modal"
                                     data-target="#uploadModal"
@@ -35,7 +38,8 @@
                     </div>
                 </div>
             </section>
-            <data-table v-on:dataChange="saveData" :tableTitle="title"
+            <data-table dusk="data-table"
+                    v-on:dataChange="saveData" :tableTitle="title"
                         :columns="columns"
                         :rows="rows">
             </data-table>
