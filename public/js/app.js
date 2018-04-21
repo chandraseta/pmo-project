@@ -66655,7 +66655,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66666,6 +66666,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -66814,7 +66817,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 display: false,
                 message: '',
                 type: ''
-            }
+            },
+            errors: []
         };
     },
 
@@ -66983,15 +66987,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post(url, formData).then(function (response) {
                 console.log("Import successful");
+                _this6.setAlert('success', response.data);
             }).catch(function (e) {
                 _this6.errors.push(e);
-                console.log(e.response.message);
+                _this6.setAlert('danger', e.response.data);
+                console.log(e.response.data);
             });
         },
         setAlert: function setAlert(type, message) {
+            var _this7 = this;
+
             this.statusAlert.display = true;
             this.statusAlert.message = message;
             this.statusAlert.type = type;
+            setTimeout(function () {
+                return document.addEventListener('click', _this7.unsetAlert);
+            }, 0);
+        },
+        unsetAlert: function unsetAlert() {
+            this.statusAlert.display = false;
+            document.removeEventListener('click', this.unsetAlert);
         }
     },
     created: function created() {
@@ -67018,7 +67033,7 @@ module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","fie
 /* 223 */
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true,"required":true},{"label":"Unit Kerja","field":"unit_kerja","immutable":true},{"label":"Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"posisi","immutable":true},{"label":"Tahun","field":"tahun","type":"number","fillable":true},{"label":"Semester","field":"semester","type":"number","fillable":true},{"label":"Skor Kinerja","field":"nilai","type":"number","fillable":true},{"label":"","field":"editButton"}]
+module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true,"required":true},{"label":"Unit Kerja","field":"unit_kerja","immutable":true},{"label":"Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"posisi","immutable":true},{"label":"Tahun","field":"tahun","type":"number","fillable":true},{"label":"Semester","field":"semester","type":"number","fillable":true},{"label":"Skor Kinerja","field":"nilai","type":"number","fillable":true},{"label":"Catatan","field":"catatan","fillable":true},{"label":"","field":"editButton"}]
 
 /***/ }),
 /* 224 */
@@ -67287,9 +67302,14 @@ var staticRenderFns = [
         attrs: { id: "navbar2SupportedContent" }
       },
       [
-        _c("a", { staticClass: "btn navbar-btn btn-primary ml-2 text-white" }, [
-          _vm._v("\n                Keluar\n            ")
-        ])
+        _c(
+          "a",
+          {
+            staticClass: "btn navbar-btn btn-primary ml-2 text-white",
+            attrs: { href: "/pages" }
+          },
+          [_vm._v("\n                Kembali\n            ")]
+        )
       ]
     )
   }
@@ -68044,7 +68064,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(2),
+                _vm._v(" "),
+                _vm.statusAlert.display
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "alert",
+                        class: "alert-" + _vm.statusAlert.type,
+                        attrs: { role: "alert" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.statusAlert.message) +
+                            "\n                    "
+                        )
+                      ]
+                    )
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
@@ -68061,7 +68099,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary",
-                    attrs: { type: "button", "data-dismiss": "modal" },
+                    attrs: { type: "button" },
                     on: { click: _vm.uploadFile }
                   },
                   [_vm._v("Upload")]
