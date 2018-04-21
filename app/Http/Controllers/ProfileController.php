@@ -9,12 +9,18 @@ use App\User;
 use App\Pegawai;
 use App\PMO;
 use App\Admin;
+use App\Kinerja;
+use App\UnitKerja;
 
 class ProfileController extends APIBaseController
 {
     public function index() {
-    	if(!$this->authenticate(4)){return view('welcome');}
-        return view("profile.index");
+        if(!$this->authenticate(4)){return view('welcome');}
+
+        $kinerja = Kinerja::where('id_pegawai', Auth::user()->id)->get();
+        $unit_kerja = UnitKerja::all();
+
+        return view("profile.index", compact('kinerja', 'unit_kerja'));
     }
 
     private function authenticate($role){

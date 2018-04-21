@@ -4,7 +4,7 @@
 
     <br>
 
-<profil-pegawai id="{{ Auth::user()->id}}" data="{{json_encode($kinerja)}}" unitKerja="{{$unit_kerja}}"></profil-pegawai>
+<profil-pegawai id="{{ Auth::user()->id}}"></profil-pegawai>
 
     <br>
 

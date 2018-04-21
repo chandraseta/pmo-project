@@ -616,7 +616,7 @@
 
 <script>
     export default {
-        props: ['id', 'unitKerja'],
+        props: ['id'],
 
         data() {
             return {
@@ -653,7 +653,12 @@
                 riwayatPekerjaan: []
             }
                
+        },  
+
+        mounted() {
+            console.log(this.unitKerja);
         },
+
         created() {
 
             axios.get('/api/pegawai/' + this.id)
