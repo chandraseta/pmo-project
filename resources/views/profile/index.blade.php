@@ -4,7 +4,11 @@
 
     <br>
 
-<profil-pegawai id="{{ Auth::user()->id}}" :kinerja="{{ $kinerja }}"></profil-pegawai>
+<profil-pegawai
+    id="{{ Auth::user()->id}}"
+    :kinerja="{{ $kinerja }}"
+    :unit-kerja="{{ $unit_kerja }}"
+></profil-pegawai>
 
     <br>
 
