@@ -67018,7 +67018,7 @@ module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","fie
 /* 223 */
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true,"required":true},{"label":"Unit Kerja","field":"unit_kerja","immutable":true},{"label":"Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"posisi","immutable":true},{"label":"Tahun","field":"tahun","type":"number","fillable":true},{"label":"Semester","field":"semester","type":"number","fillable":true},{"label":"Skor Kinerja","field":"nilai","type":"number","fillable":true},{"label":"","field":"editButton"}]
+module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","field":"nama","immutable":true},{"label":"NIP","field":"nip","immutable":true,"fillable":true,"required":true},{"label":"Unit Kerja","field":"unit_kerja","immutable":true},{"label":"Pendidikan","field":"pendidikan_terakhir","immutable":true},{"label":"Tanggal Lahir","field":"tanggal_lahir","immutable":true},{"label":"Jabatan","field":"posisi","immutable":true},{"label":"Tahun","field":"tahun","type":"number","fillable":true},{"label":"Semester","field":"semester","type":"number","fillable":true},{"label":"Skor Kinerja","field":"nilai","type":"number","fillable":true},{"label":"Catatan","field":"catatan","fillable":true},{"label":"","field":"editButton"}]
 
 /***/ }),
 /* 224 */
