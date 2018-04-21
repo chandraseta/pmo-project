@@ -96,12 +96,23 @@
                                 <div class="col-sm-3 text-right">
                                     Unit Kerja
                                 </div>
+                                <!-- <tbody v-for="dk in dataKepegawaian">
+                                <tr v-if="!isEditKepegawaian">
+                                    <td v-text="dk.id_unit_kerja" ></td>
+                                    <td v-text="dk.id_posisi" ></td>
+                                    <td v-text="dk.tahun_masuk" ></td>
+                                    <td v-text="dk.tahun_keluar" ></td>
+                                </tr> -->
                                 <div class="col-sm-9">
                                     <b v-if="!isEditProfile" v-text="unitKerja.find(x => x.id_unit_kerja == pegawai.unitKerja).nama_unit_kerja"></b>
 
                                     <div v-if="isEditProfile" id="edit-unit-kerja" class="form-group">
-
-                                        <input v-model="pegawai.unitKerja" type="text" class="form-control" disabled>
+                                        <select class="form-control" v-model="pegawai.unitKerja">
+                                            <option v-for="uk in unitKerja" v-bind:value="uk.id_unit_kerja">
+                                                {{ uk.nama_unit_kerja }}
+                                            </option>
+                                        </select>
+                                        <!-- <input v-model="pegawai.unitKerja" type="text" class="form-control" disabled> -->
                                         <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
                                     </div>
                                 </div>
@@ -130,7 +141,7 @@
                                     Kompetensi
                                 </div>
                                 <div class="col-sm-9">
-                                    <b v-if="!isEditProfile" v-text="pegawai.kompetensi"></b>
+                                    <b v-if="!isEditProfile" v-text="kelompokKompetensi.find(x => x.id_kelompok_kompetensi == pegawai.kompetensi).nama_kelompok_kompetensi"></b>
 
                                     <div v-if="isEditProfile" id="edit-kompetensi" class="form-group">
                                         <input v-model="pegawai.kompetensi" type="text" class="form-control">
@@ -617,7 +628,7 @@
 
 <script>
     export default {
-        props: ['id', 'kinerja', 'unit-kerja', 'posisi'],
+        props: ['id', 'kinerja', 'unit-kerja', 'posisi', 'kelompok-kompetensi'],
 
         data() {
             return {

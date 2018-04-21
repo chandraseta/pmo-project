@@ -9,6 +9,7 @@
     :kinerja="{{ $kinerja }}"
     :unit-kerja="{{ $unit_kerja }}"
     :posisi="{{ $posisi }}"
+    :kelompok-kompetensi="{{ $kelompok_kompetensi }}"
 ></profil-pegawai>
 
     <br>

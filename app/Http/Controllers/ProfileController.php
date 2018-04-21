@@ -12,6 +12,7 @@ use App\Admin;
 use App\Kinerja;
 use App\UnitKerja;
 use App\Posisi;
+use App\KelompokKompetensi;
 
 class ProfileController extends APIBaseController
 {
@@ -21,8 +22,9 @@ class ProfileController extends APIBaseController
         $kinerja = Kinerja::where('id_pegawai', Auth::user()->id)->get();
         $unit_kerja = UnitKerja::all();
         $posisi = Posisi::all();
+        $kelompok_kompetensi = KelompokKompetensi::all();
 
-        return view("profile.index", compact('kinerja', 'unit_kerja', 'posisi'));
+        return view("profile.index", compact('kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi'));
     }
 
     private function authenticate($role){
