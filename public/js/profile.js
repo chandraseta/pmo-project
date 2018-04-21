@@ -14890,7 +14890,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             cachedRiwayatPekerjaan: null,
             cachedDataKinerja: null,
             pegawai: {
-                // imageProfileUrl: "https://i.pinimg.com/236x/34/ba/c1/34bac13dd65ab3b81267f727e5633549--patrick-dempsey-handsome-man.jpg",
                 imageProfileUrl: "",
                 nama: "",
                 tempatLahir: "",
