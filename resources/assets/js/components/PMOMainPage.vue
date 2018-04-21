@@ -114,7 +114,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="uploadFile">Upload</button>
+                        <button type="button" class="btn btn-primary" @click="uploadFile">Upload</button>
                     </div>
                 </div>
             </div>
@@ -149,7 +149,8 @@
                     display: false,
                     message: '',
                     type: ''
-                }
+                },
+                errors: []
             }
         },
         computed: {
@@ -310,10 +311,12 @@
                 axios.post(url, formData)
                     .then(response => {
                         console.log("Import successful");
+                        this.setAlert('success', response.data);
                     })
                     .catch(e => {
                         this.errors.push(e);
-                        console.log(e.response.message);
+                        this.setAlert('danger', e.response.data);
+                        console.log(e.response.data);
                     })
             },
             setAlert: function (type, message) {
