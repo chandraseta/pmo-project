@@ -57,4 +57,32 @@ class UserAsPMOTest extends DuskTestCase
                     ->assertVue('tableTitle', 'Data Pegawai', '@data-table');
         });
     }
+
+    public function testPageNavigation() {
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs($this->user)
+                    ->visit('/pages/pmo')
+                    ->click('#dataKompetensi')
+                    ->assertVue('currentTab', 'dataKompetensi', '@pmo-main-page')
+                    ->assertVisible('@tambah-data-button')
+                    ->assertVisible('@upload-data-button')
+                    ->assertVisible('@download-data-button')
+                    ->assertVisible('@data-table')
+                    ->assertVue('tableTitle', 'Data Kompetensi', '@data-table')
+                    ->click('#dataKinerja')
+                    ->assertVue('currentTab', 'dataKinerja', '@pmo-main-page')
+                    ->assertVisible('@tambah-data-button')
+                    ->assertVisible('@upload-data-button')
+                    ->assertVisible('@download-data-button')
+                    ->assertVisible('@data-table')
+                    ->assertVue('tableTitle', 'Data Kinerja', '@data-table')
+                    ->click('#dataPegawai')
+                    ->assertVue('currentTab', 'dataPegawai', '@pmo-main-page')
+                    ->assertMissing('@tambah-data-button')
+                    ->assertMissing('@upload-data-button')
+                    ->assertVisible('@download-data-button')
+                    ->assertVisible('@data-table')
+                    ->assertVue('tableTitle', 'Data Pegawai', '@data-table');
+        });
+    }
 }
