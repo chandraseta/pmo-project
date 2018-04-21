@@ -9,8 +9,7 @@ Vue.use(Axios);
 new Vue({
     el: '#profile-page',
     components: {
-        'profil-pegawai': require('./components/ProfilPegawai.vue')
-        
+        'profil-pegawai': require('./components/ProfilPegawai.vue'),
     },
     data: {
         isEditKepegawaian: false,

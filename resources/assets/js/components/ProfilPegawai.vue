@@ -1,8 +1,11 @@
 <template>
-    <div id="pegawai">
+    <div>
         <div class="card" id="profil-pegawai">
             <div class="card-header">
-                Profil Pegawai<button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">Edit</button>
+                Profil Pegawai
+                <button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                </button>
             </div>
 
             <div class="card-body">
@@ -11,7 +14,7 @@
                         <div class="col-sm-3 img-responsive">
                             <img id="img-profile" v-bind:src="pegawai.imageProfileUrl" class="img-thumbnail">
                             <br><br>
-                            <button type="button" class="btn btn-primary">Ganti Foto</button>
+                            <button v-if="isEditProfile" type="button" class="btn btn-primary">Ganti Foto</button>
                         </div>
                         <div class="col-sm-1"></div>
                         <div class="col-sm-7">
@@ -97,8 +100,8 @@
                                     <b v-if="!isEditProfile" v-text="pegawai.unitKerja"></b>
 
                                     <div v-if="isEditProfile" id="edit-unit-kerja" class="form-group">
-                                        <input v-model="pegawai.unitKerja" type="text" class="form-control">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <input v-model="pegawai.unitKerja" type="text" class="form-control" disabled>
+                                        <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
                                     </div>
                                 </div>
                             </div>
@@ -113,8 +116,8 @@
                                     <b v-if="!isEditProfile" v-text="pegawai.posisi"></b>
 
                                     <div v-if="isEditProfile" id="edit-posisi" class="form-group">
-                                        <input v-model="pegawai.posisi" type="text" class="form-control">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <input v-model="pegawai.posisi" type="text" class="form-control" disabled>
+                                        <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
                                     </div>
                                 </div>
                             </div>
@@ -139,14 +142,14 @@
 
                             <div class="row">
                                 <div class="col-sm-3 text-right">
-                                    Tahun Masuk
+                                    Tahun Mulai Jabatan Saat Ini
                                 </div>
                                 <div class="col-sm-9">
                                     <b v-if="!isEditProfile" v-text="pegawai.tahunMasuk"></b>
 
                                     <div v-if="isEditProfile" id="edit-tahun-masuk" class="form-group">
-                                        <input v-model="pegawai.tahunMasuk" type="text" class="form-control">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <input v-model="pegawai.tahunMasuk" type="text" class="form-control" disabled>
+                                        <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
                                     </div>
                                 </div>
                             </div>
@@ -157,8 +160,12 @@
             </div>
 
             <div class="card-footer text-muted" v-if="isEditProfile">
-                <a href="#profil-pegawai" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveProfilPegawai">Simpan</a>
-                <a href="#profil-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelProfilPegawai">Batal</a>
+                <a href="#profil-pegawai" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveProfilPegawai">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#profil-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelProfilPegawai">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
             </div>
         </div>
 
@@ -166,16 +173,24 @@
 
         <div class="card" id="data-kepegawaian">
             <div class="card-header">
-                Data Kepegawaian<button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">Edit</button>
+                Data Kepegawaian
+                <button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                </button>
             </div>
 
             <div class="card-body">
                 <div class="container">
 
                     <div v-if="dataKepegawaian.length === 0" class="no-data-kepegawaian">
+                        <div v-if="!isEditKepegawaian">
+                            Belum ditambahkan.
+                            <br>
+                        </div>
+                        <button v-if="isEditKepegawaian" class="btn btn-primary float-sm-left" v-on:click="addDataKepegawaian">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
                         
-                        Belum ditambahkan.
-                        <br>
                     </div>
 
                     <div v-if="dataKepegawaian.length !== 0" class="data-kepegawaian">
@@ -184,8 +199,8 @@
                             <tr>
                                 <th scope="col">Unit Kerja</th>
                                 <th scope="col">Posisi</th>
-                                <th scope="col">Tahun Masuk</th>
-                                <th scope="col">Tahun Keluar</th>
+                                <th scope="col">Tahun Mulai</th>
+                                <th scope="col">Tahun Selesai</th>
                             </tr>
                             </thead>
                             <tbody v-for="dk in dataKepegawaian">
@@ -217,15 +232,19 @@
                                 <td>
                                     <div class="form-group">
                                         <input v-model="dk.tahun_keluar" type="text" class="form-control text-center">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <small class="form-text text-muted">*Isi dengan "-" jika belum selesai</small>
                                     </div>
                                 </td>
                                 <td>
-                                    <button v-bind:id="dataKepegawaian.indexOf(dk)" v-on:click="delDataKepegawaian($event)" class="btn btn-danger" type="button">Hapus</button>
+                                    <button v-bind:id="dataKepegawaian.indexOf(dk)" v-on:click="delDataKepegawaian($event)" class="btn btn-danger" type="button">
+                                        Hapus <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
-                            <button v-if="isEditKepegawaian" class="btn btn-primary float-sm-left" v-on:click="addDataKepegawaian">Tambah</button>
+                            <button v-if="isEditKepegawaian" class="btn btn-primary float-sm-left" v-on:click="addDataKepegawaian">
+                                Tambah <i class="fas fa-plus"></i>
+                            </button>
                         </table>
 
                     </div>
@@ -235,16 +254,22 @@
                 </div>
             </div>
             <div class="card-footer text-muted" v-if="isEditKepegawaian">
-                <a href="#data-kepegawaian" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveDataKepegawaian">Simpan</a>
-                <a href="#data-kepegawaian" class="btn btn-danger float-sm-right" v-on:click="cancelDataKepegawaian">Batal</a>
+                <a href="#data-kepegawaian" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveDataKepegawaian">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#data-kepegawaian" class="btn btn-danger float-sm-right" v-on:click="cancelDataKepegawaian">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
             </div>
         </div>
 
         <br>
 
-        <div class="card">
+        <div class="card" id="riwayat-pegawai">
             <div class="card-header">
-                Riwayat Pendidikan dan Pekerjaan<button class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai" v-bind:disabled="disableEdit">Edit</button>
+                Riwayat Pendidikan dan Pekerjaan<button class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                    </button>
             </div>
 
             <div class="card-body">
@@ -253,9 +278,14 @@
                     <h5>Riwayat Pendidikan</h5>
 
                     <div v-if="riwayatPendidikan.length === 0" class="no-riwayat-pendidikan">
-                        <hr>
-                        Belum ditambahkan.
-                        <br>
+                        <div v-if="!isEditRiwayat">
+                            <hr>
+                            Belum ditambahkan.
+                            <br>
+                        </div>
+                        <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPendidikan">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
                     </div>
 
                     <div v-if="riwayatPendidikan.length !== 0" class="riwayat-pendidikan">
@@ -270,14 +300,55 @@
                             </tr>
                             </thead>
                             <tbody v-for="rp in riwayatPendidikan">
-                            <tr>
+                            <tr v-if="!isEditRiwayat">
                                 <td v-text="rp.strata" ></td>
                                 <td v-text="rp.nama_institusi" ></td>
                                 <td v-text="rp.jurusan" ></td>
                                 <td v-text="rp.tahun_masuk" ></td>
                                 <td v-text="rp.tahun_keluar" ></td>
                             </tr>
+                            <tr v-if="isEditRiwayat">
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="rp.strata" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="rp.nama_institusi" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="rp.jurusan" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="rp.tahun_masuk" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="rp.tahun_keluar" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Isi dengan "-" jika belum selesai</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button v-bind:id="riwayatPendidikan.indexOf(rp)" v-on:click="delRiwayatPendidikan($event)" class="btn btn-danger" type="button">
+                                        Hapus <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
                             </tbody>
+                            <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPendidikan">
+                                Tambah <i class="fas fa-plus"></i>
+                            </button>
                         </table>
 
                     </div>
@@ -285,12 +356,17 @@
                     <br><br>
 
 
-                    <h5>Riwayat Pekerjaan</h5>
+                    <h5>Riwayat Pekerjaan (di luar ITB)</h5>
 
                     <div v-if="riwayatPekerjaan.length === 0" class="no-riwayat-pekerjaan">
-                        <hr>
-                        Belum ditambahkan.
-                        <br>
+                        <div v-if="!isEditRiwayat">
+                            <hr>
+                            Belum ditambahkan.
+                            <br>
+                        </div>
+                        <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPekerjaan">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
                     </div>
 
                     <div v-if="riwayatPekerjaan.length !== 0" class="riwayat-pekerjaan">
@@ -304,37 +380,262 @@
                             </tr>
                             </thead>
                             <tbody v-for="rp in riwayatPekerjaan">
-                            <tr>
+                            <tr v-if="!isEditRiwayat">
                                 <td v-text="rp.nama_institusi" ></td>
                                 <td v-text="rp.posisi" ></td>
                                 <td v-text="rp.tahun_masuk" ></td>
                                 <td v-text="rp.tahun_keluar" ></td>
                             </tr>
+
+                            <tr v-if="isEditRiwayat">
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="rp.nama_institusi" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="rp.posisi" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="rp.tahun_masuk" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="rp.tahun_keluar" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Isi dengan "-" jika belum selesai</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button v-bind:id="riwayatPekerjaan.indexOf(rp)" v-on:click="delRiwayatPekerjaan($event)" class="btn btn-danger" type="button">
+                                        Hapus <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
                             </tbody>
+                            <button v-if="isEditRiwayat" class="btn btn-primary float-sm-left" v-on:click="addRiwayatPekerjaan">
+                                Tambah <i class="fas fa-plus"></i>
+                            </button>
                         </table>
 
                     </div>
 
                 </div>
             </div>
+            <div class="card-footer text-muted" v-if="isEditRiwayat">
+                <a href="#riwayat-pegawai" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveRiwayatPegawai">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#riwayat-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelRiwayatPegawai">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
+            </div>
         </div>
+
+        <br>
+
+        <div class="card" id="data-kompetensi">
+            <div class="card-header">
+                Sertifikat
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+
+                    Belum ditambahkan.
+
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+
+        <div class="card" id="data-kinerja">
+            <div class="card-header">
+                Hasil Kinerja<button class="btn btn-primary float-sm-right" v-on:click="editDataKinerja" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                    </button>
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+                    <div v-if="dataKinerja.length === 0" class="no-data-kinerja">
+                        <div v-if="!isEditDataKinerja">
+                            Belum ditambahkan.
+                            <br>
+                        </div>
+                        <button v-if="isEditDataKinerja" class="btn btn-primary float-sm-left" v-on:click="addDataKinerja">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <div v-if="dataKinerja.length !== 0" class="data-kinerja">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Tahun</th>
+                                <th scope="col">Semester</th>
+                                <th scope="col">Nilai</th>
+                                <th scope="col">Catatan</th>
+                            </tr>
+                            </thead>
+                            <tbody v-for="dk in dataKinerja">
+                            <tr v-if="!isEditDataKinerja">
+                                <td v-text="dk.tahun" ></td>
+                                <td v-text="dk.semester" ></td>
+                                <td v-text="dk.nilai" ></td>
+                                <td v-text="dk.catatan" ></td>
+                            </tr>
+
+                            <tr v-if="isEditDataKinerja">
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.tahun" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.semester" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.nilai" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input v-model="dk.catatan" type="text" class="form-control text-center">
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button v-bind:id="dataKinerja.indexOf(dk)" v-on:click="delDataKinerja($event)" class="btn btn-danger" type="button">
+                                        Hapus <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <button v-if="isEditDataKinerja" class="btn btn-primary float-sm-left" v-on:click="addDataKinerja">
+                                Tambah <i class="fas fa-plus"></i>
+                            </button>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted" v-if="isEditDataKinerja">
+                <a href="#data-kinerja" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveDataKinerja">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#data-kinerja" class="btn btn-danger float-sm-right" v-on:click="cancelDataKinerja">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card" id="data-kompetensi">
+            <div class="card-header">
+                Hasil Kompetensi
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+
+                    Belum ditambahkan.
+
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card" id="rekomendasi">
+            <div class="card-header">
+                Rekomendasi
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+
+                    <h5>Rekomendasi Training</h5>
+
+                    <div v-if="rekomendasiTraining.length === 0" class="no-rekomendasi-trainiing">
+                        <hr>
+                        Belum dimtambahkan.
+                        <br>
+                    </div>
+
+                    <div v-if="rekomendasiTraining.length !== 0" class="rekomendasi-trainiing">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Nama Training</th>
+                                <th scope="col">Penyelenggara</th>
+                                <th scope="col">Bidang</th>
+                            </tr>
+                            </thead>
+                            <tbody v-for="rp in rekomendasiTraining">
+                            <tr>
+                                <td v-text="rp.namaTraining" ></td>
+                                <td v-text="rp.penyelenggara" ></td>
+                                <td v-text="rp.bidang" ></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <br><br>
+
+
+                    <h5>Rekomendasi Lain-lain</h5>
+
+                    <hr>
+
+                    Tidak ada.
+
+                </div>
+            </div>
+        </div>
+
     </div>
+
 </template>
 
 <script>
     export default {
-        props: ['id'],
+        props: ['id', 'unitKerja'],
 
         data() {
             return {
+                //dummy
+                dataKinerja: [
+                    {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
+                    ],
+                rekomendasiTraining : [],   
+
                 disableEdit: false,
                 isEditProfile: false,
                 isEditKepegawaian: false,
                 isEditRiwayat: false,
-                cachedpegawai: null,
+                isEditDataKinerja: false,
+                cachedPegawai: null,
                 cachedDataKepegawaian: null,
                 cachedRiwayatPendidikan: null,
                 cachedRiwayatPekerjaan: null,
+                cachedDataKinerja: null,
                 pegawai: {
                     imageProfileUrl: "https://i.pinimg.com/236x/34/ba/c1/34bac13dd65ab3b81267f727e5633549--patrick-dempsey-handsome-man.jpg",
                     nama: "",
@@ -359,52 +660,133 @@
                 .then((response) => {
                     //get data from api response
                     var responsePegawai = response.data["data"];
+
+                    this.dataKepegawaian = responsePegawai["kepegawaian"];
+                    this.riwayatPendidikan = responsePegawai["pendidikan"];
+
+                    this.riwayatPekerjaan = responsePegawai["pekerjaan"];
+                    this.updateDataKepegawaian();
+
                     this.pegawai.nama = responsePegawai["user"]["name"];
                     this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
                     this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
                     this.pegawai.email = responsePegawai["user"]["email"];
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
-                    this.dataKepegawaian = responsePegawai["kepegawaian"];
-                    this.riwayatPendidikan = responsePegawai["pendidikan"];
-                    this.riwayatPekerjaan = responsePegawai["pekerjaan"];
+                    this.pegawai.kompetensi = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
+
+
+                    //chacing
+                    this.cachedPegawai = JSON.parse(JSON.stringify(this.pegawai));
+                    this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
+                    this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
+                    this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
 
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
 
-            this.cachedpegawai = Object.assign({}, this.pegawai);
+            //caching others
+            this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
+            
         },
+
         methods: {
-            disableEditToggle() {
-                this.disableEdit = !this.disableEdit;
+            updateDataKepegawaian() {
+                //sort
+                this.dataKepegawaian.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+
+                //update relevan
+                var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length-1];
+                this.pegawai.unitKerja = lastDataPegawai["id_unit_kerja"];
+                this.pegawai.posisi = lastDataPegawai["id_posisi"];
+                this.pegawai.tahunMasuk = lastDataPegawai["tahun_masuk"];
             },
+
+            disableEditButton() {
+                this.disableEdit = true;
+            },
+
+            enableEditButton() {
+                this.disableEdit = false;
+            },
+
+
 
             editProfilPegawai() {
                 this.isEditProfile = true;
-                this.disableEditToggle();
+                this.disableEditButton();
             },
 
             editDataKepegawaian() {
                 this.isEditKepegawaian = true;
-                this.disableEditToggle();
+                this.disableEditButton();
             },
 
             editRiwayatPegawai() {
                 this.isEditRiwayat = true;
-                this.disableEditToggle();
+                this.disableEditButton();
+            },
+
+            editDataKinerja() {
+                this.isEditDataKinerja = true;
+                this.disableEditButton();
             },
 
             addDataKepegawaian() {
                 var newData = {
-                    id_data_kepegawaian : "",
-                    id_pegawai : "",
-                    id_unit_kerja : "",
-                    id_posisi : "",
-                    tahun_masuk : "",
-                    tahun_keluar : ""
+                    id_data_kepegawaian : null,
+                    id_pegawai : null,
+                    id_unit_kerja : null,
+                    id_posisi : null,
+                    tahun_masuk : null,
+                    tahun_keluar : null
                 };
                 this.dataKepegawaian.push(newData);
+            },
+
+            addRiwayatPendidikan() {
+                var newData = {
+                    id_riwayat_pendidikan : null,
+                    id_pegawai : null,
+                    nama_institusi : null,
+                    strata : null,
+                    jurusan : null,
+                    tahun_masuk : null,
+                    tahun_keluar : null
+                };
+                this.riwayatPendidikan.push(newData);
+            },
+
+            addRiwayatPekerjaan() {
+                var newData = {
+                    id_riwayat_pendidikan : null,
+                    id_pegawai : null,
+                    nama_institusi : null,
+                    posisi : null,
+                    tahun_masuk : null,
+                    tahun_keluar : null
+                };
+                this.riwayatPekerjaan.push(newData);
+            },
+
+            addDataKinerja() {
+                var newData = {
+                    id_kinerja : null,
+                    id_pegawai : null,
+                    tahun : null,
+                    semester : null,
+                    nilai : null,
+                    catatan : null
+                };
+                this.dataKinerja.push(newData);
             },
 
             delDataKepegawaian(event) {
@@ -412,57 +794,125 @@
                 this.dataKepegawaian.splice(targetIndex, 1);
             },
 
+            delRiwayatPendidikan(event) {
+                var targetIndex = event.currentTarget.id;
+                this.riwayatPendidikan.splice(targetIndex, 1);
+            },
+
+            delRiwayatPekerjaan(event) {
+                var targetIndex = event.currentTarget.id;
+                this.riwayatPekerjaan.splice(targetIndex, 1);
+            },
+
+            delDataKinerja(event) {
+                var targetIndex = event.currentTarget.id;
+                this.dataKinerja.splice(targetIndex, 1);
+            },
+
             saveProfilPegawai() {
-                this.disableEditToggle();
-                this.cachedUser = Object.assign({}, this.user);
+                this.enableEditButton();
+                // this.cachedPegawai = Object.assign({}, this.pegawai);
+                this.cachedPegawai = JSON.parse(JSON.stringify(this.pegawai));
                 this.isEditProfile = false;
 
-                axios.patch('/api/pegawai/4', {
-                    name: this.user.nama,
-                    email: this.user.email,
-                    password: '1234',
-                    nip: this.user.nopeg
-                })
-                .then(function (response) {
-                    alert(response);
-                })
-                .catch(function (error) {
-                    alert(error);
-                });
+                // axios.patch('/api/pegawai/4', {
+                //     name: this.user.nama,
+                //     email: this.user.email,
+                //     password: '1234',
+                //     nip: this.user.nopeg
+                // })
+                // .then(function (response) {
+                //     alert(response);
+                // })
+                // .catch(function (error) {
+                //     alert(error);
+                // });
 
             },
 
             saveDataKepegawaian() {
-                this.disableEditToggle();
-                this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
+                this.updateDataKepegawaian();
+                this.enableEditButton();
+                // this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
+                this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
                 this.isEditKepegawaian = false;
+
             },
 
             saveRiwayatPegawai() {
-                this.disableEditToggle();
-                this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
-                this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
+                //sort
+                this.riwayatPendidikan.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+
+                //sort
+                this.riwayatPekerjaan.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+
+                this.enableEditButton();
+                // this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
+                // this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
+                this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
+                this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
                 this.isEditRiwayat = false;
+
+                
+            },
+
+            saveDataKinerja() {
+                //sort
+                this.dataKinerja.sort(function(a, b){
+                        var keyA = a.tahun,
+                            keyB = b.tahun;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        if (keyA == keyB) {
+                            if (a.semester < b.semester) return -1;
+                            else return 1;
+                        }
+                    });
+
+                this.enableEditButton();
+                this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
+                this.isEditDataKinerja = false;
             },
 
             cancelProfilPegawai() {
-                this.disableEditToggle();
-                this.user = Object.assign({}, this.cachedUser);
+                this.enableEditButton();
+                this.pegawai = JSON.parse(JSON.stringify(this.cachedPegawai));
                 this.isEditProfile = false;
             },
 
             cancelDataKepegawaian() {
-                this.disableEditToggle();
-                this.dataKepegawaian = Object.assign({}, this.cachedDataKepegawaian);
+                this.enableEditButton();
+                this.dataKepegawaian = JSON.parse(JSON.stringify(this.cachedDataKepegawaian));
                 this.isEditKepegawaian = false;
             },
 
             cancelRiwayatPegawai() {
-                this.disableEditToggle();
-                this.riwayatPendidikan = Object.assign({}, this.cachedRiwayatPendidikan);
-                this.riwayatPekerjaan = Object.assign({}, this.cachedRiwayatPekerjaan);
+                this.enableEditButton();
+                this.riwayatPendidikan = JSON.parse(JSON.stringify(this.cachedRiwayatPendidikan));
+                this.riwayatPekerjaan = JSON.parse(JSON.stringify(this.cachedRiwayatPekerjaan));
                 this.isEditRiwayat = false;
             },
+
+            cancelDataKinerja() {
+                this.enableEditButton();
+                this.dataKinerja = JSON.parse(JSON.stringify(this.cachedDataKinerja));
+                this.isEditDataKinerja = false;
+            }
         }
     }
 </script>
