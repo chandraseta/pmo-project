@@ -18,7 +18,7 @@ class PagesController extends APIBaseController
     }
 
     public function landing() {
-        if(!$this->authenticate(6)){return view('welcome');}
+        if(!$this->authenticate(6)){return redirect('/');}
         if(!$this->authenticate(3) and !$this->authenticate(2) and $this->authenticate(1)){return redirect('/pages/profile');}
         return view('pages');
     }

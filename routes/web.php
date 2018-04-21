@@ -24,3 +24,7 @@ Route::get('/pages/pmo', 'PagesController@pmo');
 Route::get('/pages/admin', 'PagesController@admin');
 
 Route::get('/pages/admin/adduser', 'PagesController@addUser');
+
+Route::get('/pimage/{filename}', 'PhotoController@profile');
+
+Route::get('/simage/{filename}', 'PhotoController@sertifikat');
