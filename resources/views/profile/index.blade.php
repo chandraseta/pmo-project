@@ -8,6 +8,7 @@
     id="{{ Auth::user()->id}}"
     :kinerja="{{ $kinerja }}"
     :unit-kerja="{{ $unit_kerja }}"
+    :posisi="{{ $posisi }}"
 ></profil-pegawai>
 
     <br>

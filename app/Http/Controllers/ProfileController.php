@@ -11,6 +11,7 @@ use App\PMO;
 use App\Admin;
 use App\Kinerja;
 use App\UnitKerja;
+use App\Posisi;
 
 class ProfileController extends APIBaseController
 {
@@ -19,8 +20,9 @@ class ProfileController extends APIBaseController
 
         $kinerja = Kinerja::where('id_pegawai', Auth::user()->id)->get();
         $unit_kerja = UnitKerja::all();
+        $posisi = Posisi::all();
 
-        return view("profile.index", compact('kinerja', 'unit_kerja'));
+        return view("profile.index", compact('kinerja', 'unit_kerja', 'posisi'));
     }
 
     private function authenticate($role){

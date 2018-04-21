@@ -114,7 +114,7 @@
                                     Jabatan
                                 </div>
                                 <div class="col-sm-9">
-                                    <b v-if="!isEditProfile" v-text="pegawai.posisi"></b>
+                                    <b v-if="!isEditProfile" v-text="posisi.find(x => x.id_posisi == pegawai.posisi).nama_posisi"></b>
 
                                     <div v-if="isEditProfile" id="edit-posisi" class="form-group">
                                         <input v-model="pegawai.posisi" type="text" class="form-control" disabled>
@@ -617,7 +617,7 @@
 
 <script>
     export default {
-        props: ['id', 'kinerja', 'unit-kerja'],
+        props: ['id', 'kinerja', 'unit-kerja', 'posisi'],
 
         data() {
             return {
