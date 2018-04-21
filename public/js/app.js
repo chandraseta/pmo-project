@@ -67287,9 +67287,14 @@ var staticRenderFns = [
         attrs: { id: "navbar2SupportedContent" }
       },
       [
-        _c("a", { staticClass: "btn navbar-btn btn-primary ml-2 text-white" }, [
-          _vm._v("\n                Keluar\n            ")
-        ])
+        _c(
+          "a",
+          {
+            staticClass: "btn navbar-btn btn-primary ml-2 text-white",
+            attrs: { href: "/pages" }
+          },
+          [_vm._v("\n                Kembali\n            ")]
+        )
       ]
     )
   }
