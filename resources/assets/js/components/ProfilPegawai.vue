@@ -97,9 +97,10 @@
                                     Unit Kerja
                                 </div>
                                 <div class="col-sm-9">
-                                    <b v-if="!isEditProfile" v-text="pegawai.unitKerja"></b>
+                                    <b v-if="!isEditProfile" v-text="unitKerja.find(x => x.id_unit_kerja == pegawai.unitKerja).nama_unit_kerja"></b>
 
                                     <div v-if="isEditProfile" id="edit-unit-kerja" class="form-group">
+
                                         <input v-model="pegawai.unitKerja" type="text" class="form-control" disabled>
                                         <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
                                     </div>
@@ -723,7 +724,7 @@
 
 <script>
     export default {
-        props: ['id', 'unitKerja'],
+        props: ['id', 'kinerja', 'unit-kerja'],
 
         data() {
             return {
@@ -778,7 +779,12 @@
                 riwayatPekerjaan: []
             }
                
+        },  
+
+        mounted() {
+            console.log(this.unitKerja);
         },
+
         created() {
 
             axios.get('/api/pegawai/' + this.id)
