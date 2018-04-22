@@ -1119,12 +1119,13 @@
             },
 
             saveSertifikat() {
-                this.enableEditButton();
-                this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
-                this.isEditProfile = false;
+                // this.enableEditButton();
+                this.sertifikat = JSON.parse(JSON.stringify(this.cachedSertifikat));
+                // this.isEditSertifikat = false;
 
                 axios.post('/api/sertifikat/' + this.id, {
                     sertifikat: this.sertifikat,
+                    id_pegawai: this.id,
                     _method: 'put'
                 })
                 .then(function (response) {
