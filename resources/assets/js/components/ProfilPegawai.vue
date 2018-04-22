@@ -755,22 +755,7 @@
                 dataKinerja: [
                     {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
                 ],
-                sertifikat: [
-                    {
-                        judul : "Personal Care Worker",
-                        lembaga : "Harvard University",
-                        tahun_diterbitkan : 1990,
-                        catatan: "Ex numquam perspiciatis impedit fugit quam id. Harum et eos iure consequatur. Itaque inventore quia aut velit.",
-                        nama_file: "simage/" + "harvard.jpg",
-                    },
-                    {
-                        judul : "Best Pilot",
-                        lembaga : "NASA",
-                        tahun_diterbitkan : 2010,
-                        catatan: "Ex numquam perspiciatis impedit fugit quam id. Harum et eos iure consequatur. Itaque inventore quia aut velit.",
-                        nama_file: "simage/" + "nasa.jpg",
-                    }
-                ],
+                sertifikat: [],
                 rekomendasiTraining : [],   
 
                 sertifikatCounter: 0,
@@ -828,8 +813,8 @@
 
                     this.dataKepegawaian = responsePegawai["kepegawaian"];
                     this.riwayatPendidikan = responsePegawai["pendidikan"];
-
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
+                    this.sertifikat = responsePegawai["sertifikat"];
                     this.updateDataKepegawaian();
 
                     this.pegawai.nama = responsePegawai["user"]["name"];
@@ -848,6 +833,7 @@
                     this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
                     this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
 
+                    console.log(this);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -1125,7 +1111,6 @@
 
                 axios.post('/api/sertifikat/' + this.id, {
                     sertifikat: this.sertifikat,
-                    id_pegawai: this.id,
                     _method: 'put'
                 })
                 .then(function (response) {
