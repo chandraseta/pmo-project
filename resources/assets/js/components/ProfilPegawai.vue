@@ -773,6 +773,8 @@
                 ],
                 rekomendasiTraining : [],   
 
+                sertifikatCounter: 0,
+
                 disableEdit: false,
                 isEditProfile: false,
                 isEditKepegawaian: false,
@@ -959,6 +961,7 @@
             editSertifikat() {
                 this.isEditSertifikat = true;
                 this.disableEditButton();
+                this.sertifikatCounter = this.sertifikat.length;
             },
 
             editDataKinerja() {
@@ -1008,6 +1011,7 @@
 
                 };
                 this.sertifikat.push(newData);
+                this.sertifikatCounter++;
             },
 
             addDataKinerja() {
@@ -1040,6 +1044,7 @@
             delSertifikat(event) {
                 var targetIndex = event.currentTarget.id;
                 this.sertifikat.splice(targetIndex, 1);
+                this.sertifikatCounter--;
             },
 
             delDataKinerja(event) {
@@ -1114,8 +1119,20 @@
             },
 
             saveSertifikat() {
-                //sort
-                
+                this.enableEditButton();
+                this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
+                this.isEditProfile = false;
+
+                axios.post('/api/sertifikat/' + this.id, {
+                    sertifikat: this.sertifikat,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    alert(error);
+                });                
             },
 
             saveDataKinerja() {

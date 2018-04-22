@@ -38,3 +38,5 @@ Route::post('kinerja/import', 'DataKinerjaController@import');
 Route::resource('kinerja', 'DataKinerjaController');
 
 Route::resource('pegawai-denormalized', 'DataPegawaiController');
+
+Route::resource('sertifikat', 'SertifikatController');
