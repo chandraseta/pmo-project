@@ -6,7 +6,7 @@
 
 <profil-pegawai
     id="{{ Auth::user()->id}}"
-    :kinerja="{{ $kinerja }}"
+    :data-kinerja-temp="{{ $data_kinerja }}"
     :unit-kerja="{{ $unit_kerja }}"
     :posisi="{{ $posisi }}"
     :kelompok-kompetensi="{{ $kelompok_kompetensi }}"

@@ -105,7 +105,6 @@
                                                 {{ uk.nama_unit_kerja }}
                                             </option>
                                         </select>
-                                        <!-- <input v-bind:value="unitKerja.find(x => x.id_unit_kerja == pegawai.unitKerja).nama_unit_kerja" type="text" class="form-control" disabled> -->
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </div>
@@ -126,7 +125,6 @@
                                                 {{ pos.nama_posisi }}
                                             </option>
                                         </select>
-                                        <!-- <input v-bind:value="posisi.find(x => x.id_posisi == pegawai.posisi).nama_posisi" type="text" class="form-control" disabled> -->
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </div>
@@ -147,7 +145,6 @@
                                                 {{ kk.nama_kelompok_kompetensi }}
                                             </option>
                                         </select>
-                                        <!-- <input v-bind:value="kelompokKompetensi.find(x => x.id_kelompok_kompetensi == pegawai.kompetensi).nama_kelompok_kompetensi" type="text" class="form-control"> -->
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </div>
@@ -628,15 +625,16 @@
                                 <th scope="col">Catatan</th>
                             </tr>
                             </thead>
-                            <tbody v-for="dk in dataKinerja">
-                            <tr v-if="!isEditDataKinerja">
-                                <td v-text="dk.tahun" ></td>
-                                <td v-text="dk.semester" ></td>
-                                <td v-text="dk.nilai" ></td>
-                                <td v-text="dk.catatan" ></td>
+                            <tbody>
+                                
+                            <tr v-if="!isEditDataKinerja" v-for="dks in dataKinerjaShow">
+                                <td v-text="dks.tahun" ></td>
+                                <td v-text="dks.semester" ></td>
+                                <td v-text="dks.nilai" ></td>
+                                <td v-text="dks.catatan" ></td>
                             </tr>
 
-                            <tr v-if="isEditDataKinerja">
+                            <tr v-if="isEditDataKinerja" v-for="dk in dataKinerja">
                                 <td>
                                     <div class="form-group">
                                         <input v-model="dk.tahun" type="text" class="form-control text-center">
@@ -668,6 +666,12 @@
                                 </td>
                             </tr>
                             </tbody>
+                            <a href="#data-kinerja" v-if="!isEditDataKinerja && !isShowAllDataKinerja" class="btn btn-primary float-sm-left" v-on:click="showAllDataKinerja">
+                                Tamplikan semua <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#data-kinerja" v-if="!isEditDataKinerja && isShowAllDataKinerja" class="btn btn-danger float-sm-left" v-on:click="hideDataKinerja">
+                                Sembunyikan sebagian <i class="fas fa-eye-slash"></i>
+                            </a>
                             <button v-if="isEditDataKinerja" class="btn btn-primary float-sm-left" v-on:click="addDataKinerja">
                                 Tambah <i class="fas fa-plus"></i>
                             </button>
@@ -758,14 +762,14 @@
 
 <script>
     export default {
-        props: ['id', 'kinerja', 'unit-kerja', 'posisi', 'kelompok-kompetensi'],
+        props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp'],
 
         data() {
             return {
                 //dummy
-                dataKinerja: [
-                    {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
-                ],
+                // dataKinerja: [
+                //     {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
+                // ],
                 sertifikat: [
                     {
                         judul : "Personal Care Worker",
@@ -785,6 +789,7 @@
                 rekomendasiTraining : [],
                 ////////   
 
+                isShowAllDataKinerja: false,
                 disableEdit: false,
                 isEditProfile: false,
                 isEditKepegawaian: false,
@@ -820,7 +825,9 @@
                 },
                 dataKepegawaian: [],
                 riwayatPendidikan: [],
-                riwayatPekerjaan: []
+                riwayatPekerjaan: [],
+                dataKinerja: [],
+                dataKinerjaShow: []
             }
                
         },  
@@ -830,6 +837,8 @@
         },
 
         created() {
+            //dataKinerja
+            this.dataKinerja = this.dataKinerjaTemp;
 
             axios.get('/api/pegawai/' + this.id)
                 .then((response) => {
@@ -857,6 +866,8 @@
                     this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
                     this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
                     this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
+                    this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
+                    this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
 
                 })
                 .catch(function (error) {
@@ -867,9 +878,29 @@
             this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
             this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
             
+            // dataKinerjaShow
+            if (this.dataKinerja.length > 6) {
+                this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length-6);
+            } else {
+                this.dataKinerjaShow = this.dataKinerja;
+            }
+            
         },
 
         methods: {
+            showAllDataKinerja() {
+                this.isShowAllDataKinerja = true;
+                this.dataKinerjaShow = this.dataKinerja;
+            },
+
+            hideDataKinerja() {
+                this.isShowAllDataKinerja = false;
+                
+                if (this.dataKinerja.length > 6) {
+                    this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length-6);
+                }
+            },
+
             updateProfilPegawai() {
                 if (this.pegawai.unitKerja.id != null) {
                     this.pegawai.unitKerja.text = this.unitKerja.find(x => x.id_unit_kerja == this.pegawai.unitKerja.id).nama_unit_kerja;
@@ -1147,6 +1178,12 @@
                 this.enableEditButton();
                 this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
                 this.isEditDataKinerja = false;
+
+                if (this.isShowAllDataKinerja) {
+                    this.showAllDataKinerja();
+                } else {
+                    this.hideDataKinerja();
+                }
             },
 
             cancelProfilPegawai() {
@@ -1178,6 +1215,12 @@
                 this.enableEditButton();
                 this.dataKinerja = JSON.parse(JSON.stringify(this.cachedDataKinerja));
                 this.isEditDataKinerja = false;
+
+                if (this.isShowAllDataKinerja) {
+                    this.showAllDataKinerja();
+                } else {
+                    this.hideDataKinerja();
+                }
             }
         }
     }
