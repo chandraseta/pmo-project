@@ -213,7 +213,8 @@
                             <thead>
                             <tr>
                                 <th scope="col">Unit Kerja</th>
-                                <th scope="col">Posisi</th>
+                                <th scope="col">Jabatan</th>
+                                <!-- <th scope="col">Kompetensi</th> -->
                                 <th scope="col">Tahun Mulai</th>
                                 <th scope="col">Tahun Selesai</th>
                             </tr>
@@ -222,6 +223,7 @@
                             <tr v-if="!isEditKepegawaian">
                                 <td v-text="unitKerja.find(x => x.id_unit_kerja == dk.id_unit_kerja).nama_unit_kerja" ></td>
                                 <td v-text="posisi.find(x => x.id_posisi == dk.id_posisi).nama_posisi" ></td>
+                                <!-- <td v-text="kelompokKompetensi.find(x => x.id_kelompok_kompetensi == dk.id_kelompok_kompetensi).nama_kelompok_kompetensi" ></td> -->
                                 <td v-text="dk.tahun_masuk" ></td>
                                 <td v-text="dk.tahun_keluar" ></td>
                             </tr>
@@ -243,10 +245,19 @@
                                                 {{ pos.nama_posisi }}
                                             </option>
                                         </select>
-                                        <!-- <input v-model="dk.id_posisi" type="text" class="form-control text-center"> -->
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </td>
+                                <!-- <td>
+                                    <div class="form-group">
+                                        <select class="form-control" v-model="dk.id_kelompok_kompetensi">
+                                            <option v-for="kk in kelompokKomptensi" v-bind:value="kk.id_kelompok_kompetensi">
+                                                {{ kk.nama_kelompok_kompetensi }}
+                                            </option>
+                                        </select>
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td> -->
                                 <td>
                                     <div class="form-group">
                                         <input v-model="dk.tahun_masuk" type="text" class="form-control text-center">
@@ -398,7 +409,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">Nama Institusi</th>
-                                <th scope="col">Posisi</th>
+                                <th scope="col">Jabatan</th>
                                 <th scope="col">Tahun Masuk</th>
                                 <th scope="col">Tahun Keluar</th>
                             </tr>
@@ -771,7 +782,8 @@
                         nama_file: "simage/" + "nasa.jpg",
                     }
                 ],
-                rekomendasiTraining : [],   
+                rekomendasiTraining : [],
+                ////////   
 
                 disableEdit: false,
                 isEditProfile: false,
@@ -864,7 +876,6 @@
                 } else {
                     this.pegawai.unitKerja.text = null;
                 }
-
                 
                 if (this.pegawai.kompetensi.id != null) {
                     this.pegawai.kompetensi.text = this.kelompokKompetensi.find(x => x.id_kelompok_kompetensi == this.pegawai.kompetensi.id).nama_kelompok_kompetensi;
@@ -885,6 +896,7 @@
                 if (this.dataKepegawaian.length == 0) {
                     this.pegawai.unitKerja.id = null;
                     this.pegawai.posisi.id = null;
+                    // this.pegawai.kompetensi.id = null;
                     this.pegawai.tahunMasuk = null;
                 } else {
                     //sort
@@ -899,6 +911,7 @@
                     var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length-1];
                     this.pegawai.unitKerja.id = lastDataPegawai["id_unit_kerja"];
                     this.pegawai.posisi.id = lastDataPegawai["id_posisi"];
+                    // this.pegawai.kompetensi.id = lastDataPegawai["id_kelompok_kompetensi"];
                     this.pegawai.tahunMasuk = lastDataPegawai["tahun_masuk"];
                 }
             },
@@ -912,6 +925,7 @@
                         id_pegawai : null,
                         id_unit_kerja : this.pegawai.unitKerja.id,
                         id_posisi : this.pegawai.posisi.id,
+                        // id_kelompok_kompetensi : this.pegawai.kompetensi.id,
                         tahun_masuk : this.pegawai.tahunMasuk,
                         tahun_keluar : null
                     };
@@ -929,6 +943,7 @@
                     var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length-1];
                     lastDataPegawai["id_unit_kerja"] = this.pegawai.unitKerja.id;
                     lastDataPegawai["id_posisi"] = this.pegawai.posisi.id;
+                    // lastDataPegawai["id_kelompok_kompetensi"] = this.pegawai.kompetensi.id;
                     lastDataPegawai["tahun_masuk"] = this.pegawai.tahunMasuk;
                 }
             },
@@ -972,6 +987,7 @@
                     id_pegawai : null,
                     id_unit_kerja : null,
                     id_posisi : null,
+                    // id_kelompok_kompetensi : null,
                     tahun_masuk : null,
                     tahun_keluar : null
                 };
@@ -1049,7 +1065,6 @@
 
             saveProfilPegawai() {
                 this.enableEditButton();
-                // this.cachedPegawai = Object.assign({}, this.pegawai);
 
                 this.updateProfilPegawai();
                 this.updateDataKepegawaianAfterEditProfile();
@@ -1076,7 +1091,6 @@
                 this.updateDataKepegawaian();
                 this.updateProfilPegawai();
                 this.enableEditButton();
-                // this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
                 this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
                 this.isEditKepegawaian = false;
 
@@ -1104,8 +1118,6 @@
                     });
 
                 this.enableEditButton();
-                // this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
-                // this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
                 this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
                 this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
                 this.isEditRiwayat = false;
