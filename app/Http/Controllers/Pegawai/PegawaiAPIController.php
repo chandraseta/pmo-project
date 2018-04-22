@@ -241,26 +241,6 @@ class PegawaiAPIController extends APIBaseController
             ]);
         }
 
-        $sertifikat = Sertifikat::where('id_pegawai', $id);
-
-        if ($sertifikat->count() > 0) {
-            $sertifikat->delete();
-        }
-
-        for ($i = 1; $i <= $input['sertifikat_counter']; $i++) {
-            $photoTimeAsName = time() . '.' . $input['sertifikat_user_photo_' . $i]->getClientOriginalExtension();
-            $input['sertifikat_user_photo_' . $i]->move(public_path('sertifikat'), $photoTimeAsName);
-
-            $postSertifikat = Sertifikat::create([
-                'id_pegawai' => $id,
-                'nama_file' => $photoTimeAsName,
-                'judul' => $input['sertifikat_judul_' . $i],
-                'lembaga' => $input['sertifikat_lembaga_' . $i],
-                'tahun_diterbitkan' => $input['sertifikat_tahun_diterbitkan_' . $i],
-                'catatan' => $input['sertifikat_catatan_' . $i],
-            ]);
-        }
-
         $user->save();
         $pegawai->save();
 
@@ -269,8 +249,7 @@ class PegawaiAPIController extends APIBaseController
             $pegawai->toArray(),
             $pendidikan->get()->toArray(),
             $pekerjaan->get()->toArray(),
-            $kepegawaian->get()->toArray(),
-            $sertifikat->get()->toArray()
+            $kepegawaian->get()->toArray()
         );
 
         return $this->sendResponse($data, 'Profile updated successfully.');

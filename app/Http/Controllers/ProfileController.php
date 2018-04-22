@@ -15,7 +15,7 @@ use App\UnitKerja;
 class ProfileController extends APIBaseController
 {
     public function index() {
-        if(!$this->authenticate(4)){return view('welcome');}
+        if(!$this->authenticate(4)){return redirect('/');}
 
         $kinerja = Kinerja::where('id_pegawai', Auth::user()->id)->get();
         $unit_kerja = UnitKerja::all();

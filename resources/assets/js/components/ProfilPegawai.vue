@@ -729,9 +729,21 @@
         data() {
             return {
                 //dummy
-                dataKinerja: [
-                    {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
-                ],
+                pegawai: {
+                    imageProfileUrl: "",
+                    nama: "",
+                    tempatLahir: "",
+                    tanggalLahir: "",
+                    email: "",
+                    nopeg: "",
+                    unitKerja: "",
+                    posisi: "",
+                    kompetensi: "",
+                    tahunMasuk: ""
+                },
+                dataKepegawaian: [],
+                riwayatPendidikan: [],
+                riwayatPekerjaan: [],  
                 sertifikat: [
                     {
                         judul : "Personal Care Worker",
@@ -748,7 +760,12 @@
                         nama_file: "simage/" + "nasa.jpg",
                     }
                 ],
-                rekomendasiTraining : [],   
+                dataKinerja: [
+                    {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
+                ],
+                rekomendasiTraining : [],
+
+                sertifikatCounter : 0,
 
                 disableEdit: false,
                 isEditProfile: false,
@@ -762,21 +779,6 @@
                 cachedRiwayatPekerjaan: null,
                 cachedSertifikat: null,
                 cachedDataKinerja: null,
-                pegawai: {
-                    imageProfileUrl: "",
-                    nama: "",
-                    tempatLahir: "",
-                    tanggalLahir: "",
-                    email: "",
-                    nopeg: "",
-                    unitKerja: "",
-                    posisi: "",
-                    kompetensi: "",
-                    tahunMasuk: ""
-                },
-                dataKepegawaian: [],
-                riwayatPendidikan: [],
-                riwayatPekerjaan: []
             }
                
         },  
@@ -869,6 +871,7 @@
             },
 
             editSertifikat() {
+                this.sertifikatCounter = this.sertifikat.length;
                 this.isEditSertifikat = true;
                 this.disableEditButton();
             },
@@ -916,10 +919,9 @@
             },
 
             addSertifikat() {
-                var newData = {
-
-                };
+                var newData = {};
                 this.sertifikat.push(newData);
+                this.sertifikatCounter++;
             },
 
             addDataKinerja() {
@@ -952,6 +954,7 @@
             delSertifikat(event) {
                 var targetIndex = event.currentTarget.id;
                 this.sertifikat.splice(targetIndex, 1);
+                this.sertifikatCounter--;
             },
 
             delDataKinerja(event) {
@@ -1021,8 +1024,21 @@
             },
 
             saveSertifikat() {
-                //sort
-                
+                this.enableEditButton();
+                this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
+                this.isEditSertifikat = false;
+
+                axios.post('/api/sertifikat/' + this.id, {
+                    sertifikat: this.sertifikat,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    alert(error);
+                });
+
             },
 
             saveDataKinerja() {
