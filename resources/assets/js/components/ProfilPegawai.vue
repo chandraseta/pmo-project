@@ -720,7 +720,7 @@
                     <hr>
 
                     <div v-if="rekomendasiTraining.length === 0" class="no-rekomendasi-training">
-                        <hr>
+                        
                         Belum ditambahkan.
                         <br>
                     </div>
@@ -730,21 +730,34 @@
                             <li v-text="trainingList.find(x => x.id_training == rt.id_training).nama_training"></li>
                         </ul>
 
-                        <div v-if="isEditRekomendasi" class="form-group">
-                            <select class="form-control" v-model="rt.id_training">
-                                <option v-for="tl in trainingList" v-bind:value="tl.id_training">
-                                    {{ tl.nama_training }}
-                                </option>
-                            </select>
-                            <small class="form-text text-muted">*Wajib diisi</small>
+                        <div v-if="isEditRekomendasi" class="form-group row">
+                            <div class="col-sm-9">
+                                <select class="form-control" v-model="rt.id_training">
+                                    <option v-for="tl in trainingList" v-bind:value="tl.id_training">
+                                        {{ tl.nama_training }}
+                                    </option>
+                                </select>
+                                <small class="form-text text-muted">*Wajib diisi</small>
+                            </div>
+                            <div class="col-sm-1">
+                                <button v-bind:id="rekomendasiTraining.indexOf(rt)" v-on:click="delRekomendasiTraining($event)" class="btn btn-danger" type="button">
+                                    Hapus <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            
                         </div>
 
-                    </div>
-                    <button v-if="isEditRekomendasi" class="btn btn-primary float-sm-left" v-on:click="addRekomendasiTraining">
-                        Tambah <i class="fas fa-plus"></i>
-                    </button>
 
-                    <br><br><br>
+                    </div>
+
+                    <br>
+                    <div v-if="isEditRekomendasi">
+                        <button class="btn btn-primary float-sm-left" v-on:click="addRekomendasiTraining">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
+
+                        <br><br><br>
+                    </div>
 
 
                     <h5>Rekomendasi Lain-lain</h5>
@@ -754,6 +767,14 @@
                     Tidak ada.
 
                 </div>
+            </div>
+            <div class="card-footer text-muted" v-if="isEditRekomendasi">
+                <a href="#rekomendasi" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveRekomendasi">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#rekomendasi" class="btn btn-danger float-sm-right" v-on:click="cancelRekomendasi">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
             </div>
         </div>
 
@@ -767,7 +788,7 @@
 
         data() {
             return {
-                //dummy
+                
                 pegawai: {
                     imageProfileUrl: "",
                     nama: "",
@@ -785,11 +806,6 @@
                 riwayatPendidikan: [],
                 riwayatPekerjaan: [],  
                 sertifikat: [],
-
-                dataKinerja: [
-                    {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
-                ],
-
                 sertifikatCounter : 0,
 
                 isShowAllDataKinerja: false,
@@ -901,8 +917,8 @@
             this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
 
             //init rekomendasiPosisi
-            this.rekomendasiPosisi = this.rekomendasiPosisiTemp;
-            this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+            // this.rekomendasiPosisi = this.rekomendasiPosisiTemp;
+            // this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
         },
 
         methods: {
@@ -1297,7 +1313,7 @@
             saveRekomendasi() {
                 this.enableEditButton();
                 this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
-                this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+                // this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
                 this.isEditRekomendasi = false;
             },
 
@@ -1341,10 +1357,10 @@
             cancelRekomendasi() {
                 this.enableEditButton();
                 this.rekomendasiTraining = JSON.parse(JSON.stringify(this.cachedRekomendasiTraining));
-                this.rekomendasiPosisi = JSON.parse(JSON.stringify(this.cachedRekomendasiPosisi));
+                // this.rekomendasiPosisi = JSON.parse(JSON.stringify(this.cachedRekomendasiPosisi));
                 this.isEditRekomendasi = false;
             },
-            
+
             FileChangeProfile(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)

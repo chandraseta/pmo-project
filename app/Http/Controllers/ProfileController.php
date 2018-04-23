@@ -31,8 +31,9 @@ class ProfileController extends APIBaseController
         $kelompok_kompetensi = KelompokKompetensi::all();
         $rekomendasi_training = RekomendasiTraining::where('id_pegawai', Auth::user()->id)->get();
         $training_list = Training::all();
+        $rekomendasi_posisi = RekomendasiPosisi::where('id_pegawai', Auth::user()->id)->get();
 
-        return view("profile.index", compact('data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi', 'rekomendasi_training', 'training_list'));
+        return view("profile.index", compact('data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi', 'rekomendasi_training', 'training_list', 'rekomendasi_posisi'));
     }
 
     private function authenticate($role){
