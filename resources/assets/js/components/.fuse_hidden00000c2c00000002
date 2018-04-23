@@ -105,6 +105,7 @@
                                                 {{ uk.nama_unit_kerja }}
                                             </option>
                                         </select>
+                                        <!-- <input v-bind:value="unitKerja.find(x => x.id_unit_kerja == pegawai.unitKerja).nama_unit_kerja" type="text" class="form-control" disabled> -->
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </div>
@@ -125,6 +126,7 @@
                                                 {{ pos.nama_posisi }}
                                             </option>
                                         </select>
+                                        <!-- <input v-bind:value="posisi.find(x => x.id_posisi == pegawai.posisi).nama_posisi" type="text" class="form-control" disabled> -->
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </div>
@@ -145,6 +147,7 @@
                                                 {{ kk.nama_kelompok_kompetensi }}
                                             </option>
                                         </select>
+                                        <!-- <input v-bind:value="kelompokKompetensi.find(x => x.id_kelompok_kompetensi == pegawai.kompetensi).nama_kelompok_kompetensi" type="text" class="form-control"> -->
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </div>
@@ -210,8 +213,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">Unit Kerja</th>
-                                <th scope="col">Jabatan</th>
-                                <!-- <th scope="col">Kompetensi</th> -->
+                                <th scope="col">Posisi</th>
                                 <th scope="col">Tahun Mulai</th>
                                 <th scope="col">Tahun Selesai</th>
                             </tr>
@@ -220,7 +222,6 @@
                             <tr v-if="!isEditKepegawaian">
                                 <td v-text="unitKerja.find(x => x.id_unit_kerja == dk.id_unit_kerja).nama_unit_kerja" ></td>
                                 <td v-text="posisi.find(x => x.id_posisi == dk.id_posisi).nama_posisi" ></td>
-                                <!-- <td v-text="kelompokKompetensi.find(x => x.id_kelompok_kompetensi == dk.id_kelompok_kompetensi).nama_kelompok_kompetensi" ></td> -->
                                 <td v-text="dk.tahun_masuk" ></td>
                                 <td v-text="dk.tahun_keluar" ></td>
                             </tr>
@@ -242,19 +243,10 @@
                                                 {{ pos.nama_posisi }}
                                             </option>
                                         </select>
+                                        <!-- <input v-model="dk.id_posisi" type="text" class="form-control text-center"> -->
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </td>
-                                <!-- <td>
-                                    <div class="form-group">
-                                        <select class="form-control" v-model="dk.id_kelompok_kompetensi">
-                                            <option v-for="kk in kelompokKomptensi" v-bind:value="kk.id_kelompok_kompetensi">
-                                                {{ kk.nama_kelompok_kompetensi }}
-                                            </option>
-                                        </select>
-                                        <small class="form-text text-muted">*Wajib diisi</small>
-                                    </div>
-                                </td> -->
                                 <td>
                                     <div class="form-group">
                                         <input v-model="dk.tahun_masuk" type="text" class="form-control text-center">
@@ -406,7 +398,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">Nama Institusi</th>
-                                <th scope="col">Jabatan</th>
+                                <th scope="col">Posisi</th>
                                 <th scope="col">Tahun Masuk</th>
                                 <th scope="col">Tahun Keluar</th>
                             </tr>
@@ -492,9 +484,14 @@
                     </div>
 
                     <div v-if="sertifikat.length !== 0" class="sertificate">
-                        <table class="table" align="left">
+                        <table class="table" align="left" style="width: 100%">
                             <tbody v-for="dk in sertifikat">
                             <div v-if="!isEditSertifikat">
+                                <colgroup>
+                                    <col width="35%">
+                                    <col width="15%">
+                                    <col width="50%">
+                                </colgroup>
                                 <tr>
                                     <td rowspan="4">
                                             <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
@@ -526,14 +523,10 @@
                                     </div>
                                     <br>
                                     <div v-if="dk.nama_file !== NULL">
-                                        <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-primary" type="button">
-                                            Ganti Foto
-                                        </button>
+                                        <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
                                     </div>
                                     <div v-if="dk.nama_file == NULL">
-                                        <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-primary" type="button">
-                                            Tambah Foto
-                                        </button>
+                                        <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
                                     </div>
                                 </td>
                                 <td rowspan="4">
@@ -625,16 +618,15 @@
                                 <th scope="col">Catatan</th>
                             </tr>
                             </thead>
-                            <tbody>
-                                
-                            <tr v-if="!isEditDataKinerja" v-for="dks in dataKinerjaShow">
-                                <td v-text="dks.tahun" ></td>
-                                <td v-text="dks.semester" ></td>
-                                <td v-text="dks.nilai" ></td>
-                                <td v-text="dks.catatan" ></td>
+                            <tbody v-for="dk in dataKinerja">
+                            <tr v-if="!isEditDataKinerja">
+                                <td v-text="dk.tahun" ></td>
+                                <td v-text="dk.semester" ></td>
+                                <td v-text="dk.nilai" ></td>
+                                <td v-text="dk.catatan" ></td>
                             </tr>
 
-                            <tr v-if="isEditDataKinerja" v-for="dk in dataKinerja">
+                            <tr v-if="isEditDataKinerja">
                                 <td>
                                     <div class="form-group">
                                         <input v-model="dk.tahun" type="text" class="form-control text-center">
@@ -666,12 +658,6 @@
                                 </td>
                             </tr>
                             </tbody>
-                            <a href="#data-kinerja" v-if="!isEditDataKinerja && !isShowAllDataKinerja" class="btn btn-primary float-sm-left" v-on:click="showAllDataKinerja">
-                                Tamplikan semua <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="#data-kinerja" v-if="!isEditDataKinerja && isShowAllDataKinerja" class="btn btn-danger float-sm-left" v-on:click="hideDataKinerja">
-                                Sembunyikan sebagian <i class="fas fa-eye-slash"></i>
-                            </a>
                             <button v-if="isEditDataKinerja" class="btn btn-primary float-sm-left" v-on:click="addDataKinerja">
                                 Tambah <i class="fas fa-plus"></i>
                             </button>
@@ -762,51 +748,19 @@
 
 <script>
     export default {
-        props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp'],
+        props: ['id', 'kinerja', 'unit-kerja', 'posisi', 'kelompok-kompetensi'],
 
         data() {
             return {
                 //dummy
-                pegawai: {
-                    imageProfileUrl: "",
-                    nama: "",
-                    tempatLahir: "",
-                    tanggalLahir: "",
-                    email: "",
-                    nopeg: "",
-                    unitKerja: "",
-                    posisi: "",
-                    kompetensi: "",
-                    tahunMasuk: ""
-                },
-                dataKepegawaian: [],
-                riwayatPendidikan: [],
-                riwayatPekerjaan: [],  
-                sertifikat: [
-                    {
-                        judul : "Personal Care Worker",
-                        lembaga : "Harvard University",
-                        tahun_diterbitkan : 1990,
-                        catatan: "Ex numquam perspiciatis impedit fugit quam id. Harum et eos iure consequatur. Itaque inventore quia aut velit.",
-                        nama_file: "simage/" + "harvard.jpg",
-                    },
-                    {
-                        judul : "Best Pilot",
-                        lembaga : "NASA",
-                        tahun_diterbitkan : 2010,
-                        catatan: "Ex numquam perspiciatis impedit fugit quam id. Harum et eos iure consequatur. Itaque inventore quia aut velit.",
-                        nama_file: "simage/" + "nasa.jpg",
-                    }
-                ],
-
                 dataKinerja: [
                     {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
                 ],
-                rekomendasiTraining : [],
+                sertifikat: [],
+                rekomendasiTraining : [],   
 
-                sertifikatCounter : 0,
+                sertifikatCounter: 0,
 
-                isShowAllDataKinerja: false,
                 disableEdit: false,
                 isEditProfile: false,
                 isEditKepegawaian: false,
@@ -842,9 +796,7 @@
                 },
                 dataKepegawaian: [],
                 riwayatPendidikan: [],
-                riwayatPekerjaan: [],
-                dataKinerja: [],
-                dataKinerjaShow: []
+                riwayatPekerjaan: []
             }
                
         },  
@@ -854,8 +806,6 @@
         },
 
         created() {
-            //dataKinerja
-            this.dataKinerja = this.dataKinerjaTemp;
 
             axios.get('/api/pegawai/' + this.id)
                 .then((response) => {
@@ -864,9 +814,11 @@
 
                     this.dataKepegawaian = responsePegawai["kepegawaian"];
                     this.riwayatPendidikan = responsePegawai["pendidikan"];
-
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
                     this.updateDataKepegawaian();
+
+                    this.sertifikat = responsePegawai["sertifikat"];
+                    this.updateSertifikat();
 
                     this.pegawai.nama = responsePegawai["user"]["name"];
                     this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
@@ -875,7 +827,6 @@
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
                     this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
                     this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
-
                     this.updateProfilPegawai();
 
                     //chacing
@@ -884,8 +835,8 @@
                     this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
                     this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
                     this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
-                    this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
 
+                    console.log(this);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -893,37 +844,17 @@
 
             //caching others
             this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
-            this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
-            
-            // dataKinerjaShow
-            if (this.dataKinerja.length > 6) {
-                this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length-6);
-            } else {
-                this.dataKinerjaShow = this.dataKinerja;
-            }
             
         },
 
         methods: {
-            showAllDataKinerja() {
-                this.isShowAllDataKinerja = true;
-                this.dataKinerjaShow = this.dataKinerja;
-            },
-
-            hideDataKinerja() {
-                this.isShowAllDataKinerja = false;
-                
-                if (this.dataKinerja.length > 6) {
-                    this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length-6);
-                }
-            },
-
             updateProfilPegawai() {
                 if (this.pegawai.unitKerja.id != null) {
                     this.pegawai.unitKerja.text = this.unitKerja.find(x => x.id_unit_kerja == this.pegawai.unitKerja.id).nama_unit_kerja;
                 } else {
                     this.pegawai.unitKerja.text = null;
                 }
+
                 
                 if (this.pegawai.kompetensi.id != null) {
                     this.pegawai.kompetensi.text = this.kelompokKompetensi.find(x => x.id_kelompok_kompetensi == this.pegawai.kompetensi.id).nama_kelompok_kompetensi;
@@ -944,7 +875,6 @@
                 if (this.dataKepegawaian.length == 0) {
                     this.pegawai.unitKerja.id = null;
                     this.pegawai.posisi.id = null;
-                    // this.pegawai.kompetensi.id = null;
                     this.pegawai.tahunMasuk = null;
                 } else {
                     //sort
@@ -959,7 +889,6 @@
                     var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length-1];
                     this.pegawai.unitKerja.id = lastDataPegawai["id_unit_kerja"];
                     this.pegawai.posisi.id = lastDataPegawai["id_posisi"];
-                    // this.pegawai.kompetensi.id = lastDataPegawai["id_kelompok_kompetensi"];
                     this.pegawai.tahunMasuk = lastDataPegawai["tahun_masuk"];
                 }
             },
@@ -973,7 +902,6 @@
                         id_pegawai : null,
                         id_unit_kerja : this.pegawai.unitKerja.id,
                         id_posisi : this.pegawai.posisi.id,
-                        // id_kelompok_kompetensi : this.pegawai.kompetensi.id,
                         tahun_masuk : this.pegawai.tahunMasuk,
                         tahun_keluar : null
                     };
@@ -991,8 +919,13 @@
                     var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length-1];
                     lastDataPegawai["id_unit_kerja"] = this.pegawai.unitKerja.id;
                     lastDataPegawai["id_posisi"] = this.pegawai.posisi.id;
-                    // lastDataPegawai["id_kelompok_kompetensi"] = this.pegawai.kompetensi.id;
                     lastDataPegawai["tahun_masuk"] = this.pegawai.tahunMasuk;
+                }
+            },
+
+            updateSertifikat(){
+                for(var i = 0; i < this.sertifikat.length; i++){
+                    this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
                 }
             },
 
@@ -1020,9 +953,9 @@
             },
 
             editSertifikat() {
-                this.sertifikatCounter = this.sertifikat.length;
                 this.isEditSertifikat = true;
                 this.disableEditButton();
+                this.sertifikatCounter = this.sertifikat.length;
             },
 
             editDataKinerja() {
@@ -1036,7 +969,6 @@
                     id_pegawai : null,
                     id_unit_kerja : null,
                     id_posisi : null,
-                    // id_kelompok_kompetensi : null,
                     tahun_masuk : null,
                     tahun_keluar : null
                 };
@@ -1069,7 +1001,9 @@
             },
 
             addSertifikat() {
-                var newData = {};
+                var newData = {
+
+                };
                 this.sertifikat.push(newData);
                 this.sertifikatCounter++;
             },
@@ -1114,6 +1048,7 @@
 
             saveProfilPegawai() {
                 this.enableEditButton();
+                // this.cachedPegawai = Object.assign({}, this.pegawai);
 
                 this.updateProfilPegawai();
                 this.updateDataKepegawaianAfterEditProfile();
@@ -1140,6 +1075,7 @@
                 this.updateDataKepegawaian();
                 this.updateProfilPegawai();
                 this.enableEditButton();
+                // this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
                 this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
                 this.isEditKepegawaian = false;
 
@@ -1167,6 +1103,8 @@
                     });
 
                 this.enableEditButton();
+                // this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
+                // this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
                 this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
                 this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
                 this.isEditRiwayat = false;
@@ -1175,9 +1113,7 @@
             },
 
             saveSertifikat() {
-                this.enableEditButton();
-                this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
-                this.isEditSertifikat = false;
+                console.log(this.sertifikat);
 
                 axios.post('/api/sertifikat/' + this.id, {
                     sertifikat: this.sertifikat,
@@ -1185,11 +1121,11 @@
                 })
                 .then(function (response) {
                     console.log(response);
+                    window.location.href = "/pages/profile";
                 })
                 .catch(function (error) {
                     alert(error);
-                });
-
+                });                
             },
 
             saveDataKinerja() {
@@ -1209,12 +1145,6 @@
                 this.enableEditButton();
                 this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
                 this.isEditDataKinerja = false;
-
-                if (this.isShowAllDataKinerja) {
-                    this.showAllDataKinerja();
-                } else {
-                    this.hideDataKinerja();
-                }
             },
 
             cancelProfilPegawai() {
@@ -1246,13 +1176,22 @@
                 this.enableEditButton();
                 this.dataKinerja = JSON.parse(JSON.stringify(this.cachedDataKinerja));
                 this.isEditDataKinerja = false;
+            },
 
-                if (this.isShowAllDataKinerja) {
-                    this.showAllDataKinerja();
-                } else {
-                    this.hideDataKinerja();
-                }
-            }
+            onFileChange(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0], e.currentTarget.id);
+            },
+            createImage(file, id) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.sertifikat[id].nama_file = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
         }
     }
 </script>

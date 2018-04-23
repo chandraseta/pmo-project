@@ -11,16 +11,23 @@ use App\PMO;
 use App\Admin;
 use App\Kinerja;
 use App\UnitKerja;
+use App\Posisi;
+use App\KelompokKompetensi;
 
 class ProfileController extends APIBaseController
 {
     public function index() {
         if(!$this->authenticate(4)){return redirect('/');}
 
-        $kinerja = Kinerja::where('id_pegawai', Auth::user()->id)->get();
+        $data_kinerja = Kinerja::where('id_pegawai', Auth::user()->id)
+                                ->orderBy('tahun', 'ASC')
+                                ->orderBy('semester', 'ASC')
+                                ->get();
         $unit_kerja = UnitKerja::all();
+        $posisi = Posisi::all();
+        $kelompok_kompetensi = KelompokKompetensi::all();
 
-        return view("profile.index", compact('kinerja', 'unit_kerja'));
+        return view("profile.index", compact('data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi'));
     }
 
     private function authenticate($role){
