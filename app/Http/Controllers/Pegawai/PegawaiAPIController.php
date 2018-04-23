@@ -118,6 +118,7 @@ class PegawaiAPIController extends APIBaseController
         $pendidikan = RiwayatPendidikan::where("id_pegawai", $id);
         $pekerjaan = RiwayatPekerjaan::where("id_pegawai", $id);
         $kepegawaian = DataKepegawaian::where("id_pegawai", $id);
+        $sertifikat = Sertifikat::where("id_pegawai", $id);
 
         $data = [
             'user' => $user->toArray(),
@@ -125,6 +126,7 @@ class PegawaiAPIController extends APIBaseController
             'pendidikan' => $pendidikan->get()->toArray(),
             'pekerjaan' => $pekerjaan->get()->toArray(),
             'kepegawaian' => $kepegawaian->get()->toArray(),
+            'sertifikat' => $sertifikat->get()->toArray(),
         ];
 
         return $this->sendResponse($data, 'Profile retrieved successfully.');

@@ -14241,7 +14241,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -14255,6 +14255,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -15041,19 +15042,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             dataKepegawaian: [],
             riwayatPendidikan: [],
             riwayatPekerjaan: [],
-            sertifikat: [{
-                judul: "Personal Care Worker",
-                lembaga: "Harvard University",
-                tahun_diterbitkan: 1990,
-                catatan: "Ex numquam perspiciatis impedit fugit quam id. Harum et eos iure consequatur. Itaque inventore quia aut velit.",
-                nama_file: "simage/" + "harvard.jpg"
-            }, {
-                judul: "Best Pilot",
-                lembaga: "NASA",
-                tahun_diterbitkan: 2010,
-                catatan: "Ex numquam perspiciatis impedit fugit quam id. Harum et eos iure consequatur. Itaque inventore quia aut velit.",
-                nama_file: "simage/" + "nasa.jpg"
-            }],
+            sertifikat: [],
 
             dataKinerja: [{ tahun: 2010, semester: 1, nilai: 2.50, catatan: "ini catatan" }],
             rekomendasiTraining: [],
@@ -15108,9 +15097,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
             _this.dataKepegawaian = responsePegawai["kepegawaian"];
             _this.riwayatPendidikan = responsePegawai["pendidikan"];
-
             _this.riwayatPekerjaan = responsePegawai["pekerjaan"];
             _this.updateDataKepegawaian();
+
+            _this.sertifikat = responsePegawai["sertifikat"];
+            _this.updateSertifikat();
 
             _this.pegawai.nama = responsePegawai["user"]["name"];
             _this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
@@ -15119,7 +15110,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             _this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
             _this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
             _this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
-
             _this.updateProfilPegawai();
 
             //chacing
@@ -15129,13 +15119,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             _this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(_this.riwayatPekerjaan));
             _this.cachedSertifikat = JSON.parse(JSON.stringify(_this.sertifikat));
             _this.cachedDataKinerja = JSON.parse(JSON.stringify(_this.dataKinerja));
+
+            console.log(_this);
         }).catch(function (error) {
             console.log(error);
         });
 
         //caching others
         this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
-        this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
 
         // dataKinerjaShow
         if (this.dataKinerja.length > 6) {
@@ -15241,6 +15232,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 lastDataPegawai["tahun_masuk"] = this.pegawai.tahunMasuk;
             }
         },
+        updateSertifikat: function updateSertifikat() {
+            for (var i = 0; i < this.sertifikat.length; i++) {
+                this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
+            }
+        },
         disableEditButton: function disableEditButton() {
             this.disableEdit = true;
         },
@@ -15263,6 +15259,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.sertifikatCounter = this.sertifikat.length;
             this.isEditSertifikat = true;
             this.disableEditButton();
+            this.sertifikatCounter = this.sertifikat.length;
         },
         editDataKinerja: function editDataKinerja() {
             this.isEditDataKinerja = true;
@@ -15399,12 +15396,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.enableEditButton();
             this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
             this.isEditSertifikat = false;
+            console.log(this.sertifikat);
 
             axios.post('/api/sertifikat/' + this.id, {
                 sertifikat: this.sertifikat,
                 _method: 'put'
             }).then(function (response) {
                 console.log(response);
+                window.location.href = "/pages/profile";
             }).catch(function (error) {
                 alert(error);
             });
@@ -15463,6 +15462,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             } else {
                 this.hideDataKinerja();
             }
+        },
+        onFileChange: function onFileChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length) return;
+            this.createImage(files[0], e.currentTarget.id);
+        },
+        createImage: function createImage(file, id) {
+            var reader = new FileReader();
+            var vm = this;
+            reader.onload = function (e) {
+                vm.sertifikat[id].nama_file = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
     }
 });
@@ -17214,12 +17226,18 @@ var render = function() {
             ? _c("div", { staticClass: "sertificate" }, [
                 _c(
                   "table",
-                  { staticClass: "table", attrs: { align: "left" } },
+                  {
+                    staticClass: "table",
+                    staticStyle: { width: "100%" },
+                    attrs: { align: "left" }
+                  },
                   [
                     _vm._l(_vm.sertifikat, function(dk) {
                       return _c("tbody", [
                         !_vm.isEditSertifikat
                           ? _c("div", [
+                              _vm._m(3, true),
+                              _vm._v(" "),
                               _c("tr", [
                                 _c("td", { attrs: { rowspan: "4" } }, [
                                   _c("img", {
@@ -17309,51 +17327,27 @@ var render = function() {
                                   _vm._v(" "),
                                   dk.nama_file !== _vm.NULL
                                     ? _c("div", [
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass: "btn btn-primary",
-                                            attrs: {
-                                              id: _vm.sertifikat.indexOf(dk),
-                                              type: "button"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                _vm.delSertifikat($event)
-                                              }
-                                            }
+                                        _c("input", {
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "file",
+                                            id: _vm.sertifikat.indexOf(dk)
                                           },
-                                          [
-                                            _vm._v(
-                                              "\n                                        Ganti Foto\n                                    "
-                                            )
-                                          ]
-                                        )
+                                          on: { change: _vm.onFileChange }
+                                        })
                                       ])
                                     : _vm._e(),
                                   _vm._v(" "),
                                   dk.nama_file == _vm.NULL
                                     ? _c("div", [
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass: "btn btn-primary",
-                                            attrs: {
-                                              id: _vm.sertifikat.indexOf(dk),
-                                              type: "button"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                _vm.delSertifikat($event)
-                                              }
-                                            }
+                                        _c("input", {
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "file",
+                                            id: _vm.sertifikat.indexOf(dk)
                                           },
-                                          [
-                                            _vm._v(
-                                              "\n                                        Tambah Foto\n                                    "
-                                            )
-                                          ]
-                                        )
+                                          on: { change: _vm.onFileChange }
+                                        })
                                       ])
                                     : _vm._e()
                                 ]),
@@ -17643,7 +17637,7 @@ var render = function() {
           _vm.dataKinerja.length !== 0
             ? _c("div", { staticClass: "data-kinerja" }, [
                 _c("table", { staticClass: "table" }, [
-                  _vm._m(3),
+                  _vm._m(4),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -17933,7 +17927,7 @@ var render = function() {
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
-    _vm._m(4),
+    _vm._m(5),
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
@@ -17962,7 +17956,7 @@ var render = function() {
                   "table",
                   { staticClass: "table" },
                   [
-                    _vm._m(5),
+                    _vm._m(6),
                     _vm._v(" "),
                     _vm._l(_vm.rekomendasiTraining, function(rp) {
                       return _c("tbody", [
@@ -18048,6 +18042,18 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Keluar")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("colgroup", [
+      _c("col", { attrs: { width: "35%" } }),
+      _vm._v(" "),
+      _c("col", { attrs: { width: "15%" } }),
+      _vm._v(" "),
+      _c("col", { attrs: { width: "50%" } })
     ])
   },
   function() {

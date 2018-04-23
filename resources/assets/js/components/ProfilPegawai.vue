@@ -492,9 +492,14 @@
                     </div>
 
                     <div v-if="sertifikat.length !== 0" class="sertificate">
-                        <table class="table" align="left">
+                        <table class="table" align="left" style="width: 100%">
                             <tbody v-for="dk in sertifikat">
                             <div v-if="!isEditSertifikat">
+                                <colgroup>
+                                    <col width="35%">
+                                    <col width="15%">
+                                    <col width="50%">
+                                </colgroup>
                                 <tr>
                                     <td rowspan="4">
                                             <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
@@ -526,14 +531,10 @@
                                     </div>
                                     <br>
                                     <div v-if="dk.nama_file !== NULL">
-                                        <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-primary" type="button">
-                                            Ganti Foto
-                                        </button>
+                                        <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
                                     </div>
                                     <div v-if="dk.nama_file == NULL">
-                                        <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-primary" type="button">
-                                            Tambah Foto
-                                        </button>
+                                        <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
                                     </div>
                                 </td>
                                 <td rowspan="4">
@@ -782,22 +783,7 @@
                 dataKepegawaian: [],
                 riwayatPendidikan: [],
                 riwayatPekerjaan: [],  
-                sertifikat: [
-                    {
-                        judul : "Personal Care Worker",
-                        lembaga : "Harvard University",
-                        tahun_diterbitkan : 1990,
-                        catatan: "Ex numquam perspiciatis impedit fugit quam id. Harum et eos iure consequatur. Itaque inventore quia aut velit.",
-                        nama_file: "simage/" + "harvard.jpg",
-                    },
-                    {
-                        judul : "Best Pilot",
-                        lembaga : "NASA",
-                        tahun_diterbitkan : 2010,
-                        catatan: "Ex numquam perspiciatis impedit fugit quam id. Harum et eos iure consequatur. Itaque inventore quia aut velit.",
-                        nama_file: "simage/" + "nasa.jpg",
-                    }
-                ],
+                sertifikat: [],
 
                 dataKinerja: [
                     {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
@@ -864,9 +850,11 @@
 
                     this.dataKepegawaian = responsePegawai["kepegawaian"];
                     this.riwayatPendidikan = responsePegawai["pendidikan"];
-
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
                     this.updateDataKepegawaian();
+
+                    this.sertifikat = responsePegawai["sertifikat"];
+                    this.updateSertifikat();
 
                     this.pegawai.nama = responsePegawai["user"]["name"];
                     this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
@@ -875,7 +863,6 @@
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
                     this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
                     this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
-
                     this.updateProfilPegawai();
 
                     //chacing
@@ -886,6 +873,7 @@
                     this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
                     this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
 
+                    console.log(this);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -893,7 +881,6 @@
 
             //caching others
             this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
-            this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
             
             // dataKinerjaShow
             if (this.dataKinerja.length > 6) {
@@ -996,6 +983,12 @@
                 }
             },
 
+            updateSertifikat(){
+                for(var i = 0; i < this.sertifikat.length; i++){
+                    this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
+                }
+            },
+
             disableEditButton() {
                 this.disableEdit = true;
             },
@@ -1023,6 +1016,7 @@
                 this.sertifikatCounter = this.sertifikat.length;
                 this.isEditSertifikat = true;
                 this.disableEditButton();
+                this.sertifikatCounter = this.sertifikat.length;
             },
 
             editDataKinerja() {
@@ -1178,6 +1172,7 @@
                 this.enableEditButton();
                 this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
                 this.isEditSertifikat = false;
+                console.log(this.sertifikat);
 
                 axios.post('/api/sertifikat/' + this.id, {
                     sertifikat: this.sertifikat,
@@ -1185,11 +1180,11 @@
                 })
                 .then(function (response) {
                     console.log(response);
+                    window.location.href = "/pages/profile";
                 })
                 .catch(function (error) {
                     alert(error);
                 });
-
             },
 
             saveDataKinerja() {
@@ -1252,7 +1247,22 @@
                 } else {
                     this.hideDataKinerja();
                 }
-            }
+            },
+
+            onFileChange(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0], e.currentTarget.id);
+            },
+            createImage(file, id) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.sertifikat[id].nama_file = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
         }
     }
 </script>
