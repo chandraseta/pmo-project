@@ -22,19 +22,25 @@ class ProfileController extends APIBaseController
     public function index() {
         if(!$this->authenticate(4)){return redirect('/');}
 
-        $data_kinerja = Kinerja::where('id_pegawai', Auth::user()->id)
+        $id = Auth::user()->id;
+
+        $data_kinerja = Kinerja::where('id_pegawai', $id)
                                 ->orderBy('tahun', 'ASC')
                                 ->orderBy('semester', 'ASC')
                                 ->get();
         $unit_kerja = UnitKerja::all();
         $posisi = Posisi::all();
         $kelompok_kompetensi = KelompokKompetensi::all();
-        $rekomendasi_training = RekomendasiTraining::where('id_pegawai', Auth::user()->id)->get();
+        $rekomendasi_training = RekomendasiTraining::where('id_pegawai', $id)->get();
         $training_list = Training::all();
-        $rekomendasi_posisi = RekomendasiPosisi::where('id_pegawai', Auth::user()->id)->get();
-        $id_pengubah = Pegawai::where('id_user', Auth::user()->id)->first()->id_pengubah;
-        $nama_pengubah = User::where('id', $id_pengubah)->first()->name;
-        $last_edited = Pegawai::where('id_user', Auth::user()->id)->first()->updated_at;
+        $rekomendasi_posisi = RekomendasiPosisi::where('id_pegawai', $id)->get();
+        $id_pengubah = Pegawai::where('id_user', $id)->first()->id_pengubah;
+        if ($id_pengubah === $id) {
+            $nama_pengubah = "Anda";
+        } else {
+            $nama_pengubah = User::where('id', $id_pengubah)->first()->name;
+        }
+        $last_edited = Pegawai::where('id_user', $id)->first()->updated_at;
 
         return view("profile.index", compact('last_edited', 'nama_pengubah','data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi', 'rekomendasi_training', 'training_list', 'rekomendasi_posisi'));
     }
