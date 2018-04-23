@@ -32,8 +32,11 @@ class ProfileController extends APIBaseController
         $rekomendasi_training = RekomendasiTraining::where('id_pegawai', Auth::user()->id)->get();
         $training_list = Training::all();
         $rekomendasi_posisi = RekomendasiPosisi::where('id_pegawai', Auth::user()->id)->get();
+        $id_pengubah = Pegawai::where('id_user', Auth::user()->id)->first()->id_pengubah;
+        $nama_pengubah = User::where('id', $id_pengubah)->first()->name;
+        $last_edited = Pegawai::where('id_user', Auth::user()->id)->first()->updated_at;
 
-        return view("profile.index", compact('data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi', 'rekomendasi_training', 'training_list', 'rekomendasi_posisi'));
+        return view("profile.index", compact('last_edited', 'nama_pengubah','data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi', 'rekomendasi_training', 'training_list', 'rekomendasi_posisi'));
     }
 
     private function authenticate($role){
