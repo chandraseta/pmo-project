@@ -693,7 +693,9 @@
 
         <div class="card" id="data-kompetensi">
             <div class="card-header">
-                Hasil Kompetensi
+                Hasil Kompetensi<button class="btn btn-primary float-sm-right" v-on:click="editDataKompetensi" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                    </button>
             </div>
 
             <div class="card-body">
@@ -709,7 +711,9 @@
 
         <div class="card" id="rekomendasi">
             <div class="card-header">
-                Rekomendasi
+                Rekomendasi<button class="btn btn-primary float-sm-right" v-on:click="editRekomendasi" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                    </button>
             </div>
 
             <div class="card-body">
@@ -717,33 +721,34 @@
 
                     <h5>Rekomendasi Training</h5>
 
-                    <div v-if="rekomendasiTraining.length === 0" class="no-rekomendasi-trainiing">
+                    <hr>
+
+                    <div v-if="rekomendasiTraining.length === 0" class="no-rekomendasi-training">
                         <hr>
-                        Belum dimtambahkan.
+                        Belum ditambahkan.
                         <br>
                     </div>
 
-                    <div v-if="rekomendasiTraining.length !== 0" class="rekomendasi-trainiing">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Nama Training</th>
-                                <th scope="col">Penyelenggara</th>
-                                <th scope="col">Bidang</th>
-                            </tr>
-                            </thead>
-                            <tbody v-for="rp in rekomendasiTraining">
-                            <tr>
-                                <td v-text="rp.namaTraining" ></td>
-                                <td v-text="rp.penyelenggara" ></td>
-                                <td v-text="rp.bidang" ></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div v-if="rekomendasiTraining.length !== 0" v-for="rt in rekomendasiTraining" class="rekomendasi-training">
+                        <ul v-if="!isEditRekomendasi">
+                            <li v-text="trainingList.find(x => x.id_training == rt.id_training).nama_training"></li>
+                        </ul>
+
+                        <div v-if="isEditRekomendasi" class="form-group">
+                            <select class="form-control" v-model="rt.id_training">
+                                <option v-for="tl in trainingList" v-bind:value="tl.id_training">
+                                    {{ tl.nama_training }}
+                                </option>
+                            </select>
+                            <small class="form-text text-muted">*Wajib diisi</small>
+                        </div>
 
                     </div>
+                    <button v-if="isEditRekomendasi" class="btn btn-primary float-sm-left" v-on:click="addRekomendasiTraining">
+                        Tambah <i class="fas fa-plus"></i>
+                    </button>
 
-                    <br><br>
+                    <br><br><br>
 
 
                     <h5>Rekomendasi Lain-lain</h5>
@@ -762,7 +767,7 @@
 
 <script>
     export default {
-        props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp'],
+        props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
 
         data() {
             return {
@@ -786,7 +791,7 @@
                         nama_file: "simage/" + "nasa.jpg",
                     }
                 ],
-                rekomendasiTraining : [],
+                
                 ////////   
 
                 isShowAllDataKinerja: false,
@@ -796,12 +801,15 @@
                 isEditRiwayat: false,
                 isEditSertifikat: false,
                 isEditDataKinerja: false,
+                isEditRekomendasi: false,
                 cachedPegawai: null,
                 cachedDataKepegawaian: null,
                 cachedRiwayatPendidikan: null,
                 cachedRiwayatPekerjaan: null,
                 cachedSertifikat: null,
                 cachedDataKinerja: null,
+                cachedRekomendasiTraining: null,
+                cachedRekomendasiPosisi:null,
                 pegawai: {
                     imageProfileUrl: null,
                     nama: null,
@@ -827,7 +835,9 @@
                 riwayatPendidikan: [],
                 riwayatPekerjaan: [],
                 dataKinerja: [],
-                dataKinerjaShow: []
+                dataKinerjaShow: [],
+                rekomendasiTraining : [],
+                rekomendasiPosisi : []
             }
                
         },  
@@ -878,13 +888,20 @@
             this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
             this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
             
-            // dataKinerjaShow
+            // init dataKinerjaShow
             if (this.dataKinerja.length > 6) {
                 this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length-6);
             } else {
                 this.dataKinerjaShow = this.dataKinerja;
             }
-            
+
+            //init rekomendasiTraining
+            this.rekomendasiTraining = this.rekomendasiTrainingTemp;
+            this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+
+            //init rekomendasiPosisi
+            this.rekomendasiPosisi = this.rekomendasiPosisiTemp;
+            this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
         },
 
         methods: {
@@ -1012,6 +1029,15 @@
                 this.disableEditButton();
             },
 
+            editDataKompetensi() {
+
+            },
+
+            editRekomendasi() {
+                this.isEditRekomendasi = true;
+                this.disableEditButton();
+            },
+
             addDataKepegawaian() {
                 var newData = {
                     id_data_kepegawaian : null,
@@ -1069,6 +1095,25 @@
                 this.dataKinerja.push(newData);
             },
 
+            addRekomendasiTraining() {
+                var newData = {
+                    id_rekomendasi_training : null,
+                    id_pegawai : null,
+                    id_training : null
+                };
+                this.rekomendasiTraining.push(newData);
+            },
+
+            addRekomendasiPosisi() {
+                var newData = {
+                    id_rekomendasi_training : null,
+                    id_pegawai : null,
+                    id_unit_kerja : null,
+                    id_posisi : null
+                };
+                this.rekomendasiPosisi.push(newData);
+            },
+
             delDataKepegawaian(event) {
                 var targetIndex = event.currentTarget.id;
                 this.dataKepegawaian.splice(targetIndex, 1);
@@ -1092,6 +1137,16 @@
             delDataKinerja(event) {
                 var targetIndex = event.currentTarget.id;
                 this.dataKinerja.splice(targetIndex, 1);
+            },
+
+            delRekomendasiTraining(event) {
+                var targetIndex = event.currentTarget.id;
+                this.rekomendasiTraining.splice(targetIndex, 1);
+            },
+
+            delRekomendasiPosisi(event) {
+                var targetIndex = event.currentTarget.id;
+                this.rekomendasiPosisi.splice(targetIndex, 1);
             },
 
             saveProfilPegawai() {
@@ -1186,6 +1241,13 @@
                 }
             },
 
+            saveRekomendasi() {
+                this.enableEditButton();
+                this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+                this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+                this.isEditRekomendasi = false;
+            },
+
             cancelProfilPegawai() {
                 this.enableEditButton();
                 this.pegawai = JSON.parse(JSON.stringify(this.cachedPegawai));
@@ -1221,6 +1283,13 @@
                 } else {
                     this.hideDataKinerja();
                 }
+            },
+
+            cancelRekomendasi() {
+                this.enableEditButton();
+                this.rekomendasiTraining = JSON.parse(JSON.stringify(this.cachedRekomendasiTraining));
+                this.rekomendasiPosisi = JSON.parse(JSON.stringify(this.cachedRekomendasiPosisi));
+                this.isEditRekomendasi = false;
             }
         }
     }
