@@ -70,7 +70,9 @@ class DataPegawaiController extends APIBaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        
     }
 
     /**

@@ -20,7 +20,7 @@ use App\Training;
 class ProfileController extends APIBaseController
 {
     public function index() {
-        if(!$this->authenticate(4)){return view('welcome');}
+        if(!$this->authenticate(4)){return redirect('/');}
 
         $data_kinerja = Kinerja::where('id_pegawai', Auth::user()->id)
                                 ->orderBy('tahun', 'ASC')

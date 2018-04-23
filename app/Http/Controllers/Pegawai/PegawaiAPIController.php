@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Pegawai;
 
-use App\Admin;
-use App\DataKepegawaian;
-use App\DenormalizedPegawai;
 use App\Http\Controllers\APIBaseController as APIBaseController;
+use App\User;
 use App\Pegawai;
 use App\PMO;
+use App\Admin;
+use App\DataKepegawaian;
 use App\RiwayatPekerjaan;
 use App\RiwayatPendidikan;
 use App\Sertifikat;
-use App\User;
+use App\DenormalizedPegawai;
 use Carbon\Carbon;
 use Excel;
 use Illuminate\Http\Request;
@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 use Validator;
 
 
@@ -118,6 +119,7 @@ class PegawaiAPIController extends APIBaseController
         $pendidikan = RiwayatPendidikan::where("id_pegawai", $id);
         $pekerjaan = RiwayatPekerjaan::where("id_pegawai", $id);
         $kepegawaian = DataKepegawaian::where("id_pegawai", $id);
+        $sertifikat = Sertifikat::where("id_pegawai", $id);
 
         $data = [
             'user' => $user->toArray(),
@@ -125,6 +127,7 @@ class PegawaiAPIController extends APIBaseController
             'pendidikan' => $pendidikan->get()->toArray(),
             'pekerjaan' => $pekerjaan->get()->toArray(),
             'kepegawaian' => $kepegawaian->get()->toArray(),
+            'sertifikat' => $sertifikat->get()->toArray(),
         ];
 
         return $this->sendResponse($data, 'Profile retrieved successfully.');
@@ -141,124 +144,85 @@ class PegawaiAPIController extends APIBaseController
     public function update(Request $request, $id)
     {
 
-        if (!$this->authenticate(4)) {
-            return $this->sendError('You are not authenticated.');
-        }
-
+        // if (!$this->authenticate(4)) {return $this->sendError('You are not authenticated.');}
 
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'email' => 'required',
-            'password' => 'required',
-            'nama' => 'required',
-            'nip' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'id_pengubah' => 'required',
-        ]);
+        // return $this->sendResponse($input, 'Profile updated successfully.');
 
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+        // $validator = Validator::make($input['pegawai'], [
+        //     'nama' => 'required',
+        //     'tempat_lahir' => 'required',
+        //     'tanggal_lahir' => 'required',
+        //     'email' => 'required',
+        //     'nopeg' => 'required',
+        //     // 'password' => 'required',
+        //     'id_pengubah' => 'required',
+        // ]);
 
-        $pegawai = Pegawai::where('id_user', $id)->first();
+        // if ($validator->fails()) {
+        //     return $this->sendError('Validation Error.', $validator->errors());
+        // }
+
+        $pegawai = Pegawai::find($id);
 
         if (is_null($pegawai)) {
             return $this->sendError('Profile not found.');
         }
 
-        $find = User::where('email', $input['email']);
+        $find = User::where('email', $input['pegawai']['email']);
         $user = User::find($id);
-
 
         if ($find->count() != 0 && $find->first()->email != $user->email) {
             return $this->sendError('Email Already Exist');
         }
 
-        $user->name = $input['nama'];
-        $user->email = $input['email'];
-        $user->password = Hash::make($input['password']);
-        $pegawai->nama = $input['nama'];
-        $pegawai->nip = $input['nip'];
-        $pegawai->tempat_lahir = $input['tempat_lahir'];
-        $pegawai->tanggal_lahir = $input['tanggal_lahir'];
-        $pegawai->id_pengubah = $input['id_pengubah'];
-        $pegawai->ekstensi_foto = $input['user_photo']->getClientOriginalExtension();
 
-        $photoTimeAsName = $input['nip'].'.'.$input['user_photo']->getClientOriginalExtension();    
-        $input['user_photo']->move(public_path('profile'), $photoTimeAsName);
+        $user->name = $input['pegawai']['nama'];
+        $user->email = $input['pegawai']['email'];
+        // $user->password = Hash::make($input['password']);
+        $pegawai->nama = $input['pegawai']['nama'];
+        $pegawai->nip = $input['pegawai']['nopeg'];
+        $pegawai->tempat_lahir = $input['pegawai']['tempatLahir'];
+        $pegawai->tanggal_lahir = $input['pegawai']['tanggalLahir'];
+        // $pegawai->no_telp = $input['pegawai']['no_telp'];
+        $pegawai->no_telp = NULL;
+        $pegawai->id_kelompok_kompetensi = $input['pegawai']['kompetensi']['id'];
+        $pegawai->id_pengubah = Auth::user()->id;
 
+        $imageData = $input['pegawai']['imageProfileUrl'];
 
-
-        $pendidikan = RiwayatPendidikan::where('id_pegawai', $id);
-
-        if ($pendidikan->count() > 0) {
-            $pendidikan->delete();
+        if(explode("/", $imageData)[0] === "data:image"){
+            $extension = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+            $fileName =  $pegawai->nip . '.' . $extension;
+            $image = Image::make($imageData);   
+            $image->save(public_path('profile/').$fileName);
+        }else{
+            $extension = explode(".", $imageData)[1];
         }
 
-        for ($i = 1; $i <= $input['pendidikan_counter']; $i++) {
-            $postRiwayatPendidikan = RiwayatPendidikan::create([
-                'id_pegawai' => $id,
-                'nama_institusi' => $input['pendidikan_nama_institusi_' . $i],
-                'strata' => $input['pendidikan_strata_' . $i],
-                'jurusan' => $input['pendidikan_jurusan_' . $i],
-                'tahun_masuk' => $input['pendidikan_tahun_masuk_' . $i],
-                'tahun_keluar' => $input['pendidikan_tahun_keluar_' . $i],
-            ]);
-        }
+        $pegawai->ekstensi_foto = $extension;
 
-        $pekerjaan = RiwayatPekerjaan::where('id_pegawai', $id);
-
-        if ($pekerjaan->count() > 0) {
-            $pekerjaan->delete();
-        }
-
-        for ($i = 1; $i <= $input['pekerjaan_counter']; $i++) {
-            $postRiwayatPekerjaan = RiwayatPekerjaan::create([
-                'id_pegawai' => $id,
-                'nama_institusi' => $input['pekerjaan_nama_institusi_' . $i],
-                'posisi' => $input['pekerjaan_posisi_' . $i],
-                'tahun_masuk' => $input['pekerjaan_tahun_masuk_' . $i],
-                'tahun_keluar' => $input['pekerjaan_tahun_keluar_' . $i],
-            ]);
-        }
 
         $kepegawaian = DataKepegawaian::where('id_pegawai', $id);
 
-        if ($kepegawaian->count() > 0) {
-            $kepegawaian->delete();
-        }
-
-        for ($i = 1; $i <= $input['kepegawaian_counter']; $i++) {
+        if($kepegawaian->count() === 0){
             $postDataKepegawaian = DataKepegawaian::create([
                 'id_pegawai' => $id,
-                'kompetensi' => $input['kepegawaian_kompetensi_' . $i],
-                'unit_kerja' => $input['kepegawaian_unit_kerja_' . $i],
-                'posisi' => $input['kepegawaian_posisi_' . $i],
-                'tahun_masuk' => $input['kepegawaian_tahun_masuk_' . $i],
-                'tahun_keluar' => $input['kepegawaian_tahun_keluar_' . $i],
+                'id_unit_kerja' => $input['data_kepegawaian'][0]['id_unit_kerja'],
+                'id_posisi' => $input['data_kepegawaian'][0]['id_posisi'],
+                'tahun_masuk' => $input['data_kepegawaian'][0]['tahun_masuk'],
+                'tahun_keluar' => $input['data_kepegawaian'][0]['tahun_keluar'],
             ]);
-        }
+        }else{
+            $count = count($input['data_kepegawaian']);
+            $kepegawaian_new = DataKepegawaian::find($input['data_kepegawaian'][$count-1]['id_data_kepegawaian']);
 
-        $sertifikat = Sertifikat::where('id_pegawai', $id);
-
-        if ($sertifikat->count() > 0) {
-            $sertifikat->delete();
-        }
-
-        for ($i = 1; $i <= $input['sertifikat_counter']; $i++) {
-            $photoTimeAsName = time() . '.' . $input['sertifikat_user_photo_' . $i]->getClientOriginalExtension();
-            $input['sertifikat_user_photo_' . $i]->move(public_path('sertifikat'), $photoTimeAsName);
-
-            $postSertifikat = Sertifikat::create([
-                'id_pegawai' => $id,
-                'nama_file' => $photoTimeAsName,
-                'judul' => $input['sertifikat_judul_' . $i],
-                'lembaga' => $input['sertifikat_lembaga_' . $i],
-                'tahun_diterbitkan' => $input['sertifikat_tahun_diterbitkan_' . $i],
-                'catatan' => $input['sertifikat_catatan_' . $i],
-            ]);
+            $kepegawaian_new->id_unit_kerja = $input['data_kepegawaian'][$count-1]['id_unit_kerja'];
+            $kepegawaian_new->id_posisi = $input['data_kepegawaian'][$count-1]['id_posisi'];
+            $kepegawaian_new->tahun_masuk = $input['data_kepegawaian'][$count-1]['tahun_masuk'];
+            $kepegawaian_new->tahun_keluar = $input['data_kepegawaian'][$count-1]['tahun_keluar'];
+            $kepegawaian_new->save();
         }
 
         $user->save();
@@ -267,10 +231,7 @@ class PegawaiAPIController extends APIBaseController
         $data = array_merge(
             $user->toArray(),
             $pegawai->toArray(),
-            $pendidikan->get()->toArray(),
-            $pekerjaan->get()->toArray(),
-            $kepegawaian->get()->toArray(),
-            $sertifikat->get()->toArray()
+            $kepegawaian->get()->toArray()
         );
 
         return $this->sendResponse($data, 'Profile updated successfully.');
