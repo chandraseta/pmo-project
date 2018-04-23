@@ -1,7 +1,15 @@
 [
   {
+    "label": "",
+    "field": "editButton"
+  },
+  {
     "label": "Nama Training",
     "field": "nama_training",
     "fillable": true
+  },
+  {
+    "label": "",
+    "field": "deleteButton"
   }
 ]

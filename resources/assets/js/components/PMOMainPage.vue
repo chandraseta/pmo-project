@@ -203,6 +203,9 @@
                 } else if (this.currentTab === 'dataKinerja') {
                     url = '/api/kinerja/' + payload.id_kinerja;
                     getData = this.getKinerja;
+                } else if (this.currentTab === 'dataTraining') {
+                    url = '/api/training/' + payload.id_training;
+                    getData = this.getTraining;
                 }
 
                 let data = payload;
