@@ -12,6 +12,7 @@
     :kelompok-kompetensi="{{ $kelompok_kompetensi }}"
     :rekomendasi-training-temp="{{ $rekomendasi_training }}"
     :training-list="{{ $training_list }}"
+    :rekomendasi-posisi-temp="{{ $rekomendasi_posisi }}"
 ></profil-pegawai>
 
     <br>
