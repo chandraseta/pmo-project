@@ -31,12 +31,13 @@ class SertifikatController extends APIBaseController
         for ($i = 0; $i < count($input['sertifikat']); $i++) {
         	$imageData = $input['sertifikat'][$i]['nama_file'];
 
-            $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-
-            // ini_set('memory_limit','256M');
-            
-            $image = Image::make($input['sertifikat'][$i]['nama_file']);	
-            $image->save(public_path('sertifikat/').$fileName);
+            if(explode("/", $imageData)[0] === "data:image"){
+	            $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+	            $image = Image::make($imageData);	
+	            $image->save(public_path('sertifikat/').$fileName);
+			}else{
+				$fileName = explode("/", $imageData)[1];
+			}
 
             $postSertifikat = Sertifikat::create([
                 'id_pegawai' => $id,

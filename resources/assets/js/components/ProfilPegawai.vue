@@ -484,9 +484,14 @@
                     </div>
 
                     <div v-if="sertifikat.length !== 0" class="sertificate">
-                        <table class="table" align="left">
+                        <table class="table" align="left" style="width: 100%">
                             <tbody v-for="dk in sertifikat">
                             <div v-if="!isEditSertifikat">
+                                <colgroup>
+                                    <col width="35%">
+                                    <col width="15%">
+                                    <col width="50%">
+                                </colgroup>
                                 <tr>
                                     <td rowspan="4">
                                             <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
@@ -518,9 +523,6 @@
                                     </div>
                                     <br>
                                     <div v-if="dk.nama_file !== NULL">
-                                        <!-- <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-primary" type="button">
-                                            Ganti Foto
-                                        </button> -->
                                         <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
                                     </div>
                                     <div v-if="dk.nama_file == NULL">
@@ -1111,10 +1113,6 @@
             },
 
             saveSertifikat() {
-                // this.enableEditButton();
-                // this.sertifikat = JSON.parse(JSON.stringify(this.cachedSertifikat));
-                // this.isEditSertifikat = false;
-
                 console.log(this.sertifikat);
 
                 axios.post('/api/sertifikat/' + this.id, {
@@ -1123,6 +1121,7 @@
                 })
                 .then(function (response) {
                     console.log(response);
+                    window.location.href = "/pages/profile";
                 })
                 .catch(function (error) {
                     alert(error);
@@ -1177,13 +1176,6 @@
                 this.enableEditButton();
                 this.dataKinerja = JSON.parse(JSON.stringify(this.cachedDataKinerja));
                 this.isEditDataKinerja = false;
-            },
-
-            save(formData) {
-                const url = '/';
-                return axios.post(url, formData)
-                    // get data
-                    .then(x => x.data);
             },
 
             onFileChange(e) {
