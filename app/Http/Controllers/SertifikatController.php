@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\APIBaseController as APIBaseController;
 use App\Sertifikat;
+use Carbon\Carbon;
+use Intervention\Image\ImageManagerStatic as Image;
+// use Intervention\Image\Facades\Image;
 
 class SertifikatController extends APIBaseController
 {
@@ -26,12 +29,18 @@ class SertifikatController extends APIBaseController
         }
 
         for ($i = 0; $i < count($input['sertifikat']); $i++) {
-            // $photoTimeAsName = time() . '.' . $input['sertifikat'][$i]->getClientOriginalExtension();
-            // $input['sertifikat_user_photo_' . $i]->move(public_path('sertifikat'), $photoTimeAsName);
+        	$imageData = $input['sertifikat'][$i]['nama_file'];
+
+            $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+
+            // ini_set('memory_limit','256M');
+            
+            $image = Image::make($input['sertifikat'][$i]['nama_file']);	
+            $image->save(public_path('sertifikat/').$fileName);
 
             $postSertifikat = Sertifikat::create([
                 'id_pegawai' => $id,
-                'nama_file' => $input['sertifikat'][$i]['nama_file'],
+                'nama_file' => $fileName,
                 'judul' => $input['sertifikat'][$i]['judul'],
                 'lembaga' => $input['sertifikat'][$i]['lembaga'],
                 'tahun_diterbitkan' => $input['sertifikat'][$i]['tahun_diterbitkan'],

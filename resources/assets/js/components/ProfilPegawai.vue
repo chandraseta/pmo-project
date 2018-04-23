@@ -518,14 +518,13 @@
                                     </div>
                                     <br>
                                     <div v-if="dk.nama_file !== NULL">
-                                        <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-primary" type="button">
+                                        <!-- <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-primary" type="button">
                                             Ganti Foto
-                                        </button>
+                                        </button> -->
+                                        <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
                                     </div>
                                     <div v-if="dk.nama_file == NULL">
-                                        <button v-bind:id="sertifikat.indexOf(dk)" v-on:click="delSertifikat($event)" class="btn btn-primary" type="button">
-                                            Tambah Foto
-                                        </button>
+                                        <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
                                     </div>
                                 </td>
                                 <td rowspan="4">
@@ -814,8 +813,10 @@
                     this.dataKepegawaian = responsePegawai["kepegawaian"];
                     this.riwayatPendidikan = responsePegawai["pendidikan"];
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
-                    this.sertifikat = responsePegawai["sertifikat"];
                     this.updateDataKepegawaian();
+
+                    this.sertifikat = responsePegawai["sertifikat"];
+                    this.updateSertifikat();
 
                     this.pegawai.nama = responsePegawai["user"]["name"];
                     this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
@@ -824,7 +825,6 @@
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
                     this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
                     this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
-
                     this.updateProfilPegawai();
 
                     //chacing
@@ -832,6 +832,7 @@
                     this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
                     this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
                     this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
+                    this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
 
                     console.log(this);
                 })
@@ -841,7 +842,6 @@
 
             //caching others
             this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
-            this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
             
         },
 
@@ -918,6 +918,12 @@
                     lastDataPegawai["id_unit_kerja"] = this.pegawai.unitKerja.id;
                     lastDataPegawai["id_posisi"] = this.pegawai.posisi.id;
                     lastDataPegawai["tahun_masuk"] = this.pegawai.tahunMasuk;
+                }
+            },
+
+            updateSertifikat(){
+                for(var i = 0; i < this.sertifikat.length; i++){
+                    this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
                 }
             },
 
@@ -1106,8 +1112,10 @@
 
             saveSertifikat() {
                 // this.enableEditButton();
-                this.sertifikat = JSON.parse(JSON.stringify(this.cachedSertifikat));
+                // this.sertifikat = JSON.parse(JSON.stringify(this.cachedSertifikat));
                 // this.isEditSertifikat = false;
+
+                console.log(this.sertifikat);
 
                 axios.post('/api/sertifikat/' + this.id, {
                     sertifikat: this.sertifikat,
@@ -1169,7 +1177,29 @@
                 this.enableEditButton();
                 this.dataKinerja = JSON.parse(JSON.stringify(this.cachedDataKinerja));
                 this.isEditDataKinerja = false;
-            }
+            },
+
+            save(formData) {
+                const url = '/';
+                return axios.post(url, formData)
+                    // get data
+                    .then(x => x.data);
+            },
+
+            onFileChange(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0], e.currentTarget.id);
+            },
+            createImage(file, id) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.sertifikat[id].nama_file = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
         }
     }
 </script>
