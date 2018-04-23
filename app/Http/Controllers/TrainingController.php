@@ -7,10 +7,10 @@ use App\Pegawai;
 use App\PMO;
 use App\Training;
 use App\User;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class TrainingController extends APIBaseController
 {

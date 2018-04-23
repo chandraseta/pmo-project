@@ -1,6 +1,7 @@
 [
   {
     "label": "Nama Training",
-    "field": "nama_training"
+    "field": "nama_training",
+    "fillable": true
   }
 ]
