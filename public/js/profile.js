@@ -15367,17 +15367,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
             console.log(this.dataKepegawaian);
 
-            // axios.post('/api/kepegawaian/' + this.id, {
-            //     kepegawaian: this.dataKepegawaian,
-            //     _method: 'put'
-            // })
-            // .then(function (response) {
-            //     console.log(response);
-            //     window.location.href = "/pages/profile";
-            // })
-            // .catch(function (error) {
-            //     alert(error);
-            // });
+            axios.post('/api/kepegawaian/' + this.id, {
+                kepegawaian: this.dataKepegawaian,
+                _method: 'put'
+            }).then(function (response) {
+                console.log(response);
+                window.location.href = "/pages/profile";
+            }).catch(function (error) {
+                alert(error);
+            });
         },
         saveRiwayatPegawai: function saveRiwayatPegawai() {
             //sort

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\APIBaseController as APIBaseController;
 use App\RiwayatPekerjaan;
 use App\RiwayatPendidikan;
 
@@ -41,6 +42,6 @@ class RiwayatController extends APIBaseController
             
         }
 
-        return $this->sendResponse($input, 'Riwayat Pendidikan & Pekerjaan created successfully.');
+        return $this->sendResponse($input, 'Riwayat Pendidikan & Pekerjaan updated successfully.');
     }
 }
