@@ -21,6 +21,7 @@
                         <div class="col-md-3 p-2">
                             <button type="button"
                                     class="btn btn-primary float-md-right m-1"
+                                    v-if="!disableDownloadDataButton"
                                     @click="downloadData">
                                 Download Data
                             </button>
@@ -127,6 +128,7 @@
         dataPegawaiColumns: require('./configs/data-pegawai-columns.json'),
         dataKompetensiColumns: require('./configs/data-kompetensi-columns.json'),
         dataKinerjaColumns: require('./configs/data-kinerja-columns.json'),
+        dataTrainingColumns: require('./configs/data-training-columns.json'),
         name: 'pmo-main-page',
         components: {
             'pmo-navbar': require('./PMONavbar.vue'),
@@ -141,8 +143,10 @@
                 dataPegawai: [],
                 dataKinerja: [],
                 dataKompetensi: [],
+                dataTraining: [],
                 newData: {},
                 disableTambahDataButton: true,
+                disableDownloadDataButton: true,
                 disableUploadDataButton: true,
                 isFormInvalid: {},
                 statusAlert: {
@@ -185,7 +189,8 @@
                 this.columns = this.$options[payload.name + 'Columns'];
 
                 this.disableTambahDataButton = payload.name === "dataPegawai";
-                this.disableUploadDataButton = payload.name === "dataPegawai";
+                this.disableUploadDataButton = payload.name === "dataPegawai" || payload.name === "dataTraining";
+                this.disableDownloadDataButton = payload.name === "dataTraining";
             },
             saveData: function (payload) {
                 console.log(payload);
@@ -280,6 +285,16 @@
                         this.errors.push(e);
                     })
             },
+            getTraining: function () {
+                axios.get('/api/training')
+                    .then(response => {
+                        this.dataTraining = response.data.data;
+                        this.rows = this[this.currentTab];
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                    })
+            },
             downloadTemplate: function() {
                 let url = '/api/templates/template.xlsx';
                 switch (this.currentTab) {
@@ -335,6 +350,7 @@
             this.getPegawai();
             this.getKompetensi();
             this.getKinerja();
+            this.getTraining();
         }
     }
 </script>
