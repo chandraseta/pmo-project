@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\APIBaseController as APIBaseController;
 use App\Sertifikat;
+use App\Pegawai;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
-// use Intervention\Image\Facades\Image;
 
 class SertifikatController extends APIBaseController
 {
@@ -22,6 +22,7 @@ class SertifikatController extends APIBaseController
 
     	$input = $request->all();
 
+        $pegawai = Pegawai::find($id);
         $sertifikat = Sertifikat::where('id_pegawai', $id);
 
         if ($sertifikat->count() > 0) {
@@ -32,7 +33,7 @@ class SertifikatController extends APIBaseController
         	$imageData = $input['sertifikat'][$i]['nama_file'];
 
             if(explode("/", $imageData)[0] === "data:image"){
-	            $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+	            $fileName =  $pegawai->nip . '_' . $i . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
 	            $image = Image::make($imageData);	
 	            $image->save(public_path('sertifikat/').$fileName);
 			}else{
