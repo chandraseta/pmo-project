@@ -1153,7 +1153,7 @@
 
             addRiwayatPekerjaan() {
                 var newData = {
-                    id_riwayat_pendidikan : null,
+                    id_riwayat_pekerjaan : null,
                     id_pegawai : null,
                     nama_institusi : null,
                     posisi : null,

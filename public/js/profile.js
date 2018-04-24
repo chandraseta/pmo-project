@@ -14033,121 +14033,6 @@ new Vue({
     el: '#profile-page',
     components: {
         'profil-pegawai': __webpack_require__(247)
-    },
-    data: {
-        isEditKepegawaian: false,
-        isEditProfile: false,
-        isEditRiwayat: false,
-        cachedUser: null,
-        cachedDataKepegawaian: null,
-        cachedRiwayatPendidikan: null,
-        cachedRiwayatPekerjaan: null,
-        user: {
-            imageProfileUrl: "https://i.pinimg.com/236x/34/ba/c1/34bac13dd65ab3b81267f727e5633549--patrick-dempsey-handsome-man.jpg",
-            nama: "Joko Susilo",
-            tempatLahir: "Medan",
-            tanggalLahir: "17 Agustus 1981",
-            email: "joko.susilo@gmail.com",
-            nopeg: "12340009876",
-            unitKerja: "Fakultas FMIPA",
-            posisi: "Kepala Bidang Kemahasiswaan",
-            kompetensi: "Administrasi",
-            tahunMasuk: "2010",
-            tahunKeluar: "2020"
-        },
-        dataKepegawaian: [{
-            unitKerja: "Fakultas FMIPA",
-            posisi: "Tenaga Pendidik",
-            kompetensi: "Teknikal",
-            tahunMasuk: "2013",
-            tahunKeluar: "2017"
-        }],
-        riwayatPendidikan: [{
-            tingkatPendidikan: "S1",
-            namaInstitusi: "ITB",
-            jurusan: "Teknik Sipil",
-            tahunMasuk: "2000",
-            tahunKeluar: "2005"
-        }, {
-            tingkatPendidikan: "S2",
-            namaInstitusi: "ITB",
-            jurusan: "Teknik Sipil",
-            tahunMasuk: "2006",
-            tahunKeluar: "2008"
-        }],
-        riwayatPekerjaan: [{
-            namaInstitusi: "PT TIMBUL TENGGELAM",
-            posisi: "Engineer",
-            tahunMasuk: "2008",
-            tahunKeluar: "2013"
-        }, {
-            namaInstitusi: "FMIPA ITB",
-            posisi: "Tenaga Pendidik",
-            tahunMasuk: "2013",
-            tahunKeluar: "2017"
-        }],
-        rekomendasiTraining: [{
-            namaTraining: "Emotional Training",
-            penyelenggara: "PMO",
-            bidang: "Psikologi"
-        }]
-
-    },
-    mounted: function mounted() {
-
-        this.cachedUser = Object.assign({}, this.user);
-        this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
-        this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
-        this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
-    },
-
-    methods: {
-        editProfilPegawai: function editProfilPegawai() {
-            this.isEditProfile = true;
-        },
-        editDataKepegawaian: function editDataKepegawaian() {
-            this.isEditKepegawaian = true;
-        },
-        editRiwayatPegawai: function editRiwayatPegawai() {
-            this.isEditRiwayat = true;
-        },
-        saveProfilPegawai: function saveProfilPegawai() {
-            this.cachedUser = Object.assign({}, this.user);
-            this.isEditProfile = false;
-
-            axios.patch('/api/pegawai/4', {
-                name: this.user.nama,
-                email: this.user.email,
-                password: '1234',
-                nip: this.user.nopeg
-            }).then(function (response) {
-                alert(response);
-            }).catch(function (error) {
-                alert(error);
-            });
-        },
-        saveDataKepegawaian: function saveDataKepegawaian() {
-            this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
-            this.isEditKepegawaian = false;
-        },
-        saveRiwayatPegawai: function saveRiwayatPegawai() {
-            this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
-            this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
-            this.isEditRiwayat = false;
-        },
-        cancelProfilPegawai: function cancelProfilPegawai() {
-            this.user = Object.assign({}, this.cachedUser);
-            this.isEditProfile = false;
-        },
-        cancelDataKepegawaian: function cancelDataKepegawaian() {
-            this.dataKepegawaian = Object.assign({}, this.cachedDataKepegawaian);
-            this.isEditKepegawaian = false;
-        },
-        cancelRiwayatPegawai: function cancelRiwayatPegawai() {
-            this.riwayatPendidikan = Object.assign({}, this.cachedRiwayatPendidikan);
-            this.riwayatPekerjaan = Object.assign({}, this.cachedRiwayatPekerjaan);
-            this.isEditRiwayat = false;
-        }
     }
 
 });
@@ -14241,7 +14126,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -15013,15 +14898,103 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp'],
+    props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
 
     data: function data() {
         var _ref;
 
         return _ref = {
-            //dummy
+
             pegawai: {
                 imageProfileUrl: "",
                 nama: "",
@@ -15039,10 +15012,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             riwayatPendidikan: [],
             riwayatPekerjaan: [],
             sertifikat: [],
-
-            dataKinerja: [{ tahun: 2010, semester: 1, nilai: 2.50, catatan: "ini catatan" }],
-            rekomendasiTraining: [],
-
             sertifikatCounter: 0,
 
             isShowAllDataKinerja: false,
@@ -15052,12 +15021,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             isEditRiwayat: false,
             isEditSertifikat: false,
             isEditDataKinerja: false,
+            isEditRekomendasi: false,
             cachedPegawai: null,
             cachedDataKepegawaian: null,
             cachedRiwayatPendidikan: null,
             cachedRiwayatPekerjaan: null,
             cachedSertifikat: null,
-            cachedDataKinerja: null
+            cachedDataKinerja: null,
+            cachedRekomendasiTraining: null,
+            cachedRekomendasiPosisi: null
         }, _defineProperty(_ref, 'pegawai', {
             imageProfileUrl: null,
             nama: null,
@@ -15078,7 +15050,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 text: null
             },
             tahunMasuk: null
-        }), _defineProperty(_ref, 'dataKepegawaian', []), _defineProperty(_ref, 'riwayatPendidikan', []), _defineProperty(_ref, 'riwayatPekerjaan', []), _defineProperty(_ref, 'dataKinerja', []), _defineProperty(_ref, 'dataKinerjaShow', []), _ref;
+        }), _defineProperty(_ref, 'dataKepegawaian', []), _defineProperty(_ref, 'riwayatPendidikan', []), _defineProperty(_ref, 'riwayatPekerjaan', []), _defineProperty(_ref, 'dataKinerja', []), _defineProperty(_ref, 'dataKinerjaShow', []), _defineProperty(_ref, 'rekomendasiTraining', []), _defineProperty(_ref, 'rekomendasiPosisi', []), _ref;
     },
     mounted: function mounted() {},
     created: function created() {
@@ -15126,12 +15098,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //caching others
         this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
 
-        // dataKinerjaShow
+        // init dataKinerjaShow
         if (this.dataKinerja.length > 6) {
             this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length - 6);
         } else {
             this.dataKinerjaShow = this.dataKinerja;
         }
+
+        //init rekomendasiTraining
+        this.rekomendasiTraining = this.rekomendasiTrainingTemp;
+        this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+
+        //init rekomendasiPosisi
+        this.rekomendasiPosisi = this.rekomendasiPosisiTemp;
+        this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
     },
 
 
@@ -15263,6 +15243,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.isEditDataKinerja = true;
             this.disableEditButton();
         },
+        editDataKompetensi: function editDataKompetensi() {},
+        editRekomendasi: function editRekomendasi() {
+            this.isEditRekomendasi = true;
+            this.disableEditButton();
+        },
         addDataKepegawaian: function addDataKepegawaian() {
             var newData = {
                 id_data_kepegawaian: null,
@@ -15289,7 +15274,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         addRiwayatPekerjaan: function addRiwayatPekerjaan() {
             var newData = {
-                id_riwayat_pendidikan: null,
+                id_riwayat_pekerjaan: null,
                 id_pegawai: null,
                 nama_institusi: null,
                 posisi: null,
@@ -15314,6 +15299,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             };
             this.dataKinerja.push(newData);
         },
+        addRekomendasiTraining: function addRekomendasiTraining() {
+            var newData = {
+                id_rekomendasi_training: null,
+                id_pegawai: null,
+                id_training: null
+            };
+            this.rekomendasiTraining.push(newData);
+        },
+        addRekomendasiPosisi: function addRekomendasiPosisi() {
+            var newData = {
+                id_rekomendasi_training: null,
+                id_pegawai: null,
+                id_unit_kerja: null,
+                id_posisi: null
+            };
+            this.rekomendasiPosisi.push(newData);
+        },
         delDataKepegawaian: function delDataKepegawaian(event) {
             var targetIndex = event.currentTarget.id;
             this.dataKepegawaian.splice(targetIndex, 1);
@@ -15334,6 +15336,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         delDataKinerja: function delDataKinerja(event) {
             var targetIndex = event.currentTarget.id;
             this.dataKinerja.splice(targetIndex, 1);
+        },
+        delRekomendasiTraining: function delRekomendasiTraining(event) {
+            var targetIndex = event.currentTarget.id;
+            this.rekomendasiTraining.splice(targetIndex, 1);
+        },
+        delRekomendasiPosisi: function delRekomendasiPosisi(event) {
+            var targetIndex = event.currentTarget.id;
+            this.rekomendasiPosisi.splice(targetIndex, 1);
         },
         saveProfilPegawai: function saveProfilPegawai() {
             this.enableEditButton();
@@ -15456,6 +15466,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 this.hideDataKinerja();
             }
         },
+        saveRekomendasi: function saveRekomendasi() {
+            this.enableEditButton();
+            this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+            this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+            this.isEditRekomendasi = false;
+        },
         cancelProfilPegawai: function cancelProfilPegawai() {
             this.enableEditButton();
             this.pegawai = JSON.parse(JSON.stringify(this.cachedPegawai));
@@ -15487,6 +15503,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             } else {
                 this.hideDataKinerja();
             }
+        },
+        cancelRekomendasi: function cancelRekomendasi() {
+            this.enableEditButton();
+            this.rekomendasiTraining = JSON.parse(JSON.stringify(this.cachedRekomendasiTraining));
+            this.rekomendasiPosisi = JSON.parse(JSON.stringify(this.cachedRekomendasiPosisi));
+            this.isEditRekomendasi = false;
         },
         FileChangeProfile: function FileChangeProfile(e) {
             var files = e.target.files || e.dataTransfer.files;
@@ -17944,69 +17966,487 @@ var render = function() {
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
-    _vm._m(5),
+    _c("div", { staticClass: "card", attrs: { id: "data-kompetensi" } }, [
+      _c("div", { staticClass: "card-header" }, [
+        _vm._v("\n            Hasil Kompetensi"),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary float-sm-right",
+            attrs: { disabled: _vm.disableEdit },
+            on: { click: _vm.editDataKompetensi }
+          },
+          [
+            _vm._v("\n                Edit "),
+            _c("i", { staticClass: "fas fa-edit" })
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(5)
+    ]),
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "rekomendasi" } }, [
       _c("div", { staticClass: "card-header" }, [
-        _vm._v("\n            Rekomendasi\n        ")
+        _vm._v("\n            Rekomendasi"),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary float-sm-right",
+            attrs: { disabled: _vm.disableEdit },
+            on: { click: _vm.editRekomendasi }
+          },
+          [
+            _vm._v("\n                Edit "),
+            _c("i", { staticClass: "fas fa-edit" })
+          ]
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("h5", [_vm._v("Rekomendasi Training")]),
-          _vm._v(" "),
-          _vm.rekomendasiTraining.length === 0
-            ? _c("div", { staticClass: "no-rekomendasi-trainiing" }, [
-                _c("hr"),
-                _vm._v(
-                  "\n                    Belum dimtambahkan.\n                    "
-                ),
-                _c("br")
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.rekomendasiTraining.length !== 0
-            ? _c("div", { staticClass: "rekomendasi-trainiing" }, [
-                _c(
-                  "table",
-                  { staticClass: "table" },
-                  [
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _vm._l(_vm.rekomendasiTraining, function(rp) {
-                      return _c("tbody", [
-                        _c("tr", [
-                          _c("td", {
-                            domProps: { textContent: _vm._s(rp.namaTraining) }
-                          }),
-                          _vm._v(" "),
-                          _c("td", {
-                            domProps: { textContent: _vm._s(rp.penyelenggara) }
-                          }),
-                          _vm._v(" "),
-                          _c("td", {
-                            domProps: { textContent: _vm._s(rp.bidang) }
+        _c(
+          "div",
+          { staticClass: "container" },
+          [
+            _c("h5", [_vm._v("Rekomendasi Training")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm.rekomendasiTraining.length === 0
+              ? _c("div", { staticClass: "no-rekomendasi-posisi" }, [
+                  !_vm.isEditRekomendasi
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditRekomendasi
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addRekomendasiTraining }
+                        },
+                        [
+                          _vm._v("\n                        Tambah "),
+                          _c("i", { staticClass: "fas fa-plus" })
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.rekomendasiTraining, function(rt) {
+              return _vm.rekomendasiTraining.length !== 0
+                ? _c("div", { staticClass: "rekomendasi-training" }, [
+                    !_vm.isEditRekomendasi
+                      ? _c("ul", [
+                          _c("li", {
+                            domProps: {
+                              textContent: _vm._s(
+                                _vm.trainingList.find(function(x) {
+                                  return x.id_training == rt.id_training
+                                }).nama_training
+                              )
+                            }
                           })
                         ])
-                      ])
-                    })
-                  ],
-                  2
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditRekomendasi
+                      ? _c("div", { staticClass: "form-group row" }, [
+                          _c("div", { staticClass: "col-sm-10" }, [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: rt.id_training,
+                                    expression: "rt.id_training"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      rt,
+                                      "id_training",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.trainingList, function(tl) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: tl.id_training } },
+                                  [
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(tl.nama_training) +
+                                        "\n                                "
+                                    )
+                                  ]
+                                )
+                              })
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "form-text text-muted" },
+                              [_vm._v("*Wajib diisi")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-1" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: {
+                                  id: _vm.rekomendasiTraining.indexOf(rt),
+                                  type: "button"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.delRekomendasiTraining($event)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Hapus "
+                                ),
+                                _c("i", { staticClass: "fas fa-trash-alt" })
+                              ]
+                            )
+                          ])
+                        ])
+                      : _vm._e()
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm.isEditRekomendasi && _vm.rekomendasiTraining.length !== 0
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary float-sm-left",
+                    on: { click: _vm.addRekomendasiTraining }
+                  },
+                  [
+                    _vm._v("\n                    Tambah "),
+                    _c("i", { staticClass: "fas fa-plus" })
+                  ]
                 )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("br"),
-          _c("br"),
-          _vm._v(" "),
-          _c("h5", [_vm._v("Rekomendasi Lain-lain")]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v("\n\n                Tidak ada.\n\n            ")
-        ])
-      ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("br"),
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
+            _c("h5", [_vm._v("Rekomendasi Lain-lain")]),
+            _vm._v(" "),
+            _vm.rekomendasiPosisi.length === 0
+              ? _c("div", { staticClass: "no-rekomendasi-posisi" }, [
+                  !_vm.isEditRekomendasi
+                    ? _c("div", [
+                        _c("hr"),
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditRekomendasi
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addRekomendasiPosisi }
+                        },
+                        [
+                          _vm._v("\n                        Tambah "),
+                          _c("i", { staticClass: "fas fa-plus" })
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.rekomendasiPosisi.length !== 0
+              ? _c("div", { staticClass: "rekomendasi-posisi" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(6),
+                      _vm._v(" "),
+                      _vm._l(_vm.rekomendasiPosisi, function(rp) {
+                        return _c("tbody", [
+                          !_vm.isEditRekomendasi
+                            ? _c("tr", [
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.unitKerja.find(function(x) {
+                                        return (
+                                          x.id_unit_kerja == rp.id_unit_kerja
+                                        )
+                                      }).nama_unit_kerja
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.posisi.find(function(x) {
+                                        return x.id_posisi == rp.id_posisi
+                                      }).nama_posisi
+                                    )
+                                  }
+                                })
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.isEditRekomendasi
+                            ? _c("tr", [
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: rp.id_unit_kerja,
+                                            expression: "rp.id_unit_kerja"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              rp,
+                                              "id_unit_kerja",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      _vm._l(_vm.unitKerja, function(uk) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            domProps: {
+                                              value: uk.id_unit_kerja
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(uk.nama_unit_kerja) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: rp.id_posisi,
+                                            expression: "rp.id_posisi"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              rp,
+                                              "id_posisi",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      _vm._l(_vm.posisi, function(pos) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            domProps: { value: pos.id_posisi }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(pos.nama_posisi) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: {
+                                        id: _vm.rekomendasiPosisi.indexOf(rp),
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.delRekomendasiPosisi($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Hapus "
+                                      ),
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.isEditRekomendasi
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary float-sm-left",
+                              on: { click: _vm.addRekomendasiPosisi }
+                            },
+                            [
+                              _vm._v("\n                            Tambah "),
+                              _c("i", { staticClass: "fas fa-plus" })
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("br")
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _vm.isEditRekomendasi
+        ? _c("div", { staticClass: "card-footer text-muted" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-success float-sm-right btn-simpan",
+                attrs: { href: "#rekomendasi" },
+                on: { click: _vm.saveRekomendasi }
+              },
+              [
+                _vm._v("\n                Simpan "),
+                _c("i", { staticClass: "fas fa-check" })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-danger float-sm-right",
+                attrs: { href: "#rekomendasi" },
+                on: { click: _vm.cancelRekomendasi }
+              },
+              [
+                _vm._v("\n                Batal "),
+                _c("i", { staticClass: "fas fa-times" })
+              ]
+            )
+          ])
+        : _vm._e()
     ])
   ])
 }
@@ -18093,21 +18533,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card", attrs: { id: "data-kompetensi" } },
-      [
-        _c("div", { staticClass: "card-header" }, [
-          _vm._v("\n            Hasil Kompetensi\n        ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "container" }, [
-            _vm._v("\n\n                Belum ditambahkan.\n\n            ")
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "container" }, [
+        _vm._v("\n\n                Belum ditambahkan.\n\n            ")
+      ])
+    ])
   },
   function() {
     var _vm = this
@@ -18115,11 +18545,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nama Training")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Unit Kerja")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Penyelenggara")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Bidang")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jabatan")])
       ])
     ])
   }
