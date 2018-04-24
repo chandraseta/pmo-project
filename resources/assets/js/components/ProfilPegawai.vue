@@ -14,7 +14,7 @@
                         <div class="col-sm-3 img-responsive">
                             <img id="img-profile" v-bind:src="pegawai.imageProfileUrl" class="img-thumbnail">
                             <br><br>
-                            <button v-if="isEditProfile" type="button" class="btn btn-primary">Ganti Foto</button>
+                            <input type="file" v-if="isEditProfile" v-on:change="FileChangeProfile" class="form-control">
                         </div>
                         <div class="col-sm-1"></div>
                         <div class="col-sm-7">
@@ -502,7 +502,7 @@
                                 </colgroup>
                                 <tr>
                                     <td rowspan="4">
-                                            <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
+                                        <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
                                     </td>
                                     <th scope="col">Judul</th>
                                     <td v-text="dk.judul" ></td>
@@ -529,16 +529,11 @@
                                             Hapus <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
-                                    <br>
-                                    <div v-if="dk.nama_file !== NULL">
-                                        <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
-                                    </div>
-                                    <div v-if="dk.nama_file == NULL">
-                                        <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
-                                    </div>
                                 </td>
                                 <td rowspan="4">
                                     <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
+                                    <br><br>
+                                    <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="FileChangeSertifikat" class="form-control">
                                 </td>
                                 <th scope="col">Judul</th>
                                 <td>
@@ -781,6 +776,7 @@
                     tahunMasuk: ""
                 },
                 dataKepegawaian: [],
+                dataKepegawaianPrev: null,
                 riwayatPendidikan: [],
                 riwayatPekerjaan: [],  
                 sertifikat: [],
@@ -852,6 +848,8 @@
                     this.riwayatPendidikan = responsePegawai["pendidikan"];
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
                     this.updateDataKepegawaian();
+
+                    this.dataKepegawaianPrev = this.dataKepegawaian[this.dataKepegawaian.length-1];
 
                     this.sertifikat = responsePegawai["sertifikat"];
                     this.updateSertifikat();
@@ -1115,18 +1113,21 @@
                 this.cachedPegawai = JSON.parse(JSON.stringify(this.pegawai));
                 this.isEditProfile = false;
 
-                // axios.patch('/api/pegawai/4', {
-                //     name: this.user.nama,
-                //     email: this.user.email,
-                //     password: '1234',
-                //     nip: this.user.nopeg
-                // })
-                // .then(function (response) {
-                //     alert(response);
-                // })
-                // .catch(function (error) {
-                //     alert(error);
-                // });
+                axios.post('/api/pegawai/' + this.id, {
+                    pegawai: this.pegawai,
+                    data_kepegawaian: this.dataKepegawaian,
+                    data_kepegawaian_prev: this.dataKepegawaianPrev,
+                    _method: "put"
+                })
+                .then(function (response) {
+                    console.log(response);
+                    window.location.href = '/pages/profile';
+                })
+                .catch(function (error) {
+                    alert(error);
+                });
+
+                console.log(this.dataKepegawaian);
 
             },
 
@@ -1249,19 +1250,32 @@
                 }
             },
 
-            onFileChange(e) {
+            FileChangeProfile(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
-                this.createImage(files[0], e.currentTarget.id);
-            },
-            createImage(file, id) {
+
                 let reader = new FileReader();
                 let vm = this;
                 reader.onload = (e) => {
-                    vm.sertifikat[id].nama_file = e.target.result;
+                    vm.pegawai.imageProfileUrl = e.target.result;
                 };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(files[0]);
+            },
+
+            FileChangeSertifikat(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+
+                var idx = e.currentTarget.id;
+
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.sertifikat[idx].nama_file = e.target.result;
+                };
+                reader.readAsDataURL(files[0]);
             },
         }
     }
