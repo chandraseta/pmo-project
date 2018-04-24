@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use PHPExcel_IOFactory;
+use PHPExcel_Settings;
 
 class DataKompetensiController extends APIBaseController
 {
@@ -521,11 +522,24 @@ class DataKompetensiController extends APIBaseController
         $sheet->getCell('AP16')->setValue(floor($obj->manajerial_intensitas_pengarahan));
         $sheet->getCell('AQ16')->setValue(floor($obj->manajerial_kekuatan_pengawasan));
 
-        $writer = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
-        header('Content-type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment; filename="file.xlsx"');
-        $writer->setIncludeCharts(TRUE);
-        $writer->save('php://output');
+        $rendererName = PHPExcel_Settings::PDF_RENDERER_TCPDF;
+        $rendererLibraryPath = base_path() . '/vendor/dompdf/dompdf';
+        PHPExcel_Settings::setPdfRenderer($rendererName, $rendererLibraryPath);
+
+        $filename = 'laporan_kompetensi_' . $id . '.pdf';
+
+        // $writer = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        // header('Content-type: application/vnd.ms-excel');
+        // header('Content-Disposition: attachment; filename="' . $filename . '"');
+        $writer = PHPExcel_IOFactory::createWriter($excel, 'PDF');;
+        header('Content-type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Cache-Control: public');
+        $writer->setSheetIndex(
+            $excel->getIndex($excel->getSheetByName('x'))
+        );
+        $writer->setIncludeCharts(true);
+        @$writer->save('php://output');
     }
 
     private function authenticate($role)
