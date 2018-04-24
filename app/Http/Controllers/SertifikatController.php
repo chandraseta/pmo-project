@@ -48,6 +48,6 @@ class SertifikatController extends APIBaseController
             $sertifikat->save();
         }
 
-        return $this->sendResponse($input, 'Sertifikat created successfully.');
+        return $this->sendResponse($input, 'Sertifikat updated successfully.');
     }
 }
