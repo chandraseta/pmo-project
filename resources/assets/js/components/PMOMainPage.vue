@@ -253,13 +253,13 @@
                     .then(response => {
                         console.log(response.data);
                         this.newData = {};
-                        this.setAlert('success', response.data.message);
                         getData();
+                        alert(response.data.message);
                     })
                     .catch(e => {
                         console.log(e.message);
                         console.log(e.response.data.message);
-                        this.setAlert('danger', e.response.data.message);
+                        alert(e.response.data.message);
                     })
             },
             deleteData: function (payload) {
@@ -274,13 +274,13 @@
                 axios.delete(url, data, config)
                     .then(response => {
                         console.log(response.data);
-                        this.newData = {};
-                        this.setAlert('success', response.data.message);
+                        this.getTraining();
+                        alert(response.data.message);
                     })
                     .catch(e => {
                         console.log(e.message);
                         console.log(e.response.data.message);
-                        this.setAlert('danger', e.response.data.message);
+                        alert(e.response.data.message);
                     })
             },
             getPegawai: function () {

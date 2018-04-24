@@ -66923,12 +66923,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post(url, data, config).then(function (response) {
                 console.log(response.data);
                 _this2.newData = {};
-                _this2.setAlert('success', response.data.message);
                 getData();
+                alert(response.data.message);
             }).catch(function (e) {
                 console.log(e.message);
                 console.log(e.response.data.message);
-                _this2.setAlert('danger', e.response.data.message);
+                alert(e.response.data.message);
             });
         },
         deleteData: function deleteData(payload) {
@@ -66944,12 +66944,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log('Attempting to delete data...');
             axios.delete(url, data, config).then(function (response) {
                 console.log(response.data);
-                _this3.newData = {};
-                _this3.setAlert('success', response.data.message);
+                _this3.getTraining();
+                alert(response.data.message);
             }).catch(function (e) {
                 console.log(e.message);
                 console.log(e.response.data.message);
-                _this3.setAlert('danger', e.response.data.message);
+                alert(e.response.data.message);
             });
         },
         getPegawai: function getPegawai() {
@@ -67084,7 +67084,7 @@ module.exports = [{"label":"","field":"editButton"},{"label":"Nama Lengkap","fie
 /* 224 */
 /***/ (function(module, exports) {
 
-module.exports = [{"label":"","field":"editButton"},{"label":"Nama Training","field":"nama_training","fillable":true},{"label":"","field":"deleteButton"}]
+module.exports = [{"label":"","field":"editButton","width":"20px"},{"label":"Nama Training","field":"nama_training","fillable":true},{"label":"","field":"deleteButton","width":"20px"}]
 
 /***/ }),
 /* 225 */
@@ -67444,6 +67444,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'data-table',
@@ -67451,7 +67474,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             rowBeingEdited: -1,
-            dataBeingEdited: {}
+            dataBeingEdited: {},
+            rowBeingDeleted: -1
         };
     },
 
@@ -67468,8 +67492,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         viewProfile: function viewProfile(props) {
             console.log(props);
         },
-        deleteRow: function deleteRow(props) {
-            this.$emit('dataDelete', props.row);
+        prepareDeleteRow: function prepareDeleteRow(props) {
+            this.rowBeingDeleted = props.row;
+        },
+        deleteRow: function deleteRow() {
+            this.$emit('dataDelete', this.rowBeingDeleted);
         }
     }
 });
@@ -67573,9 +67600,13 @@ var render = function() {
                             "button",
                             {
                               staticClass: "btn btn-sm btn-danger",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#deleteConfirmationModal"
+                              },
                               on: {
                                 click: function($event) {
-                                  _vm.deleteRow(props)
+                                  _vm.prepareDeleteRow(props)
                                 }
                               }
                             },
@@ -67757,12 +67788,93 @@ var render = function() {
             }
           }
         ])
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "deleteConfirmationModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Batal")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.deleteRow }
+                  },
+                  [_vm._v("Hapus")]
+                )
+              ])
+            ])
+          ])
+        ]
+      )
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "addDataModalLabel" } },
+        [_vm._v("Konfirmasi Penghapusan")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("div", { staticClass: "alert" }, [
+        _vm._v(
+          "\n                        Apakah anda yakin ingin menghapus entri tersebut?\n                    "
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
