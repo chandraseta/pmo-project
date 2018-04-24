@@ -868,7 +868,6 @@
                 riwayatPendidikan: [],
                 riwayatPekerjaan: [],  
                 sertifikat: [],
-                sertifikatCounter : 0,
 
                 isShowAllDataKinerja: false,
                 disableEdit: false,
@@ -1105,10 +1104,8 @@
             },
 
             editSertifikat() {
-                this.sertifikatCounter = this.sertifikat.length;
                 this.isEditSertifikat = true;
                 this.disableEditButton();
-                this.sertifikatCounter = this.sertifikat.length;
             },
 
             editDataKinerja() {
@@ -1164,9 +1161,16 @@
             },
 
             addSertifikat() {
-                var newData = {};
+                var newData = {
+                    id_sertifikat : null,
+                    id_pegawai : null,
+                    judul : null,
+                    lembaga : null,
+                    tahun_diterbitkan : null,
+                    catatan : null,
+                    nama_file : null,
+                };
                 this.sertifikat.push(newData);
-                this.sertifikatCounter++;
             },
 
             addDataKinerja() {
@@ -1218,7 +1222,6 @@
             delSertifikat(event) {
                 var targetIndex = event.currentTarget.id;
                 this.sertifikat.splice(targetIndex, 1);
-                this.sertifikatCounter--;
             },
 
             delDataKinerja(event) {
