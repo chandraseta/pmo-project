@@ -1,0 +1,17 @@
+[
+  {
+    "label": "",
+    "field": "editButton",
+    "width": "20px"
+  },
+  {
+    "label": "Nama Training",
+    "field": "nama_training",
+    "fillable": true
+  },
+  {
+    "label": "",
+    "field": "deleteButton",
+    "width": "20px"
+  }
+]

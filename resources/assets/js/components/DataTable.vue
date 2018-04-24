@@ -36,6 +36,14 @@
                         View
                     </a>
                 </span>
+                <span v-else-if="props.column.field == 'deleteButton'">
+                    <button class="btn btn-sm btn-danger"
+                            data-toggle="modal"
+                            data-target="#deleteConfirmationModal"
+                            @click="prepareDeleteRow(props)">
+                        Delete
+                    </button>
+                </span>
                 <span v-else-if="props.row.originalIndex == rowBeingEdited && !props.column.immutable">
                     <input class="form-control"
                            :id="props.column.field + '-' + props.row.originalIndex"
@@ -48,6 +56,27 @@
                 </span>
             </template>
         </vue-good-table>
+        <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addDataModalLabel">Konfirmasi Penghapusan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert">
+                            Apakah anda yakin ingin menghapus entri tersebut?
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteRow">Hapus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -62,7 +91,8 @@
         data(){
             return {
                 rowBeingEdited: -1,
-                dataBeingEdited: {}
+                dataBeingEdited: {},
+                rowBeingDeleted: -1
             };
         },
         methods: {
@@ -77,6 +107,12 @@
             },
             viewProfile(props) {
                 console.log(props);
+            },
+            prepareDeleteRow(props) {
+                this.rowBeingDeleted = props.row;
+            },
+            deleteRow() {
+                this.$emit('dataDelete', this.rowBeingDeleted);
             }
         }
     };

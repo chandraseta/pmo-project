@@ -21,6 +21,7 @@
                         <div class="col-md-3 p-2">
                             <button type="button"
                                     class="btn btn-primary float-md-right m-1"
+                                    v-if="!disableDownloadDataButton"
                                     @click="downloadData">
                                 Download Data
                             </button>
@@ -35,7 +36,9 @@
                     </div>
                 </div>
             </section>
-            <data-table v-on:dataChange="saveData" :tableTitle="title"
+            <data-table v-on:dataChange="saveData"
+                        v-on:dataDelete="deleteData"
+                        :tableTitle="title"
                         :columns="columns"
                         :rows="rows">
             </data-table>
@@ -127,6 +130,7 @@
         dataPegawaiColumns: require('./configs/data-pegawai-columns.json'),
         dataKompetensiColumns: require('./configs/data-kompetensi-columns.json'),
         dataKinerjaColumns: require('./configs/data-kinerja-columns.json'),
+        dataTrainingColumns: require('./configs/data-training-columns.json'),
         name: 'pmo-main-page',
         components: {
             'pmo-navbar': require('./PMONavbar.vue'),
@@ -141,8 +145,10 @@
                 dataPegawai: [],
                 dataKinerja: [],
                 dataKompetensi: [],
+                dataTraining: [],
                 newData: {},
                 disableTambahDataButton: true,
+                disableDownloadDataButton: true,
                 disableUploadDataButton: true,
                 isFormInvalid: {},
                 statusAlert: {
@@ -185,7 +191,8 @@
                 this.columns = this.$options[payload.name + 'Columns'];
 
                 this.disableTambahDataButton = payload.name === "dataPegawai";
-                this.disableUploadDataButton = payload.name === "dataPegawai";
+                this.disableUploadDataButton = payload.name === "dataPegawai" || payload.name === "dataTraining";
+                this.disableDownloadDataButton = payload.name === "dataTraining";
             },
             saveData: function (payload) {
                 console.log(payload);
@@ -198,6 +205,9 @@
                 } else if (this.currentTab === 'dataKinerja') {
                     url = '/api/kinerja/' + payload.id_kinerja;
                     getData = this.getKinerja;
+                } else if (this.currentTab === 'dataTraining') {
+                    url = '/api/training/' + payload.id_training;
+                    getData = this.getTraining;
                 }
 
                 let data = payload;
@@ -228,6 +238,9 @@
                 } else if (this.currentTab === 'dataKinerja') {
                     url = '/api/kinerja';
                     getData = this.getKinerja;
+                } else if (this.currentTab === 'dataTraining') {
+                    url = '/api/training';
+                    getData = this.getTraining;
                 }
 
                 let data = this.newData;
@@ -240,13 +253,34 @@
                     .then(response => {
                         console.log(response.data);
                         this.newData = {};
-                        this.setAlert('success', response.data.message);
                         getData();
+                        alert(response.data.message);
                     })
                     .catch(e => {
                         console.log(e.message);
                         console.log(e.response.data.message);
-                        this.setAlert('danger', e.response.data.message);
+                        alert(e.response.data.message);
+                    })
+            },
+            deleteData: function (payload) {
+                let url = '/api/training/' + payload.id_training;
+                let data = payload;
+                let config = {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                console.log('Attempting to delete data...');
+                axios.delete(url, data, config)
+                    .then(response => {
+                        console.log(response.data);
+                        this.getTraining();
+                        alert(response.data.message);
+                    })
+                    .catch(e => {
+                        console.log(e.message);
+                        console.log(e.response.data.message);
+                        alert(e.response.data.message);
                     })
             },
             getPegawai: function () {
@@ -274,6 +308,16 @@
                 axios.get('/api/kinerja')
                     .then(response => {
                         this.dataKinerja = response.data.data;
+                        this.rows = this[this.currentTab];
+                    })
+                    .catch(e => {
+                        this.errors.push(e);
+                    })
+            },
+            getTraining: function () {
+                axios.get('/api/training')
+                    .then(response => {
+                        this.dataTraining = response.data.data;
                         this.rows = this[this.currentTab];
                     })
                     .catch(e => {
@@ -335,6 +379,7 @@
             this.getPegawai();
             this.getKompetensi();
             this.getKinerja();
+            this.getTraining();
         }
     }
 </script>

@@ -49,6 +49,12 @@
                         label: 'Data Kinerja',
                         link: '#',
                         isActive: false
+                    },
+                    {
+                        name: 'dataTraining',
+                        label: 'Data Training',
+                        link: '#',
+                        isActive: false
                     }
                 ]
             }
