@@ -39,6 +39,11 @@ Route::resource('kinerja', 'DataKinerjaController');
 
 Route::resource('pegawai-denormalized', 'DataPegawaiController');
 
+Route::resource('training', 'TrainingController');
+
+Route::resource('kepegawaian', 'KepegawaianController');
+
+Route::resource('riwayat', 'RiwayatController');
+
 Route::resource('sertifikat', 'SertifikatController');
 
-Route::resource('training', 'TrainingController');

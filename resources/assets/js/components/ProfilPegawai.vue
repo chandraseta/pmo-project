@@ -14,7 +14,7 @@
                         <div class="col-sm-3 img-responsive">
                             <img id="img-profile" v-bind:src="pegawai.imageProfileUrl" class="img-thumbnail">
                             <br><br>
-                            <button v-if="isEditProfile" type="button" class="btn btn-primary">Ganti Foto</button>
+                            <input type="file" v-if="isEditProfile" v-on:change="FileChangeProfile" class="form-control">
                         </div>
                         <div class="col-sm-1"></div>
                         <div class="col-sm-7">
@@ -502,7 +502,7 @@
                                 </colgroup>
                                 <tr>
                                     <td rowspan="4">
-                                            <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
+                                        <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
                                     </td>
                                     <th scope="col">Judul</th>
                                     <td v-text="dk.judul" ></td>
@@ -529,16 +529,11 @@
                                             Hapus <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
-                                    <br>
-                                    <div v-if="dk.nama_file !== NULL">
-                                        <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
-                                    </div>
-                                    <div v-if="dk.nama_file == NULL">
-                                        <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="onFileChange" class="form-control">
-                                    </div>
                                 </td>
                                 <td rowspan="4">
                                     <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
+                                    <br><br>
+                                    <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="FileChangeSertifikat" class="form-control">
                                 </td>
                                 <th scope="col">Judul</th>
                                 <td>
@@ -694,7 +689,9 @@
 
         <div class="card" id="data-kompetensi">
             <div class="card-header">
-                Hasil Kompetensi
+                Hasil Kompetensi<button class="btn btn-primary float-sm-right" v-on:click="editDataKompetensi" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                    </button>
             </div>
 
             <div class="card-body">
@@ -710,7 +707,9 @@
 
         <div class="card" id="rekomendasi">
             <div class="card-header">
-                Rekomendasi
+                Rekomendasi<button class="btn btn-primary float-sm-right" v-on:click="editRekomendasi" v-bind:disabled="disableEdit">
+                    Edit <i class="fas fa-edit"></i>
+                    </button>
             </div>
 
             <div class="card-body">
@@ -718,42 +717,126 @@
 
                     <h5>Rekomendasi Training</h5>
 
-                    <div v-if="rekomendasiTraining.length === 0" class="no-rekomendasi-trainiing">
-                        <hr>
-                        Belum dimtambahkan.
-                        <br>
+                    <hr>
+
+                    <div v-if="rekomendasiTraining.length === 0" class="no-rekomendasi-posisi">
+                        <div v-if="!isEditRekomendasi">
+                            Belum ditambahkan.
+                            <br>
+                        </div>
+                        <button v-if="isEditRekomendasi" class="btn btn-primary float-sm-left" v-on:click="addRekomendasiTraining">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
+                        
                     </div>
 
-                    <div v-if="rekomendasiTraining.length !== 0" class="rekomendasi-trainiing">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Nama Training</th>
-                                <th scope="col">Penyelenggara</th>
-                                <th scope="col">Bidang</th>
-                            </tr>
-                            </thead>
-                            <tbody v-for="rp in rekomendasiTraining">
-                            <tr>
-                                <td v-text="rp.namaTraining" ></td>
-                                <td v-text="rp.penyelenggara" ></td>
-                                <td v-text="rp.bidang" ></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div v-if="rekomendasiTraining.length !== 0" v-for="rt in rekomendasiTraining" class="rekomendasi-training">
+                        <ul v-if="!isEditRekomendasi">
+                            <li v-text="trainingList.find(x => x.id_training == rt.id_training).nama_training"></li>
+                        </ul>
+
+                        <div v-if="isEditRekomendasi" class="form-group row">
+                            <div class="col-sm-10">
+                                <select class="form-control" v-model="rt.id_training">
+                                    <option v-for="tl in trainingList" v-bind:value="tl.id_training">
+                                        {{ tl.nama_training }}
+                                    </option>
+                                </select>
+                                <small class="form-text text-muted">*Wajib diisi</small>
+                            </div>
+                            <div class="col-sm-1">
+                                <button v-bind:id="rekomendasiTraining.indexOf(rt)" v-on:click="delRekomendasiTraining($event)" class="btn btn-danger" type="button">
+                                    Hapus <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            
+                        </div>
+
 
                     </div>
 
-                    <br><br>
+                    <button v-if="isEditRekomendasi && rekomendasiTraining.length !== 0" class="btn btn-primary float-sm-left" v-on:click="addRekomendasiTraining">
+                        Tambah <i class="fas fa-plus"></i>
+                    </button>
+
+                    <br><br><br>
 
 
                     <h5>Rekomendasi Lain-lain</h5>
 
-                    <hr>
+                    
 
-                    Tidak ada.
+                    <div v-if="rekomendasiPosisi.length === 0" class="no-rekomendasi-posisi">
+                        <div v-if="!isEditRekomendasi">
+                            <hr>
+                            Belum ditambahkan.
+                            <br>
+                        </div>
+                        <button v-if="isEditRekomendasi" class="btn btn-primary float-sm-left" v-on:click="addRekomendasiPosisi">
+                            Tambah <i class="fas fa-plus"></i>
+                        </button>
+                        
+                    </div>
+
+                    <div v-if="rekomendasiPosisi.length !== 0" class="rekomendasi-posisi">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Unit Kerja</th>
+                                <th scope="col">Jabatan</th>
+                            </tr>
+                            </thead>
+                            <tbody v-for="rp in rekomendasiPosisi">
+                            <tr v-if="!isEditRekomendasi">
+                                <td v-text="unitKerja.find(x => x.id_unit_kerja == rp.id_unit_kerja).nama_unit_kerja" ></td>
+                                <td v-text="posisi.find(x => x.id_posisi == rp.id_posisi).nama_posisi" ></td>
+                            </tr>
+                            <tr v-if="isEditRekomendasi">
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" v-model="rp.id_unit_kerja">
+                                            <option v-for="uk in unitKerja" v-bind:value="uk.id_unit_kerja">
+                                                {{ uk.nama_unit_kerja }}
+                                            </option>
+                                        </select>
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" v-model="rp.id_posisi">
+                                            <option v-for="pos in posisi" v-bind:value="pos.id_posisi">
+                                                {{ pos.nama_posisi }}
+                                            </option>
+                                        </select>
+                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button v-bind:id="rekomendasiPosisi.indexOf(rp)" v-on:click="delRekomendasiPosisi($event)" class="btn btn-danger" type="button">
+                                        Hapus <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <button v-if="isEditRekomendasi" class="btn btn-primary float-sm-left" v-on:click="addRekomendasiPosisi">
+                                Tambah <i class="fas fa-plus"></i>
+                            </button>
+                        </table>
+
+                    </div>
+
+                    <br>
 
                 </div>
+            </div>
+            <div class="card-footer text-muted" v-if="isEditRekomendasi">
+                <a href="#rekomendasi" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveRekomendasi">
+                    Simpan <i class="fas fa-check"></i>
+                    </a>
+                <a href="#rekomendasi" class="btn btn-danger float-sm-right" v-on:click="cancelRekomendasi">
+                    Batal <i class ="fas fa-times"></i>
+                </a>
             </div>
         </div>
 
@@ -763,11 +846,11 @@
 
 <script>
     export default {
-        props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp'],
+        props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
 
         data() {
             return {
-                //dummy
+                
                 pegawai: {
                     imageProfileUrl: "",
                     nama: "",
@@ -781,16 +864,10 @@
                     tahunMasuk: ""
                 },
                 dataKepegawaian: [],
+                dataKepegawaianPrev: null,
                 riwayatPendidikan: [],
                 riwayatPekerjaan: [],  
                 sertifikat: [],
-
-                dataKinerja: [
-                    {tahun : 2010, semester:1, nilai:2.50, catatan:"ini catatan"}
-                ],
-                rekomendasiTraining : [],
-
-                sertifikatCounter : 0,
 
                 isShowAllDataKinerja: false,
                 disableEdit: false,
@@ -799,12 +876,15 @@
                 isEditRiwayat: false,
                 isEditSertifikat: false,
                 isEditDataKinerja: false,
+                isEditRekomendasi: false,
                 cachedPegawai: null,
                 cachedDataKepegawaian: null,
                 cachedRiwayatPendidikan: null,
                 cachedRiwayatPekerjaan: null,
                 cachedSertifikat: null,
                 cachedDataKinerja: null,
+                cachedRekomendasiTraining: null,
+                cachedRekomendasiPosisi:null,
                 pegawai: {
                     imageProfileUrl: null,
                     nama: null,
@@ -830,7 +910,9 @@
                 riwayatPendidikan: [],
                 riwayatPekerjaan: [],
                 dataKinerja: [],
-                dataKinerjaShow: []
+                dataKinerjaShow: [],
+                rekomendasiTraining : [],
+                rekomendasiPosisi : []
             }
                
         },  
@@ -852,6 +934,8 @@
                     this.riwayatPendidikan = responsePegawai["pendidikan"];
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
                     this.updateDataKepegawaian();
+
+                    this.dataKepegawaianPrev = this.dataKepegawaian[this.dataKepegawaian.length-1];
 
                     this.sertifikat = responsePegawai["sertifikat"];
                     this.updateSertifikat();
@@ -882,13 +966,20 @@
             //caching others
             this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
             
-            // dataKinerjaShow
+            // init dataKinerjaShow
             if (this.dataKinerja.length > 6) {
                 this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length-6);
             } else {
                 this.dataKinerjaShow = this.dataKinerja;
             }
-            
+
+            //init rekomendasiTraining
+            this.rekomendasiTraining = this.rekomendasiTrainingTemp;
+            this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+
+            //init rekomendasiPosisi
+            this.rekomendasiPosisi = this.rekomendasiPosisiTemp;
+            this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
         },
 
         methods: {
@@ -1013,14 +1104,21 @@
             },
 
             editSertifikat() {
-                this.sertifikatCounter = this.sertifikat.length;
                 this.isEditSertifikat = true;
                 this.disableEditButton();
-                this.sertifikatCounter = this.sertifikat.length;
             },
 
             editDataKinerja() {
                 this.isEditDataKinerja = true;
+                this.disableEditButton();
+            },
+
+            editDataKompetensi() {
+
+            },
+
+            editRekomendasi() {
+                this.isEditRekomendasi = true;
                 this.disableEditButton();
             },
 
@@ -1052,7 +1150,7 @@
 
             addRiwayatPekerjaan() {
                 var newData = {
-                    id_riwayat_pendidikan : null,
+                    id_riwayat_pekerjaan : null,
                     id_pegawai : null,
                     nama_institusi : null,
                     posisi : null,
@@ -1063,9 +1161,16 @@
             },
 
             addSertifikat() {
-                var newData = {};
+                var newData = {
+                    id_sertifikat : null,
+                    id_pegawai : null,
+                    judul : null,
+                    lembaga : null,
+                    tahun_diterbitkan : null,
+                    catatan : null,
+                    nama_file : null,
+                };
                 this.sertifikat.push(newData);
-                this.sertifikatCounter++;
             },
 
             addDataKinerja() {
@@ -1078,6 +1183,25 @@
                     catatan : null
                 };
                 this.dataKinerja.push(newData);
+            },
+
+            addRekomendasiTraining() {
+                var newData = {
+                    id_rekomendasi_training : null,
+                    id_pegawai : null,
+                    id_training : null
+                };
+                this.rekomendasiTraining.push(newData);
+            },
+
+            addRekomendasiPosisi() {
+                var newData = {
+                    id_rekomendasi_training : null,
+                    id_pegawai : null,
+                    id_unit_kerja : null,
+                    id_posisi : null
+                };
+                this.rekomendasiPosisi.push(newData);
             },
 
             delDataKepegawaian(event) {
@@ -1098,12 +1222,21 @@
             delSertifikat(event) {
                 var targetIndex = event.currentTarget.id;
                 this.sertifikat.splice(targetIndex, 1);
-                this.sertifikatCounter--;
             },
 
             delDataKinerja(event) {
                 var targetIndex = event.currentTarget.id;
                 this.dataKinerja.splice(targetIndex, 1);
+            },
+
+            delRekomendasiTraining(event) {
+                var targetIndex = event.currentTarget.id;
+                this.rekomendasiTraining.splice(targetIndex, 1);
+            },
+
+            delRekomendasiPosisi(event) {
+                var targetIndex = event.currentTarget.id;
+                this.rekomendasiPosisi.splice(targetIndex, 1);
             },
 
             saveProfilPegawai() {
@@ -1115,18 +1248,21 @@
                 this.cachedPegawai = JSON.parse(JSON.stringify(this.pegawai));
                 this.isEditProfile = false;
 
-                // axios.patch('/api/pegawai/4', {
-                //     name: this.user.nama,
-                //     email: this.user.email,
-                //     password: '1234',
-                //     nip: this.user.nopeg
-                // })
-                // .then(function (response) {
-                //     alert(response);
-                // })
-                // .catch(function (error) {
-                //     alert(error);
-                // });
+                axios.post('/api/pegawai/' + this.id, {
+                    pegawai: this.pegawai,
+                    data_kepegawaian: this.dataKepegawaian,
+                    data_kepegawaian_prev: this.dataKepegawaianPrev,
+                    _method: "put"
+                })
+                .then(function (response) {
+                    console.log(response);
+                    window.location.href = '/pages/profile';
+                })
+                .catch(function (error) {
+                    alert(error);
+                });
+
+                console.log(this.dataKepegawaian);
 
             },
 
@@ -1137,6 +1273,19 @@
                 this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
                 this.isEditKepegawaian = false;
 
+                console.log(this.dataKepegawaian);
+
+                axios.post('/api/kepegawaian/' + this.id, {
+                    kepegawaian: this.dataKepegawaian,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    window.location.href = "/pages/profile";
+                })
+                .catch(function (error) {
+                    alert(error);
+                });
             },
 
             saveRiwayatPegawai() {
@@ -1165,7 +1314,21 @@
                 this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
                 this.isEditRiwayat = false;
 
-                
+                console.log(this.riwayatPendidikan);
+                console.log(this.riwayatPekerjaan);
+
+                axios.post('/api/riwayat/' + this.id, {
+                    pendidikan: this.riwayatPendidikan,
+                    pekerjaan: this.riwayatPekerjaan,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    window.location.href = "/pages/profile";
+                })
+                .catch(function (error) {
+                    alert(error);
+                });
             },
 
             saveSertifikat() {
@@ -1212,6 +1375,13 @@
                 }
             },
 
+            saveRekomendasi() {
+                this.enableEditButton();
+                this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+                this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+                this.isEditRekomendasi = false;
+            },
+
             cancelProfilPegawai() {
                 this.enableEditButton();
                 this.pegawai = JSON.parse(JSON.stringify(this.cachedPegawai));
@@ -1249,19 +1419,39 @@
                 }
             },
 
-            onFileChange(e) {
+            cancelRekomendasi() {
+                this.enableEditButton();
+                this.rekomendasiTraining = JSON.parse(JSON.stringify(this.cachedRekomendasiTraining));
+                this.rekomendasiPosisi = JSON.parse(JSON.stringify(this.cachedRekomendasiPosisi));
+                this.isEditRekomendasi = false;
+            },
+
+            FileChangeProfile(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
-                this.createImage(files[0], e.currentTarget.id);
-            },
-            createImage(file, id) {
+
                 let reader = new FileReader();
                 let vm = this;
                 reader.onload = (e) => {
-                    vm.sertifikat[id].nama_file = e.target.result;
+                    vm.pegawai.imageProfileUrl = e.target.result;
                 };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(files[0]);
+            },
+
+            FileChangeSertifikat(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+
+                var idx = e.currentTarget.id;
+
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.sertifikat[idx].nama_file = e.target.result;
+                };
+                reader.readAsDataURL(files[0]);
             },
         }
     }

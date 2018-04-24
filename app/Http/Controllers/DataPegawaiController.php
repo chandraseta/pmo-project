@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\DenormalizedPegawai;
 use Illuminate\Http\Request;
+use App\Http\Controllers\APIBaseController as APIBaseController;
+use App\DataKepegawaian;
 
 class DataPegawaiController extends APIBaseController
 {
@@ -70,7 +72,7 @@ class DataPegawaiController extends APIBaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
