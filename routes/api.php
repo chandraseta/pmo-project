@@ -29,6 +29,8 @@ Route::get('kompetensi/export', 'DataKompetensiController@export');
 
 Route::post('kompetensi/import', 'DataKompetensiController@import');
 
+Route::get('kompetensi/report/{id}', 'DataKompetensiController@generateReport');
+
 Route::resource('kompetensi', 'DataKompetensiController');
 
 Route::get('kinerja/export', 'DataKinerjaController@export');
