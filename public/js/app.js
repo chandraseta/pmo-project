@@ -66655,7 +66655,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66666,6 +66666,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -66929,44 +66931,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.setAlert('danger', e.response.data.message);
             });
         },
-        getPegawai: function getPegawai() {
+        deleteData: function deleteData(payload) {
             var _this3 = this;
 
-            axios.get('/api/pegawai-denormalized').then(function (response) {
-                _this3.dataPegawai = response.data.data;
-                _this3.rows = _this3[_this3.currentTab];
+            var url = '/api/training/' + payload.id_training;
+            var data = payload;
+            var config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            console.log('Attempting to delete data...');
+            axios.delete(url, data, config).then(function (response) {
+                console.log(response.data);
+                _this3.newData = {};
+                _this3.setAlert('success', response.data.message);
             }).catch(function (e) {
-                _this3.errors.push(e);
+                console.log(e.message);
+                console.log(e.response.data.message);
+                _this3.setAlert('danger', e.response.data.message);
             });
         },
-        getKompetensi: function getKompetensi() {
+        getPegawai: function getPegawai() {
             var _this4 = this;
 
-            axios.get('/api/kompetensi').then(function (response) {
-                _this4.dataKompetensi = response.data.data;
+            axios.get('/api/pegawai-denormalized').then(function (response) {
+                _this4.dataPegawai = response.data.data;
                 _this4.rows = _this4[_this4.currentTab];
             }).catch(function (e) {
                 _this4.errors.push(e);
             });
         },
-        getKinerja: function getKinerja() {
+        getKompetensi: function getKompetensi() {
             var _this5 = this;
 
-            axios.get('/api/kinerja').then(function (response) {
-                _this5.dataKinerja = response.data.data;
+            axios.get('/api/kompetensi').then(function (response) {
+                _this5.dataKompetensi = response.data.data;
                 _this5.rows = _this5[_this5.currentTab];
             }).catch(function (e) {
                 _this5.errors.push(e);
             });
         },
-        getTraining: function getTraining() {
+        getKinerja: function getKinerja() {
             var _this6 = this;
 
-            axios.get('/api/training').then(function (response) {
-                _this6.dataTraining = response.data.data;
+            axios.get('/api/kinerja').then(function (response) {
+                _this6.dataKinerja = response.data.data;
                 _this6.rows = _this6[_this6.currentTab];
             }).catch(function (e) {
                 _this6.errors.push(e);
+            });
+        },
+        getTraining: function getTraining() {
+            var _this7 = this;
+
+            axios.get('/api/training').then(function (response) {
+                _this7.dataTraining = response.data.data;
+                _this7.rows = _this7[_this7.currentTab];
+            }).catch(function (e) {
+                _this7.errors.push(e);
             });
         },
         downloadTemplate: function downloadTemplate() {
@@ -66992,7 +67015,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             window.open(url);
         },
         uploadFile: function uploadFile() {
-            var _this7 = this;
+            var _this8 = this;
 
             var url = void 0;
             switch (this.currentTab) {
@@ -67008,21 +67031,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post(url, formData).then(function (response) {
                 console.log("Import successful");
-                _this7.setAlert('success', response.data);
+                _this8.setAlert('success', response.data);
             }).catch(function (e) {
-                _this7.errors.push(e);
-                _this7.setAlert('danger', e.response.data);
+                _this8.errors.push(e);
+                _this8.setAlert('danger', e.response.data);
                 console.log(e.response.data);
             });
         },
         setAlert: function setAlert(type, message) {
-            var _this8 = this;
+            var _this9 = this;
 
             this.statusAlert.display = true;
             this.statusAlert.message = message;
             this.statusAlert.type = type;
             setTimeout(function () {
-                return document.addEventListener('click', _this8.unsetAlert);
+                return document.addEventListener('click', _this9.unsetAlert);
             }, 0);
         },
         unsetAlert: function unsetAlert() {
@@ -67415,6 +67438,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'data-table',
@@ -67438,6 +67467,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         viewProfile: function viewProfile(props) {
             console.log(props);
+        },
+        deleteRow: function deleteRow(props) {
+            this.$emit('dataDelete', props.row);
         }
     }
 });
@@ -67535,81 +67567,31 @@ var render = function() {
                           ]
                         )
                       ])
-                    : props.row.originalIndex == _vm.rowBeingEdited &&
-                      !props.column.immutable
+                    : props.column.field == "deleteButton"
                       ? _c("span", [
-                          (props.column.type == "number" || "date"
-                            ? props.column.type
-                            : "text") === "checkbox"
-                            ? _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value:
-                                      _vm.dataBeingEdited[props.column.field],
-                                    expression:
-                                      "dataBeingEdited[props.column.field]"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  id:
-                                    props.column.field +
-                                    "-" +
-                                    props.row.originalIndex,
-                                  title: props.column.label,
-                                  type: "checkbox"
-                                },
-                                domProps: {
-                                  checked: Array.isArray(
-                                    _vm.dataBeingEdited[props.column.field]
-                                  )
-                                    ? _vm._i(
-                                        _vm.dataBeingEdited[props.column.field],
-                                        null
-                                      ) > -1
-                                    : _vm.dataBeingEdited[props.column.field]
-                                },
-                                on: {
-                                  change: function($event) {
-                                    var $$a =
-                                        _vm.dataBeingEdited[props.column.field],
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = null,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          _vm.$set(
-                                            _vm.dataBeingEdited,
-                                            props.column.field,
-                                            $$a.concat([$$v])
-                                          )
-                                      } else {
-                                        $$i > -1 &&
-                                          _vm.$set(
-                                            _vm.dataBeingEdited,
-                                            props.column.field,
-                                            $$a
-                                              .slice(0, $$i)
-                                              .concat($$a.slice($$i + 1))
-                                          )
-                                      }
-                                    } else {
-                                      _vm.$set(
-                                        _vm.dataBeingEdited,
-                                        props.column.field,
-                                        $$c
-                                      )
-                                    }
-                                  }
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-danger",
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteRow(props)
                                 }
-                              })
-                            : (props.column.type == "number" || "date"
-                                ? props.column.type
-                                : "text") === "radio"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    Delete\n                "
+                              )
+                            ]
+                          )
+                        ])
+                      : props.row.originalIndex == _vm.rowBeingEdited &&
+                        !props.column.immutable
+                        ? _c("span", [
+                            (props.column.type == "number" || "date"
+                              ? props.column.type
+                              : "text") === "checkbox"
                               ? _c("input", {
                                   directives: [
                                     {
@@ -67628,72 +67610,149 @@ var render = function() {
                                       "-" +
                                       props.row.originalIndex,
                                     title: props.column.label,
-                                    type: "radio"
+                                    type: "checkbox"
                                   },
                                   domProps: {
-                                    checked: _vm._q(
-                                      _vm.dataBeingEdited[props.column.field],
-                                      null
+                                    checked: Array.isArray(
+                                      _vm.dataBeingEdited[props.column.field]
                                     )
+                                      ? _vm._i(
+                                          _vm.dataBeingEdited[
+                                            props.column.field
+                                          ],
+                                          null
+                                        ) > -1
+                                      : _vm.dataBeingEdited[props.column.field]
                                   },
                                   on: {
                                     change: function($event) {
-                                      _vm.$set(
-                                        _vm.dataBeingEdited,
-                                        props.column.field,
+                                      var $$a =
+                                          _vm.dataBeingEdited[
+                                            props.column.field
+                                          ],
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = null,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            _vm.$set(
+                                              _vm.dataBeingEdited,
+                                              props.column.field,
+                                              $$a.concat([$$v])
+                                            )
+                                        } else {
+                                          $$i > -1 &&
+                                            _vm.$set(
+                                              _vm.dataBeingEdited,
+                                              props.column.field,
+                                              $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1))
+                                            )
+                                        }
+                                      } else {
+                                        _vm.$set(
+                                          _vm.dataBeingEdited,
+                                          props.column.field,
+                                          $$c
+                                        )
+                                      }
+                                    }
+                                  }
+                                })
+                              : (props.column.type == "number" || "date"
+                                  ? props.column.type
+                                  : "text") === "radio"
+                                ? _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value:
+                                          _vm.dataBeingEdited[
+                                            props.column.field
+                                          ],
+                                        expression:
+                                          "dataBeingEdited[props.column.field]"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      id:
+                                        props.column.field +
+                                        "-" +
+                                        props.row.originalIndex,
+                                      title: props.column.label,
+                                      type: "radio"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.dataBeingEdited[props.column.field],
                                         null
                                       )
-                                    }
-                                  }
-                                })
-                              : _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value:
-                                        _vm.dataBeingEdited[props.column.field],
-                                      expression:
-                                        "dataBeingEdited[props.column.field]"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: {
-                                    id:
-                                      props.column.field +
-                                      "-" +
-                                      props.row.originalIndex,
-                                    title: props.column.label,
-                                    type:
-                                      props.column.type == "number" || "date"
-                                        ? props.column.type
-                                        : "text"
-                                  },
-                                  domProps: {
-                                    value:
-                                      _vm.dataBeingEdited[props.column.field]
-                                  },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        _vm.$set(
+                                          _vm.dataBeingEdited,
+                                          props.column.field,
+                                          null
+                                        )
                                       }
-                                      _vm.$set(
-                                        _vm.dataBeingEdited,
-                                        props.column.field,
-                                        $event.target.value
-                                      )
                                     }
-                                  }
-                                })
-                        ])
-                      : _c("span", [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(props.formattedRow[props.column.field]) +
-                              "\n            "
-                          )
-                        ])
+                                  })
+                                : _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value:
+                                          _vm.dataBeingEdited[
+                                            props.column.field
+                                          ],
+                                        expression:
+                                          "dataBeingEdited[props.column.field]"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      id:
+                                        props.column.field +
+                                        "-" +
+                                        props.row.originalIndex,
+                                      title: props.column.label,
+                                      type:
+                                        props.column.type == "number" || "date"
+                                          ? props.column.type
+                                          : "text"
+                                    },
+                                    domProps: {
+                                      value:
+                                        _vm.dataBeingEdited[props.column.field]
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.dataBeingEdited,
+                                          props.column.field,
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                          ])
+                        : _c("span", [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(props.formattedRow[props.column.field]) +
+                                "\n            "
+                            )
+                          ])
               ]
             }
           }
@@ -67806,7 +67865,7 @@ var render = function() {
             columns: _vm.columns,
             rows: _vm.rows
           },
-          on: { dataChange: _vm.saveData }
+          on: { dataChange: _vm.saveData, dataDelete: _vm.deleteData }
         })
       ],
       1

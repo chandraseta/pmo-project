@@ -36,7 +36,9 @@
                     </div>
                 </div>
             </section>
-            <data-table v-on:dataChange="saveData" :tableTitle="title"
+            <data-table v-on:dataChange="saveData"
+                        v-on:dataDelete="deleteData"
+                        :tableTitle="title"
                         :columns="columns"
                         :rows="rows">
             </data-table>
@@ -253,6 +255,27 @@
                         this.newData = {};
                         this.setAlert('success', response.data.message);
                         getData();
+                    })
+                    .catch(e => {
+                        console.log(e.message);
+                        console.log(e.response.data.message);
+                        this.setAlert('danger', e.response.data.message);
+                    })
+            },
+            deleteData: function (payload) {
+                let url = '/api/training/' + payload.id_training;
+                let data = payload;
+                let config = {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                console.log('Attempting to delete data...');
+                axios.delete(url, data, config)
+                    .then(response => {
+                        console.log(response.data);
+                        this.newData = {};
+                        this.setAlert('success', response.data.message);
                     })
                     .catch(e => {
                         console.log(e.message);

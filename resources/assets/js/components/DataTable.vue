@@ -36,6 +36,12 @@
                         View
                     </a>
                 </span>
+                <span v-else-if="props.column.field == 'deleteButton'">
+                    <button class="btn btn-sm btn-danger"
+                        @click="deleteRow(props)">
+                        Delete
+                    </button>
+                </span>
                 <span v-else-if="props.row.originalIndex == rowBeingEdited && !props.column.immutable">
                     <input class="form-control"
                            :id="props.column.field + '-' + props.row.originalIndex"
@@ -77,6 +83,9 @@
             },
             viewProfile(props) {
                 console.log(props);
+            },
+            deleteRow(props) {
+                this.$emit('dataDelete', props.row);
             }
         }
     };
