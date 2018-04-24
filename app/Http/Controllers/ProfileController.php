@@ -13,6 +13,9 @@ use App\Kinerja;
 use App\UnitKerja;
 use App\Posisi;
 use App\KelompokKompetensi;
+use App\RekomendasiPosisi;
+use App\RekomendasiTraining;
+use App\Training;
 
 class ProfileController extends APIBaseController
 {
@@ -26,8 +29,10 @@ class ProfileController extends APIBaseController
         $unit_kerja = UnitKerja::all();
         $posisi = Posisi::all();
         $kelompok_kompetensi = KelompokKompetensi::all();
+        $rekomendasi_training = RekomendasiTraining::where('id_pegawai', Auth::user()->id)->get();
+        $training_list = Training::all();
 
-        return view("profile.index", compact('data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi'));
+        return view("profile.index", compact('data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi', 'rekomendasi_training', 'training_list'));
     }
 
     private function authenticate($role){
