@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Validator;
+use PHPExcel_IOFactory;
 
 class DataKompetensiController extends APIBaseController
 {
@@ -482,44 +483,49 @@ class DataKompetensiController extends APIBaseController
         $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         $path = $storagePath . 'templates/laporan_template.xlsx';
 
-        $objs = Excel::load($path, function ($excel) use ($obj) {
-            $excel->sheet('Psikogram', function($sheet) use ($obj) {
-                $sheet->getCell('B16')->setValue($obj->nama);
-                $sheet->getCell('C16')->setValue($obj->nip);
-                $sheet->getCell('D16')->setValue($obj->unit_kerja);
-                $sheet->getCell('E16')->setValue($obj->pendidikan_terakhir);
-                $sheet->getCell('F16')->setValue($obj->tanggal_lahir);
-                $sheet->getCell('G16')->setValue($obj->posisi);
-                $sheet->getCell('H16')->setValue($obj->tujuan);
-                $sheet->getCell('I16')->setValue($obj->tanggal);
-                $sheet->getCell('J16')->setValue(floor($obj->kognitif_efisiensi_kecerdasan));
-                $sheet->getCell('K16')->setValue(floor($obj->kognitif_daya_nalar));
-                $sheet->getCell('L16')->setValue(floor($obj->kognitif_daya_asosiasi));
-                $sheet->getCell('M16')->setValue(floor($obj->kognitif_daya_analitis));
-                $sheet->getCell('N16')->setValue(floor($obj->kognitif_daya_antisipasi));
-                $sheet->getCell('O16')->setValue(floor($obj->kognitif_kemandirian_berpikir));
-                $sheet->getCell('P16')->setValue(floor($obj->kognitif_fleksibilitas));
-                $sheet->getCell('Q16')->setValue(floor($obj->kognitif_daya_tangkap));
-                $sheet->getCell('S16')->setValue(floor($obj->interaksional_penempatan_diri));
-                $sheet->getCell('T16')->setValue(floor($obj->interaksional_percaya_diri));
-                $sheet->getCell('U16')->setValue(floor($obj->interaksional_daya_kooperatif));
-                $sheet->getCell('V16')->setValue(floor($obj->interaksional_penyesuaian_perasaan));
-                $sheet->getCell('X16')->setValue(floor($obj->emosional_stabilitas_emosi));
-                $sheet->getCell('Y16')->setValue(floor($obj->emosional_toleransi_stres));
-                $sheet->getCell('Z16')->setValue(floor($obj->emosional_pengendalian_diri));
-                $sheet->getCell('AA16')->setValue(floor($obj->emosional_kemantapan_konsentrasi));
-                $sheet->getCell('AC16')->setValue(floor($obj->sikap_kerja_hasrat_berprestasi));
-                $sheet->getCell('AD16')->setValue(floor($obj->sikap_kerja_daya_tahan));
-                $sheet->getCell('AE16')->setValue(floor($obj->sikap_kerja_keteraturan_kerja));
-                $sheet->getCell('AF16')->setValue(floor($obj->sikap_kerja_pengerahan_energi_kerja));
-                $sheet->getCell('AN16')->setValue(floor($obj->manajerial_efektivitas_perencanaan));
-                $sheet->getCell('AO16')->setValue(floor($obj->manajerial_pengorganisasian_pelaksanaan));
-                $sheet->getCell('AP16')->setValue(floor($obj->manajerial_intensitas_pengarahan));
-                $sheet->getCell('AQ16')->setValue(floor($obj->manajerial_kekuatan_pengawasan));
-            });
-            $excel->sheet('x', null);
-            $excel->calculate();
-        })->download('xlsx');
+        $reader = PHPExcel_IOFactory::createReader('Excel2007');
+        $reader->setIncludeCharts(TRUE);
+        $excel = $reader->load($path);
+        $sheet = $excel->getSheetByName('Psikogram');
+
+        $sheet->getCell('B16')->setValue($obj->nama);
+        $sheet->getCell('C16')->setValue($obj->nip);
+        $sheet->getCell('D16')->setValue($obj->unit_kerja);
+        $sheet->getCell('E16')->setValue($obj->pendidikan_terakhir);
+        $sheet->getCell('F16')->setValue($obj->tanggal_lahir);
+        $sheet->getCell('G16')->setValue($obj->posisi);
+        $sheet->getCell('H16')->setValue($obj->tujuan);
+        $sheet->getCell('I16')->setValue($obj->tanggal);
+        $sheet->getCell('J16')->setValue(floor($obj->kognitif_efisiensi_kecerdasan));
+        $sheet->getCell('K16')->setValue(floor($obj->kognitif_daya_nalar));
+        $sheet->getCell('L16')->setValue(floor($obj->kognitif_daya_asosiasi));
+        $sheet->getCell('M16')->setValue(floor($obj->kognitif_daya_analitis));
+        $sheet->getCell('N16')->setValue(floor($obj->kognitif_daya_antisipasi));
+        $sheet->getCell('O16')->setValue(floor($obj->kognitif_kemandirian_berpikir));
+        $sheet->getCell('P16')->setValue(floor($obj->kognitif_fleksibilitas));
+        $sheet->getCell('Q16')->setValue(floor($obj->kognitif_daya_tangkap));
+        $sheet->getCell('S16')->setValue(floor($obj->interaksional_penempatan_diri));
+        $sheet->getCell('T16')->setValue(floor($obj->interaksional_percaya_diri));
+        $sheet->getCell('U16')->setValue(floor($obj->interaksional_daya_kooperatif));
+        $sheet->getCell('V16')->setValue(floor($obj->interaksional_penyesuaian_perasaan));
+        $sheet->getCell('X16')->setValue(floor($obj->emosional_stabilitas_emosi));
+        $sheet->getCell('Y16')->setValue(floor($obj->emosional_toleransi_stres));
+        $sheet->getCell('Z16')->setValue(floor($obj->emosional_pengendalian_diri));
+        $sheet->getCell('AA16')->setValue(floor($obj->emosional_kemantapan_konsentrasi));
+        $sheet->getCell('AC16')->setValue(floor($obj->sikap_kerja_hasrat_berprestasi));
+        $sheet->getCell('AD16')->setValue(floor($obj->sikap_kerja_daya_tahan));
+        $sheet->getCell('AE16')->setValue(floor($obj->sikap_kerja_keteraturan_kerja));
+        $sheet->getCell('AF16')->setValue(floor($obj->sikap_kerja_pengerahan_energi_kerja));
+        $sheet->getCell('AN16')->setValue(floor($obj->manajerial_efektivitas_perencanaan));
+        $sheet->getCell('AO16')->setValue(floor($obj->manajerial_pengorganisasian_pelaksanaan));
+        $sheet->getCell('AP16')->setValue(floor($obj->manajerial_intensitas_pengarahan));
+        $sheet->getCell('AQ16')->setValue(floor($obj->manajerial_kekuatan_pengawasan));
+
+        $writer = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        header('Content-type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment; filename="file.xlsx"');
+        $writer->setIncludeCharts(TRUE);
+        $writer->save('php://output');
     }
 
     private function authenticate($role)
