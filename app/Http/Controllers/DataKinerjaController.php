@@ -204,7 +204,9 @@ class DataKinerjaController extends APIBaseController
             if ($extension == "xlsx" || $extension == "xls" || $extension == "csv") {
                 // Load data from Excel file
                 $path = $request->excel->getRealPath();
-                $objs = Excel::load($path, null)->get();
+                $objs = Excel::load($path, function ($reader) {
+                    $reader->ignoreEmpty();
+                })->get();
 
                 // Parse data
                 if (!empty($objs) && $objs->count()) {
