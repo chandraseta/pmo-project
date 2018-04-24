@@ -431,6 +431,97 @@ class DataKompetensiController extends APIBaseController
         }
     }
 
+    public function generateReport($id) {
+        $obj = DB::table('denormalized_pegawai')
+            ->join('kompetensi', 'denormalized_pegawai.id_user', '=', 'kompetensi.id_pegawai')
+            ->select([
+                'nama',
+                'nip',
+                'unit_kerja',
+                'pendidikan_terakhir',
+                'tanggal_lahir',
+                'posisi',
+                'tujuan',
+                'tanggal',
+                'kognitif_efisiensi_kecerdasan',
+                'kognitif_daya_nalar',
+                'kognitif_daya_asosiasi',
+                'kognitif_daya_analitis',
+                'kognitif_daya_antisipasi',
+                'kognitif_kemandirian_berpikir',
+                'kognitif_fleksibilitas',
+                'kognitif_daya_tangkap',
+                'interaksional_penempatan_diri',
+                'interaksional_percaya_diri',
+                'interaksional_daya_kooperatif',
+                'interaksional_penyesuaian_perasaan',
+                'emosional_stabilitas_emosi',
+                'emosional_toleransi_stres',
+                'emosional_pengendalian_diri',
+                'emosional_kemantapan_konsentrasi',
+                'sikap_kerja_hasrat_berprestasi',
+                'sikap_kerja_daya_tahan',
+                'sikap_kerja_keteraturan_kerja',
+                'sikap_kerja_pengerahan_energi_kerja',
+                'manajerial_efektivitas_perencanaan',
+                'manajerial_pengorganisasian_pelaksanaan',
+                'manajerial_intensitas_pengarahan',
+                'manajerial_kekuatan_pengawasan',
+            ])
+            ->where('denormalized_pegawai.id_user', '=', $id)
+            ->orderBy('tanggal', 'desc')
+            ->limit(1)
+            ->get();
+        
+        if (empty($obj) || $obj->count() == 0) {
+            return response('Data kompetensi tidak ditemukan', 404);
+        }
+        
+        $obj = $obj[0];
+
+        $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+        $path = $storagePath . 'templates/laporan_template.xlsx';
+
+        $objs = Excel::load($path, function ($excel) use ($obj) {
+            $excel->sheet('Psikogram', function($sheet) use ($obj) {
+                $sheet->getCell('B16')->setValue($obj->nama);
+                $sheet->getCell('C16')->setValue($obj->nip);
+                $sheet->getCell('D16')->setValue($obj->unit_kerja);
+                $sheet->getCell('E16')->setValue($obj->pendidikan_terakhir);
+                $sheet->getCell('F16')->setValue($obj->tanggal_lahir);
+                $sheet->getCell('G16')->setValue($obj->posisi);
+                $sheet->getCell('H16')->setValue($obj->tujuan);
+                $sheet->getCell('I16')->setValue($obj->tanggal);
+                $sheet->getCell('J16')->setValue(floor($obj->kognitif_efisiensi_kecerdasan));
+                $sheet->getCell('K16')->setValue(floor($obj->kognitif_daya_nalar));
+                $sheet->getCell('L16')->setValue(floor($obj->kognitif_daya_asosiasi));
+                $sheet->getCell('M16')->setValue(floor($obj->kognitif_daya_analitis));
+                $sheet->getCell('N16')->setValue(floor($obj->kognitif_daya_antisipasi));
+                $sheet->getCell('O16')->setValue(floor($obj->kognitif_kemandirian_berpikir));
+                $sheet->getCell('P16')->setValue(floor($obj->kognitif_fleksibilitas));
+                $sheet->getCell('Q16')->setValue(floor($obj->kognitif_daya_tangkap));
+                $sheet->getCell('S16')->setValue(floor($obj->interaksional_penempatan_diri));
+                $sheet->getCell('T16')->setValue(floor($obj->interaksional_percaya_diri));
+                $sheet->getCell('U16')->setValue(floor($obj->interaksional_daya_kooperatif));
+                $sheet->getCell('V16')->setValue(floor($obj->interaksional_penyesuaian_perasaan));
+                $sheet->getCell('X16')->setValue(floor($obj->emosional_stabilitas_emosi));
+                $sheet->getCell('Y16')->setValue(floor($obj->emosional_toleransi_stres));
+                $sheet->getCell('Z16')->setValue(floor($obj->emosional_pengendalian_diri));
+                $sheet->getCell('AA16')->setValue(floor($obj->emosional_kemantapan_konsentrasi));
+                $sheet->getCell('AC16')->setValue(floor($obj->sikap_kerja_hasrat_berprestasi));
+                $sheet->getCell('AD16')->setValue(floor($obj->sikap_kerja_daya_tahan));
+                $sheet->getCell('AE16')->setValue(floor($obj->sikap_kerja_keteraturan_kerja));
+                $sheet->getCell('AF16')->setValue(floor($obj->sikap_kerja_pengerahan_energi_kerja));
+                $sheet->getCell('AN16')->setValue(floor($obj->manajerial_efektivitas_perencanaan));
+                $sheet->getCell('AO16')->setValue(floor($obj->manajerial_pengorganisasian_pelaksanaan));
+                $sheet->getCell('AP16')->setValue(floor($obj->manajerial_intensitas_pengarahan));
+                $sheet->getCell('AQ16')->setValue(floor($obj->manajerial_kekuatan_pengawasan));
+            });
+            $excel->sheet('x', null);
+            $excel->calculate();
+        })->download('xlsx');
+    }
+
     private function authenticate($role)
     {
         if (Auth::check()) {
