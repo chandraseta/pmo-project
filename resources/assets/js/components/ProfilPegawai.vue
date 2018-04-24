@@ -1138,6 +1138,19 @@
                 this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
                 this.isEditKepegawaian = false;
 
+                console.log(this.dataKepegawaian);
+
+                // axios.post('/api/kepegawaian/' + this.id, {
+                //     kepegawaian: this.dataKepegawaian,
+                //     _method: 'put'
+                // })
+                // .then(function (response) {
+                //     console.log(response);
+                //     window.location.href = "/pages/profile";
+                // })
+                // .catch(function (error) {
+                //     alert(error);
+                // });
             },
 
             saveRiwayatPegawai() {
@@ -1166,7 +1179,21 @@
                 this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
                 this.isEditRiwayat = false;
 
-                
+                console.log(this.riwayatPendidikan);
+                console.log(this.riwayatPekerjaan);
+
+                axios.post('/api/riwayat/' + this.id, {
+                    pendidikan: this.riwayatPendidikan,
+                    pekerjaan: this.riwayatPekerjaan,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    window.location.href = "/pages/profile";
+                })
+                .catch(function (error) {
+                    alert(error);
+                });
             },
 
             saveSertifikat() {

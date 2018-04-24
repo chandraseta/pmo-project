@@ -23,13 +23,11 @@ class SertifikatController extends APIBaseController
     	$input = $request->all();
 
         $pegawai = Pegawai::find($id);
-        $sertifikat = Sertifikat::where('id_pegawai', $id);
-
-        if ($sertifikat->count() > 0) {
-            $sertifikat->delete();
-        }
 
         for ($i = 0; $i < count($input['sertifikat']); $i++) {
+
+            $sertifikat = Sertifikat::find($input['sertifikat'][$i]['id_sertifikat']);
+
         	$imageData = $input['sertifikat'][$i]['nama_file'];
 
             if(explode("/", $imageData)[0] === "data:image"){
@@ -40,14 +38,14 @@ class SertifikatController extends APIBaseController
 				$fileName = explode("/", $imageData)[1];
 			}
 
-            $postSertifikat = Sertifikat::create([
-                'id_pegawai' => $id,
-                'nama_file' => $fileName,
-                'judul' => $input['sertifikat'][$i]['judul'],
-                'lembaga' => $input['sertifikat'][$i]['lembaga'],
-                'tahun_diterbitkan' => $input['sertifikat'][$i]['tahun_diterbitkan'],
-                'catatan' => $input['sertifikat'][$i]['catatan'],
-            ]);
+            $sertifikat->id_pegawai = $id;
+            $sertifikat->nama_file = $fileName;
+            $sertifikat->judul = $input['sertifikat'][$i]['judul'];
+            $sertifikat->lembaga = $input['sertifikat'][$i]['lembaga'];
+            $sertifikat->tahun_diterbitkan = $input['sertifikat'][$i]['tahun_diterbitkan'];
+            $sertifikat->catatan = $input['sertifikat'][$i]['catatan'];
+
+            $sertifikat->save();
         }
 
         return $this->sendResponse($input, 'Sertifikat created successfully.');
