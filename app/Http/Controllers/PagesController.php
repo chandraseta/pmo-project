@@ -32,6 +32,7 @@ class PagesController extends APIBaseController
 
     public function pegawai(){
         if(!$this->authenticate(4)){return redirect('/');}
+        if(!$this->authenticate(1)){return redirect('/pages/profile/100');}
 
         $id = Auth::user()->id;
 
@@ -54,6 +55,32 @@ class PagesController extends APIBaseController
         $last_edited = Pegawai::where('id_user', $id)->first()->updated_at;
 
         return view("profile.index", compact('last_edited', 'nama_pengubah','data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi', 'rekomendasi_training', 'training_list', 'rekomendasi_posisi'));
+    }
+
+    public function pegawaiSpecific($id){
+        if(!$this->authenticate(2)){return redirect('/');}
+
+        $id_pmo = Auth::user()->id;
+
+        $data_kinerja = Kinerja::where('id_pegawai', $id)
+                                ->orderBy('tahun', 'ASC')
+                                ->orderBy('semester', 'ASC')
+                                ->get();
+        $unit_kerja = UnitKerja::all();
+        $posisi = Posisi::all();
+        $kelompok_kompetensi = KelompokKompetensi::all();
+        $rekomendasi_training = RekomendasiTraining::where('id_pegawai', $id)->get();
+        $training_list = Training::all();
+        $rekomendasi_posisi = RekomendasiPosisi::where('id_pegawai', $id)->get();
+        $id_pengubah = Pegawai::where('id_user', $id)->first()->id_pengubah;
+        if ($id_pengubah === $id_pmo) {
+            $nama_pengubah = "Anda";
+        } else {
+            $nama_pengubah = User::where('id', $id_pengubah)->first()->name;
+        }
+        $last_edited = Pegawai::where('id_user', $id)->first()->updated_at;
+
+        return view("profile.pmo", compact('id', 'last_edited', 'nama_pengubah','data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi', 'rekomendasi_training', 'training_list', 'rekomendasi_posisi'));
     }
 
     public function pmo() {

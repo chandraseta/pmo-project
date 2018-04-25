@@ -19,6 +19,8 @@ Route::get('/pages', 'PagesController@landing');
 
 Route::get('/pages/profile', 'PagesController@pegawai');
 
+Route::get('/pages/profile/{id}', 'PagesController@pegawaiSpecific');
+
 Route::get('/pages/pmo', 'PagesController@pmo');
 
 Route::get('/pages/admin', 'PagesController@admin');
