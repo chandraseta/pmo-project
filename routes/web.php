@@ -17,7 +17,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/pages', 'PagesController@landing');
 
-Route::get('/pages/profile', 'ProfileController@index');
+Route::get('/pages/profile', 'PagesController@pegawai');
 
 Route::get('/pages/pmo', 'PagesController@pmo');
 
