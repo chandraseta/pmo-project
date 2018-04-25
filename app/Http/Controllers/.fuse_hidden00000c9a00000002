@@ -79,9 +79,7 @@ class PagesController extends APIBaseController
         }
         $last_edited = Pegawai::where('id_user', $id)->first()->updated_at;
 
-        
-
-        return view("profile.pmo", compact('id_pmo','id', 'last_edited', 'nama_pengubah','data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi', 'rekomendasi_training', 'training_list', 'rekomendasi_posisi'));
+        return view("profile.pmo", compact('id', 'last_edited', 'nama_pengubah','data_kinerja', 'unit_kerja', 'posisi', 'kelompok_kompetensi', 'rekomendasi_training', 'training_list', 'rekomendasi_posisi'));
     }
 
     public function pmo() {

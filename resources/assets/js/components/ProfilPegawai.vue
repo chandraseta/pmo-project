@@ -693,13 +693,15 @@
                 Hasil Kompetensi
                 <!-- <button class="btn btn-primary float-sm-right" v-on:click="editDataKompetensi" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                 -->    </button>
+                 </button> -->
             </div>
 
             <div class="card-body">
                 <div class="container">
 
-                    Belum ditambahkan.
+                    <button class="btn btn-primary float-sm-left" v-on:click="downloadKompetensi" v-bind:disabled="disableEdit">
+                    Download <i class="fas fa-download"></i>
+                 </button>
 
                 </div>
             </div>
@@ -710,9 +712,9 @@
         <div class="card" id="rekomendasi">
             <div class="card-header">
                 Rekomendasi
-                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editRekomendasi" v-bind:disabled="disableEdit">
+                 <!-- <button class="btn btn-primary float-sm-right" v-on:click="editRekomendasi" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                 -->    </button>
+                 </button> -->
             </div>
 
             <div class="card-body">
@@ -987,6 +989,10 @@
         },
 
         methods: {
+            downloadKompetensi() {
+                window.open('/api/kompetensi/report/' + this.id);
+            },
+
             showAllDataKinerja() {
                 this.isShowAllDataKinerja = true;
                 this.dataKinerjaShow = this.dataKinerja;

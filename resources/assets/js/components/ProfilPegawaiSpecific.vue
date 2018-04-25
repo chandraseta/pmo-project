@@ -690,7 +690,7 @@
 
         <div class="card" id="data-kompetensi">
             <div class="card-header">
-                Hasil Kompetensi<button class="btn btn-primary float-sm-right" v-on:click="editDataKompetensi" v-bind:disabled="disableEdit">
+                Hasil Kompetensi<button class="btn btn-primary float-sm-right" v-on:click="editKommpetensi" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
                     </button>
             </div>
@@ -698,7 +698,9 @@
             <div class="card-body">
                 <div class="container">
 
-                    Belum ditambahkan.
+                     <button class="btn btn-primary float-sm-left" v-on:click="downloadKompetensi" v-bind:disabled="disableEdit">
+                    Download <i class="fas fa-download"></i>
+                 </button>
 
                 </div>
             </div>
@@ -847,7 +849,7 @@
 
 <script>
     export default {
-        props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
+        props: ['id-pmo','id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
 
         data() {
             return {
@@ -985,6 +987,14 @@
         },
 
         methods: {
+            downloadKompetensi() {
+                window.open('/api/kompetensi/report/' + this.id);
+            },
+
+            editKommpetensi() {
+                window.open('/pages/pmo?nip=' + this.pegawai.nopeg + '&tab=dataKompetensi');
+            },
+
             showAllDataKinerja() {
                 this.isShowAllDataKinerja = true;
                 this.dataKinerjaShow = this.dataKinerja;
@@ -1258,7 +1268,7 @@
                 })
                 .then(function (response) {
                     console.log(response);
-                    window.location.href = '/pages/profile';
+                    window.location.href = '/pages/profile/' + this.id;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -1284,7 +1294,7 @@
                 })
                 .then(function (response) {
                     console.log(response);
-                    window.location.href = "/pages/profile";
+                    window.location.href = "/pages/profile/" + this.id;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -1328,7 +1338,7 @@
                 })
                 .then(function (response) {
                     console.log(response);
-                    window.location.href = "/pages/profile";
+                    window.location.href = "/pages/profile/" + this.id;
                 })
                 .catch(function (error) {
                     console.log(error);
