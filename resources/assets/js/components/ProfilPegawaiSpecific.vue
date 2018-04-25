@@ -3,9 +3,9 @@
         <div class="card" id="profil-pegawai-specific">
             <div class="card-header">
                 Profil Pegawai
-                <button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">
+                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                </button>
+                </button> -->
             </div>
 
             <div class="card-body">
@@ -186,9 +186,9 @@
         <div class="card" id="data-kepegawaian">
             <div class="card-header">
                 Data Kepegawaian
-                <button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">
+                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                </button>
+                </button> -->
             </div>
 
             <div class="card-body">
@@ -299,9 +299,10 @@
 
         <div class="card" id="riwayat-pegawai">
             <div class="card-header">
-                Riwayat Pendidikan dan Pekerjaan<button class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai" v-bind:disabled="disableEdit">
+                Riwayat Pendidikan dan Pekerjaan
+                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                    </button>
+                </button> -->
             </div>
 
             <div class="card-body">
@@ -945,7 +946,7 @@
                     this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
                     this.pegawai.email = responsePegawai["user"]["email"];
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
-                    this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
+                    this.pegawai.imageProfileUrl = 'http://localhost:8000/pages/pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
                     this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
                     this.updateProfilPegawai();
 
@@ -1076,7 +1077,7 @@
 
             updateSertifikat(){
                 for(var i = 0; i < this.sertifikat.length; i++){
-                    this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
+                    this.sertifikat[i].nama_file = 'http://localhost:8000/pages/simage/' + this.sertifikat[i].nama_file;
                 }
             },
 

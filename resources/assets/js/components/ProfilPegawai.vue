@@ -594,9 +594,10 @@
 
         <div class="card" id="data-kinerja">
             <div class="card-header">
-                Hasil Kinerja<button class="btn btn-primary float-sm-right" v-on:click="editDataKinerja" v-bind:disabled="disableEdit">
+                Hasil Kinerja
+                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editDataKinerja" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                    </button>
+                 -->    </button>
             </div>
 
             <div class="card-body">
@@ -689,9 +690,10 @@
 
         <div class="card" id="data-kompetensi">
             <div class="card-header">
-                Hasil Kompetensi<button class="btn btn-primary float-sm-right" v-on:click="editDataKompetensi" v-bind:disabled="disableEdit">
+                Hasil Kompetensi
+                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editDataKompetensi" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                    </button>
+                 -->    </button>
             </div>
 
             <div class="card-body">
@@ -707,9 +709,10 @@
 
         <div class="card" id="rekomendasi">
             <div class="card-header">
-                Rekomendasi<button class="btn btn-primary float-sm-right" v-on:click="editRekomendasi" v-bind:disabled="disableEdit">
+                Rekomendasi
+                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editRekomendasi" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                    </button>
+                 -->    </button>
             </div>
 
             <div class="card-body">

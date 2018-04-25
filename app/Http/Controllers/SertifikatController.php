@@ -34,7 +34,8 @@ class SertifikatController extends APIBaseController
                 $image = Image::make($imageData);   
                 $image->save(public_path('sertifikat/').$fileName);
             }else{
-                $fileName = explode("/", $imageData)[1];
+                $string = explode("/", $imageData);
+                $fileName = $string[count($string-1)];
             }
 
             $sertifikat = null;
