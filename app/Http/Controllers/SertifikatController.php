@@ -69,6 +69,6 @@ class SertifikatController extends APIBaseController
         $data = Sertifikat::where('id_pegawai',$id)->whereNotIn('id_sertifikat', $list);
         $data->delete();
 
-        return $this->sendResponse($input, 'Sertifikat updated successfully.');
+        return $this->sendResponse($id, 'Sertifikat updated successfully.');
     }
 }

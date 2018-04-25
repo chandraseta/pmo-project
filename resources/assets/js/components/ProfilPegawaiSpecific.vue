@@ -962,6 +962,7 @@
                 })
                 .catch(function (error) {
                     console.log(error);
+                    alert('Gagal mengambil data');
                 });
 
             //caching others
@@ -1260,7 +1261,8 @@
                     window.location.href = '/pages/profile';
                 })
                 .catch(function (error) {
-                    alert(error);
+                    console.log(error);
+                    alert('Semua kolom harus terisi');
                 });
 
                 console.log(this.dataKepegawaian);
@@ -1285,7 +1287,8 @@
                     window.location.href = "/pages/profile";
                 })
                 .catch(function (error) {
-                    alert(error);
+                    console.log(error);
+                    alert('Semua kolom harus terisi');
                 });
             },
 
@@ -1328,7 +1331,8 @@
                     window.location.href = "/pages/profile";
                 })
                 .catch(function (error) {
-                    alert(error);
+                    console.log(error);
+                    alert('Semua kolom harus terisi');
                 });
             },
 
@@ -1344,10 +1348,11 @@
                 })
                 .then(function (response) {
                     console.log(response);
-                    window.location.href = "/pages/profile";
+                    window.location.href = "/pages/profile/" + response.data.data;
                 })
                 .catch(function (error) {
-                    alert(error);
+                    console.log(error);
+                    alert('Semua kolom harus terisi');
                 });
             },
 

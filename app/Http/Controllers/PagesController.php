@@ -31,8 +31,7 @@ class PagesController extends APIBaseController
     }
 
     public function pegawai(){
-        if(!$this->authenticate(4)){return redirect('/');}
-        if(!$this->authenticate(1)){return redirect('/pages/profile/100');}
+        if(!$this->authenticate(1)){return redirect('/');}
 
         $id = Auth::user()->id;
 
