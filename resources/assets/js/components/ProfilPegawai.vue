@@ -1355,7 +1355,7 @@
                     _method: 'put'
                 })
                 .then(function (response) {
-                    console.log(response);
+                    console.log(response.data.data);
                     window.location.href = "/pages/profile";
                 })
                 .catch(function (error) {

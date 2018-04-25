@@ -12,15 +12,15 @@ use Intervention\Image\ImageManagerStatic as Image;
 class SertifikatController extends APIBaseController
 {
 
-	public function index(){
-		$sertifikat = Sertifikat::all();
-		return $this->sendResponse($sertifikat, 'Sertifikat created successfully.');
-	}
+    public function index(){
+        $sertifikat = Sertifikat::all();
+        return $this->sendResponse($sertifikat, 'Sertifikat created successfully.');
+    }
 
     public function update(Request $request, $id){
-    	// if (!$this->authenticate(4)) {return $this->sendError('You are not authenticated.');}
+        // if (!$this->authenticate(4)) {return $this->sendError('You are not authenticated.');}
 
-    	$input = $request->all();
+        $input = $request->all();
 
         $pegawai = Pegawai::find($id);
         $list = array();
@@ -44,6 +44,7 @@ class SertifikatController extends APIBaseController
             }
 
             if(is_null($sertifikat)){
+                $id = (int) $id;
                 $postSertifikat = Sertifikat::create([
                     'id_pegawai' => $id,
                     'nama_file' => $fileName,
