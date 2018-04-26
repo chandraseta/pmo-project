@@ -66829,7 +66829,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dataTraining: [],
             newData: {},
             disableTambahDataButton: true,
-            disableDownloadDataButton: true,
+            disableDownloadDataButton: false,
             disableUploadDataButton: true,
             isFormInvalid: {},
             statusAlert: {

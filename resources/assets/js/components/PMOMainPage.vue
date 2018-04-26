@@ -148,7 +148,7 @@
                 dataTraining: [],
                 newData: {},
                 disableTambahDataButton: true,
-                disableDownloadDataButton: true,
+                disableDownloadDataButton: false,
                 disableUploadDataButton: true,
                 isFormInvalid: {},
                 statusAlert: {
