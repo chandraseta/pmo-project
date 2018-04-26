@@ -380,20 +380,6 @@
             this.getKompetensi();
             this.getKinerja();
             this.getTraining();
-        },
-        mounted: function () {
-            let url = new URL(window.location.href);
-            console.log(window.location.href);
-            let tabParam = url.searchParams.get("tab");
-            let nipParam = url.searchParams.get("nip");
-            console.log(tabParam);
-            console.log(nipParam);
-            if (nipParam != null && tabParam != null) {
-                let payload = {};
-                payload.name = tabParam;
-                payload.label = "Data Kompetensi";
-                this.changeTable(payload);
-            }
         }
     }
 </script>
