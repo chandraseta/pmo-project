@@ -8,7 +8,8 @@
                 :lineNumbers="true"
                 :searchOptions="{
                     enabled: true,
-                    placeholder: 'Cari data'
+                    placeholder: 'Cari data',
+                    externalQuery: searchQuery
                 }"
                 :paginationOptions="{
                     enabled: true,
@@ -86,7 +87,8 @@
         props: [
             'tableTitle',
             'columns',
-            'rows'
+            'rows',
+            'searchQuery'
         ],
         data(){
             return {

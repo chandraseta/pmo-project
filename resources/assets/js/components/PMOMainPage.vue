@@ -40,7 +40,8 @@
                         v-on:dataDelete="deleteData"
                         :tableTitle="title"
                         :columns="columns"
-                        :rows="rows">
+                        :rows="rows"
+                        :searchQuery="searchQuery">
             </data-table>
         </main>
         <footer>
@@ -142,13 +143,14 @@
                 currentTab: 'dataPegawai',
                 columns: [],
                 rows: [],
+                searchQuery: null,
                 dataPegawai: [],
                 dataKinerja: [],
                 dataKompetensi: [],
                 dataTraining: [],
                 newData: {},
                 disableTambahDataButton: true,
-                disableDownloadDataButton: true,
+                disableDownloadDataButton: false,
                 disableUploadDataButton: true,
                 isFormInvalid: {},
                 statusAlert: {
@@ -372,6 +374,13 @@
             unsetAlert: function () {
                 this.statusAlert.display = false;
                 document.removeEventListener('click', this.unsetAlert);
+            },
+            getNIPFromUrl: function () {
+                let url = new URL(window.location.href);
+                let nipParam = url.searchParams.get("nip");
+                if (nipParam != null) {
+                    this.searchQuery = nipParam;
+                }
             }
         },
         created: function () {
@@ -380,20 +389,8 @@
             this.getKompetensi();
             this.getKinerja();
             this.getTraining();
-        },
-        mounted: function () {
-            let url = new URL(window.location.href);
-            console.log(window.location.href);
-            let tabParam = url.searchParams.get("tab");
-            let nipParam = url.searchParams.get("nip");
-            console.log(tabParam);
-            console.log(nipParam);
-            if (nipParam != null && tabParam != null) {
-                let payload = {};
-                payload.name = tabParam;
-                payload.label = "Data Kompetensi";
-                this.changeTable(payload);
-            }
+
+            this.getNIPFromUrl();
         }
     }
 </script>

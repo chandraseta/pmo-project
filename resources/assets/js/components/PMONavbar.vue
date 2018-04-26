@@ -73,6 +73,12 @@
         },
         mounted() {
             console.log("Navbar mounted.");
+
+            let url = new URL(window.location.href);
+            let tabParam = url.searchParams.get("tab");
+            if (tabParam != null) {
+                this.navigateTo(tabParam);
+            }
         }
     }
 </script>
