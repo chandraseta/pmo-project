@@ -1364,6 +1364,21 @@
                     console.log(error);
                     alert('Semua kolom harus terisi');
                 });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
             saveDataKinerja() {
@@ -1403,6 +1418,21 @@
                     alert(error);
                     alert('Semua kolom harus terisi');
                 });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
             saveRekomendasi() {
@@ -1418,6 +1448,21 @@
                 })
                 .then(function (response) {
                     console.log(response);
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
                     // window.location.href = "/pages/profile/" + this.id;
                 })
                 .catch(function (error) {
