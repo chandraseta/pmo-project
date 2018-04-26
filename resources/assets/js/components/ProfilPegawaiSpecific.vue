@@ -1358,7 +1358,7 @@
                 })
                 .then(function (response) {
                     console.log(response);
-                    window.location.href = "/pages/profile/" + response.data.data;
+                    // window.location.href = "/pages/profile/" + response.data.data;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -1389,6 +1389,20 @@
                 } else {
                     this.hideDataKinerja();
                 }
+
+                axios.post('/api/savekinerja/' + this.id, {
+                    kinerja: this.dataKinerja,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
             saveRekomendasi() {
@@ -1397,6 +1411,9 @@
                 this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
                 this.isEditRekomendasi = false;
             },
+
+
+            /////
 
             cancelProfilPegawai() {
                 this.enableEditButton();

@@ -49,3 +49,4 @@ Route::resource('riwayat', 'RiwayatController');
 
 Route::resource('sertifikat', 'SertifikatController');
 
+Route::resource('savekinerja', 'HasilKinerjaController');
