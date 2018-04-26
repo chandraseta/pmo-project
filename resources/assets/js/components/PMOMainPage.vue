@@ -40,7 +40,8 @@
                         v-on:dataDelete="deleteData"
                         :tableTitle="title"
                         :columns="columns"
-                        :rows="rows">
+                        :rows="rows"
+                        :searchQuery="searchQuery">
             </data-table>
         </main>
         <footer>
@@ -142,6 +143,7 @@
                 currentTab: 'dataPegawai',
                 columns: [],
                 rows: [],
+                searchQuery: null,
                 dataPegawai: [],
                 dataKinerja: [],
                 dataKompetensi: [],
@@ -372,6 +374,13 @@
             unsetAlert: function () {
                 this.statusAlert.display = false;
                 document.removeEventListener('click', this.unsetAlert);
+            },
+            getNIPFromUrl: function () {
+                let url = new URL(window.location.href);
+                let nipParam = url.searchParams.get("nip");
+                if (nipParam != null) {
+                    this.searchQuery = nipParam;
+                }
             }
         },
         created: function () {
@@ -380,6 +389,8 @@
             this.getKompetensi();
             this.getKinerja();
             this.getTraining();
+
+            this.getNIPFromUrl();
         }
     }
 </script>

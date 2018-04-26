@@ -75,12 +75,8 @@
             console.log("Navbar mounted.");
 
             let url = new URL(window.location.href);
-            console.log(window.location.href);
             let tabParam = url.searchParams.get("tab");
-            let nipParam = url.searchParams.get("nip");
-            console.log(tabParam);
-            console.log(nipParam);
-            if (nipParam != null && tabParam != null) {
+            if (tabParam != null) {
                 this.navigateTo(tabParam);
             }
         }

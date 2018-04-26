@@ -66668,7 +66668,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66679,6 +66679,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -66823,6 +66824,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentTab: 'dataPegawai',
             columns: [],
             rows: [],
+            searchQuery: null,
             dataPegawai: [],
             dataKinerja: [],
             dataKompetensi: [],
@@ -67064,6 +67066,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         unsetAlert: function unsetAlert() {
             this.statusAlert.display = false;
             document.removeEventListener('click', this.unsetAlert);
+        },
+        getNIPFromUrl: function getNIPFromUrl() {
+            var url = new URL(window.location.href);
+            var nipParam = url.searchParams.get("nip");
+            if (nipParam != null) {
+                this.searchQuery = nipParam;
+            }
         }
     },
     created: function created() {
@@ -67072,6 +67081,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.getKompetensi();
         this.getKinerja();
         this.getTraining();
+
+        this.getNIPFromUrl();
     }
 });
 
@@ -67185,7 +67196,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -67269,12 +67280,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log("Navbar mounted.");
 
         var url = new URL(window.location.href);
-        console.log(window.location.href);
         var tabParam = url.searchParams.get("tab");
-        var nipParam = url.searchParams.get("nip");
-        console.log(tabParam);
-        console.log(nipParam);
-        if (nipParam != null && tabParam != null) {
+        if (tabParam != null) {
             this.navigateTo(tabParam);
         }
     }
@@ -67490,10 +67497,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'data-table',
-    props: ['tableTitle', 'columns', 'rows'],
+    props: ['tableTitle', 'columns', 'rows', 'searchQuery'],
     data: function data() {
         return {
             rowBeingEdited: -1,
@@ -67544,7 +67552,8 @@ var render = function() {
           lineNumbers: true,
           searchOptions: {
             enabled: true,
-            placeholder: "Cari data"
+            placeholder: "Cari data",
+            externalQuery: _vm.searchQuery
           },
           paginationOptions: {
             enabled: true,
@@ -67998,7 +68007,8 @@ var render = function() {
           attrs: {
             tableTitle: _vm.title,
             columns: _vm.columns,
-            rows: _vm.rows
+            rows: _vm.rows,
+            searchQuery: _vm.searchQuery
           },
           on: { dataChange: _vm.saveData, dataDelete: _vm.deleteData }
         })
