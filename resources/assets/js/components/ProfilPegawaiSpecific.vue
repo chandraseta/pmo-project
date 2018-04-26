@@ -1208,7 +1208,7 @@
 
             addRekomendasiPosisi() {
                 var newData = {
-                    id_rekomendasi_training : null,
+                    id_rekomendasi_posisi : null,
                     id_pegawai : null,
                     id_unit_kerja : null,
                     id_posisi : null
@@ -1410,6 +1410,21 @@
                 this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
                 this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
                 this.isEditRekomendasi = false;
+
+                axios.post('/api/rekomendasi/' + this.id, {
+                    training: this.rekomendasiTraining,
+                    posisi: this.rekomendasiPosisi,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
 
