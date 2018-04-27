@@ -936,6 +936,9 @@
                     this.dataKepegawaian = responsePegawai["kepegawaian"];
                     this.riwayatPendidikan = responsePegawai["pendidikan"];
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
+                    this.validationTahunKeluar(this.riwayatPekerjaan);
+
+                    this.updateRiwayat();
                     this.updateDataKepegawaian();
 
                     this.dataKepegawaianPrev = this.dataKepegawaian[this.dataKepegawaian.length-1];
@@ -1302,7 +1305,7 @@
                 });
             },
 
-            saveRiwayatPegawai() {
+            updateRiwayat() {
                 //sort
                 this.riwayatPendidikan.sort(function(a, b){
                         var keyA = a.tahun_masuk,
@@ -1322,6 +1325,11 @@
                         if(keyA > keyB) return 1;
                         return 0;
                     });
+            },
+
+            saveRiwayatPegawai() {
+                
+                this.updateRiwayat();
 
                 this.enableEditButton();
                 this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
