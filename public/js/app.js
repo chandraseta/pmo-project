@@ -67288,7 +67288,10 @@ var render = function() {
     [
       _c(
         "a",
-        { staticClass: "navbar-brand font-weight-bold", attrs: { href: "#" } },
+        {
+          staticClass: "navbar-brand font-weight-bold",
+          attrs: { href: "/pages" }
+        },
         [_vm._v("UPT PMO")]
       ),
       _vm._v(" "),

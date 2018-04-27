@@ -50,6 +50,7 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                text-align: center;
             }
 
             .m-b-md {
@@ -59,20 +60,44 @@
     </head>
     <body>
     <div class="flex-center position-ref full-height">
-
         <div class="content">
-            <div class="links">
-                <a href="/pages/profile">Halaman Profil</a>
-            </div>
+            <div class="row">
+                @if(Auth::check())
+                <div class="col">
+                    <a href="/pages/profile">
+                        <img src="http://localhost:8000/icons/pegawai.png" alt="Profile">
+                    </a>
+                    <div class="links">
+                        <a href="/pages/profile">Profil</a>
+                    </div>
+                </div>
+                @endif
+                @if(Auth::check())
+                    @if(\App\PMO::find(Auth::user()->id))
+                        <div class="col">
+                            <a href="/pages/pmo">
+                                <img src="http://localhost:8000/icons/pmo.png" alt="PMO">
+                            </a>
+                            <div class="links">
+                                <a href="/pages/pmo">PMO</a>
+                            </div>
+                        </div>
+                    @endif
+                @endif
 
-            <div class="links">
-                <a href="/pages/pmo">Halaman PMO</a>
-            </div>
-
-            <div class="links">
-                <a href="/pages/admin">Halaman Admin</a>
+                @if(Auth::check())
+                    @if(\App\Pegawai::find(Auth::user()->id))
+                        <div class="col">
+                            <a href="/pages/admin">
+                                <img src="http://localhost:8000/icons/admin.png" alt="Admin">
+                            </a>
+                            <div class="links">
+                                <a href="/pages/admin">Admin</a>
+                            </div>
+                        </div>
+                    @endif
+                @endif
             </div>
         </div>
     </div>
-    </body>
 @endsection
