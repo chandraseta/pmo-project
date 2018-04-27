@@ -945,7 +945,7 @@
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
                     this.validationTahunKeluar(this.riwayatPekerjaan);
 
-                    
+                    this.updateRiwayat();                    
 
                     this.dataKepegawaianPrev = this.dataKepegawaian[this.dataKepegawaian.length-1];
 
@@ -1442,27 +1442,31 @@
                 }
             },
 
+            updateRiwayat() {
+                //sort
+                this.riwayatPendidikan.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+
+                //sort
+                this.riwayatPekerjaan.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+            },
+
             saveRiwayatPegawai() {
                 if (this.isCompleteRiwayat()) {
-                    //sort
-                    this.riwayatPendidikan.sort(function(a, b){
-                            var keyA = a.tahun_masuk,
-                                keyB = b.tahun_masuk;
-                            // Compare the 2 dates
-                            if(keyA < keyB) return -1;
-                            if(keyA > keyB) return 1;
-                            return 0;
-                        });
-
-                    //sort
-                    this.riwayatPekerjaan.sort(function(a, b){
-                            var keyA = a.tahun_masuk,
-                                keyB = b.tahun_masuk;
-                            // Compare the 2 dates
-                            if(keyA < keyB) return -1;
-                            if(keyA > keyB) return 1;
-                            return 0;
-                        });
+                    this.updateRiwayat();
 
                     this.enableEditButton();
                     this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));

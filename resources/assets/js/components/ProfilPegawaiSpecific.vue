@@ -942,7 +942,8 @@
 
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
                     this.validationTahunKeluar(this.riwayatPekerjaan);
-                    
+
+                    this.updateRiwayat();
 
                     this.dataKepegawaianPrev = this.dataKepegawaian[this.dataKepegawaian.length-1];
 
@@ -1453,49 +1454,53 @@
                 });
             },
 
+            updateRiwayat() {
+                //sort
+                this.riwayatPendidikan.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+
+                //sort
+                this.riwayatPekerjaan.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+            },
+
             saveRiwayatPegawai() {
                 
-                    //sort
-                    this.riwayatPendidikan.sort(function(a, b){
-                            var keyA = a.tahun_masuk,
-                                keyB = b.tahun_masuk;
-                            // Compare the 2 dates
-                            if(keyA < keyB) return -1;
-                            if(keyA > keyB) return 1;
-                            return 0;
-                        });
-    
-                    //sort
-                    this.riwayatPekerjaan.sort(function(a, b){
-                            var keyA = a.tahun_masuk,
-                                keyB = b.tahun_masuk;
-                            // Compare the 2 dates
-                            if(keyA < keyB) return -1;
-                            if(keyA > keyB) return 1;
-                            return 0;
-                        });
-    
-                    this.enableEditButton();
-                    this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
-                    this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
-                    this.isEditRiwayat = false;
-    
-                    console.log(this.riwayatPendidikan);
-                    console.log(this.riwayatPekerjaan);
-    
-                    axios.post('/api/riwayat/' + this.id, {
-                        pendidikan: this.riwayatPendidikan,
-                        pekerjaan: this.riwayatPekerjaan,
-                        _method: 'put'
-                    })
-                    .then(function (response) {
-                        console.log(response);
-                        window.location.href = "/pages/profile/" + this.id;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        alert('Semua kolom harus terisi');
-                    });
+                this.updateRiwayat();
+
+                this.enableEditButton();
+                this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
+                this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
+                this.isEditRiwayat = false;
+
+                console.log(this.riwayatPendidikan);
+                console.log(this.riwayatPekerjaan);
+
+                axios.post('/api/riwayat/' + this.id, {
+                    pendidikan: this.riwayatPendidikan,
+                    pekerjaan: this.riwayatPekerjaan,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
             saveSertifikat() {
