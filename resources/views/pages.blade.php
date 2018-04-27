@@ -78,7 +78,7 @@
                     @if(\App\PMO::find(Auth::user()->id))
                         <div class="col">
                             <a href="/pages/pmo">
-                                <img src="http://pplk2b.if.itb.ac.id:8000/pages/pimage/icons/pmo.png" alt="PMO">
+                                <img src="http://pplk2b.if.itb.ac.id:8000/pages/pimage/pmo.png" alt="PMO">
                             </a>
                             <div class="links">
                                 <a href="/pages/pmo">PMO</a>
@@ -91,7 +91,7 @@
                     @if(\App\Admin::find(Auth::user()->id))
                         <div class="col">
                             <a href="/pages/admin">
-                                <img src="http://pplk2b.if.itb.ac.id:8000/pages/pimage/icons/admin.png" alt="Admin">
+                                <img src="http://pplk2b.if.itb.ac.id:8000/pages/pimage/admin.png" alt="Admin">
                             </a>
                             <div class="links">
                                 <a href="/pages/admin">Admin</a>
