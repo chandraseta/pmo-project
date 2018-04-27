@@ -68,7 +68,7 @@
 
                                     <div v-if="isEditProfile" id="edit-email" class="form-group">
                                         <input v-model="pegawai.email" type="email" class="form-control">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <small class="form-text text-muted">*Wajib diisi dengan format email yang benar</small>
                                     </div>
 
                                 </div>
@@ -161,7 +161,7 @@
 
                                     <div v-if="isEditProfile" id="edit-tahun-masuk" class="form-group">
                                         <input v-model="pegawai.tahunMasuk" type="text" class="form-control">
-                                        <small class="form-text text-muted">*Edit pada data kepegawaian di bawah</small>
+                                        <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </div>
                             </div>
@@ -566,7 +566,7 @@
                                 <td>
                                     <div class="form-group">
                                         <input v-model="dk.catatan" type="text" class="form-control">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <small class="form-text text-muted">*Tidak wajib diisi</small>
                                     </div>
                                 </td>
                             </tr>
@@ -936,9 +936,16 @@
                     var responsePegawai = response.data["data"];
 
                     this.dataKepegawaian = responsePegawai["kepegawaian"];
-                    this.riwayatPendidikan = responsePegawai["pendidikan"];
-                    this.riwayatPekerjaan = responsePegawai["pekerjaan"];
                     this.updateDataKepegawaian();
+                    this.validationTahunKeluar(this.dataKepegawaian);
+
+                    this.riwayatPendidikan = responsePegawai["pendidikan"];
+                    this.validationTahunKeluar(this.riwayatPendidikan);
+
+                    this.riwayatPekerjaan = responsePegawai["pekerjaan"];
+                    this.validationTahunKeluar(this.riwayatPekerjaan);
+
+                    
 
                     this.dataKepegawaianPrev = this.dataKepegawaian[this.dataKepegawaian.length-1];
 
@@ -989,6 +996,14 @@
         },
 
         methods: {
+            validationTahunKeluar(arr) {
+                for (let i=0; i<arr.length; i++) {
+                    if (arr[i].tahun_keluar == 0) {
+                        arr[i].tahun_keluar = '-';
+                    }
+                }
+            },
+
             downloadKompetensi() {
                 window.open('/api/kompetensi/report/' + this.id);
             },
@@ -1249,179 +1264,277 @@
                 this.rekomendasiPosisi.splice(targetIndex, 1);
             },
 
+            isYearValid(year) {
+                year = year.toString();
+                return (year.length == 4 && !isNaN(year) && year > 1945);
+            },
+
+            isCompleteProfilPegawai() {
+                return (this.pegawai.nama != "" && this.pegawai.nama != null) &&
+                        (this.pegawai.tempatLahir != "" && this.pegawai.tempatLahir != null) &&
+                        (this.pegawai.tanggalLahir != "" && this.pegawai.tanggalLahir != null) &&
+                        (this.pegawai.email != "" && this.pegawai.email != null) &&
+                        (this.pegawai.nopeg != "" && this.pegawai.nopeg != null) &&
+                        (this.pegawai.unitKerja.id != "" && this.pegawai.unitKerja.id != null) &&
+                        (this.pegawai.posisi.id != "" && this.pegawai.posisi.id != null) &&
+                        (this.pegawai.kompetensi.id != "" && this.pegawai.kompetensi.id != null) &&
+                        (this.pegawai.tahunMasuk != "" && this.pegawai.tahunMasuk != null) &&
+                        this.isYearValid(this.pegawai.tahunMasuk);
+            },
+
+            isCompleteDataKepegawaian() {
+                var isEmpty = false;
+                var i = 0;
+                while (i<this.dataKepegawaian.length && !isEmpty) {
+                    if (this.dataKepegawaian[i].id_unit_kerja != '' && this.dataKepegawaian[i].id_unit_kerja != null &&
+                        this.dataKepegawaian[i].id_posisi != '' && this.dataKepegawaian[i].id_posisi != null &&
+                        //this.dataKepegawaian[i].id_kelompok_kompetensi != '' && this.dataKepegawaian[i].id_kelompok_kompetensi != null &&
+                        this.dataKepegawaian[i].tahun_masuk != '' && this.dataKepegawaian[i].tahun_masuk != null &&
+                        this.isYearValid(this.dataKepegawaian[i].tahun_masuk) &&
+                        this.dataKepegawaian[i].tahun_keluar != '' && this.dataKepegawaian[i].tahun_keluar != null &&
+                        (this.isYearValid(this.dataKepegawaian[i].tahun_keluar) || this.dataKepegawaian[i].tahun_keluar == '-')
+                        ) {
+                            i++;
+                    } else {
+                        isEmpty = true;
+                    }
+                }
+
+                return !isEmpty;
+            },
+
+            isCompleteRiwayat() {
+                var isEmpty = false;
+                var i = 0;
+                while (i<this.riwayatPendidikan.length && !isEmpty) {
+                    if (this.riwayatPendidikan[i].nama_institusi != '' && this.riwayatPendidikan[i].nama_institusi != null &&
+                        this.riwayatPendidikan[i].strata != '' && this.riwayatPendidikan[i].strata != null &&
+                        this.riwayatPendidikan[i].jurusan != '' && this.riwayatPendidikan[i].jurusan != null &&
+                        this.riwayatPendidikan[i].tahun_masuk != '' && this.riwayatPendidikan[i].tahun_masuk != null &&
+                        this.riwayatPendidikan[i].tahun_keluar != '' && this.riwayatPendidikan[i].tahun_keluar != null &&
+                        this.isYearValid(this.riwayatPendidikan[i].tahun_masuk) &&
+                        (this.isYearValid(this.riwayatPendidikan[i].tahun_keluar) || this.riwayatPendidikan[i].tahun_keluar == '-')
+                        ) {
+                            i++;
+                    } else {
+                        isEmpty = true;
+                    }
+                }
+
+                var i = 0;
+                while (i<this.riwayatPekerjaan.length && !isEmpty) {
+                    if (this.riwayatPekerjaan[i].nama_institusi != '' && this.riwayatPekerjaan[i].nama_institusi != null &&
+                        this.riwayatPekerjaan[i].posisi != '' && this.riwayatPekerjaan[i].posisi != null &&
+                        this.riwayatPekerjaan[i].tahun_masuk != '' && this.riwayatPekerjaan[i].tahun_masuk != null &&
+                        this.riwayatPekerjaan[i].tahun_keluar != '' && this.riwayatPekerjaan[i].tahun_keluar != null &&
+                        this.isYearValid(this.riwayatPekerjaan[i].tahun_masuk) &&
+                        (this.isYearValid(this.riwayatPekerjaan[i].tahun_keluar) || this.riwayatPekerjaan[i].tahun_keluar == '-')
+                        ) {
+                            i++;
+                    } else {
+                        isEmpty = true;
+                    }
+                }
+
+                return !isEmpty;
+            },
+
+            isCompleteSertifikat() {
+                var isEmpty = false;
+                var i = 0;
+                while (i<this.sertifikat.length && !isEmpty) {
+                    if (this.sertifikat[i].judul != '' && this.sertifikat[i].judul != null &&
+                        this.sertifikat[i].lembaga != '' && this.sertifikat[i].lembaga != null &&
+                        this.sertifikat[i].tahun_diterbitkan != '' && this.sertifikat[i].tahun_diterbitkan != null &&
+                        this.isYearValid(this.sertifikat[i].tahun_diterbitkan)
+                        ) {
+                            i++;
+                    } else {
+                        isEmpty = true;
+                    }
+                }
+
+                return !isEmpty;
+            },
+
             saveProfilPegawai() {
-                this.enableEditButton();
+                if (this.isCompleteProfilPegawai()) {
+                    this.enableEditButton();
 
-                this.updateProfilPegawai();
-                this.updateDataKepegawaianAfterEditProfile();
+                    this.updateProfilPegawai();
+                    this.updateDataKepegawaianAfterEditProfile();
 
-                this.cachedPegawai = JSON.parse(JSON.stringify(this.pegawai));
-                this.isEditProfile = false;
+                    this.cachedPegawai = JSON.parse(JSON.stringify(this.pegawai));
+                    this.isEditProfile = false;
 
-                axios.post('/api/pegawai/' + this.id, {
-                    pegawai: this.pegawai,
-                    data_kepegawaian: this.dataKepegawaian,
-                    data_kepegawaian_prev: this.dataKepegawaianPrev,
-                    _method: "put"
-                })
-                .then(function (response) {
-                    console.log(response);
-                    window.location.href = '/pages/profile';
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert('Semua kolom harus terisi');
-                });
+                    axios.post('/api/pegawai/' + this.id, {
+                        pegawai: this.pegawai,
+                        data_kepegawaian: this.dataKepegawaian,
+                        data_kepegawaian_prev: this.dataKepegawaianPrev,
+                        _method: "put"
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        
+                    });
 
-                axios.post('/api/lastedited/' + this.id, {
-                    id_pengubah: this.id,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response);
-                    location.reload();
-                    // window.location.href = "/pages/profile/" + this.id;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert(error);
-                    alert('Semua kolom harus terisi');
-                });
+                    axios.post('/api/lastedited/' + this.id, {
+                        id_pengubah: this.id,
+                        _method: 'put'
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
 
-                console.log(this.dataKepegawaian);
+                    });
+
+                    console.log(this.dataKepegawaian);
+
+                } else {
+                    alert('Kolom yang wajib harus terisi dengan benar');
+                }
+
 
             },
 
             saveDataKepegawaian() {
-                this.updateDataKepegawaian();
-                this.updateProfilPegawai();
-                this.enableEditButton();
-                this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
-                this.isEditKepegawaian = false;
+                if(this.isCompleteDataKepegawaian()) {
+                    this.updateDataKepegawaian();
+                    this.updateProfilPegawai();
+                    this.enableEditButton();
+                    this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
+                    this.isEditKepegawaian = false;
+    
+                    console.log(this.dataKepegawaian);
+    
+                    axios.post('/api/kepegawaian/' + this.id, {
+                        kepegawaian: this.dataKepegawaian,
+                        _method: 'put'
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+    
+                    axios.post('/api/lastedited/' + this.id, {
+                        id_pengubah: this.id,
+                        _method: 'put'
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        
+                    });
 
-                console.log(this.dataKepegawaian);
-
-                axios.post('/api/kepegawaian/' + this.id, {
-                    kepegawaian: this.dataKepegawaian,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response);
-                    window.location.href = "/pages/profile";
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert('Semua kolom harus terisi');
-                });
-
-                axios.post('/api/lastedited/' + this.id, {
-                    id_pengubah: this.id,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response);
-                    location.reload();
-                    // window.location.href = "/pages/profile/" + this.id;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert(error);
-                    alert('Semua kolom harus terisi');
-                });
+                } else {
+                    alert('Kolom yang wajib harus terisi dengan benar');
+                }
             },
 
             saveRiwayatPegawai() {
-                //sort
-                this.riwayatPendidikan.sort(function(a, b){
-                        var keyA = a.tahun_masuk,
-                            keyB = b.tahun_masuk;
-                        // Compare the 2 dates
-                        if(keyA < keyB) return -1;
-                        if(keyA > keyB) return 1;
-                        return 0;
+                if (this.isCompleteRiwayat()) {
+                    //sort
+                    this.riwayatPendidikan.sort(function(a, b){
+                            var keyA = a.tahun_masuk,
+                                keyB = b.tahun_masuk;
+                            // Compare the 2 dates
+                            if(keyA < keyB) return -1;
+                            if(keyA > keyB) return 1;
+                            return 0;
+                        });
+
+                    //sort
+                    this.riwayatPekerjaan.sort(function(a, b){
+                            var keyA = a.tahun_masuk,
+                                keyB = b.tahun_masuk;
+                            // Compare the 2 dates
+                            if(keyA < keyB) return -1;
+                            if(keyA > keyB) return 1;
+                            return 0;
+                        });
+
+                    this.enableEditButton();
+                    this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
+                    this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
+                    this.isEditRiwayat = false;
+
+                    console.log(this.riwayatPendidikan);
+                    console.log(this.riwayatPekerjaan);
+
+                    axios.post('/api/riwayat/' + this.id, {
+                        pendidikan: this.riwayatPendidikan,
+                        pekerjaan: this.riwayatPekerjaan,
+                        _method: 'put'
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        alert('Semua kolom harus terisi');
                     });
 
-                //sort
-                this.riwayatPekerjaan.sort(function(a, b){
-                        var keyA = a.tahun_masuk,
-                            keyB = b.tahun_masuk;
-                        // Compare the 2 dates
-                        if(keyA < keyB) return -1;
-                        if(keyA > keyB) return 1;
-                        return 0;
+                    axios.post('/api/lastedited/' + this.id, {
+                        id_pengubah: this.id,
+                        _method: 'put'
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
                     });
-
-                this.enableEditButton();
-                this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
-                this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
-                this.isEditRiwayat = false;
-
-                console.log(this.riwayatPendidikan);
-                console.log(this.riwayatPekerjaan);
-
-                axios.post('/api/riwayat/' + this.id, {
-                    pendidikan: this.riwayatPendidikan,
-                    pekerjaan: this.riwayatPekerjaan,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response);
-                    window.location.href = "/pages/profile";
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert('Semua kolom harus terisi');
-                });
-
-                axios.post('/api/lastedited/' + this.id, {
-                    id_pengubah: this.id,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response);
-                    location.reload();
-                    // window.location.href = "/pages/profile/" + this.id;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert(error);
-                    alert('Semua kolom harus terisi');
-                });
+                } else {
+                    alert('Kolom yang wajib harus terisi dengan benar');
+                }
+                
             },
 
             saveSertifikat() {
-                this.enableEditButton();
-                this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
-                this.isEditSertifikat = false;
-                console.log(this.sertifikat);
-
-                axios.post('/api/sertifikat/' + this.id, {
-                    sertifikat: this.sertifikat,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response.data.data);
-                    window.location.href = "/pages/profile";
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert('Semua kolom harus terisi');
-                });
-
-                axios.post('/api/lastedited/' + this.id, {
-                    id_pengubah: this.id,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response);
-                    location.reload();
-                    // window.location.href = "/pages/profile/" + this.id;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert(error);
-                    alert('Semua kolom harus terisi');
-                });
+                if(this.isCompleteSertifikat()) {
+                    this.enableEditButton();
+                    this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
+                    this.isEditSertifikat = false;
+                    console.log(this.sertifikat);
+    
+                    axios.post('/api/sertifikat/' + this.id, {
+                        sertifikat: this.sertifikat,
+                        _method: 'put'
+                    })
+                    .then(function (response) {
+                        console.log(response.data.data);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        alert('Semua kolom harus terisi');
+                    });
+    
+                    axios.post('/api/lastedited/' + this.id, {
+                        id_pengubah: this.id,
+                        _method: 'put'
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        });
+                } else {
+                    alert('Kolom yang wajib harus terisi dengan benar');
+                }
             },
 
             saveDataKinerja() {
