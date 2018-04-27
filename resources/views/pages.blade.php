@@ -50,6 +50,7 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                text-align: center;
             }
 
             .m-b-md {
@@ -60,23 +61,34 @@
     <body>
     <div class="flex-center position-ref full-height">
         <div class="content">
-            @if(Auth::check())
-                <div class="links">
-                    <a href="/pages/profile">Halaman Profil</a>
+            <div class="row">
+                @if(Auth::check())
+                <div class="col">
+                    <div class="links">
+                        <a href="/pages/profile">Halaman Profil</a>
+                    </div>
                 </div>
-
-                @if(\App\PMO::find(Auth::user()->id))
-                    <div class="links">
-                        <a href="/pages/pmo">Halaman PMO</a>
-                    </div>
+                @endif
+                @if(Auth::check())
+                    @if(\App\PMO::find(Auth::user()->id))
+                        <div class="col">
+                            <div class="links">
+                                <a href="/pages/pmo">Halaman PMO</a>
+                            </div>
+                        </div>
+                    @endif
                 @endif
 
-                @if(\App\Pegawai::find(Auth::user()->id))
-                    <div class="links">
-                        <a href="/pages/admin">Halaman Admin</a>
-                    </div>
+                @if(Auth::check())
+                    @if(\App\Pegawai::find(Auth::user()->id))
+                        <div class="col">
+                            <div class="links">
+                                <a href="/pages/admin">Halaman Admin</a>
+                            </div>
+                        </div>
+                    @endif
                 @endif
-            @endif
+            </div>
         </div>
     </div>
 @endsection
