@@ -5,7 +5,8 @@
     <br>
 
 <profil-pegawai-specific
-    id="{{ $id }}"
+    :id="{{ $id }}"
+    :id-pmo="{{ $id_pmo }}"
     :data-kinerja-temp="{{ $data_kinerja }}"
     :unit-kerja="{{ $unit_kerja }}"
     :posisi="{{ $posisi }}"

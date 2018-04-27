@@ -1208,7 +1208,7 @@
 
             addRekomendasiPosisi() {
                 var newData = {
-                    id_rekomendasi_training : null,
+                    id_rekomendasi_posisi : null,
                     id_pegawai : null,
                     id_unit_kerja : null,
                     id_posisi : null
@@ -1358,10 +1358,25 @@
                 })
                 .then(function (response) {
                     console.log(response);
-                    window.location.href = "/pages/profile/" + response.data.data;
+                    // window.location.href = "/pages/profile/" + response.data.data;
                 })
                 .catch(function (error) {
                     console.log(error);
+                    alert('Semua kolom harus terisi');
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
                     alert('Semua kolom harus terisi');
                 });
             },
@@ -1389,6 +1404,35 @@
                 } else {
                     this.hideDataKinerja();
                 }
+
+                axios.post('/api/savekinerja/' + this.id, {
+                    kinerja: this.dataKinerja,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
             saveRekomendasi() {
@@ -1396,7 +1440,40 @@
                 this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
                 this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
                 this.isEditRekomendasi = false;
+
+                axios.post('/api/rekomendasi/' + this.id, {
+                    training: this.rekomendasiTraining,
+                    posisi: this.rekomendasiPosisi,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
+
+
+            /////
 
             cancelProfilPegawai() {
                 this.enableEditButton();

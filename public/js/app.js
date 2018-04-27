@@ -15340,7 +15340,7 @@ if (token) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.10';
+  var VERSION = '4.17.5';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -15764,14 +15764,6 @@ if (token) {
   /** Used to access faster Node.js helpers. */
   var nodeUtil = (function() {
     try {
-      // Use `util.types` for Node.js 10+.
-      var types = freeModule && freeModule.require && freeModule.require('util').types;
-
-      if (types) {
-        return types;
-      }
-
-      // Legacy `process.binding('util')` for Node.js < 10.
       return freeProcess && freeProcess.binding && freeProcess.binding('util');
     } catch (e) {}
   }());
@@ -50491,7 +50483,7 @@ if (document.getElementById('admin-page')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_clone__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_clone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_clone__);
 /**
- * vue-good-table v2.4.3
+ * vue-good-table v2.4.1
  * (c) 2018-present xaksis <shay@crayonbits.com>
  * https://github.com/xaksis/vue-good-table
  * Released under the MIT License.
@@ -50734,7 +50726,7 @@ var VgtFilterRow = { render: function () {
     })], 2) : _vm._e();
   }, staticRenderFns: [], _scopeId: 'data-v-2949d74f',
   name: 'VgtFilterRow',
-  props: ['lineNumbers', 'columns', 'typedColumns', 'globalSearchEnabled', 'selectable', 'mode'],
+  props: ['lineNumbers', 'columns', 'typedColumns', 'globalSearchEnabled', 'selectable'],
   watch: {
     columns: {
       handler: function handler() {
@@ -50756,7 +50748,7 @@ var VgtFilterRow = { render: function () {
     hasFilterRow: function hasFilterRow() {
       var this$1 = this;
 
-      if (this.mode === 'remote' || !this.globalSearchEnabled) {
+      if (!this.globalSearchEnabled) {
         for (var i = 0; i < this.columns.length; i++) {
           var col = this$1.columns[i];
           if (col.filterOptions && col.filterOptions.enabled) {
@@ -50949,7 +50941,7 @@ var GoodTable = { render: function () {
       return !column.hidden ? _c('th', { key: index$$1, class: _vm.getHeaderClasses(column, index$$1), style: { width: column.width ? column.width : 'auto' }, on: { "click": function ($event) {
             _vm.sort(index$$1);
           } } }, [_vm._t("table-column", [_c('span', [_vm._v(_vm._s(column.label))])], { column: column })], 2) : _vm._e();
-    })], 2), _vm._v(" "), _c("vgt-filter-row", { tag: "tr", attrs: { "global-search-enabled": _vm.searchEnabled, "line-numbers": _vm.lineNumbers, "selectable": _vm.selectable, "columns": _vm.columns, "mode": _vm.mode, "typed-columns": _vm.typedColumns }, on: { "filter-changed": _vm.filterRows } })]), _vm._v(" "), _vm._l(_vm.paginated, function (headerRow, index$$1) {
+    })], 2), _vm._v(" "), _c("vgt-filter-row", { tag: "tr", attrs: { "global-search-enabled": _vm.searchEnabled, "line-numbers": _vm.lineNumbers, "selectable": _vm.selectable, "columns": _vm.columns, "typed-columns": _vm.typedColumns }, on: { "filter-changed": _vm.filterRows } })]), _vm._v(" "), _vm._l(_vm.paginated, function (headerRow, index$$1) {
       return _c('tbody', { key: index$$1 }, [_vm.groupHeaderOnTop ? _c('tr', [headerRow.mode === 'span' ? _c('th', { staticClass: "vgt-left-align vgt-row-header", attrs: { "colspan": _vm.fullColspan } }, [_vm._v(" " + _vm._s(headerRow.label) + " ")]) : _vm._e(), _vm._v(" "), headerRow.mode !== 'span' && _vm.lineNumbers ? _c('th', { staticClass: "vgt-row-header" }) : _vm._e(), _vm._v(" "), headerRow.mode !== 'span' && _vm.selectable ? _c('th', { staticClass: "vgt-row-header" }) : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, i) {
         return headerRow.mode !== 'span' ? _c('th', { key: i, staticClass: "vgt-row-header", class: _vm.getClasses(i, 'td') }, [_vm._v(" " + _vm._s(_vm.collectFormatted(headerRow, column, true)) + " ")]) : _vm._e();
       })], 2) : _vm._e(), _vm._v(" "), _vm._l(headerRow.children, function (row, index$$1) {
@@ -51103,8 +51095,7 @@ var GoodTable = { render: function () {
       handler: function handler() {
         this.filterRows(this.columnFilters, false);
       },
-      deep: true,
-      immediate: true
+      deep: true
     },
 
     selectOptions: {
@@ -51435,9 +51426,6 @@ var GoodTable = { render: function () {
           this$1.$set(row, 'vgtSelected', false);
         });
       });
-      // we need to call this to propagate changes to paginated
-      // rows
-      this.filterRows();
     },
 
     unselectAll: function unselectAll() {
@@ -51685,9 +51673,8 @@ var GoodTable = { render: function () {
       var this$1 = this;
       if ( fromFilter === void 0 ) fromFilter = true;
 
-      if (!this.rows.length) { return; }
       // this is invoked either as a result of changing filters
-      // or as a result of modifying rows.
+      // or as a result of modifying rows rows.
       this.columnFilters = columnFilters;
       var computedRows = __WEBPACK_IMPORTED_MODULE_2_lodash_clonedeep___default()(this.originalRows);
 
@@ -51762,16 +51749,16 @@ var GoodTable = { render: function () {
       return originalRows;
     },
 
-    // handleRows() {
-    //   if (!this.groupOptions.enabled) {
-    //     this.filteredRows = this.handleGrouped([{
-    //       label: 'no groups',
-    //       children: this.originalRows,
-    //     }]);
-    //   } else {
-    //     this.filteredRows = this.handleGrouped(this.originalRows);
-    //   }
-    // },
+    handleRows: function handleRows() {
+      if (!this.groupOptions.enabled) {
+        this.filteredRows = this.handleGrouped([{
+          label: 'no groups',
+          children: this.originalRows
+        }]);
+      } else {
+        this.filteredRows = this.handleGrouped(this.originalRows);
+      }
+    },
 
     initializePagination: function initializePagination() {
       var this$1 = this;
@@ -51911,7 +51898,7 @@ var GoodTable = { render: function () {
   mounted: function mounted() {
     var this$1 = this;
 
-    // this.filteredRows = this.originalRows;
+    this.filteredRows = this.originalRows;
 
     if (this.perPage) {
       this.currentPerPage = this.perPage;
