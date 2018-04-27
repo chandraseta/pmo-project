@@ -11,18 +11,19 @@
             <div class="card-body">
                 <div class="card-container">
                     <div class="row">
+                        <div class="col-sm-1"></div>
                         <div class="col-sm-3 img-responsive">
                             <img id="img-profile" v-bind:src="pegawai.imageProfileUrl" class="img-thumbnail">
                             <br><br>
                             <input type="file" v-if="isEditProfile" v-on:change="FileChangeProfile" class="form-control">
                         </div>
-                        <div class="col-sm-1"></div>
+
                         <div class="col-sm-7">
                             <div class="row">
-                                <div class="col-sm-3 text-right">
-                                    Nama
+                                <div class="col-sm-4 text-right">
+                                    Nama Lengkap
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
 
                                     <b v-if="!isEditProfile" v-text="pegawai.nama"></b>
 
@@ -36,10 +37,10 @@
                             <hr>
 
                             <div class="row">
-                                <div class="col-sm-3 text-right">
+                                <div class="col-sm-4 text-right">
                                     Tempat, Tanggal Lahir
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <b v-if="!isEditProfile"><span v-text="pegawai.tempatLahir"></span>, <span v-text="pegawai.tanggalLahir"></span></b>
 
                                     <div class="form-row" v-if="isEditProfile">
@@ -60,10 +61,10 @@
                             <hr>
 
                             <div class="row">
-                                <div class="col-sm-3 text-right">
+                                <div class="col-sm-4 text-right">
                                     Email
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <b v-if="!isEditProfile" v-text="pegawai.email"></b>
 
                                     <div v-if="isEditProfile" id="edit-email" class="form-group">
@@ -77,10 +78,10 @@
                             <hr>
 
                             <div class="row">
-                                <div class="col-sm-3 text-right">
+                                <div class="col-sm-4 text-right">
                                     No. Pegawai
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <b v-if="!isEditProfile" v-text="pegawai.nopeg"></b>
 
                                     <div v-if="isEditProfile" id="edit-nopeg" class="form-group">
@@ -93,10 +94,10 @@
                             <hr>
 
                             <div class="row">
-                                <div class="col-sm-3 text-right">
+                                <div class="col-sm-4 text-right">
                                     Unit Kerja
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <b v-if="!isEditProfile" v-text="pegawai.unitKerja.text"></b>
 
                                     <div v-if="isEditProfile" id="edit-unit-kerja" class="form-group">
@@ -113,10 +114,10 @@
                             <hr>
 
                             <div class="row">
-                                <div class="col-sm-3 text-right">
+                                <div class="col-sm-4 text-right">
                                     Jabatan
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <b v-if="!isEditProfile" v-text="pegawai.posisi.text"></b>
 
                                     <div v-if="isEditProfile" id="edit-posisi" class="form-group">
@@ -133,10 +134,10 @@
                             <hr>
 
                             <div class="row">
-                                <div class="col-sm-3 text-right">
+                                <div class="col-sm-4 text-right">
                                     Kompetensi
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <b v-if="!isEditProfile" v-text="pegawai.kompetensi.text"></b>
 
                                     <div v-if="isEditProfile" id="edit-kompetensi" class="form-group">
@@ -153,10 +154,10 @@
                             <hr>
 
                             <div class="row">
-                                <div class="col-sm-3 text-right">
+                                <div class="col-sm-4 text-right">
                                     Tahun Mulai Jabatan Saat Ini
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <b v-if="!isEditProfile" v-text="pegawai.tahunMasuk"></b>
 
                                     <div v-if="isEditProfile" id="edit-tahun-masuk" class="form-group">
