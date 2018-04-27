@@ -1,6 +1,16 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~open-iconic/font/css/open-iconic-bootstrap';
 
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+.navbar-laravel {
+    background-color: map_get($theme-colors, primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
 
 .starter-template {
     padding: 3rem 1.5rem;
