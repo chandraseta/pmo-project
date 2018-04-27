@@ -65,7 +65,7 @@
                 @if(Auth::check())
                 <div class="col">
                     <a href="/pages/profile">
-                        <img src="/icons/pegawai.png" alt="Profile">
+                        <img src="localhost:8000/icons/pegawai.png" alt="Profile">
                     </a>
                     <div class="links">
                         <a href="/pages/profile">Profil</a>
@@ -89,7 +89,7 @@
                     @if(\App\Pegawai::find(Auth::user()->id))
                         <div class="col">
                             <a href="/pages/admin">
-                                <img src="/icons/admin.png" alt="Admin">
+                                <img src="localhost:8000/icons/admin.png" alt="Admin">
                             </a>
                             <div class="links">
                                 <a href="/pages/admin">Admin</a>
