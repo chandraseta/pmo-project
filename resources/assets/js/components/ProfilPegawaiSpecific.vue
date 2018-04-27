@@ -849,7 +849,7 @@
 
 <script>
     export default {
-        props: ['id-pmo','id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp', 'app-url'],
+        props: ['id-pmo','id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
 
         data() {
             return {
@@ -934,15 +934,9 @@
                     var responsePegawai = response.data["data"];
 
                     this.dataKepegawaian = responsePegawai["kepegawaian"];
-                    this.updateDataKepegawaian();
-                    this.validationTahunKeluar(this.dataKepegawaian);
-
                     this.riwayatPendidikan = responsePegawai["pendidikan"];
-                    this.validationTahunKeluar(this.riwayatPendidikan);
-
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
-                    this.validationTahunKeluar(this.riwayatPekerjaan);
-                    
+                    this.updateDataKepegawaian();
 
                     this.dataKepegawaianPrev = this.dataKepegawaian[this.dataKepegawaian.length-1];
 
@@ -954,7 +948,7 @@
                     this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
                     this.pegawai.email = responsePegawai["user"]["email"];
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
-                    this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
+                    this.pegawai.imageProfileUrl = 'http://pplk2b.if.itb.ac.id/pages/pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
                     this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
                     this.updateProfilPegawai();
 
@@ -993,14 +987,6 @@
         },
 
         methods: {
-            validationTahunKeluar(arr) {
-                for (let i=0; i<arr.length; i++) {
-                    if (arr[i].tahun_keluar == 0) {
-                        arr[i].tahun_keluar = '-';
-                    }
-                }
-            },
-
             downloadKompetensi() {
                 window.open('/api/kompetensi/report/' + this.id);
             },
@@ -1102,7 +1088,7 @@
 
             updateSertifikat(){
                 for(var i = 0; i < this.sertifikat.length; i++){
-                    this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
+                    this.sertifikat[i].nama_file = 'http://pplk2b.if.itb.ac.id/pages/simage/' + this.sertifikat[i].nama_file;
                 }
             },
 
@@ -1265,143 +1251,6 @@
                 this.rekomendasiPosisi.splice(targetIndex, 1);
             },
 
-            isYearValid(year) {
-                year = year.toString();
-                return (year.length == 4 && !isNaN(year) && year > 1945);
-            },
-
-            isCompleteProfilPegawai() {
-                return (this.pegawai.nama != "" && this.pegawai.nama != null) &&
-                        (this.pegawai.tempatLahir != "" && this.pegawai.tempatLahir != null) &&
-                        (this.pegawai.tanggalLahir != "" && this.pegawai.tanggalLahir != null) &&
-                        (this.pegawai.email != "" && this.pegawai.email != null) &&
-                        (this.pegawai.nopeg != "" && this.pegawai.nopeg != null) &&
-                        (this.pegawai.unitKerja.id != "" && this.pegawai.unitKerja.id != null) &&
-                        (this.pegawai.posisi.id != "" && this.pegawai.posisi.id != null) &&
-                        (this.pegawai.kompetensi.id != "" && this.pegawai.kompetensi.id != null) &&
-                        (this.pegawai.tahunMasuk != "" && this.pegawai.tahunMasuk != null) &&
-                        this.isYearValid(this.pegawai.tahunMasuk);
-            },
-
-            isCompleteDataKepegawaian() {
-                var isEmpty = false;
-                var i = 0;
-                while (i<this.dataKepegawaian.length && !isEmpty) {
-                    if (this.dataKepegawaian[i].id_unit_kerja != '' && this.dataKepegawaian[i].id_unit_kerja != null &&
-                        this.dataKepegawaian[i].id_posisi != '' && this.dataKepegawaian[i].id_posisi != null &&
-                        //this.dataKepegawaian[i].id_kelompok_kompetensi != '' && this.dataKepegawaian[i].id_kelompok_kompetensi != null &&
-                        this.dataKepegawaian[i].tahun_masuk != '' && this.dataKepegawaian[i].tahun_masuk != null &&
-                        this.isYearValid(this.dataKepegawaian[i].tahun_masuk) &&
-                        this.dataKepegawaian[i].tahun_keluar != '' && this.dataKepegawaian[i].tahun_keluar != null &&
-                        (this.isYearValid(this.dataKepegawaian[i].tahun_keluar) || this.dataKepegawaian[i].tahun_keluar == '-')
-                        ) {
-                            i++;
-                    } else {
-                        isEmpty = true;
-                    }
-                }
-
-                return !isEmpty;
-            },
-
-            isCompleteRiwayat() {
-                var isEmpty = false;
-                var i = 0;
-                while (i<this.riwayatPendidikan.length && !isEmpty) {
-                    if (this.riwayatPendidikan[i].nama_institusi != '' && this.riwayatPendidikan[i].nama_institusi != null &&
-                        this.riwayatPendidikan[i].strata != '' && this.riwayatPendidikan[i].strata != null &&
-                        this.riwayatPendidikan[i].jurusan != '' && this.riwayatPendidikan[i].jurusan != null &&
-                        this.riwayatPendidikan[i].tahun_masuk != '' && this.riwayatPendidikan[i].tahun_masuk != null &&
-                        this.riwayatPendidikan[i].tahun_keluar != '' && this.riwayatPendidikan[i].tahun_keluar != null &&
-                        this.isYearValid(this.riwayatPendidikan[i].tahun_masuk) &&
-                        (this.isYearValid(this.riwayatPendidikan[i].tahun_keluar) || this.riwayatPendidikan[i].tahun_keluar == '-')
-                        ) {
-                            i++;
-                    } else {
-                        isEmpty = true;
-                    }
-                }
-
-                var i = 0;
-                while (i<this.riwayatPekerjaan.length && !isEmpty) {
-                    if (this.riwayatPekerjaan[i].nama_institusi != '' && this.riwayatPekerjaan[i].nama_institusi != null &&
-                        this.riwayatPekerjaan[i].posisi != '' && this.riwayatPekerjaan[i].posisi != null &&
-                        this.riwayatPekerjaan[i].tahun_masuk != '' && this.riwayatPekerjaan[i].tahun_masuk != null &&
-                        this.riwayatPekerjaan[i].tahun_keluar != '' && this.riwayatPekerjaan[i].tahun_keluar != null &&
-                        this.isYearValid(this.riwayatPekerjaan[i].tahun_masuk) &&
-                        (this.isYearValid(this.riwayatPekerjaan[i].tahun_keluar) || this.riwayatPekerjaan[i].tahun_keluar == '-')
-                        ) {
-                            i++;
-                    } else {
-                        isEmpty = true;
-                    }
-                }
-
-                return !isEmpty;
-            },
-
-            isCompleteSertifikat() {
-                var isEmpty = false;
-                var i = 0;
-                while (i<this.sertifikat.length && !isEmpty) {
-                    if (this.sertifikat[i].judul != '' && this.sertifikat[i].judul != null &&
-                        this.sertifikat[i].lembaga != '' && this.sertifikat[i].lembaga != null &&
-                        this.sertifikat[i].tahun_diterbitkan != '' && this.sertifikat[i].tahun_diterbitkan != null &&
-                        this.isYearValid(this.sertifikat[i].tahun_diterbitkan)
-                        ) {
-                            i++;
-                    } else {
-                        isEmpty = true;
-                    }
-                }
-
-                return !isEmpty;
-            },
-
-            isCompleteDataKinerja() {
-                var isEmpty = false;
-                var i = 0;
-                while (i<this.dataKinerja.length && !isEmpty) {
-                    if (this.dataKinerja[i].tahun != '' && this.dataKinerja[i].tahun != null &&
-                        this.isYearValid(this.dataKinerja[i].tahun) &&
-                        this.dataKinerja[i].semester != '' && this.dataKinerja[i].semester != null &&
-                        (this.dataKinerja[i].semester == '1' || this.dataKinerja[i].semester == '2') &&
-                        this.dataKinerja[i].nilai != '' && this.dataKinerja[i].nilai != null
-                        ) {
-                            i++;
-                    } else {
-                        isEmpty = true;
-                    }
-                }
-
-                return !isEmpty;
-            },
-
-            isCompleteRekomendasi() {
-                var isEmpty = false;
-                var i = 0;
-                while (i<this.rekomendasiTraining.length && !isEmpty) {
-                    if (this.rekomendasiTraining[i].id_training != '' && this.rekomendasiTraining[i].id_training != null) {
-                        i++;
-                    } else {
-                        isEmpty = true;
-                    }
-                }
-
-                var i = 0;
-                while (i<this.rekomendasiPosisi.length && !isEmpty) {
-                    if (this.rekomendasiPosisi[i].id_unit_kerja != '' && this.rekomendasiPosisi[i].id_unit_kerja != null &&
-                        this.rekomendasiPosisi[i].id_posisi != '' && this.rekomendasiPosisi[i].id_posisi != null
-                        ) {
-                            i++;
-                    } else {
-                        isEmpty = true;
-                    }
-                }
-
-                return !isEmpty;
-            },
-
             saveProfilPegawai() {
                 this.enableEditButton();
 
@@ -1454,186 +1303,173 @@
             },
 
             saveRiwayatPegawai() {
-                
-                    //sort
-                    this.riwayatPendidikan.sort(function(a, b){
-                            var keyA = a.tahun_masuk,
-                                keyB = b.tahun_masuk;
-                            // Compare the 2 dates
-                            if(keyA < keyB) return -1;
-                            if(keyA > keyB) return 1;
-                            return 0;
-                        });
-    
-                    //sort
-                    this.riwayatPekerjaan.sort(function(a, b){
-                            var keyA = a.tahun_masuk,
-                                keyB = b.tahun_masuk;
-                            // Compare the 2 dates
-                            if(keyA < keyB) return -1;
-                            if(keyA > keyB) return 1;
-                            return 0;
-                        });
-    
-                    this.enableEditButton();
-                    this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
-                    this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
-                    this.isEditRiwayat = false;
-    
-                    console.log(this.riwayatPendidikan);
-                    console.log(this.riwayatPekerjaan);
-    
-                    axios.post('/api/riwayat/' + this.id, {
-                        pendidikan: this.riwayatPendidikan,
-                        pekerjaan: this.riwayatPekerjaan,
-                        _method: 'put'
-                    })
-                    .then(function (response) {
-                        console.log(response);
-                        window.location.href = "/pages/profile/" + this.id;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        alert('Semua kolom harus terisi');
+                //sort
+                this.riwayatPendidikan.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
                     });
+
+                //sort
+                this.riwayatPekerjaan.sort(function(a, b){
+                        var keyA = a.tahun_masuk,
+                            keyB = b.tahun_masuk;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+
+                this.enableEditButton();
+                this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
+                this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
+                this.isEditRiwayat = false;
+
+                console.log(this.riwayatPendidikan);
+                console.log(this.riwayatPekerjaan);
+
+                axios.post('/api/riwayat/' + this.id, {
+                    pendidikan: this.riwayatPendidikan,
+                    pekerjaan: this.riwayatPekerjaan,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
             saveSertifikat() {
-                if (this.isCompleteSertifikat()) {
-                    this.enableEditButton();
-                    this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
-                    this.isEditSertifikat = false;
-                    console.log(this.sertifikat);
+                this.enableEditButton();
+                this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
+                this.isEditSertifikat = false;
+                console.log(this.sertifikat);
 
-                    axios.post('/api/sertifikat/' + this.id, {
-                        sertifikat: this.sertifikat,
-                        _method: 'put'
-                    })
-                    .then(function (response) {
-                        console.log(response);
-                        // window.location.href = "/pages/profile/" + response.data.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        alert('Semua kolom harus terisi');
-                    });
+                axios.post('/api/sertifikat/' + this.id, {
+                    sertifikat: this.sertifikat,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    // window.location.href = "/pages/profile/" + response.data.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert('Semua kolom harus terisi');
+                });
 
-                    axios.post('/api/lastedited/' + this.id, {
-                        id_pengubah: this.idPmo,
-                        _method: 'put'
-                    })
-                    .then(function (response) {
-                        console.log(response);
-                        location.reload();
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                } else {
-                    alert('Kolom yang wajib harus terisi dengan benar');
-                }
-                
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
             saveDataKinerja() {
-                if (this.isCompleteDataKinerja()) {
-                    //sort
-                    this.dataKinerja.sort(function(a, b){
-                            var keyA = a.tahun,
-                                keyB = b.tahun;
-                            // Compare the 2 dates
-                            if(keyA < keyB) return -1;
-                            if(keyA > keyB) return 1;
-                            if (keyA == keyB) {
-                                if (a.semester < b.semester) return -1;
-                                else return 1;
-                            }
-                        });
-
-                    this.enableEditButton();
-                    this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
-                    this.isEditDataKinerja = false;
-
-                    if (this.isShowAllDataKinerja) {
-                        this.showAllDataKinerja();
-                    } else {
-                        this.hideDataKinerja();
-                    }
-
-                    axios.post('/api/savekinerja/' + this.id, {
-                        kinerja: this.dataKinerja,
-                        _method: 'put'
-                    })
-                    .then(function (response) {
-                        console.log(response);
-                        // window.location.href = "/pages/profile/" + this.id;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        alert(error);
-                        alert('Semua kolom harus terisi');
+                //sort
+                this.dataKinerja.sort(function(a, b){
+                        var keyA = a.tahun,
+                            keyB = b.tahun;
+                        // Compare the 2 dates
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        if (keyA == keyB) {
+                            if (a.semester < b.semester) return -1;
+                            else return 1;
+                        }
                     });
 
-                    axios.post('/api/lastedited/' + this.id, {
-                        id_pengubah: this.idPmo,
-                        _method: 'put'
-                    })
-                    .then(function (response) {
-                        console.log(response);
-                        location.reload();
-                        // window.location.href = "/pages/profile/" + this.id;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        alert(error);
-                        alert('Semua kolom harus terisi');
-                    });
+                this.enableEditButton();
+                this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
+                this.isEditDataKinerja = false;
+
+                if (this.isShowAllDataKinerja) {
+                    this.showAllDataKinerja();
                 } else {
-                    alert('Kolom yang wajib harus terisi dengan benar');
+                    this.hideDataKinerja();
                 }
-                
+
+                axios.post('/api/savekinerja/' + this.id, {
+                    kinerja: this.dataKinerja,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
             saveRekomendasi() {
-                if (this.isCompleteRekomendasi()) {
-                    this.enableEditButton();
-                    this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
-                    this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
-                    this.isEditRekomendasi = false;
+                this.enableEditButton();
+                this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+                this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+                this.isEditRekomendasi = false;
 
-                    axios.post('/api/rekomendasi/' + this.id, {
-                        training: this.rekomendasiTraining,
-                        posisi: this.rekomendasiPosisi,
-                        _method: 'put'
-                    })
-                    .then(function (response) {
-                        console.log(response);
-                        // window.location.href = "/pages/profile/" + this.id;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        alert(error);
-                        alert('Semua kolom harus terisi');
-                    });
+                axios.post('/api/rekomendasi/' + this.id, {
+                    training: this.rekomendasiTraining,
+                    posisi: this.rekomendasiPosisi,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
 
-                    axios.post('/api/lastedited/' + this.id, {
-                        id_pengubah: this.idPmo,
-                        _method: 'put'
-                    })
-                    .then(function (response) {
-                        console.log(response);
-                        location.reload();
-                        // window.location.href = "/pages/profile/" + this.id;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        alert(error);
-                        alert('Semua kolom harus terisi');
-                    });
-                } else {
-                    alert('Kolom yang wajib harus terisi dengan benar');
-                }
-                
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
 
