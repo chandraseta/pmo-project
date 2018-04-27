@@ -13,7 +13,7 @@ class LastEditedController extends APIBaseController
         $input = $request->all();
 
         $pegawai = Pegawai::where('id_user', $id)->first();
-        // $pegawai->id_pengubah = $input['id_pengubah'];
+        $pegawai->id_pengubah = $input['id_pengubah'];
         $pegawai->updated_at = now();
         $pegawai->save();
 
