@@ -65,7 +65,7 @@
                 @if(Auth::check())
                 <div class="col">
                     <div class="links">
-                        <a href="/pages/profile">Halaman Profil</a>
+                        <a href="/pages/profile">Profil</a>
                     </div>
                 </div>
                 @endif
@@ -73,7 +73,7 @@
                     @if(\App\PMO::find(Auth::user()->id))
                         <div class="col">
                             <div class="links">
-                                <a href="/pages/pmo">Halaman PMO</a>
+                                <a href="/pages/pmo">PMO</a>
                             </div>
                         </div>
                     @endif
@@ -83,7 +83,7 @@
                     @if(\App\Pegawai::find(Auth::user()->id))
                         <div class="col">
                             <div class="links">
-                                <a href="/pages/admin">Halaman Admin</a>
+                                <a href="/pages/admin">Admin</a>
                             </div>
                         </div>
                     @endif
