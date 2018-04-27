@@ -531,6 +531,7 @@ class DataKompetensiController extends APIBaseController
         $writer = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         header('Content-type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
+        $writer->setPreCalculateFormulas(true);
         $writer->setIncludeCharts(true);
         $writer->save('php://output');
     }
