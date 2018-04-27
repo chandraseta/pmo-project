@@ -225,18 +225,18 @@ class DataKinerjaController extends APIBaseController
                             $model->fill($arr);
                             $model->save();
                         }
-                        return response('Data inserted', 200);
+                        return response('Data berhasil dimasukkan', 200);
                     } catch (\Exception $e) {
-                        return response('Failed in inserting data. Check data correctness', 400);
+                        return response('Gagal memasukkan data. Cek apakah semua data sudah dalam format yang benar', 400);
                     }
                 } else {
-                    return response('Empty file', 400);
+                    return response('Berkas kosong', 400);
                 }
             } else {
-                return response('Wrong file format', 400);
+                return response('Format berkas salah', 400);
             }
         } else {
-            return response('File not found', 400);
+            return response('Berkas tidak ditemukan', 400);
         }
     }
 }
