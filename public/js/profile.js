@@ -19442,7 +19442,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             _this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
             _this.pegawai.email = responsePegawai["user"]["email"];
             _this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
-            _this.pegawai.imageProfileUrl = 'http://pplk2b.if.itb.ac.id:8000/pages/pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
+            _this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
             _this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
             _this.updateProfilPegawai();
 
@@ -19583,7 +19583,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         updateSertifikat: function updateSertifikat() {
             for (var i = 0; i < this.sertifikat.length; i++) {
-                this.sertifikat[i].nama_file = 'http://pplk2b.if.itb.ac.id:8000/pages/simage/' + this.sertifikat[i].nama_file;
+                this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
             }
         },
         disableEditButton: function disableEditButton() {
