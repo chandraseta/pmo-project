@@ -59,20 +59,24 @@
     </head>
     <body>
     <div class="flex-center position-ref full-height">
-
         <div class="content">
-            <div class="links">
-                <a href="/pages/profile">Halaman Profil</a>
-            </div>
+            @if(Auth::check())
+                <div class="links">
+                    <a href="/pages/profile">Halaman Profil</a>
+                </div>
 
-            <div class="links">
-                <a href="/pages/pmo">Halaman PMO</a>
-            </div>
+                @if(\App\PMO::find(Auth::user()->id))
+                    <div class="links">
+                        <a href="/pages/pmo">Halaman PMO</a>
+                    </div>
+                @endif
 
-            <div class="links">
-                <a href="/pages/admin">Halaman Admin</a>
-            </div>
+                @if(\App\Pegawai::find(Auth::user()->id))
+                    <div class="links">
+                        <a href="/pages/admin">Halaman Admin</a>
+                    </div>
+                @endif
+            @endif
         </div>
     </div>
-    </body>
 @endsection
