@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="card" id="profil-pegawai-specific">
+        <div class="card" id="profil-pegawai">
             <div class="card-header">
                 Profil Pegawai
-                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">
+                <button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                </button> -->
+                </button>
             </div>
 
             <div class="card-body">
@@ -172,10 +172,10 @@
             </div>
 
             <div class="card-footer text-muted" v-if="isEditProfile">
-                <a href="#profil-pegawai-specific" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveProfilPegawai">
+                <a href="#profil-pegawai" class="btn btn-success float-sm-right btn-simpan" v-on:click="saveProfilPegawai">
                     Simpan <i class="fas fa-check"></i>
                     </a>
-                <a href="#profil-pegawai-specific" class="btn btn-danger float-sm-right" v-on:click="cancelProfilPegawai">
+                <a href="#profil-pegawai" class="btn btn-danger float-sm-right" v-on:click="cancelProfilPegawai">
                     Batal <i class ="fas fa-times"></i>
                 </a>
             </div>
@@ -186,9 +186,9 @@
         <div class="card" id="data-kepegawaian">
             <div class="card-header">
                 Data Kepegawaian
-                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">
+                <button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                </button> -->
+                </button>
             </div>
 
             <div class="card-body">
@@ -299,10 +299,9 @@
 
         <div class="card" id="riwayat-pegawai">
             <div class="card-header">
-                Riwayat Pendidikan dan Pekerjaan
-                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai" v-bind:disabled="disableEdit">
+                Riwayat Pendidikan dan Pekerjaan<button class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                </button> -->
+                    </button>
             </div>
 
             <div class="card-body">
@@ -595,9 +594,10 @@
 
         <div class="card" id="data-kinerja">
             <div class="card-header">
-                Hasil Kinerja<button class="btn btn-primary float-sm-right" v-on:click="editDataKinerja" v-bind:disabled="disableEdit">
+                Hasil Kinerja
+                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editDataKinerja" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                    </button>
+                 -->    </button>
             </div>
 
             <div class="card-body">
@@ -690,15 +690,16 @@
 
         <div class="card" id="data-kompetensi">
             <div class="card-header">
-                Hasil Kompetensi<button class="btn btn-primary float-sm-right" v-on:click="editKommpetensi" v-bind:disabled="disableEdit">
+                Hasil Kompetensi
+                <!-- <button class="btn btn-primary float-sm-right" v-on:click="editDataKompetensi" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                    </button>
+                 </button> -->
             </div>
 
             <div class="card-body">
                 <div class="container">
 
-                     <button class="btn btn-primary float-sm-left" v-on:click="downloadKompetensi" v-bind:disabled="disableEdit">
+                    <button class="btn btn-primary float-sm-left" v-on:click="downloadKompetensi" v-bind:disabled="disableEdit">
                     Download <i class="fas fa-download"></i>
                  </button>
 
@@ -710,9 +711,10 @@
 
         <div class="card" id="rekomendasi">
             <div class="card-header">
-                Rekomendasi<button class="btn btn-primary float-sm-right" v-on:click="editRekomendasi" v-bind:disabled="disableEdit">
+                Rekomendasi
+                 <!-- <button class="btn btn-primary float-sm-right" v-on:click="editRekomendasi" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                    </button>
+                 </button> -->
             </div>
 
             <div class="card-body">
@@ -849,7 +851,7 @@
 
 <script>
     export default {
-        props: ['id-pmo','id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
+        props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
 
         data() {
             return {
@@ -936,9 +938,6 @@
                     this.dataKepegawaian = responsePegawai["kepegawaian"];
                     this.riwayatPendidikan = responsePegawai["pendidikan"];
                     this.riwayatPekerjaan = responsePegawai["pekerjaan"];
-                    this.validationTahunKeluar(this.riwayatPekerjaan);
-
-                    this.updateRiwayat();
                     this.updateDataKepegawaian();
 
                     this.dataKepegawaianPrev = this.dataKepegawaian[this.dataKepegawaian.length-1];
@@ -951,7 +950,7 @@
                     this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
                     this.pegawai.email = responsePegawai["user"]["email"];
                     this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
-                    this.pegawai.imageProfileUrl = 'http://pplk2b.if.itb.ac.id/pages/pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
+                    this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
                     this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
                     this.updateProfilPegawai();
 
@@ -992,10 +991,6 @@
         methods: {
             downloadKompetensi() {
                 window.open('/api/kompetensi/report/' + this.id);
-            },
-
-            editKommpetensi() {
-                window.open('/pages/pmo?nip=' + this.pegawai.nopeg + '&tab=dataKompetensi');
             },
 
             showAllDataKinerja() {
@@ -1091,7 +1086,7 @@
 
             updateSertifikat(){
                 for(var i = 0; i < this.sertifikat.length; i++){
-                    this.sertifikat[i].nama_file = 'http://pplk2b.if.itb.ac.id/pages/simage/' + this.sertifikat[i].nama_file;
+                    this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
                 }
             },
 
@@ -1211,7 +1206,7 @@
 
             addRekomendasiPosisi() {
                 var newData = {
-                    id_rekomendasi_posisi : null,
+                    id_rekomendasi_training : null,
                     id_pegawai : null,
                     id_unit_kerja : null,
                     id_posisi : null
@@ -1271,10 +1266,25 @@
                 })
                 .then(function (response) {
                     console.log(response);
-                    window.location.href = '/pages/profile/' + this.id;
+                    window.location.href = '/pages/profile';
                 })
                 .catch(function (error) {
                     console.log(error);
+                    alert('Semua kolom harus terisi');
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.id,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
                     alert('Semua kolom harus terisi');
                 });
 
@@ -1297,15 +1307,30 @@
                 })
                 .then(function (response) {
                     console.log(response);
-                    window.location.href = "/pages/profile/" + this.id;
+                    window.location.href = "/pages/profile";
                 })
                 .catch(function (error) {
                     console.log(error);
                     alert('Semua kolom harus terisi');
                 });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.id,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             },
 
-            updateRiwayat() {
+            saveRiwayatPegawai() {
                 //sort
                 this.riwayatPendidikan.sort(function(a, b){
                         var keyA = a.tahun_masuk,
@@ -1325,11 +1350,6 @@
                         if(keyA > keyB) return 1;
                         return 0;
                     });
-            },
-
-            saveRiwayatPegawai() {
-                
-                this.updateRiwayat();
 
                 this.enableEditButton();
                 this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
@@ -1346,10 +1366,25 @@
                 })
                 .then(function (response) {
                     console.log(response);
-                    window.location.href = "/pages/profile/" + this.id;
+                    window.location.href = "/pages/profile";
                 })
                 .catch(function (error) {
                     console.log(error);
+                    alert('Semua kolom harus terisi');
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.id,
+                    _method: 'put'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error);
                     alert('Semua kolom harus terisi');
                 });
             },
@@ -1365,8 +1400,8 @@
                     _method: 'put'
                 })
                 .then(function (response) {
-                    console.log(response);
-                    // window.location.href = "/pages/profile/" + response.data.data;
+                    console.log(response.data.data);
+                    window.location.href = "/pages/profile";
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -1374,7 +1409,7 @@
                 });
 
                 axios.post('/api/lastedited/' + this.id, {
-                    id_pengubah: this.idPmo,
+                    id_pengubah: this.id,
                     _method: 'put'
                 })
                 .then(function (response) {
@@ -1412,35 +1447,6 @@
                 } else {
                     this.hideDataKinerja();
                 }
-
-                axios.post('/api/savekinerja/' + this.id, {
-                    kinerja: this.dataKinerja,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response);
-                    // window.location.href = "/pages/profile/" + this.id;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert(error);
-                    alert('Semua kolom harus terisi');
-                });
-
-                axios.post('/api/lastedited/' + this.id, {
-                    id_pengubah: this.idPmo,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response);
-                    location.reload();
-                    // window.location.href = "/pages/profile/" + this.id;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert(error);
-                    alert('Semua kolom harus terisi');
-                });
             },
 
             saveRekomendasi() {
@@ -1448,40 +1454,7 @@
                 this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
                 this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
                 this.isEditRekomendasi = false;
-
-                axios.post('/api/rekomendasi/' + this.id, {
-                    training: this.rekomendasiTraining,
-                    posisi: this.rekomendasiPosisi,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response);
-                    // window.location.href = "/pages/profile/" + this.id;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert(error);
-                    alert('Semua kolom harus terisi');
-                });
-
-                axios.post('/api/lastedited/' + this.id, {
-                    id_pengubah: this.idPmo,
-                    _method: 'put'
-                })
-                .then(function (response) {
-                    console.log(response);
-                    location.reload();
-                    // window.location.href = "/pages/profile/" + this.id;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert(error);
-                    alert('Semua kolom harus terisi');
-                });
             },
-
-
-            /////
 
             cancelProfilPegawai() {
                 this.enableEditButton();
