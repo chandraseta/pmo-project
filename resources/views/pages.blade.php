@@ -64,6 +64,9 @@
             <div class="row">
                 @if(Auth::check())
                 <div class="col">
+                    <a href="/pages/profile">
+                        <img src="/icons/pegawai.png" alt="Profile">
+                    </a>
                     <div class="links">
                         <a href="/pages/profile">Profil</a>
                     </div>
@@ -72,6 +75,9 @@
                 @if(Auth::check())
                     @if(\App\PMO::find(Auth::user()->id))
                         <div class="col">
+                            <a href="/pages/pmo">
+                                <img src="/icons/pmo.png" alt="PMO">
+                            </a>
                             <div class="links">
                                 <a href="/pages/pmo">PMO</a>
                             </div>
@@ -82,6 +88,9 @@
                 @if(Auth::check())
                     @if(\App\Pegawai::find(Auth::user()->id))
                         <div class="col">
+                            <a href="/pages/admin">
+                                <img src="/icons/admin.png" alt="Admin">
+                            </a>
                             <div class="links">
                                 <a href="/pages/admin">Admin</a>
                             </div>
