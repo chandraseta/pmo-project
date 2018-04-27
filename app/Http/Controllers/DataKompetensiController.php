@@ -434,9 +434,11 @@ class DataKompetensiController extends APIBaseController
     }
 
     public function generateReport($id) {
+        // Get kompetensi data from DB
         $obj = DB::table('denormalized_pegawai')
             ->join('kompetensi', 'denormalized_pegawai.id_user', '=', 'kompetensi.id_pegawai')
             ->select([
+                'id_kompetensi',
                 'nama',
                 'nip',
                 'unit_kerja',
@@ -481,6 +483,16 @@ class DataKompetensiController extends APIBaseController
         
         $obj = $obj[0];
 
+        // Get rek. training data from database
+        $obj_rek = DB::table('training')
+            ->leftJoin(DB::raw("(SELECT * FROM rekomendasi_training WHERE id_pegawai = $id) AS rek"),
+                        'training.id_training',
+                        '=',
+                        'rek.id_training')
+            ->get();
+        $obj_rek = json_decode(json_encode($obj_rek), true);
+
+        // Open Excel template
         $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         $path = $storagePath . 'templates/laporan_template.xlsx';
 
@@ -489,6 +501,8 @@ class DataKompetensiController extends APIBaseController
         $excel = $reader->load($path);
         $sheet = $excel->getSheetByName('Psikogram');
 
+        // Set kompetensi data in Excel
+        $sheet->getCell('A16')->setValue($obj->id_kompetensi);
         $sheet->getCell('B16')->setValue($obj->nama);
         $sheet->getCell('C16')->setValue($obj->nip);
         $sheet->getCell('D16')->setValue($obj->unit_kerja);
@@ -522,10 +536,43 @@ class DataKompetensiController extends APIBaseController
         $sheet->getCell('AP16')->setValue(floor($obj->manajerial_intensitas_pengarahan));
         $sheet->getCell('AQ16')->setValue(floor($obj->manajerial_kekuatan_pengawasan));
 
+        // Protect template sheet
+        $excel->getActiveSheet()->getProtection()->setSheet(true);
+        $excel->getActiveSheet()->getProtection()->setSort(true);
+        $excel->getActiveSheet()->getProtection()->setInsertRows(true);
+        $excel->getActiveSheet()->getProtection()->setFormatCells(true);
+        $excel->getActiveSheet()->getProtection()->setPassword('uptpmoitb');
+
+        // Move sheet
+        $sheet = $excel->getSheetByName('x');
         $excel->setActiveSheetIndex(
-            $excel->getIndex($excel->getSheetByName('x'))
+            $excel->getIndex($sheet)
         );
 
+        // Set rekomendasi data
+        $row_num = 60;
+        foreach ($obj_rek as $rek) {
+            $sheet->getCell('C' . $row_num)->setValue(strtoupper($rek['nama_training']));
+            $sheet->getCell('G' . $row_num)->setValue($rek['id_training'] ? 'l' : '');
+
+            if (++$row_num > 71) {
+                break;
+            }
+        }
+
+        // Protect results sheet
+        $excel->getActiveSheet()->getProtection()->setSheet(true);
+        $excel->getActiveSheet()->getProtection()->setSort(true);
+        $excel->getActiveSheet()->getProtection()->setInsertRows(true);
+        $excel->getActiveSheet()->getProtection()->setFormatCells(true);
+        $excel->getActiveSheet()->getProtection()->setPassword('uptpmoitb');
+
+        // Protect workbook
+        $excel->getSecurity()->setLockWindows(true);
+        $excel->getSecurity()->setLockStructure(true);
+        $excel->getSecurity()->setWorkbookPassword('uptpmoitb');
+
+        // Export Excel
         $filename = 'laporan_kompetensi_' . $id . '.xlsx';
 
         $writer = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
