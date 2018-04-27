@@ -18,7 +18,7 @@
                             <input type="file" v-if="isEditProfile" v-on:change="FileChangeProfile" class="form-control">
                         </div>
                         
-                        <div class="col-sm-7">
+                        <div class="col-sm-8">
                             <div class="row">
                                 <div class="col-sm-4 text-right">
                                     Nama
