@@ -266,7 +266,7 @@
                                 <td>
                                     <div class="form-group">
                                         <input v-model="dk.tahun_keluar" type="text" class="form-control text-center">
-                                        <small class="form-text text-muted">*Isi dengan "-" jika belum selesai</small>
+                                        <small class="form-text text-muted">*Isi dengan "-" jika status belum selesai</small>
                                     </div>
                                 </td>
                                 <td>
@@ -371,7 +371,7 @@
                                 <td>
                                     <div class="form-group">
                                         <input v-model="rp.tahun_keluar" type="text" class="form-control text-center">
-                                        <small class="form-text text-muted">*Isi dengan "-" jika belum selesai</small>
+                                        <small class="form-text text-muted">*Isi dengan "-" jika status belum selesai</small>
                                     </div>
                                 </td>
                                 <td>
@@ -445,7 +445,7 @@
                                 <td>
                                     <div class="form-group">
                                         <input v-model="rp.tahun_keluar" type="text" class="form-control text-center">
-                                        <small class="form-text text-muted">*Isi dengan "-" jika belum selesai</small>
+                                        <small class="form-text text-muted">*Isi dengan "-" jika status belum selesai</small>
                                     </div>
                                 </td>
                                 <td>
@@ -547,7 +547,7 @@
                                 <th scope="col">Judul</th>
                                 <td>
                                     <div class="form-group">
-                                        <input v-model="dk.judul" type="text" class="form-control">
+                                        <input v-model="dk.judul" type="text" class="form-control text-center">
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </td>
@@ -556,7 +556,7 @@
                                 <th scope="col">Lembaga</th>
                                 <td>
                                     <div class="form-group">
-                                        <input v-model="dk.lembaga" type="text" class="form-control">
+                                        <input v-model="dk.lembaga" type="text" class="form-control text-center">
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </td>
@@ -565,7 +565,7 @@
                                 <th scope="col">Tahun Diterbitkan</th>
                                 <td>
                                     <div class="form-group">
-                                        <input v-model="dk.tahun_diterbitkan" type="text" class="form-control">
+                                        <input v-model="dk.tahun_diterbitkan" type="text" class="form-control text-center">
                                         <small class="form-text text-muted">*Wajib diisi</small>
                                     </div>
                                 </td>
@@ -574,8 +574,8 @@
                                 <th scope="col">Catatan</th>
                                 <td>
                                     <div class="form-group">
-                                        <input v-model="dk.catatan" type="text" class="form-control">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <input v-model="dk.catatan" type="text" class="form-control text-center">
+                                        <!-- <small class="form-text text-muted">*Wajib diisi</small> -->
                                     </div>
                                 </td>
                             </tr>
