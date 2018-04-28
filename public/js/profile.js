@@ -13869,7 +13869,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ProfilPegawai.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ProfilPegawai.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -13878,9 +13878,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a4d53326", Component.options)
+    hotAPI.createRecord("data-v-7827fda6", Component.options)
   } else {
-    hotAPI.reload("data-v-a4d53326", Component.options)
+    hotAPI.reload("data-v-7827fda6", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -13902,13 +13902,13 @@ var content = __webpack_require__(250);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(9)("073fefff", content, false, {});
+var update = __webpack_require__(9)("41430490", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a4d53326\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProfilPegawai.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a4d53326\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProfilPegawai.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7827fda6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProfilPegawai.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7827fda6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProfilPegawai.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -13927,7 +13927,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -13941,6 +13941,23 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14878,6 +14895,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             _this.riwayatPekerjaan = responsePegawai["pekerjaan"];
             _this.validationTahunKeluar(_this.riwayatPekerjaan);
 
+            _this.updateRiwayat();
+
             _this.dataKepegawaianPrev = _this.dataKepegawaian[_this.dataKepegawaian.length - 1];
 
             _this.sertifikat = responsePegawai["sertifikat"];
@@ -14927,6 +14946,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
     methods: {
+        browseSertifikatImage: function browseSertifikatImage(event) {
+            var targetIndex = event.currentTarget.id;
+            document.querySelector(".sert" + targetIndex).click();
+        },
+        browseImageProfile: function browseImageProfile() {
+            this.$refs.imgProfileInput.click();
+        },
         validationTahunKeluar: function validationTahunKeluar(arr) {
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].tahun_keluar == 0) {
@@ -15295,27 +15321,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 alert('Kolom yang wajib harus terisi dengan benar');
             }
         },
+        updateRiwayat: function updateRiwayat() {
+            //sort
+            this.riwayatPendidikan.sort(function (a, b) {
+                var keyA = a.tahun_masuk,
+                    keyB = b.tahun_masuk;
+                // Compare the 2 dates
+                if (keyA < keyB) return -1;
+                if (keyA > keyB) return 1;
+                return 0;
+            });
+
+            //sort
+            this.riwayatPekerjaan.sort(function (a, b) {
+                var keyA = a.tahun_masuk,
+                    keyB = b.tahun_masuk;
+                // Compare the 2 dates
+                if (keyA < keyB) return -1;
+                if (keyA > keyB) return 1;
+                return 0;
+            });
+        },
         saveRiwayatPegawai: function saveRiwayatPegawai() {
             if (this.isCompleteRiwayat()) {
-                //sort
-                this.riwayatPendidikan.sort(function (a, b) {
-                    var keyA = a.tahun_masuk,
-                        keyB = b.tahun_masuk;
-                    // Compare the 2 dates
-                    if (keyA < keyB) return -1;
-                    if (keyA > keyB) return 1;
-                    return 0;
-                });
-
-                //sort
-                this.riwayatPekerjaan.sort(function (a, b) {
-                    var keyA = a.tahun_masuk,
-                        keyB = b.tahun_masuk;
-                    // Compare the 2 dates
-                    if (keyA < keyB) return -1;
-                    if (keyA > keyB) return 1;
-                    return 0;
-                });
+                this.updateRiwayat();
 
                 this.enableEditButton();
                 this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
@@ -15484,7 +15513,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "card", attrs: { id: "profil-pegawai" } }, [
-      _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-header" }, [
+        _c("i", { staticClass: "fas fa-user-circle" }),
         _vm._v("\n            Profil Pegawai\n            "),
         _c(
           "button",
@@ -15503,6 +15533,8 @@ var render = function() {
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "card-container" }, [
           _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-1" }),
+            _vm._v(" "),
             _c("div", { staticClass: "col-sm-3 img-responsive" }, [
               _c("img", {
                 staticClass: "img-thumbnail",
@@ -15513,25 +15545,41 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _vm.isEditProfile
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: { click: _vm.browseImageProfile }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-image" }),
+                      _vm._v(
+                        "\n                            Ganti\n                        "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isEditProfile
                 ? _c("input", {
+                    ref: "imgProfileInput",
                     staticClass: "form-control",
+                    staticStyle: { display: "none" },
                     attrs: { type: "file" },
                     on: { change: _vm.FileChangeProfile }
                   })
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-1" }),
-            _vm._v(" "),
             _c("div", { staticClass: "col-sm-7" }, [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                _c("div", { staticClass: "col-sm-4 text-right" }, [
                   _vm._v(
                     "\n                                Nama\n                            "
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-9" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   !_vm.isEditProfile
                     ? _c("b", {
                         domProps: { textContent: _vm._s(_vm.pegawai.nama) }
@@ -15584,13 +15632,13 @@ var render = function() {
               _c("hr"),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                _c("div", { staticClass: "col-sm-4 text-right" }, [
                   _vm._v(
                     "\n                                Tempat, Tanggal Lahir\n                            "
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-9" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   !_vm.isEditProfile
                     ? _c("b", [
                         _c("span", {
@@ -15698,13 +15746,13 @@ var render = function() {
               _c("hr"),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                _c("div", { staticClass: "col-sm-4 text-right" }, [
                   _vm._v(
                     "\n                                Email\n                            "
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-9" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   !_vm.isEditProfile
                     ? _c("b", {
                         domProps: { textContent: _vm._s(_vm.pegawai.email) }
@@ -15759,13 +15807,13 @@ var render = function() {
               _c("hr"),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                _c("div", { staticClass: "col-sm-4 text-right" }, [
                   _vm._v(
                     "\n                                No. Pegawai\n                            "
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-9" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   !_vm.isEditProfile
                     ? _c("b", {
                         domProps: { textContent: _vm._s(_vm.pegawai.nopeg) }
@@ -15818,13 +15866,13 @@ var render = function() {
               _c("hr"),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                _c("div", { staticClass: "col-sm-4 text-right" }, [
                   _vm._v(
                     "\n                                Unit Kerja\n                            "
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-9" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   !_vm.isEditProfile
                     ? _c("b", {
                         domProps: {
@@ -15901,13 +15949,13 @@ var render = function() {
               _c("hr"),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                _c("div", { staticClass: "col-sm-4 text-right" }, [
                   _vm._v(
                     "\n                                Jabatan\n                            "
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-9" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   !_vm.isEditProfile
                     ? _c("b", {
                         domProps: {
@@ -15984,13 +16032,13 @@ var render = function() {
               _c("hr"),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                _c("div", { staticClass: "col-sm-4 text-right" }, [
                   _vm._v(
                     "\n                                Kompetensi\n                            "
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-9" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   !_vm.isEditProfile
                     ? _c("b", {
                         domProps: {
@@ -16069,13 +16117,13 @@ var render = function() {
               _c("hr"),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-3 text-right" }, [
+                _c("div", { staticClass: "col-sm-4 text-right" }, [
                   _vm._v(
                     "\n                                Tahun Mulai Jabatan Saat Ini\n                            "
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-9" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   !_vm.isEditProfile
                     ? _c("b", {
                         domProps: {
@@ -16165,7 +16213,8 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kepegawaian" } }, [
-      _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-header" }, [
+        _c("i", { staticClass: "fas fa-table" }),
         _vm._v("\n            Data Kepegawaian\n            "),
         _c(
           "button",
@@ -16455,7 +16504,7 @@ var render = function() {
                                     { staticClass: "form-text text-muted" },
                                     [
                                       _vm._v(
-                                        '*Isi dengan "-" jika belum selesai'
+                                        '*Isi dengan "-" jika status belum selesai'
                                       )
                                     ]
                                   )
@@ -16547,7 +16596,8 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "riwayat-pegawai" } }, [
-      _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-header" }, [
+        _c("i", { staticClass: "fas fa-briefcase" }),
         _vm._v("\n            Riwayat Pendidikan dan Pekerjaan"),
         _c(
           "button",
@@ -16814,7 +16864,7 @@ var render = function() {
                                     { staticClass: "form-text text-muted" },
                                     [
                                       _vm._v(
-                                        '*Isi dengan "-" jika belum selesai'
+                                        '*Isi dengan "-" jika status belum selesai'
                                       )
                                     ]
                                   )
@@ -17080,7 +17130,7 @@ var render = function() {
                                     { staticClass: "form-text text-muted" },
                                     [
                                       _vm._v(
-                                        '*Isi dengan "-" jika belum selesai'
+                                        '*Isi dengan "-" jika status belum selesai'
                                       )
                                     ]
                                   )
@@ -17170,7 +17220,8 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "sertificate" } }, [
-      _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-header" }, [
+        _c("i", { staticClass: "fas fa-file-alt" }),
         _vm._v("\n            Sertifikat"),
         _c(
           "button",
@@ -17330,8 +17381,29 @@ var render = function() {
                                   _c("br"),
                                   _c("br"),
                                   _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-primary",
+                                      attrs: { id: _vm.sertifikat.indexOf(dk) },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.browseSertifikatImage($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", { staticClass: "fas fa-upload" }),
+                                      _vm._v(
+                                        "\n                                    Upload Gambar\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
                                   _c("input", {
                                     staticClass: "form-control",
+                                    class: "sert" + _vm.sertifikat.indexOf(dk),
+                                    staticStyle: { display: "none" },
                                     attrs: {
                                       type: "file",
                                       id: _vm.sertifikat.indexOf(dk)
@@ -17355,7 +17427,7 @@ var render = function() {
                                           expression: "dk.judul"
                                         }
                                       ],
-                                      staticClass: "form-control",
+                                      staticClass: "form-control text-center",
                                       attrs: { type: "text" },
                                       domProps: { value: dk.judul },
                                       on: {
@@ -17397,7 +17469,7 @@ var render = function() {
                                           expression: "dk.lembaga"
                                         }
                                       ],
-                                      staticClass: "form-control",
+                                      staticClass: "form-control text-center",
                                       attrs: { type: "text" },
                                       domProps: { value: dk.lembaga },
                                       on: {
@@ -17439,7 +17511,7 @@ var render = function() {
                                           expression: "dk.tahun_diterbitkan"
                                         }
                                       ],
-                                      staticClass: "form-control",
+                                      staticClass: "form-control text-center",
                                       attrs: { type: "text" },
                                       domProps: { value: dk.tahun_diterbitkan },
                                       on: {
@@ -17481,7 +17553,7 @@ var render = function() {
                                           expression: "dk.catatan"
                                         }
                                       ],
-                                      staticClass: "form-control",
+                                      staticClass: "form-control text-center",
                                       attrs: { type: "text" },
                                       domProps: { value: dk.catatan },
                                       on: {
@@ -17496,13 +17568,7 @@ var render = function() {
                                           )
                                         }
                                       }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "small",
-                                      { staticClass: "form-text text-muted" },
-                                      [_vm._v("*Tidak wajib diisi")]
-                                    )
+                                    })
                                   ])
                                 ])
                               ])
@@ -17566,9 +17632,7 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kinerja" } }, [
-      _c("div", { staticClass: "card-header" }, [
-        _vm._v("\n            Hasil Kinerja\n            ")
-      ]),
+      _vm._m(4),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "container" }, [
@@ -17602,7 +17666,7 @@ var render = function() {
           _vm.dataKinerja.length !== 0
             ? _c("div", { staticClass: "data-kinerja" }, [
                 _c("table", { staticClass: "table" }, [
-                  _vm._m(4),
+                  _vm._m(5),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -17893,9 +17957,7 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kompetensi" } }, [
-      _c("div", { staticClass: "card-header" }, [
-        _vm._v("\n            Hasil Kompetensi\n            ")
-      ]),
+      _vm._m(6),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "container" }, [
@@ -17918,9 +17980,7 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "rekomendasi" } }, [
-      _c("div", { staticClass: "card-header" }, [
-        _vm._v("\n            Rekomendasi\n             ")
-      ]),
+      _vm._m(7),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c(
@@ -18116,7 +18176,7 @@ var render = function() {
                     "table",
                     { staticClass: "table" },
                     [
-                      _vm._m(5),
+                      _vm._m(8),
                       _vm._v(" "),
                       _vm._l(_vm.rekomendasiPosisi, function(rp) {
                         return _c("tbody", [
@@ -18434,6 +18494,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-clipboard-check" }),
+      _vm._v("\n            Hasil Kinerja\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun")]),
@@ -18444,6 +18513,24 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Catatan")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-clipboard-list" }),
+      _vm._v("\n            Hasil Kompetensi\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-info-circle" }),
+      _vm._v("\n            Rekomendasi\n             ")
     ])
   },
   function() {
@@ -18464,7 +18551,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a4d53326", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7827fda6", module.exports)
   }
 }
 
@@ -18499,7 +18586,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ProfilPegawaiSpecific.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ProfilPegawaiSpecific.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -18508,9 +18595,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-47f115bf", Component.options)
+    hotAPI.createRecord("data-v-0660f07f", Component.options)
   } else {
-    hotAPI.reload("data-v-47f115bf", Component.options)
+    hotAPI.reload("data-v-0660f07f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -18532,13 +18619,13 @@ var content = __webpack_require__(255);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(9)("45cdb34d", content, false, {});
+var update = __webpack_require__(9)("838a5ee0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47f115bf\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProfilPegawaiSpecific.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47f115bf\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProfilPegawaiSpecific.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0660f07f\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProfilPegawaiSpecific.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0660f07f\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProfilPegawaiSpecific.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -18557,7 +18644,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -19420,9 +19507,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id-pmo', 'id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
+    props: ['id-pmo', 'id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp', 'app-url'],
 
     data: function data() {
         var _ref;
@@ -19497,9 +19595,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             var responsePegawai = response.data["data"];
 
             _this.dataKepegawaian = responsePegawai["kepegawaian"];
-            _this.riwayatPendidikan = responsePegawai["pendidikan"];
-            _this.riwayatPekerjaan = responsePegawai["pekerjaan"];
             _this.updateDataKepegawaian();
+            _this.validationTahunKeluar(_this.dataKepegawaian);
+
+            _this.riwayatPendidikan = responsePegawai["pendidikan"];
+            _this.validationTahunKeluar(_this.riwayatPendidikan);
+
+            _this.riwayatPekerjaan = responsePegawai["pekerjaan"];
+            _this.validationTahunKeluar(_this.riwayatPekerjaan);
+
+            _this.updateRiwayat();
 
             _this.dataKepegawaianPrev = _this.dataKepegawaian[_this.dataKepegawaian.length - 1];
 
@@ -19511,7 +19616,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             _this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
             _this.pegawai.email = responsePegawai["user"]["email"];
             _this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
-            _this.pegawai.imageProfileUrl = 'http://pplk2b.if.itb.ac.id/pages/pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
+            _this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
             _this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
             _this.updateProfilPegawai();
 
@@ -19550,6 +19655,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
     methods: {
+        browseSertifikatImage: function browseSertifikatImage(event) {
+            var targetIndex = event.currentTarget.id;
+            document.querySelector(".sert" + targetIndex).click();
+        },
+        validationTahunKeluar: function validationTahunKeluar(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].tahun_keluar == 0) {
+                    arr[i].tahun_keluar = '-';
+                }
+            }
+        },
         downloadKompetensi: function downloadKompetensi() {
             window.open('/api/kompetensi/report/' + this.id);
         },
@@ -19652,7 +19768,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         updateSertifikat: function updateSertifikat() {
             for (var i = 0; i < this.sertifikat.length; i++) {
-                this.sertifikat[i].nama_file = 'http://pplk2b.if.itb.ac.id/pages/simage/' + this.sertifikat[i].nama_file;
+                this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
             }
         },
         disableEditButton: function disableEditButton() {
@@ -19789,6 +19905,98 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             var targetIndex = event.currentTarget.id;
             this.rekomendasiPosisi.splice(targetIndex, 1);
         },
+        isYearValid: function isYearValid(year) {
+            year = year.toString();
+            return year.length == 4 && !isNaN(year) && year > 1945;
+        },
+        isCompleteProfilPegawai: function isCompleteProfilPegawai() {
+            return this.pegawai.nama != "" && this.pegawai.nama != null && this.pegawai.tempatLahir != "" && this.pegawai.tempatLahir != null && this.pegawai.tanggalLahir != "" && this.pegawai.tanggalLahir != null && this.pegawai.email != "" && this.pegawai.email != null && this.pegawai.nopeg != "" && this.pegawai.nopeg != null && this.pegawai.unitKerja.id != "" && this.pegawai.unitKerja.id != null && this.pegawai.posisi.id != "" && this.pegawai.posisi.id != null && this.pegawai.kompetensi.id != "" && this.pegawai.kompetensi.id != null && this.pegawai.tahunMasuk != "" && this.pegawai.tahunMasuk != null && this.isYearValid(this.pegawai.tahunMasuk);
+        },
+        isCompleteDataKepegawaian: function isCompleteDataKepegawaian() {
+            var isEmpty = false;
+            var i = 0;
+            while (i < this.dataKepegawaian.length && !isEmpty) {
+                if (this.dataKepegawaian[i].id_unit_kerja != '' && this.dataKepegawaian[i].id_unit_kerja != null && this.dataKepegawaian[i].id_posisi != '' && this.dataKepegawaian[i].id_posisi != null &&
+                //this.dataKepegawaian[i].id_kelompok_kompetensi != '' && this.dataKepegawaian[i].id_kelompok_kompetensi != null &&
+                this.dataKepegawaian[i].tahun_masuk != '' && this.dataKepegawaian[i].tahun_masuk != null && this.isYearValid(this.dataKepegawaian[i].tahun_masuk) && this.dataKepegawaian[i].tahun_keluar != '' && this.dataKepegawaian[i].tahun_keluar != null && (this.isYearValid(this.dataKepegawaian[i].tahun_keluar) || this.dataKepegawaian[i].tahun_keluar == '-')) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            return !isEmpty;
+        },
+        isCompleteRiwayat: function isCompleteRiwayat() {
+            var isEmpty = false;
+            var i = 0;
+            while (i < this.riwayatPendidikan.length && !isEmpty) {
+                if (this.riwayatPendidikan[i].nama_institusi != '' && this.riwayatPendidikan[i].nama_institusi != null && this.riwayatPendidikan[i].strata != '' && this.riwayatPendidikan[i].strata != null && this.riwayatPendidikan[i].jurusan != '' && this.riwayatPendidikan[i].jurusan != null && this.riwayatPendidikan[i].tahun_masuk != '' && this.riwayatPendidikan[i].tahun_masuk != null && this.riwayatPendidikan[i].tahun_keluar != '' && this.riwayatPendidikan[i].tahun_keluar != null && this.isYearValid(this.riwayatPendidikan[i].tahun_masuk) && (this.isYearValid(this.riwayatPendidikan[i].tahun_keluar) || this.riwayatPendidikan[i].tahun_keluar == '-')) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            var i = 0;
+            while (i < this.riwayatPekerjaan.length && !isEmpty) {
+                if (this.riwayatPekerjaan[i].nama_institusi != '' && this.riwayatPekerjaan[i].nama_institusi != null && this.riwayatPekerjaan[i].posisi != '' && this.riwayatPekerjaan[i].posisi != null && this.riwayatPekerjaan[i].tahun_masuk != '' && this.riwayatPekerjaan[i].tahun_masuk != null && this.riwayatPekerjaan[i].tahun_keluar != '' && this.riwayatPekerjaan[i].tahun_keluar != null && this.isYearValid(this.riwayatPekerjaan[i].tahun_masuk) && (this.isYearValid(this.riwayatPekerjaan[i].tahun_keluar) || this.riwayatPekerjaan[i].tahun_keluar == '-')) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            return !isEmpty;
+        },
+        isCompleteSertifikat: function isCompleteSertifikat() {
+            var isEmpty = false;
+            var i = 0;
+            while (i < this.sertifikat.length && !isEmpty) {
+                if (this.sertifikat[i].judul != '' && this.sertifikat[i].judul != null && this.sertifikat[i].lembaga != '' && this.sertifikat[i].lembaga != null && this.sertifikat[i].tahun_diterbitkan != '' && this.sertifikat[i].tahun_diterbitkan != null && this.isYearValid(this.sertifikat[i].tahun_diterbitkan)) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            return !isEmpty;
+        },
+        isCompleteDataKinerja: function isCompleteDataKinerja() {
+            var isEmpty = false;
+            var i = 0;
+            while (i < this.dataKinerja.length && !isEmpty) {
+                if (this.dataKinerja[i].tahun != '' && this.dataKinerja[i].tahun != null && this.isYearValid(this.dataKinerja[i].tahun) && this.dataKinerja[i].semester != '' && this.dataKinerja[i].semester != null && (this.dataKinerja[i].semester == '1' || this.dataKinerja[i].semester == '2') && this.dataKinerja[i].nilai != '' && this.dataKinerja[i].nilai != null) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            return !isEmpty;
+        },
+        isCompleteRekomendasi: function isCompleteRekomendasi() {
+            var isEmpty = false;
+            var i = 0;
+            while (i < this.rekomendasiTraining.length && !isEmpty) {
+                if (this.rekomendasiTraining[i].id_training != '' && this.rekomendasiTraining[i].id_training != null) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            var i = 0;
+            while (i < this.rekomendasiPosisi.length && !isEmpty) {
+                if (this.rekomendasiPosisi[i].id_unit_kerja != '' && this.rekomendasiPosisi[i].id_unit_kerja != null && this.rekomendasiPosisi[i].id_posisi != '' && this.rekomendasiPosisi[i].id_posisi != null) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            return !isEmpty;
+        },
         saveProfilPegawai: function saveProfilPegawai() {
             this.enableEditButton();
 
@@ -19833,7 +20041,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 alert('Semua kolom harus terisi');
             });
         },
-        saveRiwayatPegawai: function saveRiwayatPegawai() {
+        updateRiwayat: function updateRiwayat() {
             //sort
             this.riwayatPendidikan.sort(function (a, b) {
                 var keyA = a.tahun_masuk,
@@ -19853,6 +20061,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 if (keyA > keyB) return 1;
                 return 0;
             });
+        },
+        saveRiwayatPegawai: function saveRiwayatPegawai() {
+
+            this.updateRiwayat();
 
             this.enableEditButton();
             this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
@@ -19875,114 +20087,123 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
         },
         saveSertifikat: function saveSertifikat() {
-            this.enableEditButton();
-            this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
-            this.isEditSertifikat = false;
-            console.log(this.sertifikat);
+            if (this.isCompleteSertifikat()) {
+                this.enableEditButton();
+                this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
+                this.isEditSertifikat = false;
+                console.log(this.sertifikat);
 
-            axios.post('/api/sertifikat/' + this.id, {
-                sertifikat: this.sertifikat,
-                _method: 'put'
-            }).then(function (response) {
-                console.log(response);
-                // window.location.href = "/pages/profile/" + response.data.data;
-            }).catch(function (error) {
-                console.log(error);
-                alert('Semua kolom harus terisi');
-            });
+                axios.post('/api/sertifikat/' + this.id, {
+                    sertifikat: this.sertifikat,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                    // window.location.href = "/pages/profile/" + response.data.data;
+                }).catch(function (error) {
+                    console.log(error);
+                    // alert('Semua kolom harus terisi');
+                });
 
-            axios.post('/api/lastedited/' + this.id, {
-                id_pengubah: this.idPmo,
-                _method: 'put'
-            }).then(function (response) {
-                console.log(response);
-                location.reload();
-                // window.location.href = "/pages/profile/" + this.id;
-            }).catch(function (error) {
-                console.log(error);
-                alert(error);
-                alert('Semua kolom harus terisi');
-            });
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                    location.reload();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                alert('Kolom yang wajib harus terisi dengan benar');
+            }
         },
         saveDataKinerja: function saveDataKinerja() {
-            //sort
-            this.dataKinerja.sort(function (a, b) {
-                var keyA = a.tahun,
-                    keyB = b.tahun;
-                // Compare the 2 dates
-                if (keyA < keyB) return -1;
-                if (keyA > keyB) return 1;
-                if (keyA == keyB) {
-                    if (a.semester < b.semester) return -1;else return 1;
+            if (this.isCompleteDataKinerja()) {
+                //sort
+                this.dataKinerja.sort(function (a, b) {
+                    var keyA = a.tahun,
+                        keyB = b.tahun;
+                    // Compare the 2 dates
+                    if (keyA < keyB) return -1;
+                    if (keyA > keyB) return 1;
+                    if (keyA == keyB) {
+                        if (a.semester < b.semester) return -1;else return 1;
+                    }
+                });
+
+                this.enableEditButton();
+                this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
+                this.isEditDataKinerja = false;
+
+                if (this.isShowAllDataKinerja) {
+                    this.showAllDataKinerja();
+                } else {
+                    this.hideDataKinerja();
                 }
-            });
 
-            this.enableEditButton();
-            this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
-            this.isEditDataKinerja = false;
+                axios.post('/api/savekinerja/' + this.id, {
+                    kinerja: this.dataKinerja,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                    // window.location.href = "/pages/profile/" + this.id;
+                }).catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
 
-            if (this.isShowAllDataKinerja) {
-                this.showAllDataKinerja();
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                }).catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
             } else {
-                this.hideDataKinerja();
+                alert('Kolom yang wajib harus terisi dengan benar');
             }
-
-            axios.post('/api/savekinerja/' + this.id, {
-                kinerja: this.dataKinerja,
-                _method: 'put'
-            }).then(function (response) {
-                console.log(response);
-                // window.location.href = "/pages/profile/" + this.id;
-            }).catch(function (error) {
-                console.log(error);
-                alert(error);
-                alert('Semua kolom harus terisi');
-            });
-
-            axios.post('/api/lastedited/' + this.id, {
-                id_pengubah: this.idPmo,
-                _method: 'put'
-            }).then(function (response) {
-                console.log(response);
-                location.reload();
-                // window.location.href = "/pages/profile/" + this.id;
-            }).catch(function (error) {
-                console.log(error);
-                alert(error);
-                alert('Semua kolom harus terisi');
-            });
         },
         saveRekomendasi: function saveRekomendasi() {
-            this.enableEditButton();
-            this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
-            this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
-            this.isEditRekomendasi = false;
+            if (this.isCompleteRekomendasi()) {
+                this.enableEditButton();
+                this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+                this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+                this.isEditRekomendasi = false;
 
-            axios.post('/api/rekomendasi/' + this.id, {
-                training: this.rekomendasiTraining,
-                posisi: this.rekomendasiPosisi,
-                _method: 'put'
-            }).then(function (response) {
-                console.log(response);
-                // window.location.href = "/pages/profile/" + this.id;
-            }).catch(function (error) {
-                console.log(error);
-                alert(error);
-                alert('Semua kolom harus terisi');
-            });
+                axios.post('/api/rekomendasi/' + this.id, {
+                    training: this.rekomendasiTraining,
+                    posisi: this.rekomendasiPosisi,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                    // window.location.href = "/pages/profile/" + this.id;
+                }).catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
 
-            axios.post('/api/lastedited/' + this.id, {
-                id_pengubah: this.idPmo,
-                _method: 'put'
-            }).then(function (response) {
-                console.log(response);
-                location.reload();
-                // window.location.href = "/pages/profile/" + this.id;
-            }).catch(function (error) {
-                console.log(error);
-                alert(error);
-                alert('Semua kolom harus terisi');
-            });
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.idPmo,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                    location.reload();
+                    // window.location.href = "/pages/profile/" + this.id;
+                }).catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                    alert('Semua kolom harus terisi');
+                });
+            } else {
+                alert('Kolom yang wajib harus terisi dengan benar');
+            }
         },
 
 
@@ -20067,13 +20288,13 @@ var render = function() {
       "div",
       { staticClass: "card", attrs: { id: "profil-pegawai-specific" } },
       [
-        _c("div", { staticClass: "card-header" }, [
-          _vm._v("\n            Profil Pegawai\n            ")
-        ]),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "card-container" }, [
             _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-1" }),
+              _vm._v(" "),
               _c("div", { staticClass: "col-sm-3 img-responsive" }, [
                 _c("img", {
                   staticClass: "img-thumbnail",
@@ -20092,17 +20313,15 @@ var render = function() {
                   : _vm._e()
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-1" }),
-              _vm._v(" "),
               _c("div", { staticClass: "col-sm-7" }, [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
                     _vm._v(
                       "\n                                Nama\n                            "
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-9" }, [
+                  _c("div", { staticClass: "col-sm-8" }, [
                     !_vm.isEditProfile
                       ? _c("b", {
                           domProps: { textContent: _vm._s(_vm.pegawai.nama) }
@@ -20157,13 +20376,13 @@ var render = function() {
                 _c("hr"),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
                     _vm._v(
                       "\n                                Tempat, Tanggal Lahir\n                            "
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-9" }, [
+                  _c("div", { staticClass: "col-sm-8" }, [
                     !_vm.isEditProfile
                       ? _c("b", [
                           _c("span", {
@@ -20271,13 +20490,13 @@ var render = function() {
                 _c("hr"),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
                     _vm._v(
                       "\n                                Email\n                            "
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-9" }, [
+                  _c("div", { staticClass: "col-sm-8" }, [
                     !_vm.isEditProfile
                       ? _c("b", {
                           domProps: { textContent: _vm._s(_vm.pegawai.email) }
@@ -20332,13 +20551,13 @@ var render = function() {
                 _c("hr"),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
                     _vm._v(
                       "\n                                No. Pegawai\n                            "
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-9" }, [
+                  _c("div", { staticClass: "col-sm-8" }, [
                     !_vm.isEditProfile
                       ? _c("b", {
                           domProps: { textContent: _vm._s(_vm.pegawai.nopeg) }
@@ -20393,13 +20612,13 @@ var render = function() {
                 _c("hr"),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
                     _vm._v(
                       "\n                                Unit Kerja\n                            "
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-9" }, [
+                  _c("div", { staticClass: "col-sm-8" }, [
                     !_vm.isEditProfile
                       ? _c("b", {
                           domProps: {
@@ -20478,13 +20697,13 @@ var render = function() {
                 _c("hr"),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
                     _vm._v(
                       "\n                                Jabatan\n                            "
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-9" }, [
+                  _c("div", { staticClass: "col-sm-8" }, [
                     !_vm.isEditProfile
                       ? _c("b", {
                           domProps: {
@@ -20563,13 +20782,13 @@ var render = function() {
                 _c("hr"),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
                     _vm._v(
                       "\n                                Kompetensi\n                            "
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-9" }, [
+                  _c("div", { staticClass: "col-sm-8" }, [
                     !_vm.isEditProfile
                       ? _c("b", {
                           domProps: {
@@ -20652,13 +20871,13 @@ var render = function() {
                 _c("hr"),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-3 text-right" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
                     _vm._v(
                       "\n                                Tahun Mulai Jabatan Saat Ini\n                            "
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-9" }, [
+                  _c("div", { staticClass: "col-sm-8" }, [
                     !_vm.isEditProfile
                       ? _c("b", {
                           domProps: {
@@ -20751,9 +20970,7 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kepegawaian" } }, [
-      _c("div", { staticClass: "card-header" }, [
-        _vm._v("\n            Data Kepegawaian\n            ")
-      ]),
+      _vm._m(1),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "container" }, [
@@ -20790,7 +21007,7 @@ var render = function() {
                   "table",
                   { staticClass: "table" },
                   [
-                    _vm._m(0),
+                    _vm._m(2),
                     _vm._v(" "),
                     _vm._l(_vm.dataKepegawaian, function(dk) {
                       return _c("tbody", [
@@ -21029,7 +21246,7 @@ var render = function() {
                                     { staticClass: "form-text text-muted" },
                                     [
                                       _vm._v(
-                                        '*Isi dengan "-" jika belum selesai'
+                                        '*Isi dengan "-" jika status belum selesai'
                                       )
                                     ]
                                   )
@@ -21121,9 +21338,7 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "riwayat-pegawai" } }, [
-      _c("div", { staticClass: "card-header" }, [
-        _vm._v("\n            Riwayat Pendidikan dan Pekerjaan\n            ")
-      ]),
+      _vm._m(3),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "container" }, [
@@ -21163,7 +21378,7 @@ var render = function() {
                   "table",
                   { staticClass: "table" },
                   [
-                    _vm._m(1),
+                    _vm._m(4),
                     _vm._v(" "),
                     _vm._l(_vm.riwayatPendidikan, function(rp) {
                       return _c("tbody", [
@@ -21376,7 +21591,7 @@ var render = function() {
                                     { staticClass: "form-text text-muted" },
                                     [
                                       _vm._v(
-                                        '*Isi dengan "-" jika belum selesai'
+                                        '*Isi dengan "-" jika status belum selesai'
                                       )
                                     ]
                                   )
@@ -21469,7 +21684,7 @@ var render = function() {
                   "table",
                   { staticClass: "table" },
                   [
-                    _vm._m(2),
+                    _vm._m(5),
                     _vm._v(" "),
                     _vm._l(_vm.riwayatPekerjaan, function(rp) {
                       return _c("tbody", [
@@ -21642,7 +21857,7 @@ var render = function() {
                                     { staticClass: "form-text text-muted" },
                                     [
                                       _vm._v(
-                                        '*Isi dengan "-" jika belum selesai'
+                                        '*Isi dengan "-" jika status belum selesai'
                                       )
                                     ]
                                   )
@@ -21732,7 +21947,8 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "sertificate" } }, [
-      _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-header" }, [
+        _c("i", { staticClass: "fas fa-file-alt" }),
         _vm._v("\n            Sertifikat"),
         _c(
           "button",
@@ -21742,8 +21958,8 @@ var render = function() {
             on: { click: _vm.editSertifikat }
           },
           [
-            _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fas fa-edit" })
+            _c("i", { staticClass: "fas fa-edit" }),
+            _vm._v(" Edit \n                ")
           ]
         )
       ]),
@@ -21769,8 +21985,8 @@ var render = function() {
                         on: { click: _vm.addSertifikat }
                       },
                       [
-                        _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fas fa-plus" })
+                        _c("i", { staticClass: "fas fa-plus" }),
+                        _vm._v(" Tambah \n                    ")
                       ]
                     )
                   : _vm._e()
@@ -21791,7 +22007,7 @@ var render = function() {
                       return _c("tbody", [
                         !_vm.isEditSertifikat
                           ? _c("div", [
-                              _vm._m(3, true),
+                              _vm._m(6, true),
                               _vm._v(" "),
                               _c("tr", [
                                 _c("td", { attrs: { rowspan: "4" } }, [
@@ -21868,12 +22084,12 @@ var render = function() {
                                         }
                                       },
                                       [
-                                        _vm._v(
-                                          "\n                                        Hapus "
-                                        ),
                                         _c("i", {
                                           staticClass: "fas fa-trash-alt"
-                                        })
+                                        }),
+                                        _vm._v(
+                                          " Hapus \n                                    "
+                                        )
                                       ]
                                     )
                                   ])
@@ -21892,8 +22108,29 @@ var render = function() {
                                   _c("br"),
                                   _c("br"),
                                   _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-primary",
+                                      attrs: { id: _vm.sertifikat.indexOf(dk) },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.browseSertifikatImage($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", { staticClass: "fas fa-upload" }),
+                                      _vm._v(
+                                        "\n                                    Upload Gambar\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
                                   _c("input", {
                                     staticClass: "form-control",
+                                    class: "sert" + _vm.sertifikat.indexOf(dk),
+                                    staticStyle: { display: "none" },
                                     attrs: {
                                       type: "file",
                                       id: _vm.sertifikat.indexOf(dk)
@@ -21917,7 +22154,7 @@ var render = function() {
                                           expression: "dk.judul"
                                         }
                                       ],
-                                      staticClass: "form-control",
+                                      staticClass: "form-control text-center",
                                       attrs: { type: "text" },
                                       domProps: { value: dk.judul },
                                       on: {
@@ -21959,7 +22196,7 @@ var render = function() {
                                           expression: "dk.lembaga"
                                         }
                                       ],
-                                      staticClass: "form-control",
+                                      staticClass: "form-control text-center",
                                       attrs: { type: "text" },
                                       domProps: { value: dk.lembaga },
                                       on: {
@@ -22001,7 +22238,7 @@ var render = function() {
                                           expression: "dk.tahun_diterbitkan"
                                         }
                                       ],
-                                      staticClass: "form-control",
+                                      staticClass: "form-control text-center",
                                       attrs: { type: "text" },
                                       domProps: { value: dk.tahun_diterbitkan },
                                       on: {
@@ -22043,7 +22280,7 @@ var render = function() {
                                           expression: "dk.catatan"
                                         }
                                       ],
-                                      staticClass: "form-control",
+                                      staticClass: "form-control text-center",
                                       attrs: { type: "text" },
                                       domProps: { value: dk.catatan },
                                       on: {
@@ -22058,13 +22295,7 @@ var render = function() {
                                           )
                                         }
                                       }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "small",
-                                      { staticClass: "form-text text-muted" },
-                                      [_vm._v("*Wajib diisi")]
-                                    )
+                                    })
                                   ])
                                 ])
                               ])
@@ -22081,8 +22312,8 @@ var render = function() {
                             on: { click: _vm.addSertifikat }
                           },
                           [
-                            _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fas fa-plus" })
+                            _c("i", { staticClass: "fas fa-plus" }),
+                            _vm._v(" Tambah \n                        ")
                           ]
                         )
                       : _vm._e()
@@ -22104,8 +22335,8 @@ var render = function() {
                 on: { click: _vm.saveSertifikat }
               },
               [
-                _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fas fa-check" }),
+                _vm._v(" Simpan \n                ")
               ]
             ),
             _vm._v(" "),
@@ -22117,8 +22348,8 @@ var render = function() {
                 on: { click: _vm.cancelSertifikat }
               },
               [
-                _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fas fa-times" }),
+                _vm._v(" Batal \n            ")
               ]
             )
           ])
@@ -22128,7 +22359,8 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kinerja" } }, [
-      _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-header" }, [
+        _c("i", { staticClass: "fas fa-clipboard-check" }),
         _vm._v("\n            Hasil Kinerja"),
         _c(
           "button",
@@ -22138,8 +22370,8 @@ var render = function() {
             on: { click: _vm.editDataKinerja }
           },
           [
-            _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fas fa-edit" })
+            _c("i", { staticClass: "fas fa-edit" }),
+            _vm._v(" Edit \n                ")
           ]
         )
       ]),
@@ -22165,8 +22397,8 @@ var render = function() {
                         on: { click: _vm.addDataKinerja }
                       },
                       [
-                        _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fas fa-plus" })
+                        _c("i", { staticClass: "fas fa-plus" }),
+                        _vm._v(" Tambah \n                    ")
                       ]
                     )
                   : _vm._e()
@@ -22176,7 +22408,7 @@ var render = function() {
           _vm.dataKinerja.length !== 0
             ? _c("div", { staticClass: "data-kinerja" }, [
                 _c("table", { staticClass: "table" }, [
-                  _vm._m(4),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -22366,10 +22598,12 @@ var render = function() {
                                     }
                                   },
                                   [
+                                    _c("i", {
+                                      staticClass: "fas fa-trash-alt"
+                                    }),
                                     _vm._v(
-                                      "\n                                    Hapus "
-                                    ),
-                                    _c("i", { staticClass: "fas fa-trash-alt" })
+                                      " Hapus \n                                "
+                                    )
                                   ]
                                 )
                               ])
@@ -22389,10 +22623,8 @@ var render = function() {
                           on: { click: _vm.showAllDataKinerja }
                         },
                         [
-                          _vm._v(
-                            "\n                            Tamplikan semua "
-                          ),
-                          _c("i", { staticClass: "fas fa-eye" })
+                          _c("i", { staticClass: "fas fa-eye" }),
+                          _vm._v(" Tamplikan semua \n                        ")
                         ]
                       )
                     : _vm._e(),
@@ -22406,10 +22638,10 @@ var render = function() {
                           on: { click: _vm.hideDataKinerja }
                         },
                         [
+                          _c("i", { staticClass: "fas fa-eye-slash" }),
                           _vm._v(
-                            "\n                            Sembunyikan sebagian "
-                          ),
-                          _c("i", { staticClass: "fas fa-eye-slash" })
+                            " Sembunyikan sebagian \n                        "
+                          )
                         ]
                       )
                     : _vm._e(),
@@ -22422,8 +22654,8 @@ var render = function() {
                           on: { click: _vm.addDataKinerja }
                         },
                         [
-                          _vm._v("\n                            Tambah "),
-                          _c("i", { staticClass: "fas fa-plus" })
+                          _c("i", { staticClass: "fas fa-plus" }),
+                          _vm._v(" Tambah \n                        ")
                         ]
                       )
                     : _vm._e()
@@ -22443,8 +22675,8 @@ var render = function() {
                 on: { click: _vm.saveDataKinerja }
               },
               [
-                _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fas fa-check" }),
+                _vm._v(" Simpan \n                ")
               ]
             ),
             _vm._v(" "),
@@ -22456,8 +22688,8 @@ var render = function() {
                 on: { click: _vm.cancelDataKinerja }
               },
               [
-                _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fas fa-times" }),
+                _vm._v(" Batal \n            ")
               ]
             )
           ])
@@ -22467,7 +22699,8 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kompetensi" } }, [
-      _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-header" }, [
+        _c("i", { staticClass: "fas fa-clipboard-list" }),
         _vm._v("\n            Hasil Kompetensi"),
         _c(
           "button",
@@ -22477,8 +22710,8 @@ var render = function() {
             on: { click: _vm.editKommpetensi }
           },
           [
-            _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fas fa-edit" })
+            _c("i", { staticClass: "fas fa-edit" }),
+            _vm._v(" Edit \n                ")
           ]
         )
       ]),
@@ -22493,8 +22726,8 @@ var render = function() {
               on: { click: _vm.downloadKompetensi }
             },
             [
-              _vm._v("\n                Download "),
-              _c("i", { staticClass: "fas fa-download" })
+              _c("i", { staticClass: "fas fa-download" }),
+              _vm._v(" Download \n             ")
             ]
           )
         ])
@@ -22504,7 +22737,8 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "rekomendasi" } }, [
-      _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-header" }, [
+        _c("i", { staticClass: "fas fa-info-circle" }),
         _vm._v("\n            Rekomendasi"),
         _c(
           "button",
@@ -22514,8 +22748,8 @@ var render = function() {
             on: { click: _vm.editRekomendasi }
           },
           [
-            _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fas fa-edit" })
+            _c("i", { staticClass: "fas fa-edit" }),
+            _vm._v(" Edit \n                ")
           ]
         )
       ]),
@@ -22548,8 +22782,8 @@ var render = function() {
                           on: { click: _vm.addRekomendasiTraining }
                         },
                         [
-                          _vm._v("\n                        Tambah "),
-                          _c("i", { staticClass: "fas fa-plus" })
+                          _c("i", { staticClass: "fas fa-plus" }),
+                          _vm._v(" Tambah \n                    ")
                         ]
                       )
                     : _vm._e()
@@ -22647,10 +22881,8 @@ var render = function() {
                                 }
                               },
                               [
-                                _vm._v(
-                                  "\n                                Hapus "
-                                ),
-                                _c("i", { staticClass: "fas fa-trash-alt" })
+                                _c("i", { staticClass: "fas fa-trash-alt" }),
+                                _vm._v(" Hapus \n                            ")
                               ]
                             )
                           ])
@@ -22668,8 +22900,8 @@ var render = function() {
                     on: { click: _vm.addRekomendasiTraining }
                   },
                   [
-                    _vm._v("\n                    Tambah "),
-                    _c("i", { staticClass: "fas fa-plus" })
+                    _c("i", { staticClass: "fas fa-plus" }),
+                    _vm._v(" Tambah \n                ")
                   ]
                 )
               : _vm._e(),
@@ -22700,8 +22932,8 @@ var render = function() {
                           on: { click: _vm.addRekomendasiPosisi }
                         },
                         [
-                          _vm._v("\n                        Tambah "),
-                          _c("i", { staticClass: "fas fa-plus" })
+                          _c("i", { staticClass: "fas fa-plus" }),
+                          _vm._v(" Tambah \n                    ")
                         ]
                       )
                     : _vm._e()
@@ -22714,7 +22946,7 @@ var render = function() {
                     "table",
                     { staticClass: "table" },
                     [
-                      _vm._m(5),
+                      _vm._m(8),
                       _vm._v(" "),
                       _vm._l(_vm.rekomendasiPosisi, function(rp) {
                         return _c("tbody", [
@@ -22894,12 +23126,12 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _vm._v(
-                                        "\n                                    Hapus "
-                                      ),
                                       _c("i", {
                                         staticClass: "fas fa-trash-alt"
-                                      })
+                                      }),
+                                      _vm._v(
+                                        " Hapus \n                                "
+                                      )
                                     ]
                                   )
                                 ])
@@ -22916,8 +23148,8 @@ var render = function() {
                               on: { click: _vm.addRekomendasiPosisi }
                             },
                             [
-                              _vm._v("\n                            Tambah "),
-                              _c("i", { staticClass: "fas fa-plus" })
+                              _c("i", { staticClass: "fas fa-plus" }),
+                              _vm._v(" Tambah \n                        ")
                             ]
                           )
                         : _vm._e()
@@ -22943,8 +23175,8 @@ var render = function() {
                 on: { click: _vm.saveRekomendasi }
               },
               [
-                _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fas fa-check" }),
+                _vm._v(" Simpan \n                ")
               ]
             ),
             _vm._v(" "),
@@ -22956,8 +23188,8 @@ var render = function() {
                 on: { click: _vm.cancelRekomendasi }
               },
               [
-                _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fas fa-times" }),
+                _vm._v(" Batal \n            ")
               ]
             )
           ])
@@ -22966,6 +23198,24 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-user-circle" }),
+      _vm._v("\n            Profil Pegawai\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-table" }),
+      _vm._v("\n            Data Kepegawaian\n            ")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -22980,6 +23230,15 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Selesai")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-briefcase" }),
+      _vm._v("\n            Riwayat Pendidikan dan Pekerjaan\n            ")
     ])
   },
   function() {
@@ -23062,7 +23321,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-47f115bf", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0660f07f", module.exports)
   }
 }
 
