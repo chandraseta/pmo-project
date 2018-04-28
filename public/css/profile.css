@@ -11338,6 +11338,10 @@ a.text-dark:focus {
   content: '\E0DE';
 }
 
+body {
+  background-color: #f5f8fa;
+}
+
 .navbar-laravel {
   background-color: #005792;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -11355,7 +11359,7 @@ a.text-dark:focus {
 }
 
 .card-container {
-  padding: 30px 120px;
+  padding: 30px 20px;
 }
 
 footer {
@@ -11376,6 +11380,25 @@ table th {
 }
 
 .text-center {
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #005792;
+  border-color: #005792;
+}
+
+.btn-danger {
+  background-color: #ba0101;
+  border-color: #ba0101;
+}
+
+.btn-success {
+  background-color: #009602;
+  border-color: #009602;
+}
+
+.img-responsive {
   text-align: center;
 }
 
