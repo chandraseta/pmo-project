@@ -7,6 +7,10 @@
 // Variables
 @import "variables";
 
+body {
+    background-color: #f5f8fa;
+}
+
 .navbar-laravel {
     background-color: map_get($theme-colors, primary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -44,5 +48,24 @@ table th{
 }
 
 .text-center {
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: map_get($theme-colors, primary);
+    border-color: map_get($theme-colors, primary);
+}
+
+.btn-danger {
+    background-color: #ba0101;
+    border-color: #ba0101;
+}
+
+.btn-success {
+    background-color: #009602;
+    border-color: #009602;
+}
+
+.img-responsive {
     text-align: center;
 }

@@ -1,12 +1,14 @@
 <template>
     <div>
         <div class="card" id="profil-pegawai">
-            <div class="card-header">
+            <h5 class="card-header">
+                <i class="fas fa-user-circle"></i>
                 Profil Pegawai
                 <button class="btn btn-primary float-sm-right" v-on:click="editProfilPegawai" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
                 </button>
-            </div>
+            </h5>
+            
 
             <div class="card-body">
                 <div class="card-container">
@@ -15,10 +17,13 @@
                         <div class="col-sm-3 img-responsive">
                             <img id="img-profile" v-bind:src="pegawai.imageProfileUrl" class="img-thumbnail">
                             <br><br>
-                            <input type="file" v-if="isEditProfile" v-on:change="FileChangeProfile" class="form-control">
+                            <button v-if="isEditProfile" class="btn btn-primary" v-on:click="browseImageProfile">
+                                <i class="fas fa-image"></i>
+                                Ganti Gambar
+                            </button>
+                            <input type="file" style="display:none;" ref="imgProfileInput" v-if="isEditProfile" v-on:change="FileChangeProfile" class="form-control">
                         </div>
-                        
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <div class="row">
                                 <div class="col-sm-4 text-right">
                                     Nama
@@ -48,6 +53,7 @@
                                             <input v-model="pegawai.tempatLahir" type="text" class="form-control">
                                             <small class="form-text text-muted">*Tempat lahir. Wajib diisi</small>
                                         </div>
+                                        
                                         <div id="edit-tanggal-lahir" class="form-group">
                                             <input v-model="pegawai.tanggalLahir" type="date" class="form-control">
                                             <small class="form-text text-muted">*Tanggal lahir. Wajib diisi</small>
@@ -185,12 +191,13 @@
         <br>
 
         <div class="card" id="data-kepegawaian">
-            <div class="card-header">
+            <h5 class="card-header">
+                <i class="fas fa-table"></i>
                 Data Kepegawaian
                 <button class="btn btn-primary float-sm-right" v-on:click="editDataKepegawaian" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
                 </button>
-            </div>
+            </h5>
 
             <div class="card-body">
                 <div class="container">
@@ -299,11 +306,12 @@
         <br>
 
         <div class="card" id="riwayat-pegawai">
-            <div class="card-header">
+            <h5 class="card-header">
+                <i class="fas fa-briefcase"></i>
                 Riwayat Pendidikan dan Pekerjaan<button class="btn btn-primary float-sm-right" v-on:click="editRiwayatPegawai" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
                     </button>
-            </div>
+            </h5>
 
             <div class="card-body">
                 <div class="container">
@@ -474,11 +482,12 @@
         <br>
 
         <div class="card" id="sertificate">
-            <div class="card-header">
+            <h5 class="card-header">
+                <i class="fas fa-file-alt"></i>
                 Sertifikat<button class="btn btn-primary float-sm-right" v-on:click="editSertifikat" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
                     </button>
-            </div>
+            </h5>
 
             <div class="card-body">
                 <div class="container">
@@ -534,7 +543,11 @@
                                 <td rowspan="4">
                                     <img id="img-sertifikat-1" v-bind:src="dk.nama_file" class="img-thumbnail" width="200">
                                     <br><br>
-                                    <input type="file" v-bind:id="sertifikat.indexOf(dk)" v-on:change="FileChangeSertifikat" class="form-control">
+                                    <button v-bind:id="sertifikat.indexOf(dk)" class="btn btn-primary" v-on:click="browseSertifikatImage($event)">
+                                        <i class="fas fa-upload"></i>
+                                        Upload Gambar
+                                    </button>
+                                    <input style="display:none" type="file" v-bind:class="'sert'+sertifikat.indexOf(dk)" v-bind:id="sertifikat.indexOf(dk)" v-on:change="FileChangeSertifikat" class="form-control">
                                 </td>
                                 <th scope="col">Judul</th>
                                 <td>
@@ -594,12 +607,13 @@
         <br>
 
         <div class="card" id="data-kinerja">
-            <div class="card-header">
+            <h5 class="card-header">
+                <i class="fas fa-clipboard-check"></i>
                 Hasil Kinerja
                 <!-- <button class="btn btn-primary float-sm-right" v-on:click="editDataKinerja" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
                  -->    </button>
-            </div>
+            </h5>
 
             <div class="card-body">
                 <div class="container">
@@ -690,12 +704,13 @@
         <br>
 
         <div class="card" id="data-kompetensi">
-            <div class="card-header">
+            <h5 class="card-header">
+                <i class="fas fa-clipboard-list"></i>
                 Hasil Kompetensi
                 <!-- <button class="btn btn-primary float-sm-right" v-on:click="editDataKompetensi" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
                  </button> -->
-            </div>
+            </h5>
 
             <div class="card-body">
                 <div class="container">
@@ -711,12 +726,13 @@
         <br>
 
         <div class="card" id="rekomendasi">
-            <div class="card-header">
+            <h5 class="card-header">
+                <i class="fas fa-info-circle"></i>
                 Rekomendasi
                  <!-- <button class="btn btn-primary float-sm-right" v-on:click="editRekomendasi" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
                  </button> -->
-            </div>
+            </h5>
 
             <div class="card-body">
                 <div class="container">
@@ -997,6 +1013,16 @@
         },
 
         methods: {
+
+            browseSertifikatImage(event) {
+                var targetIndex = event.currentTarget.id;
+                document.querySelector(".sert"+targetIndex).click();
+            },
+
+            browseImageProfile() {
+                this.$refs.imgProfileInput.click();
+            },
+
             validationTahunKeluar(arr) {
                 for (let i=0; i<arr.length; i++) {
                     if (arr[i].tahun_keluar == 0) {
