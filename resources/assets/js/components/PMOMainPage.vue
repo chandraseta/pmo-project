@@ -65,7 +65,7 @@
                                        :class="{'is-invalid': isFormInvalid[column.field]}"
                                        :type="column.type == 'number' || 'date' ? column.type : 'text'"
                                        :id="column.field"
-                                       :placeholder="column.label"
+                                       :placeholder="column.placeholder"
                                        v-model="newData[column.field]">
                                 <div v-if="column.required" class="invalid-feedback">
                                     NIP diperlukan untuk membuat data baru.
