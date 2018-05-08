@@ -855,7 +855,7 @@
         </div>
 
     </div>
-
+    <common-footer></common-footer>
 </template>
 
 <script>

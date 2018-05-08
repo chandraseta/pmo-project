@@ -44,9 +44,7 @@
                         :searchQuery="searchQuery">
             </data-table>
         </main>
-        <footer>
-
-        </footer>
+        <common-footer></common-footer>
         <!--Modals-->
         <div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -134,6 +132,7 @@
         dataTrainingColumns: require('./configs/data-training-columns.json'),
         name: 'pmo-main-page',
         components: {
+            'common-footer': require('./CommonFooter.vue'),
             'pmo-navbar': require('./PMONavbar.vue'),
             'data-table': require('./DataTable.vue'),
         },
