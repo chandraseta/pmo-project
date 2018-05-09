@@ -714,11 +714,30 @@
 
             <div class="card-body">
                 <div class="container">
-
                     <button class="btn btn-primary float-sm-left" v-on:click="downloadKompetensi" v-bind:disabled="disableEdit">
-                    Download <i class="fas fa-download"></i>
-                 </button>
-
+                        Download <i class="fas fa-download"></i>
+                    </button>
+                    
+                    <br><br><br>
+                    <h5>Petunjuk:</h5>
+                    <ul>
+                        <li>Buka berkas dengan Microsoft Excel</li>
+                        <li>Jika ada, tekan tombol "<i>Enable Editing</i>" pada <i>bar</i> kuning di bagian atas</li>
+                        <li>Jika ingin disimpan sebagai PDF: 
+                            <ul>
+                                <li>Pilih <b><i>File → Save As</i></b></li>
+                                <li>Pilih format PDF pada <i>dropdown menu</i> pemilihan format</li>
+                                <li>Tekan tombol <b><i>Save</i></b> untuk menyimpannya sebagai PDF</li>
+                            </ul>
+                        </li>
+                        <li>Jika ingin dicetak: 
+                            <ul>
+                                <li>Pilih <b><i>File → Print</i></b></li>
+                                <li>Masukan pengaturan pencetakan yang sesuai</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>Selain dengan menggunakan Microsoft Excel, berkas Excel yang diunduh juga dapat dikonversi ke format PDF dengan layanan Web seperti <a href="https://smallpdf.com/excel-to-pdf">SmallPDF</a> atau <a href="https://www.ilovepdf.com/excel_to_pdf">iLovePDF</a>. Ikuti petunjuk yang tertera pada situs-situs tersebut untuk mengkonversi.</p>
                 </div>
             </div>
         </div>
