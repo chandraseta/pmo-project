@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Validator;
 use PHPExcel_IOFactory;
 use PHPExcel_Settings;
+use Validator;
 
 class DataKompetensiController extends APIBaseController
 {
@@ -497,7 +497,7 @@ class DataKompetensiController extends APIBaseController
         $path = $storagePath . 'templates/laporan_template.xlsx';
 
         $reader = PHPExcel_IOFactory::createReader('Excel2007');
-        $reader->setIncludeCharts(TRUE);
+        $reader->setIncludeCharts(true);
         $excel = $reader->load($path);
         $sheet = $excel->getSheetByName('Psikogram');
 
@@ -510,7 +510,7 @@ class DataKompetensiController extends APIBaseController
         $sheet->getCell('F16')->setValue($obj->tanggal_lahir);
         $sheet->getCell('G16')->setValue($obj->posisi);
         $sheet->getCell('H16')->setValue($obj->tujuan);
-        $sheet->getCell('I16')->setValue($obj->tanggal);
+        $sheet->getCell('I16')->setValue(date('d-m-Y', strtotime($obj->tanggal)));
         $sheet->getCell('J16')->setValue(floor($obj->kognitif_efisiensi_kecerdasan));
         $sheet->getCell('K16')->setValue(floor($obj->kognitif_daya_nalar));
         $sheet->getCell('L16')->setValue(floor($obj->kognitif_daya_asosiasi));
@@ -536,18 +536,8 @@ class DataKompetensiController extends APIBaseController
         $sheet->getCell('AP16')->setValue(floor($obj->manajerial_intensitas_pengarahan));
         $sheet->getCell('AQ16')->setValue(floor($obj->manajerial_kekuatan_pengawasan));
 
-        // Protect template sheet
-        $excel->getActiveSheet()->getProtection()->setSheet(true);
-        $excel->getActiveSheet()->getProtection()->setSort(true);
-        $excel->getActiveSheet()->getProtection()->setInsertRows(true);
-        $excel->getActiveSheet()->getProtection()->setFormatCells(true);
-        $excel->getActiveSheet()->getProtection()->setPassword('uptpmoitb');
-
         // Move sheet
         $sheet = $excel->getSheetByName('x');
-        $excel->setActiveSheetIndex(
-            $excel->getIndex($sheet)
-        );
 
         // Set rekomendasi data
         $row_num = 60;
@@ -560,12 +550,34 @@ class DataKompetensiController extends APIBaseController
             }
         }
 
+        // Convert all formulas to values
+        for ($i = 'C'; $i <= 'K'; ++$i) {
+            for ($j = 6; $j <= 71; ++$j) {
+                $cell = $sheet->getCell($i . $j);
+                if ($cell->isFormula()) {
+                    $cell->setValue($cell->getCalculatedValue());
+                }
+            }
+        }
+
+        // Delete template
+        $excel->removeSheetByIndex(
+            $excel->getIndex(
+                $excel->getSheetByName('Psikogram')
+            )
+        );
+
+        $sheet = $excel->getSheetByName('x');
+        for ($i = 12; $i < 48; ++$i) {
+            $sheet->removeColumnByIndex($i);
+        }
+
         // Protect results sheet
-        $excel->getActiveSheet()->getProtection()->setSheet(true);
-        $excel->getActiveSheet()->getProtection()->setSort(true);
-        $excel->getActiveSheet()->getProtection()->setInsertRows(true);
-        $excel->getActiveSheet()->getProtection()->setFormatCells(true);
-        $excel->getActiveSheet()->getProtection()->setPassword('uptpmoitb');
+        $sheet->getProtection()->setSheet(true);
+        $sheet->getProtection()->setSort(true);
+        $sheet->getProtection()->setInsertRows(true);
+        $sheet->getProtection()->setFormatCells(true);
+        $sheet->getProtection()->setPassword('uptpmoitb');
 
         // Protect workbook
         $excel->getSecurity()->setLockWindows(true);
