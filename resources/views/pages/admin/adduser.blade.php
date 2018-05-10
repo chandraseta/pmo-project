@@ -6,11 +6,20 @@
             <div class="col-md-8">
                 <div class="flash-message">
                     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                        @if(Session::has('alert-' . $msg))
-
-                            <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                        @if(session()->has('alert-' . $msg))
+                            <p class="alert alert-{{ $msg }}">{{ session()->get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                         @endif
                     @endforeach
+                    @if ($errors->has('email'))
+                        <p class="alert alert-danger">
+                            <strong>{{ $errors->first('email') }}</strong> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </p>
+                    @endif
+                    @if ($errors->has('nip'))
+                        <p class="alert alert-danger">
+                            <strong>{{ $errors->first('nip') }}</strong> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </p>
+                    @endif
                 </div>
                 <div class="card">
                     <div class="card-header">{{ __('Tambah User') }}</div>
@@ -48,7 +57,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="nip" class="col-md-4 col-form-label text-md-right">{{ __('NIP') }}</label>
+                                <label for="nip" class="col-md-4 col-form-label text-md-right">{{ __('NIP/Nopeg') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="nip" type="text" class="form-control{{ $errors->has('nip') ? ' is-invalid' : '' }}" name="nip" required>

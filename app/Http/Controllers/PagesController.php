@@ -96,7 +96,7 @@ class PagesController extends APIBaseController
 
     public function addUser() {
         if(!$this->authenticate(3)){return redirect('/');}
-        return view('pages.admin.adduser')->with('page', 'addUser');
+        return view('pages.admin.adduser');
     }
 
     private function authenticate($role){

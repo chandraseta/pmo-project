@@ -53,22 +53,33 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $request->session()->flash('alert-info', 'Hi');
         $this->validator($request->all())->validate();
-        if ($request->has('isAdmin') or $request->has('isPMO') or $request->has('isPegawai')) {
-            event(new Registered($user = $this->create($request->all())));
-            $request->session()->flash('alert-success', 'Pengguna berhasil ditambahkan');
-            if ($this->registered($request, $user)) {
-                $request->session()->flash('alert-success', 'Pengguna berhasil ditambahkan');
-            }
-            else {
-                $request->session()->flash('alert-danger', 'Terjadi kesalahan dalam penambahan pengguna');
-            }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'nip' => 'required|string|unique:pegawai',
+        ]);
+
+        if ($validator->fails()) {
+            session()->flash('alert-danger', 'Email atau NIP/Nopeg telah terdaftar');
         }
         else {
-            $request->session()->flash('alert-warning', 'Pengguna baru harus memiliki setidaknya 1 peran (Administrator, Anggota PMO, atau Pegawai)');
+            if ($request->has('isAdmin') or $request->has('isPMO') or $request->has('isPegawai')) {
+                event(new Registered($user = $this->create($request->all())));
+                session()->flash('alert-success', 'Pengguna berhasil ditambahkan');
+                if ($this->registered($request, $user)) {
+                    session()->flash('alert-success', 'Pengguna berhasil ditambahkan');
+                }
+                else {
+                    session()->flash('alert-danger', 'Terjadi kesalahan dalam penambahan pengguna');
+                }
+            }
+            else {
+                session()->flash('alert-warning', 'Pengguna baru harus memiliki setidaknya 1 peran (Administrator, Anggota PMO, atau Pegawai)');
+            }
         }
-        return redirect($this->redirectPath());
+        return view('pages.admin.adduser');
     }
 
     /**
@@ -126,6 +137,7 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user) {
         $token = app('auth.password.broker')->createToken($user);
-        return $user->notify(new WelcomeEmail($token));
+        $user->notify(new WelcomeEmail($token));
+        return true;
     }
 }
