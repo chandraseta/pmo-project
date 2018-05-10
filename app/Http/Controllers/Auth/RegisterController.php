@@ -53,8 +53,6 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -62,7 +60,12 @@ class RegisterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            session()->flash('alert-danger', 'Email atau NIP/Nopeg telah terdaftar');
+            if ($validator->errors()->first('email')) {
+                session()->flash('alert-danger', 'Email telah terdaftar');
+            }
+            else if ($validator->errors()->first('nip')) {
+                session()->flash('alert-danger', 'NIP/Nopeg telah terdaftar');
+            }
         }
         else {
             if ($request->has('isAdmin') or $request->has('isPMO') or $request->has('isPegawai')) {
@@ -88,14 +91,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'nip' => 'required|string|unique:pegawai',
-        ]);
-    }
+//    protected function validator(array $data)
+//    {
+//        return Validator::make($data, [
+//            'name' => 'required|string|max:255',
+//            'email' => 'required|string|email|max:255|unique:users',
+//            'nip' => 'required|string|unique:pegawai',
+//        ]);
+//    }
 
     /**
      * Create a new user instance after a valid registration.

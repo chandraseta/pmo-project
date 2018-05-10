@@ -10,16 +10,6 @@
                             <p class="alert alert-{{ $msg }}">{{ session()->get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                         @endif
                     @endforeach
-                    @if ($errors->has('email'))
-                        <p class="alert alert-danger">
-                            <strong>{{ $errors->first('email') }}</strong> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        </p>
-                    @endif
-                    @if ($errors->has('nip'))
-                        <p class="alert alert-danger">
-                            <strong>{{ $errors->first('nip') }}</strong> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        </p>
-                    @endif
                 </div>
                 <div class="card">
                     <div class="card-header">{{ __('Tambah User') }}</div>
