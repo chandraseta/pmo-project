@@ -8,6 +8,7 @@ use App\Sertifikat;
 use App\Pegawai;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
+use ImageOptimizer as ImageOptimizer;
 
 class SertifikatController extends APIBaseController
 {
@@ -33,6 +34,7 @@ class SertifikatController extends APIBaseController
                 $fileName =  $pegawai->nip . '_' . $i . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
                 $image = Image::make($imageData);   
                 $image->save(public_path('sertifikat/').$fileName);
+                ImageOptimizer::optimize(public_path('sertifikat/').$fileName);
             }else{
                 $string = explode("/", $imageData);
                 $fileName = $string[count($string)-1];

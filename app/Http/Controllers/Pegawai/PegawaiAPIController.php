@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 use Validator;
+use ImageOptimizer as ImageOptimizer;
 
 
 class PegawaiAPIController extends APIBaseController
@@ -197,6 +198,7 @@ class PegawaiAPIController extends APIBaseController
             $fileName =  $pegawai->nip . '.' . $extension;
             $image = Image::make($imageData);   
             $image->save(public_path('profile/').$fileName);
+            ImageOptimizer::optimize(public_path('profile/').$fileName);
         }else{
             $extension = explode(".", $imageData)[1];
         }
