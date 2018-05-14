@@ -30,3 +30,7 @@ Route::get('/pages/admin/adduser', 'PagesController@addUser');
 Route::get('/pages/pimage/{filename}', 'PhotoController@profile');
 
 Route::get('/pages/simage/{filename}', 'PhotoController@sertifikat');
+
+Route::get('/pages/profile/pimage/{filename}', 'PhotoController@profile');
+
+Route::get('/pages/profile/simage/{filename}', 'PhotoController@sertifikat');
