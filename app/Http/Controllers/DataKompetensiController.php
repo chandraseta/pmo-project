@@ -384,8 +384,13 @@ class DataKompetensiController extends APIBaseController
                     try {
                         // Insert each row
                         foreach ($objs as $obj) {
+                            $dbObj = Pegawai::where('nip', $obj->nip)->first();
+                            if ($obj->nip == NULL || empty($dbObj)) {
+                                break;
+                            }
+
                             $arr = [
-                                'id_pegawai' => Pegawai::where('nip', $obj->nip)->first()->id_user,
+                                'id_pegawai' => $dbObj->id_user,
                                 'tujuan' => $obj->tujuan_pemeriksaan,
                                 'tanggal' => $obj->tanggal_pelaksanaan,
                                 'kognitif_efisiensi_kecerdasan' => $obj->efisiensi_kecerdasan,
@@ -420,6 +425,7 @@ class DataKompetensiController extends APIBaseController
                         }
                         return response('Data berhasil dimasukkan', 200);
                     } catch (\Exception $e) {
+                        \Log::error($e);
                         return response('Gagal memasukkan data. Cek apakah semua data sudah dalam format yang benar', 400);
                     }
                 } else {

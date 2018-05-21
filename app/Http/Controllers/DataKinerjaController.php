@@ -213,8 +213,13 @@ class DataKinerjaController extends APIBaseController
                     try {
                         // Insert each row
                         foreach ($objs as $obj) {
+                            $dbObj = Pegawai::where('nip', $obj->nip)->first();
+                            if ($obj->nip == NULL || empty($dbObj)) {
+                                break;
+                            }
+
                             $arr = [
-                                'id_pegawai' => Pegawai::where('nip', $obj->nip)->first()->id_user,
+                                'id_pegawai' => $dbObj->id_user,
                                 'tahun' => $obj->tahun_pemeriksaan,
                                 'semester' => $obj->semester,
                                 'nilai' => $obj->skor_kinerja,
