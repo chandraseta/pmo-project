@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 245);
+/******/ 	return __webpack_require__(__webpack_require__.s = 251);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -72,7 +72,7 @@
 
 
 var bind = __webpack_require__(15);
-var isBuffer = __webpack_require__(34);
+var isBuffer = __webpack_require__(35);
 
 /*global toString:true*/
 
@@ -377,238 +377,38 @@ module.exports = {
 /***/ }),
 
 /***/ 10:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(33);
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
 
 /***/ }),
 
-/***/ 12:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(61)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
+module.exports = __webpack_require__(34);
 
 /***/ }),
 
@@ -13731,12 +13531,12 @@ process.umask = function() { return 0; };
 
 
 var utils = __webpack_require__(1);
-var settle = __webpack_require__(37);
-var buildURL = __webpack_require__(39);
-var parseHeaders = __webpack_require__(40);
-var isURLSameOrigin = __webpack_require__(41);
+var settle = __webpack_require__(38);
+var buildURL = __webpack_require__(40);
+var parseHeaders = __webpack_require__(41);
+var isURLSameOrigin = __webpack_require__(42);
 var createError = __webpack_require__(18);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(42);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(43);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13833,7 +13633,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(43);
+      var cookies = __webpack_require__(44);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13918,7 +13718,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(38);
+var enhanceError = __webpack_require__(39);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -14006,24 +13806,24 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 245:
+/***/ 251:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(246);
+module.exports = __webpack_require__(252);
 
 
 /***/ }),
 
-/***/ 246:
+/***/ 252:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-__webpack_require__(30);
+__webpack_require__(31);
 
-window.Vue = __webpack_require__(51);
+window.Vue = __webpack_require__(52);
 
 
 
@@ -14032,142 +13832,27 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_axios___default.a);
 new Vue({
     el: '#profile-page',
     components: {
-        'profil-pegawai': __webpack_require__(247)
-
-    },
-    data: {
-        isEditKepegawaian: false,
-        isEditProfile: false,
-        isEditRiwayat: false,
-        cachedUser: null,
-        cachedDataKepegawaian: null,
-        cachedRiwayatPendidikan: null,
-        cachedRiwayatPekerjaan: null,
-        user: {
-            imageProfileUrl: "https://i.pinimg.com/236x/34/ba/c1/34bac13dd65ab3b81267f727e5633549--patrick-dempsey-handsome-man.jpg",
-            nama: "Joko Susilo",
-            tempatLahir: "Medan",
-            tanggalLahir: "17 Agustus 1981",
-            email: "joko.susilo@gmail.com",
-            nopeg: "12340009876",
-            unitKerja: "Fakultas FMIPA",
-            posisi: "Kepala Bidang Kemahasiswaan",
-            kompetensi: "Administrasi",
-            tahunMasuk: "2010",
-            tahunKeluar: "2020"
-        },
-        dataKepegawaian: [{
-            unitKerja: "Fakultas FMIPA",
-            posisi: "Tenaga Pendidik",
-            kompetensi: "Teknikal",
-            tahunMasuk: "2013",
-            tahunKeluar: "2017"
-        }],
-        riwayatPendidikan: [{
-            tingkatPendidikan: "S1",
-            namaInstitusi: "ITB",
-            jurusan: "Teknik Sipil",
-            tahunMasuk: "2000",
-            tahunKeluar: "2005"
-        }, {
-            tingkatPendidikan: "S2",
-            namaInstitusi: "ITB",
-            jurusan: "Teknik Sipil",
-            tahunMasuk: "2006",
-            tahunKeluar: "2008"
-        }],
-        riwayatPekerjaan: [{
-            namaInstitusi: "PT TIMBUL TENGGELAM",
-            posisi: "Engineer",
-            tahunMasuk: "2008",
-            tahunKeluar: "2013"
-        }, {
-            namaInstitusi: "FMIPA ITB",
-            posisi: "Tenaga Pendidik",
-            tahunMasuk: "2013",
-            tahunKeluar: "2017"
-        }],
-        rekomendasiTraining: [{
-            namaTraining: "Emotional Training",
-            penyelenggara: "PMO",
-            bidang: "Psikologi"
-        }]
-
-    },
-    mounted: function mounted() {
-
-        this.cachedUser = Object.assign({}, this.user);
-        this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
-        this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
-        this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
-    },
-
-    methods: {
-        editProfilPegawai: function editProfilPegawai() {
-            this.isEditProfile = true;
-        },
-        editDataKepegawaian: function editDataKepegawaian() {
-            this.isEditKepegawaian = true;
-        },
-        editRiwayatPegawai: function editRiwayatPegawai() {
-            this.isEditRiwayat = true;
-        },
-        saveProfilPegawai: function saveProfilPegawai() {
-            this.cachedUser = Object.assign({}, this.user);
-            this.isEditProfile = false;
-
-            axios.patch('/api/pegawai/4', {
-                name: this.user.nama,
-                email: this.user.email,
-                password: '1234',
-                nip: this.user.nopeg
-            }).then(function (response) {
-                alert(response);
-            }).catch(function (error) {
-                alert(error);
-            });
-        },
-        saveDataKepegawaian: function saveDataKepegawaian() {
-            this.cachedDataKepegawaian = Object.assign({}, this.dataKepegawaian);
-            this.isEditKepegawaian = false;
-        },
-        saveRiwayatPegawai: function saveRiwayatPegawai() {
-            this.cachedRiwayatPendidikan = Object.assign({}, this.riwayatPendidikan);
-            this.cachedRiwayatPekerjaan = Object.assign({}, this.riwayatPekerjaan);
-            this.isEditRiwayat = false;
-        },
-        cancelProfilPegawai: function cancelProfilPegawai() {
-            this.user = Object.assign({}, this.cachedUser);
-            this.isEditProfile = false;
-        },
-        cancelDataKepegawaian: function cancelDataKepegawaian() {
-            this.dataKepegawaian = Object.assign({}, this.cachedDataKepegawaian);
-            this.isEditKepegawaian = false;
-        },
-        cancelRiwayatPegawai: function cancelRiwayatPegawai() {
-            this.riwayatPendidikan = Object.assign({}, this.cachedRiwayatPendidikan);
-            this.riwayatPekerjaan = Object.assign({}, this.cachedRiwayatPekerjaan);
-            this.isEditRiwayat = false;
-        }
+        'profil-pegawai': __webpack_require__(253),
+        'profil-pegawai-specific': __webpack_require__(258)
     }
 
 });
 
 /***/ }),
 
-/***/ 247:
+/***/ 253:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(248)
+  __webpack_require__(254)
 }
-var normalizeComponent = __webpack_require__(8)
+var normalizeComponent = __webpack_require__(4)
 /* script */
-var __vue_script__ = __webpack_require__(250)
+var __vue_script__ = __webpack_require__(256)
 /* template */
-var __vue_template__ = __webpack_require__(251)
+var __vue_template__ = __webpack_require__(257)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -14207,17 +13892,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 248:
+/***/ 254:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(249);
+var content = __webpack_require__(255);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(12)("073fefff", content, false, {});
+var update = __webpack_require__(5)("073fefff", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -14234,26 +13919,5624 @@ if(false) {
 
 /***/ }),
 
-/***/ 249:
+/***/ 255:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 250:
+/***/ 256:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CommonFooter_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CommonFooter_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CommonFooter_vue__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { CommonFooter: __WEBPACK_IMPORTED_MODULE_0__CommonFooter_vue___default.a },
+    props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
+
+    data: function data() {
+        var _ref;
+
+        return _ref = {
+
+            pegawai: {
+                imageProfileUrl: "",
+                nama: "",
+                tempatLahir: "",
+                tanggalLahir: "",
+                email: "",
+                nopeg: "",
+                unitKerja: "",
+                posisi: "",
+                kompetensi: "",
+                tahunMasuk: ""
+            },
+            dataKepegawaian: [],
+            dataKepegawaianPrev: null,
+            riwayatPendidikan: [],
+            riwayatPekerjaan: [],
+            sertifikat: [],
+
+            isShowAllDataKinerja: false,
+            disableEdit: false,
+            isEditProfile: false,
+            isEditKepegawaian: false,
+            isEditRiwayat: false,
+            isEditSertifikat: false,
+            isEditDataKinerja: false,
+            isEditRekomendasi: false,
+            cachedPegawai: null,
+            cachedDataKepegawaian: null,
+            cachedRiwayatPendidikan: null,
+            cachedRiwayatPekerjaan: null,
+            cachedSertifikat: null,
+            cachedDataKinerja: null,
+            cachedRekomendasiTraining: null,
+            cachedRekomendasiPosisi: null
+        }, _defineProperty(_ref, 'pegawai', {
+            imageProfileUrl: null,
+            nama: null,
+            tempatLahir: null,
+            tanggalLahir: null,
+            email: null,
+            nopeg: null,
+            unitKerja: {
+                id: null,
+                text: null
+            },
+            posisi: {
+                id: null,
+                text: null
+            },
+            kompetensi: {
+                id: null,
+                text: null
+            },
+            tahunMasuk: null
+        }), _defineProperty(_ref, 'dataKepegawaian', []), _defineProperty(_ref, 'riwayatPendidikan', []), _defineProperty(_ref, 'riwayatPekerjaan', []), _defineProperty(_ref, 'dataKinerja', []), _defineProperty(_ref, 'dataKinerjaShow', []), _defineProperty(_ref, 'rekomendasiTraining', []), _defineProperty(_ref, 'rekomendasiPosisi', []), _ref;
+    },
+    mounted: function mounted() {},
+    created: function created() {
+        var _this = this;
+
+        //dataKinerja
+        this.dataKinerja = this.dataKinerjaTemp;
+
+        axios.get('/api/pegawai/' + this.id).then(function (response) {
+            //get data from api response
+            var responsePegawai = response.data["data"];
+
+            _this.dataKepegawaian = responsePegawai["kepegawaian"];
+            _this.updateDataKepegawaian();
+            _this.validationTahunKeluar(_this.dataKepegawaian);
+
+            _this.riwayatPendidikan = responsePegawai["pendidikan"];
+            _this.validationTahunKeluar(_this.riwayatPendidikan);
+
+            _this.riwayatPekerjaan = responsePegawai["pekerjaan"];
+            _this.validationTahunKeluar(_this.riwayatPekerjaan);
+
+            _this.updateRiwayat();
+
+            _this.dataKepegawaianPrev = _this.dataKepegawaian[_this.dataKepegawaian.length - 1];
+
+            _this.sertifikat = responsePegawai["sertifikat"];
+            _this.updateSertifikat();
+
+            _this.pegawai.nama = responsePegawai["user"]["name"];
+            _this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
+            _this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
+            _this.pegawai.email = responsePegawai["user"]["email"];
+            _this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
+            _this.pegawai.imageProfileUrl = 'pimage/' + responsePegawai["pegawai"]["nip"] + '.' + responsePegawai["pegawai"]["ekstensi_foto"];
+            _this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
+            _this.updateProfilPegawai();
+
+            //chacing
+            _this.cachedPegawai = JSON.parse(JSON.stringify(_this.pegawai));
+            _this.cachedDataKepegawaian = JSON.parse(JSON.stringify(_this.dataKepegawaian));
+            _this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(_this.riwayatPendidikan));
+            _this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(_this.riwayatPekerjaan));
+            _this.cachedSertifikat = JSON.parse(JSON.stringify(_this.sertifikat));
+            _this.cachedDataKinerja = JSON.parse(JSON.stringify(_this.dataKinerja));
+
+            console.log(_this);
+        }).catch(function (error) {
+            console.log(error);
+            alert('Gagal mengambil data');
+        });
+
+        //caching others
+        this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
+
+        // init dataKinerjaShow
+        if (this.dataKinerja.length > 6) {
+            this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length - 6);
+        } else {
+            this.dataKinerjaShow = this.dataKinerja;
+        }
+
+        //init rekomendasiTraining
+        this.rekomendasiTraining = this.rekomendasiTrainingTemp;
+        this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+
+        //init rekomendasiPosisi
+        this.rekomendasiPosisi = this.rekomendasiPosisiTemp;
+        this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+    },
+
+
+    methods: {
+        browseSertifikatImage: function browseSertifikatImage(event) {
+            var targetIndex = event.currentTarget.id;
+            document.querySelector(".sert" + targetIndex).click();
+        },
+        browseImageProfile: function browseImageProfile() {
+            this.$refs.imgProfileInput.click();
+        },
+        validationTahunKeluar: function validationTahunKeluar(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].tahun_keluar == 0) {
+                    arr[i].tahun_keluar = '-';
+                }
+            }
+        },
+        downloadKompetensi: function downloadKompetensi() {
+            window.open('/api/kompetensi/report/' + this.id);
+        },
+        showAllDataKinerja: function showAllDataKinerja() {
+            this.isShowAllDataKinerja = true;
+            this.dataKinerjaShow = this.dataKinerja;
+        },
+        hideDataKinerja: function hideDataKinerja() {
+            this.isShowAllDataKinerja = false;
+
+            if (this.dataKinerja.length > 6) {
+                this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length - 6);
+            }
+        },
+        updateProfilPegawai: function updateProfilPegawai() {
+            var _this2 = this;
+
+            if (this.pegawai.unitKerja.id != null) {
+                this.pegawai.unitKerja.text = this.unitKerja.find(function (x) {
+                    return x.id_unit_kerja == _this2.pegawai.unitKerja.id;
+                }).nama_unit_kerja;
+            } else {
+                this.pegawai.unitKerja.text = null;
+            }
+
+            if (this.pegawai.kompetensi.id != null) {
+                this.pegawai.kompetensi.text = this.kelompokKompetensi.find(function (x) {
+                    return x.id_kelompok_kompetensi == _this2.pegawai.kompetensi.id;
+                }).nama_kelompok_kompetensi;
+            } else {
+                this.pegawai.kompetensi.text = null;
+            }
+
+            if (this.pegawai.posisi.id != null) {
+                this.pegawai.posisi.text = this.posisi.find(function (x) {
+                    return x.id_posisi == _this2.pegawai.posisi.id;
+                }).nama_posisi;
+            } else {
+                this.pegawai.posisi.text = null;
+            }
+        },
+        updateDataKepegawaian: function updateDataKepegawaian() {
+
+            //update relevan
+            if (this.dataKepegawaian.length == 0) {
+                this.pegawai.unitKerja.id = null;
+                this.pegawai.posisi.id = null;
+                // this.pegawai.kompetensi.id = null;
+                this.pegawai.tahunMasuk = null;
+            } else {
+                //sort
+                this.dataKepegawaian.sort(function (a, b) {
+                    var keyA = a.tahun_masuk,
+                        keyB = b.tahun_masuk;
+                    // Compare the 2 dates
+                    if (keyA < keyB) return -1;
+                    if (keyA > keyB) return 1;
+                    return 0;
+                });
+                var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length - 1];
+                this.pegawai.unitKerja.id = lastDataPegawai["id_unit_kerja"];
+                this.pegawai.posisi.id = lastDataPegawai["id_posisi"];
+                // this.pegawai.kompetensi.id = lastDataPegawai["id_kelompok_kompetensi"];
+                this.pegawai.tahunMasuk = lastDataPegawai["tahun_masuk"];
+            }
+        },
+        updateDataKepegawaianAfterEditProfile: function updateDataKepegawaianAfterEditProfile() {
+
+            //update relevan
+            if (this.dataKepegawaian.length == 0) {
+                var newData = {
+                    id_data_kepegawaian: null,
+                    id_pegawai: null,
+                    id_unit_kerja: this.pegawai.unitKerja.id,
+                    id_posisi: this.pegawai.posisi.id,
+                    // id_kelompok_kompetensi : this.pegawai.kompetensi.id,
+                    tahun_masuk: this.pegawai.tahunMasuk,
+                    tahun_keluar: null
+                };
+                this.dataKepegawaian.push(newData);
+            } else {
+                //sort
+                this.dataKepegawaian.sort(function (a, b) {
+                    var keyA = a.tahun_masuk,
+                        keyB = b.tahun_masuk;
+                    // Compare the 2 dates
+                    if (keyA < keyB) return -1;
+                    if (keyA > keyB) return 1;
+                    return 0;
+                });
+                var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length - 1];
+                lastDataPegawai["id_unit_kerja"] = this.pegawai.unitKerja.id;
+                lastDataPegawai["id_posisi"] = this.pegawai.posisi.id;
+                // lastDataPegawai["id_kelompok_kompetensi"] = this.pegawai.kompetensi.id;
+                lastDataPegawai["tahun_masuk"] = this.pegawai.tahunMasuk;
+            }
+        },
+        updateSertifikat: function updateSertifikat() {
+            for (var i = 0; i < this.sertifikat.length; i++) {
+                this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
+            }
+        },
+        disableEditButton: function disableEditButton() {
+            this.disableEdit = true;
+        },
+        enableEditButton: function enableEditButton() {
+            this.disableEdit = false;
+        },
+        editProfilPegawai: function editProfilPegawai() {
+            this.isEditProfile = true;
+            this.disableEditButton();
+        },
+        editDataKepegawaian: function editDataKepegawaian() {
+            this.isEditKepegawaian = true;
+            this.disableEditButton();
+        },
+        editRiwayatPegawai: function editRiwayatPegawai() {
+            this.isEditRiwayat = true;
+            this.disableEditButton();
+        },
+        editSertifikat: function editSertifikat() {
+            this.isEditSertifikat = true;
+            this.disableEditButton();
+        },
+        editDataKinerja: function editDataKinerja() {
+            this.isEditDataKinerja = true;
+            this.disableEditButton();
+        },
+        editDataKompetensi: function editDataKompetensi() {},
+        editRekomendasi: function editRekomendasi() {
+            this.isEditRekomendasi = true;
+            this.disableEditButton();
+        },
+        addDataKepegawaian: function addDataKepegawaian() {
+            var newData = {
+                id_data_kepegawaian: null,
+                id_pegawai: null,
+                id_unit_kerja: null,
+                id_posisi: null,
+                // id_kelompok_kompetensi : null,
+                tahun_masuk: null,
+                tahun_keluar: null
+            };
+            this.dataKepegawaian.push(newData);
+        },
+        addRiwayatPendidikan: function addRiwayatPendidikan() {
+            var newData = {
+                id_riwayat_pendidikan: null,
+                id_pegawai: null,
+                nama_institusi: null,
+                strata: null,
+                jurusan: null,
+                tahun_masuk: null,
+                tahun_keluar: null
+            };
+            this.riwayatPendidikan.push(newData);
+        },
+        addRiwayatPekerjaan: function addRiwayatPekerjaan() {
+            var newData = {
+                id_riwayat_pekerjaan: null,
+                id_pegawai: null,
+                nama_institusi: null,
+                posisi: null,
+                tahun_masuk: null,
+                tahun_keluar: null
+            };
+            this.riwayatPekerjaan.push(newData);
+        },
+        addSertifikat: function addSertifikat() {
+            var newData = {
+                id_sertifikat: null,
+                id_pegawai: null,
+                judul: null,
+                lembaga: null,
+                tahun_diterbitkan: null,
+                catatan: null,
+                nama_file: null
+            };
+            this.sertifikat.push(newData);
+        },
+        addDataKinerja: function addDataKinerja() {
+            var newData = {
+                id_kinerja: null,
+                id_pegawai: null,
+                tahun: null,
+                semester: null,
+                nilai: null,
+                catatan: null
+            };
+            this.dataKinerja.push(newData);
+        },
+        addRekomendasiTraining: function addRekomendasiTraining() {
+            var newData = {
+                id_rekomendasi_training: null,
+                id_pegawai: null,
+                id_training: null
+            };
+            this.rekomendasiTraining.push(newData);
+        },
+        addRekomendasiPosisi: function addRekomendasiPosisi() {
+            var newData = {
+                id_rekomendasi_training: null,
+                id_pegawai: null,
+                id_unit_kerja: null,
+                id_posisi: null
+            };
+            this.rekomendasiPosisi.push(newData);
+        },
+        delDataKepegawaian: function delDataKepegawaian(event) {
+            var targetIndex = event.currentTarget.id;
+            this.dataKepegawaian.splice(targetIndex, 1);
+        },
+        delRiwayatPendidikan: function delRiwayatPendidikan(event) {
+            var targetIndex = event.currentTarget.id;
+            this.riwayatPendidikan.splice(targetIndex, 1);
+        },
+        delRiwayatPekerjaan: function delRiwayatPekerjaan(event) {
+            var targetIndex = event.currentTarget.id;
+            this.riwayatPekerjaan.splice(targetIndex, 1);
+        },
+        delSertifikat: function delSertifikat(event) {
+            var targetIndex = event.currentTarget.id;
+            this.sertifikat.splice(targetIndex, 1);
+        },
+        delDataKinerja: function delDataKinerja(event) {
+            var targetIndex = event.currentTarget.id;
+            this.dataKinerja.splice(targetIndex, 1);
+        },
+        delRekomendasiTraining: function delRekomendasiTraining(event) {
+            var targetIndex = event.currentTarget.id;
+            this.rekomendasiTraining.splice(targetIndex, 1);
+        },
+        delRekomendasiPosisi: function delRekomendasiPosisi(event) {
+            var targetIndex = event.currentTarget.id;
+            this.rekomendasiPosisi.splice(targetIndex, 1);
+        },
+        isYearValid: function isYearValid(year) {
+            year = year.toString();
+            return year.length == 4 && !isNaN(year) && year > 1945;
+        },
+        isCompleteProfilPegawai: function isCompleteProfilPegawai() {
+            return this.pegawai.nama != "" && this.pegawai.nama != null && this.pegawai.tempatLahir != "" && this.pegawai.tempatLahir != null && this.pegawai.tanggalLahir != "" && this.pegawai.tanggalLahir != null && this.pegawai.email != "" && this.pegawai.email != null && this.pegawai.nopeg != "" && this.pegawai.nopeg != null && this.pegawai.unitKerja.id != "" && this.pegawai.unitKerja.id != null && this.pegawai.posisi.id != "" && this.pegawai.posisi.id != null && this.pegawai.kompetensi.id != "" && this.pegawai.kompetensi.id != null && this.pegawai.tahunMasuk != "" && this.pegawai.tahunMasuk != null && this.isYearValid(this.pegawai.tahunMasuk);
+        },
+        isCompleteDataKepegawaian: function isCompleteDataKepegawaian() {
+            var isEmpty = false;
+            var i = 0;
+            while (i < this.dataKepegawaian.length && !isEmpty) {
+                if (this.dataKepegawaian[i].id_unit_kerja != '' && this.dataKepegawaian[i].id_unit_kerja != null && this.dataKepegawaian[i].id_posisi != '' && this.dataKepegawaian[i].id_posisi != null &&
+                //this.dataKepegawaian[i].id_kelompok_kompetensi != '' && this.dataKepegawaian[i].id_kelompok_kompetensi != null &&
+                this.dataKepegawaian[i].tahun_masuk != '' && this.dataKepegawaian[i].tahun_masuk != null && this.isYearValid(this.dataKepegawaian[i].tahun_masuk) && this.dataKepegawaian[i].tahun_keluar != '' && this.dataKepegawaian[i].tahun_keluar != null && (this.isYearValid(this.dataKepegawaian[i].tahun_keluar) || this.dataKepegawaian[i].tahun_keluar == '-')) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            return !isEmpty;
+        },
+        isCompleteRiwayat: function isCompleteRiwayat() {
+            var isEmpty = false;
+            var i = 0;
+            while (i < this.riwayatPendidikan.length && !isEmpty) {
+                if (this.riwayatPendidikan[i].nama_institusi != '' && this.riwayatPendidikan[i].nama_institusi != null && this.riwayatPendidikan[i].strata != '' && this.riwayatPendidikan[i].strata != null && this.riwayatPendidikan[i].jurusan != '' && this.riwayatPendidikan[i].jurusan != null && this.riwayatPendidikan[i].tahun_masuk != '' && this.riwayatPendidikan[i].tahun_masuk != null && this.riwayatPendidikan[i].tahun_keluar != '' && this.riwayatPendidikan[i].tahun_keluar != null && this.isYearValid(this.riwayatPendidikan[i].tahun_masuk) && (this.isYearValid(this.riwayatPendidikan[i].tahun_keluar) || this.riwayatPendidikan[i].tahun_keluar == '-')) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            var i = 0;
+            while (i < this.riwayatPekerjaan.length && !isEmpty) {
+                if (this.riwayatPekerjaan[i].nama_institusi != '' && this.riwayatPekerjaan[i].nama_institusi != null && this.riwayatPekerjaan[i].posisi != '' && this.riwayatPekerjaan[i].posisi != null && this.riwayatPekerjaan[i].tahun_masuk != '' && this.riwayatPekerjaan[i].tahun_masuk != null && this.riwayatPekerjaan[i].tahun_keluar != '' && this.riwayatPekerjaan[i].tahun_keluar != null && this.isYearValid(this.riwayatPekerjaan[i].tahun_masuk) && (this.isYearValid(this.riwayatPekerjaan[i].tahun_keluar) || this.riwayatPekerjaan[i].tahun_keluar == '-')) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            return !isEmpty;
+        },
+        isCompleteSertifikat: function isCompleteSertifikat() {
+            var isEmpty = false;
+            var i = 0;
+            while (i < this.sertifikat.length && !isEmpty) {
+                if (this.sertifikat[i].judul != '' && this.sertifikat[i].judul != null && this.sertifikat[i].lembaga != '' && this.sertifikat[i].lembaga != null && this.sertifikat[i].tahun_diterbitkan != '' && this.sertifikat[i].tahun_diterbitkan != null && this.isYearValid(this.sertifikat[i].tahun_diterbitkan)) {
+                    i++;
+                } else {
+                    isEmpty = true;
+                }
+            }
+
+            return !isEmpty;
+        },
+        saveProfilPegawai: function saveProfilPegawai() {
+            if (this.isCompleteProfilPegawai()) {
+                this.enableEditButton();
+
+                this.updateProfilPegawai();
+                this.updateDataKepegawaianAfterEditProfile();
+
+                this.cachedPegawai = JSON.parse(JSON.stringify(this.pegawai));
+                this.isEditProfile = false;
+
+                axios.post('/api/pegawai/' + this.id, {
+                    pegawai: this.pegawai,
+                    data_kepegawaian: this.dataKepegawaian,
+                    data_kepegawaian_prev: this.dataKepegawaianPrev,
+                    _method: "put"
+                }).then(function (response) {
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.id,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                    location.reload();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+                console.log(this.dataKepegawaian);
+            } else {
+                alert('Kolom yang wajib harus terisi dengan benar');
+            }
+        },
+        saveDataKepegawaian: function saveDataKepegawaian() {
+            if (this.isCompleteDataKepegawaian()) {
+                this.updateDataKepegawaian();
+                this.updateProfilPegawai();
+                this.enableEditButton();
+                this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
+                this.isEditKepegawaian = false;
+
+                console.log(this.dataKepegawaian);
+
+                axios.post('/api/kepegawaian/' + this.id, {
+                    kepegawaian: this.dataKepegawaian,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.id,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                    location.reload();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                alert('Kolom yang wajib harus terisi dengan benar');
+            }
+        },
+        updateRiwayat: function updateRiwayat() {
+            //sort
+            this.riwayatPendidikan.sort(function (a, b) {
+                var keyA = a.tahun_masuk,
+                    keyB = b.tahun_masuk;
+                // Compare the 2 dates
+                if (keyA < keyB) return -1;
+                if (keyA > keyB) return 1;
+                return 0;
+            });
+
+            //sort
+            this.riwayatPekerjaan.sort(function (a, b) {
+                var keyA = a.tahun_masuk,
+                    keyB = b.tahun_masuk;
+                // Compare the 2 dates
+                if (keyA < keyB) return -1;
+                if (keyA > keyB) return 1;
+                return 0;
+            });
+        },
+        saveRiwayatPegawai: function saveRiwayatPegawai() {
+            if (this.isCompleteRiwayat()) {
+                this.updateRiwayat();
+
+                this.enableEditButton();
+                this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
+                this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
+                this.isEditRiwayat = false;
+
+                console.log(this.riwayatPendidikan);
+                console.log(this.riwayatPekerjaan);
+
+                axios.post('/api/riwayat/' + this.id, {
+                    pendidikan: this.riwayatPendidikan,
+                    pekerjaan: this.riwayatPekerjaan,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                    alert('Semua kolom harus terisi');
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.id,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                    location.reload();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                alert('Kolom yang wajib harus terisi dengan benar');
+            }
+        },
+        saveSertifikat: function saveSertifikat() {
+            if (this.isCompleteSertifikat()) {
+                this.enableEditButton();
+                this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
+                this.isEditSertifikat = false;
+                console.log(this.sertifikat);
+
+                axios.post('/api/sertifikat/' + this.id, {
+                    sertifikat: this.sertifikat,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response.data.data);
+                }).catch(function (error) {
+                    console.log(error);
+                    alert('Semua kolom harus terisi');
+                });
+
+                axios.post('/api/lastedited/' + this.id, {
+                    id_pengubah: this.id,
+                    _method: 'put'
+                }).then(function (response) {
+                    console.log(response);
+                    location.reload();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                alert('Kolom yang wajib harus terisi dengan benar');
+            }
+        },
+        saveDataKinerja: function saveDataKinerja() {
+            //sort
+            this.dataKinerja.sort(function (a, b) {
+                var keyA = a.tahun,
+                    keyB = b.tahun;
+                // Compare the 2 dates
+                if (keyA < keyB) return -1;
+                if (keyA > keyB) return 1;
+                if (keyA == keyB) {
+                    if (a.semester < b.semester) return -1;else return 1;
+                }
+            });
+
+            this.enableEditButton();
+            this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
+            this.isEditDataKinerja = false;
+
+            if (this.isShowAllDataKinerja) {
+                this.showAllDataKinerja();
+            } else {
+                this.hideDataKinerja();
+            }
+        },
+        saveRekomendasi: function saveRekomendasi() {
+            this.enableEditButton();
+            this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+            this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+            this.isEditRekomendasi = false;
+        },
+        cancelProfilPegawai: function cancelProfilPegawai() {
+            this.enableEditButton();
+            this.pegawai = JSON.parse(JSON.stringify(this.cachedPegawai));
+            this.isEditProfile = false;
+        },
+        cancelDataKepegawaian: function cancelDataKepegawaian() {
+            this.enableEditButton();
+            this.dataKepegawaian = JSON.parse(JSON.stringify(this.cachedDataKepegawaian));
+            this.isEditKepegawaian = false;
+        },
+        cancelRiwayatPegawai: function cancelRiwayatPegawai() {
+            this.enableEditButton();
+            this.riwayatPendidikan = JSON.parse(JSON.stringify(this.cachedRiwayatPendidikan));
+            this.riwayatPekerjaan = JSON.parse(JSON.stringify(this.cachedRiwayatPekerjaan));
+            this.isEditRiwayat = false;
+        },
+        cancelSertifikat: function cancelSertifikat() {
+            this.enableEditButton();
+            this.sertifikat = JSON.parse(JSON.stringify(this.cachedSertifikat));
+            this.isEditSertifikat = false;
+        },
+        cancelDataKinerja: function cancelDataKinerja() {
+            this.enableEditButton();
+            this.dataKinerja = JSON.parse(JSON.stringify(this.cachedDataKinerja));
+            this.isEditDataKinerja = false;
+
+            if (this.isShowAllDataKinerja) {
+                this.showAllDataKinerja();
+            } else {
+                this.hideDataKinerja();
+            }
+        },
+        cancelRekomendasi: function cancelRekomendasi() {
+            this.enableEditButton();
+            this.rekomendasiTraining = JSON.parse(JSON.stringify(this.cachedRekomendasiTraining));
+            this.rekomendasiPosisi = JSON.parse(JSON.stringify(this.cachedRekomendasiPosisi));
+            this.isEditRekomendasi = false;
+        },
+        FileChangeProfile: function FileChangeProfile(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length) return;
+
+            var reader = new FileReader();
+            var vm = this;
+            reader.onload = function (e) {
+                vm.pegawai.imageProfileUrl = e.target.result;
+            };
+            reader.readAsDataURL(files[0]);
+        },
+        FileChangeSertifikat: function FileChangeSertifikat(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length) return;
+
+            var idx = e.currentTarget.id;
+
+            var reader = new FileReader();
+            var vm = this;
+            reader.onload = function (e) {
+                vm.sertifikat[idx].nama_file = e.target.result;
+            };
+            reader.readAsDataURL(files[0]);
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 257:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "card", attrs: { id: "profil-pegawai" } }, [
+        _c("h5", { staticClass: "card-header" }, [
+          _c("i", { staticClass: "fas fa-user-circle" }),
+          _vm._v("\n            Profil Pegawai\n            "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary float-sm-right",
+              attrs: { disabled: _vm.disableEdit },
+              on: { click: _vm.editProfilPegawai }
+            },
+            [
+              _vm._v("\n                Edit "),
+              _c("i", { staticClass: "fas fa-edit" })
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "card-container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-1" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-3 img-responsive" }, [
+                _c("img", {
+                  staticClass: "img-thumbnail",
+                  attrs: { id: "img-profile", src: _vm.pegawai.imageProfileUrl }
+                }),
+                _vm._v(" "),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm.isEditProfile
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: { click: _vm.browseImageProfile }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-image" }),
+                        _vm._v(
+                          "\n                            Ganti\n                        "
+                        )
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isEditProfile
+                  ? _c("input", {
+                      ref: "imgProfileInput",
+                      staticClass: "form-control",
+                      staticStyle: { display: "none" },
+                      attrs: { type: "file" },
+                      on: { change: _vm.FileChangeProfile }
+                    })
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-7" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
+                    _vm._v(
+                      "\n                                Nama\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    !_vm.isEditProfile
+                      ? _c("b", {
+                          domProps: { textContent: _vm._s(_vm.pegawai.nama) }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditProfile
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "form-group",
+                            attrs: { id: "edit-nama" }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.pegawai.nama,
+                                  expression: "pegawai.nama"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.pegawai.nama },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.pegawai,
+                                    "nama",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "form-text text-muted" },
+                              [_vm._v("*Wajib diisi")]
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
+                    _vm._v(
+                      "\n                                Tempat, Tanggal Lahir\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    !_vm.isEditProfile
+                      ? _c("b", [
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.pegawai.tempatLahir)
+                            }
+                          }),
+                          _vm._v(", "),
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.pegawai.tanggalLahir)
+                            }
+                          })
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditProfile
+                      ? _c("div", { staticClass: "form-row" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "form-group",
+                              attrs: { id: "edit-tempat-lahir" }
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pegawai.tempatLahir,
+                                    expression: "pegawai.tempatLahir"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.pegawai.tempatLahir },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.pegawai,
+                                      "tempatLahir",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Tempat lahir. Wajib diisi")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "form-group",
+                              attrs: { id: "edit-tanggal-lahir" }
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pegawai.tanggalLahir,
+                                    expression: "pegawai.tanggalLahir"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "date" },
+                                domProps: { value: _vm.pegawai.tanggalLahir },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.pegawai,
+                                      "tanggalLahir",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Tanggal lahir. Wajib diisi")]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
+                    _vm._v(
+                      "\n                                Email\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    !_vm.isEditProfile
+                      ? _c("b", {
+                          domProps: { textContent: _vm._s(_vm.pegawai.email) }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditProfile
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "form-group",
+                            attrs: { id: "edit-email" }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.pegawai.email,
+                                  expression: "pegawai.email"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "email" },
+                              domProps: { value: _vm.pegawai.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.pegawai,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "form-text text-muted" },
+                              [
+                                _vm._v(
+                                  "*Wajib diisi dengan format email yang benar"
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
+                    _vm._v(
+                      "\n                                No. Pegawai\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    !_vm.isEditProfile
+                      ? _c("b", {
+                          domProps: { textContent: _vm._s(_vm.pegawai.nopeg) }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditProfile
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "form-group",
+                            attrs: { id: "edit-nopeg" }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.pegawai.nopeg,
+                                  expression: "pegawai.nopeg"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.pegawai.nopeg },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.pegawai,
+                                    "nopeg",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "form-text text-muted" },
+                              [_vm._v("*Wajib diisi")]
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
+                    _vm._v(
+                      "\n                                Unit Kerja\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    !_vm.isEditProfile
+                      ? _c("b", {
+                          domProps: {
+                            textContent: _vm._s(_vm.pegawai.unitKerja.text)
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditProfile
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "form-group",
+                            attrs: { id: "edit-unit-kerja" }
+                          },
+                          [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pegawai.unitKerja.id,
+                                    expression: "pegawai.unitKerja.id"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.pegawai.unitKerja,
+                                      "id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.unitKerja, function(uk) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: uk.id_unit_kerja } },
+                                  [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(uk.nama_unit_kerja) +
+                                        "\n                                        "
+                                    )
+                                  ]
+                                )
+                              })
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "form-text text-muted" },
+                              [_vm._v("*Wajib diisi")]
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
+                    _vm._v(
+                      "\n                                Jabatan\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    !_vm.isEditProfile
+                      ? _c("b", {
+                          domProps: {
+                            textContent: _vm._s(_vm.pegawai.posisi.text)
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditProfile
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "form-group",
+                            attrs: { id: "edit-posisi" }
+                          },
+                          [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pegawai.posisi.id,
+                                    expression: "pegawai.posisi.id"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.pegawai.posisi,
+                                      "id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.posisi, function(pos) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: pos.id_posisi } },
+                                  [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(pos.nama_posisi) +
+                                        "\n                                        "
+                                    )
+                                  ]
+                                )
+                              })
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "form-text text-muted" },
+                              [_vm._v("*Wajib diisi")]
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
+                    _vm._v(
+                      "\n                                Kompetensi\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    !_vm.isEditProfile
+                      ? _c("b", {
+                          domProps: {
+                            textContent: _vm._s(_vm.pegawai.kompetensi.text)
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditProfile
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "form-group",
+                            attrs: { id: "edit-kompetensi" }
+                          },
+                          [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pegawai.kompetensi.id,
+                                    expression: "pegawai.kompetensi.id"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.pegawai.kompetensi,
+                                      "id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.kelompokKompetensi, function(kk) {
+                                return _c(
+                                  "option",
+                                  {
+                                    domProps: {
+                                      value: kk.id_kelompok_kompetensi
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(kk.nama_kelompok_kompetensi) +
+                                        "\n                                        "
+                                    )
+                                  ]
+                                )
+                              })
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "form-text text-muted" },
+                              [_vm._v("*Wajib diisi")]
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-4 text-right" }, [
+                    _vm._v(
+                      "\n                                Tahun Mulai Jabatan Saat Ini\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    !_vm.isEditProfile
+                      ? _c("b", {
+                          domProps: {
+                            textContent: _vm._s(_vm.pegawai.tahunMasuk)
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditProfile
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "form-group",
+                            attrs: { id: "edit-tahun-masuk" }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.pegawai.tahunMasuk,
+                                  expression: "pegawai.tahunMasuk"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.pegawai.tahunMasuk },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.pegawai,
+                                    "tahunMasuk",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "form-text text-muted" },
+                              [_vm._v("*Wajib diisi")]
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.isEditProfile
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#profil-pegawai" },
+                  on: { click: _vm.saveProfilPegawai }
+                },
+                [
+                  _vm._v("\n                Simpan "),
+                  _c("i", { staticClass: "fas fa-check" })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#profil-pegawai" },
+                  on: { click: _vm.cancelProfilPegawai }
+                },
+                [
+                  _vm._v("\n                Batal "),
+                  _c("i", { staticClass: "fas fa-times" })
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "data-kepegawaian" } }, [
+        _c("h5", { staticClass: "card-header" }, [
+          _c("i", { staticClass: "fas fa-table" }),
+          _vm._v("\n            Data Kepegawaian\n            "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary float-sm-right",
+              attrs: { disabled: _vm.disableEdit },
+              on: { click: _vm.editDataKepegawaian }
+            },
+            [
+              _vm._v("\n                Edit "),
+              _c("i", { staticClass: "fas fa-edit" })
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _vm.dataKepegawaian.length === 0
+              ? _c("div", { staticClass: "no-data-kepegawaian" }, [
+                  !_vm.isEditKepegawaian
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditKepegawaian
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addDataKepegawaian }
+                        },
+                        [
+                          _vm._v("\n                        Tambah "),
+                          _c("i", { staticClass: "fas fa-plus" })
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.dataKepegawaian.length !== 0
+              ? _c("div", { staticClass: "data-kepegawaian" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _vm._l(_vm.dataKepegawaian, function(dk) {
+                        return _c("tbody", [
+                          !_vm.isEditKepegawaian
+                            ? _c("tr", [
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.unitKerja.find(function(x) {
+                                        return (
+                                          x.id_unit_kerja == dk.id_unit_kerja
+                                        )
+                                      }).nama_unit_kerja
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.posisi.find(function(x) {
+                                        return x.id_posisi == dk.id_posisi
+                                      }).nama_posisi
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(dk.tahun_masuk)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(dk.tahun_keluar)
+                                  }
+                                })
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.isEditKepegawaian
+                            ? _c("tr", [
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.id_unit_kerja,
+                                            expression: "dk.id_unit_kerja"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              dk,
+                                              "id_unit_kerja",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      _vm._l(_vm.unitKerja, function(uk) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            domProps: {
+                                              value: uk.id_unit_kerja
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(uk.nama_unit_kerja) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.id_posisi,
+                                            expression: "dk.id_posisi"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              dk,
+                                              "id_posisi",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      _vm._l(_vm.posisi, function(pos) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            domProps: { value: pos.id_posisi }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(pos.nama_posisi) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.tahun_masuk,
+                                          expression: "dk.tahun_masuk"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.tahun_masuk },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "tahun_masuk",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.tahun_keluar,
+                                          expression: "dk.tahun_keluar"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.tahun_keluar },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "tahun_keluar",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [
+                                        _vm._v(
+                                          '*Isi dengan "-" jika status belum selesai'
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: {
+                                        id: _vm.dataKepegawaian.indexOf(dk),
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.delDataKepegawaian($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Hapus "
+                                      ),
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.isEditKepegawaian
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary float-sm-left",
+                              on: { click: _vm.addDataKepegawaian }
+                            },
+                            [
+                              _vm._v("\n                            Tambah "),
+                              _c("i", { staticClass: "fas fa-plus" })
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("br")
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.isEditKepegawaian
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#data-kepegawaian" },
+                  on: { click: _vm.saveDataKepegawaian }
+                },
+                [
+                  _vm._v("\n                Simpan "),
+                  _c("i", { staticClass: "fas fa-check" })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#data-kepegawaian" },
+                  on: { click: _vm.cancelDataKepegawaian }
+                },
+                [
+                  _vm._v("\n                Batal "),
+                  _c("i", { staticClass: "fas fa-times" })
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "riwayat-pegawai" } }, [
+        _c("h5", { staticClass: "card-header" }, [
+          _c("i", { staticClass: "fas fa-briefcase" }),
+          _vm._v("\n            Riwayat Pendidikan dan Pekerjaan"),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary float-sm-right",
+              attrs: { disabled: _vm.disableEdit },
+              on: { click: _vm.editRiwayatPegawai }
+            },
+            [
+              _vm._v("\n                Edit "),
+              _c("i", { staticClass: "fas fa-edit" })
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _c("h5", [_vm._v("Riwayat Pendidikan")]),
+            _vm._v(" "),
+            _vm.riwayatPendidikan.length === 0
+              ? _c("div", { staticClass: "no-riwayat-pendidikan" }, [
+                  !_vm.isEditRiwayat
+                    ? _c("div", [
+                        _c("hr"),
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditRiwayat
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addRiwayatPendidikan }
+                        },
+                        [
+                          _vm._v("\n                        Tambah "),
+                          _c("i", { staticClass: "fas fa-plus" })
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.riwayatPendidikan.length !== 0
+              ? _c("div", { staticClass: "riwayat-pendidikan" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._l(_vm.riwayatPendidikan, function(rp) {
+                        return _c("tbody", [
+                          !_vm.isEditRiwayat
+                            ? _c("tr", [
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(rp.strata) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.nama_institusi)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(rp.jurusan) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.tahun_masuk)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.tahun_keluar)
+                                  }
+                                })
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.isEditRiwayat
+                            ? _c("tr", [
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.strata,
+                                          expression: "rp.strata"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.strata },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "strata",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.nama_institusi,
+                                          expression: "rp.nama_institusi"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.nama_institusi },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "nama_institusi",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.jurusan,
+                                          expression: "rp.jurusan"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.jurusan },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "jurusan",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.tahun_masuk,
+                                          expression: "rp.tahun_masuk"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.tahun_masuk },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "tahun_masuk",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.tahun_keluar,
+                                          expression: "rp.tahun_keluar"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.tahun_keluar },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "tahun_keluar",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [
+                                        _vm._v(
+                                          '*Isi dengan "-" jika status belum selesai'
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: {
+                                        id: _vm.riwayatPendidikan.indexOf(rp),
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.delRiwayatPendidikan($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Hapus "
+                                      ),
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.isEditRiwayat
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary float-sm-left",
+                              on: { click: _vm.addRiwayatPendidikan }
+                            },
+                            [
+                              _vm._v("\n                            Tambah "),
+                              _c("i", { staticClass: "fas fa-plus" })
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
+            _c("h5", [_vm._v("Riwayat Pekerjaan (di luar ITB)")]),
+            _vm._v(" "),
+            _vm.riwayatPekerjaan.length === 0
+              ? _c("div", { staticClass: "no-riwayat-pekerjaan" }, [
+                  !_vm.isEditRiwayat
+                    ? _c("div", [
+                        _c("hr"),
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditRiwayat
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addRiwayatPekerjaan }
+                        },
+                        [
+                          _vm._v("\n                        Tambah "),
+                          _c("i", { staticClass: "fas fa-plus" })
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.riwayatPekerjaan.length !== 0
+              ? _c("div", { staticClass: "riwayat-pekerjaan" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _vm._l(_vm.riwayatPekerjaan, function(rp) {
+                        return _c("tbody", [
+                          !_vm.isEditRiwayat
+                            ? _c("tr", [
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.nama_institusi)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(rp.posisi) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.tahun_masuk)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.tahun_keluar)
+                                  }
+                                })
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.isEditRiwayat
+                            ? _c("tr", [
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.nama_institusi,
+                                          expression: "rp.nama_institusi"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.nama_institusi },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "nama_institusi",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.posisi,
+                                          expression: "rp.posisi"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.posisi },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "posisi",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.tahun_masuk,
+                                          expression: "rp.tahun_masuk"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.tahun_masuk },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "tahun_masuk",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.tahun_keluar,
+                                          expression: "rp.tahun_keluar"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.tahun_keluar },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "tahun_keluar",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [
+                                        _vm._v(
+                                          '*Isi dengan "-" jika status belum selesai'
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: {
+                                        id: _vm.riwayatPekerjaan.indexOf(rp),
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.delRiwayatPekerjaan($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Hapus "
+                                      ),
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.isEditRiwayat
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary float-sm-left",
+                              on: { click: _vm.addRiwayatPekerjaan }
+                            },
+                            [
+                              _vm._v("\n                            Tambah "),
+                              _c("i", { staticClass: "fas fa-plus" })
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.isEditRiwayat
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#riwayat-pegawai" },
+                  on: { click: _vm.saveRiwayatPegawai }
+                },
+                [
+                  _vm._v("\n                Simpan "),
+                  _c("i", { staticClass: "fas fa-check" })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#riwayat-pegawai" },
+                  on: { click: _vm.cancelRiwayatPegawai }
+                },
+                [
+                  _vm._v("\n                Batal "),
+                  _c("i", { staticClass: "fas fa-times" })
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "sertificate" } }, [
+        _c("h5", { staticClass: "card-header" }, [
+          _c("i", { staticClass: "fas fa-file-alt" }),
+          _vm._v("\n            Sertifikat"),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary float-sm-right",
+              attrs: { disabled: _vm.disableEdit },
+              on: { click: _vm.editSertifikat }
+            },
+            [
+              _vm._v("\n                Edit "),
+              _c("i", { staticClass: "fas fa-edit" })
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _vm.sertifikat.length === 0
+              ? _c("div", { staticClass: "no-sertificate" }, [
+                  !_vm.isEditSertifikat
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditSertifikat
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addSertifikat }
+                        },
+                        [
+                          _vm._v("\n                        Tambah "),
+                          _c("i", { staticClass: "fas fa-plus" })
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.sertifikat.length !== 0
+              ? _c("div", { staticClass: "sertificate" }, [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table",
+                      staticStyle: { width: "100%" },
+                      attrs: { align: "left" }
+                    },
+                    [
+                      _vm._l(_vm.sertifikat, function(dk) {
+                        return _c("tbody", [
+                          !_vm.isEditSertifikat
+                            ? _c("div", [
+                                _vm._m(3, true),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", { attrs: { rowspan: "4" } }, [
+                                    _c("img", {
+                                      staticClass: "img-thumbnail",
+                                      attrs: {
+                                        id: "img-sertifikat-1",
+                                        src: dk.nama_file,
+                                        width: "200"
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Judul")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", {
+                                    domProps: { textContent: _vm._s(dk.judul) }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Lembaga")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(dk.lembaga)
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Tahun Diterbitkan")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(dk.tahun_diterbitkan)
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Catatan")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(dk.catatan)
+                                    }
+                                  })
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.isEditSertifikat
+                            ? _c("div", [
+                                _c("tr", [
+                                  _c("td", { attrs: { rowspan: "4" } }, [
+                                    _c("div", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          attrs: {
+                                            id: _vm.sertifikat.indexOf(dk),
+                                            type: "button"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.delSertifikat($event)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                        Hapus "
+                                          ),
+                                          _c("i", {
+                                            staticClass: "fas fa-trash-alt"
+                                          })
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { attrs: { rowspan: "4" } }, [
+                                    _c("img", {
+                                      staticClass: "img-thumbnail",
+                                      attrs: {
+                                        id: "img-sertifikat-1",
+                                        src: dk.nama_file,
+                                        width: "200"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("br"),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        attrs: {
+                                          id: _vm.sertifikat.indexOf(dk)
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.browseSertifikatImage($event)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-upload"
+                                        }),
+                                        _vm._v(
+                                          "\n                                    Upload Gambar\n                                "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      staticClass: "form-control",
+                                      class:
+                                        "sert" + _vm.sertifikat.indexOf(dk),
+                                      staticStyle: { display: "none" },
+                                      attrs: {
+                                        type: "file",
+                                        id: _vm.sertifikat.indexOf(dk)
+                                      },
+                                      on: { change: _vm.FileChangeSertifikat }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Judul")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.judul,
+                                            expression: "dk.judul"
+                                          }
+                                        ],
+                                        staticClass: "form-control text-center",
+                                        attrs: { type: "text" },
+                                        domProps: { value: dk.judul },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              dk,
+                                              "judul",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "form-text text-muted" },
+                                        [_vm._v("*Wajib diisi")]
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Lembaga")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.lembaga,
+                                            expression: "dk.lembaga"
+                                          }
+                                        ],
+                                        staticClass: "form-control text-center",
+                                        attrs: { type: "text" },
+                                        domProps: { value: dk.lembaga },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              dk,
+                                              "lembaga",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "form-text text-muted" },
+                                        [_vm._v("*Wajib diisi")]
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Tahun Diterbitkan")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.tahun_diterbitkan,
+                                            expression: "dk.tahun_diterbitkan"
+                                          }
+                                        ],
+                                        staticClass: "form-control text-center",
+                                        attrs: { type: "text" },
+                                        domProps: {
+                                          value: dk.tahun_diterbitkan
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              dk,
+                                              "tahun_diterbitkan",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "form-text text-muted" },
+                                        [_vm._v("*Wajib diisi")]
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Catatan")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.catatan,
+                                            expression: "dk.catatan"
+                                          }
+                                        ],
+                                        staticClass: "form-control text-center",
+                                        attrs: { type: "text" },
+                                        domProps: { value: dk.catatan },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              dk,
+                                              "catatan",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      })
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.isEditSertifikat
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary float-sm-left",
+                              on: { click: _vm.addSertifikat }
+                            },
+                            [
+                              _vm._v("\n                            Tambah "),
+                              _c("i", { staticClass: "fas fa-plus" })
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.isEditSertifikat
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#sertificate" },
+                  on: { click: _vm.saveSertifikat }
+                },
+                [
+                  _vm._v("\n                Simpan "),
+                  _c("i", { staticClass: "fas fa-check" })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#sertificate" },
+                  on: { click: _vm.cancelSertifikat }
+                },
+                [
+                  _vm._v("\n                Batal "),
+                  _c("i", { staticClass: "fas fa-times" })
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "data-kinerja" } }, [
+        _vm._m(4),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _vm.dataKinerja.length === 0
+              ? _c("div", { staticClass: "no-data-kinerja" }, [
+                  !_vm.isEditDataKinerja
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditDataKinerja
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addDataKinerja }
+                        },
+                        [
+                          _vm._v("\n                        Tambah "),
+                          _c("i", { staticClass: "fas fa-plus" })
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.dataKinerja.length !== 0
+              ? _c("div", { staticClass: "data-kinerja" }, [
+                  _c("table", { staticClass: "table" }, [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      [
+                        _vm._l(_vm.dataKinerjaShow, function(dks) {
+                          return !_vm.isEditDataKinerja
+                            ? _c("tr", [
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(dks.tahun) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(dks.semester)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(dks.nilai) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(dks.catatan) }
+                                })
+                              ])
+                            : _vm._e()
+                        }),
+                        _vm._v(" "),
+                        _vm._l(_vm.dataKinerja, function(dk) {
+                          return _vm.isEditDataKinerja
+                            ? _c("tr", [
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.tahun,
+                                          expression: "dk.tahun"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.tahun },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "tahun",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.semester,
+                                          expression: "dk.semester"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.semester },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "semester",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.nilai,
+                                          expression: "dk.nilai"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.nilai },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "nilai",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.catatan,
+                                          expression: "dk.catatan"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.catatan },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "catatan",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: {
+                                        id: _vm.dataKinerja.indexOf(dk),
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.delDataKinerja($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Hapus "
+                                      ),
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    !_vm.isEditDataKinerja && !_vm.isShowAllDataKinerja
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary float-sm-left",
+                            attrs: { href: "#data-kinerja" },
+                            on: { click: _vm.showAllDataKinerja }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Tamplikan semua "
+                            ),
+                            _c("i", { staticClass: "fas fa-eye" })
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.isEditDataKinerja && _vm.isShowAllDataKinerja
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-danger float-sm-left",
+                            attrs: { href: "#data-kinerja" },
+                            on: { click: _vm.hideDataKinerja }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Sembunyikan sebagian "
+                            ),
+                            _c("i", { staticClass: "fas fa-eye-slash" })
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditDataKinerja
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary float-sm-left",
+                            on: { click: _vm.addDataKinerja }
+                          },
+                          [
+                            _vm._v("\n                            Tambah "),
+                            _c("i", { staticClass: "fas fa-plus" })
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.isEditDataKinerja
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#data-kinerja" },
+                  on: { click: _vm.saveDataKinerja }
+                },
+                [
+                  _vm._v("\n                Simpan "),
+                  _c("i", { staticClass: "fas fa-check" })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#data-kinerja" },
+                  on: { click: _vm.cancelDataKinerja }
+                },
+                [
+                  _vm._v("\n                Batal "),
+                  _c("i", { staticClass: "fas fa-times" })
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "data-kompetensi" } }, [
+        _vm._m(6),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary float-sm-left",
+                attrs: { disabled: _vm.disableEdit },
+                on: { click: _vm.downloadKompetensi }
+              },
+              [
+                _vm._v("\n                    Download "),
+                _c("i", { staticClass: "fas fa-download" })
+              ]
+            ),
+            _vm._v(" "),
+            _c("br"),
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
+            _c("h5", [_vm._v("Petunjuk:")]),
+            _vm._v(" "),
+            _vm._m(7),
+            _vm._v(" "),
+            _vm._m(8)
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "rekomendasi" } }, [
+        _vm._m(9),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "div",
+            { staticClass: "container" },
+            [
+              _c("h5", [_vm._v("Rekomendasi Training")]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _vm.rekomendasiTraining.length === 0
+                ? _c("div", { staticClass: "no-rekomendasi-posisi" }, [
+                    !_vm.isEditRekomendasi
+                      ? _c("div", [
+                          _vm._v(
+                            "\n                        Belum ditambahkan.\n                        "
+                          ),
+                          _c("br")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditRekomendasi
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary float-sm-left",
+                            on: { click: _vm.addRekomendasiTraining }
+                          },
+                          [
+                            _vm._v("\n                        Tambah "),
+                            _c("i", { staticClass: "fas fa-plus" })
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.rekomendasiTraining, function(rt) {
+                return _vm.rekomendasiTraining.length !== 0
+                  ? _c("div", { staticClass: "rekomendasi-training" }, [
+                      !_vm.isEditRekomendasi
+                        ? _c("ul", [
+                            _c("li", {
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.trainingList.find(function(x) {
+                                    return x.id_training == rt.id_training
+                                  }).nama_training
+                                )
+                              }
+                            })
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEditRekomendasi
+                        ? _c("div", { staticClass: "form-group row" }, [
+                            _c("div", { staticClass: "col-sm-10" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: rt.id_training,
+                                      expression: "rt.id_training"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        rt,
+                                        "id_training",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.trainingList, function(tl) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: tl.id_training } },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(tl.nama_training) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Wajib diisi")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-1" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: {
+                                    id: _vm.rekomendasiTraining.indexOf(rt),
+                                    type: "button"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.delRekomendasiTraining($event)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Hapus "
+                                  ),
+                                  _c("i", { staticClass: "fas fa-trash-alt" })
+                                ]
+                              )
+                            ])
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm.isEditRekomendasi && _vm.rekomendasiTraining.length !== 0
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary float-sm-left",
+                      on: { click: _vm.addRekomendasiTraining }
+                    },
+                    [
+                      _vm._v("\n                    Tambah "),
+                      _c("i", { staticClass: "fas fa-plus" })
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("br"),
+              _c("br"),
+              _c("br"),
+              _vm._v(" "),
+              _c("h5", [_vm._v("Rekomendasi Lain-lain")]),
+              _vm._v(" "),
+              _vm.rekomendasiPosisi.length === 0
+                ? _c("div", { staticClass: "no-rekomendasi-posisi" }, [
+                    !_vm.isEditRekomendasi
+                      ? _c("div", [
+                          _c("hr"),
+                          _vm._v(
+                            "\n                        Belum ditambahkan.\n                        "
+                          ),
+                          _c("br")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditRekomendasi
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary float-sm-left",
+                            on: { click: _vm.addRekomendasiPosisi }
+                          },
+                          [
+                            _vm._v("\n                        Tambah "),
+                            _c("i", { staticClass: "fas fa-plus" })
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.rekomendasiPosisi.length !== 0
+                ? _c("div", { staticClass: "rekomendasi-posisi" }, [
+                    _c(
+                      "table",
+                      { staticClass: "table" },
+                      [
+                        _vm._m(10),
+                        _vm._v(" "),
+                        _vm._l(_vm.rekomendasiPosisi, function(rp) {
+                          return _c("tbody", [
+                            !_vm.isEditRekomendasi
+                              ? _c("tr", [
+                                  _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.unitKerja.find(function(x) {
+                                          return (
+                                            x.id_unit_kerja == rp.id_unit_kerja
+                                          )
+                                        }).nama_unit_kerja
+                                      )
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.posisi.find(function(x) {
+                                          return x.id_posisi == rp.id_posisi
+                                        }).nama_posisi
+                                      )
+                                    }
+                                  })
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.isEditRekomendasi
+                              ? _c("tr", [
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: rp.id_unit_kerja,
+                                              expression: "rp.id_unit_kerja"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.$set(
+                                                rp,
+                                                "id_unit_kerja",
+                                                $event.target.multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              )
+                                            }
+                                          }
+                                        },
+                                        _vm._l(_vm.unitKerja, function(uk) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              domProps: {
+                                                value: uk.id_unit_kerja
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(uk.nama_unit_kerja) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        })
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "form-text text-muted" },
+                                        [_vm._v("*Wajib diisi")]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: rp.id_posisi,
+                                              expression: "rp.id_posisi"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.$set(
+                                                rp,
+                                                "id_posisi",
+                                                $event.target.multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              )
+                                            }
+                                          }
+                                        },
+                                        _vm._l(_vm.posisi, function(pos) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              domProps: { value: pos.id_posisi }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(pos.nama_posisi) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        })
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "form-text text-muted" },
+                                        [_vm._v("*Wajib diisi")]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        attrs: {
+                                          id: _vm.rekomendasiPosisi.indexOf(rp),
+                                          type: "button"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.delRekomendasiPosisi($event)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    Hapus "
+                                        ),
+                                        _c("i", {
+                                          staticClass: "fas fa-trash-alt"
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e()
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _vm.isEditRekomendasi
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary float-sm-left",
+                                on: { click: _vm.addRekomendasiPosisi }
+                              },
+                              [
+                                _vm._v("\n                            Tambah "),
+                                _c("i", { staticClass: "fas fa-plus" })
+                              ]
+                            )
+                          : _vm._e()
+                      ],
+                      2
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("br")
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm.isEditRekomendasi
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#rekomendasi" },
+                  on: { click: _vm.saveRekomendasi }
+                },
+                [
+                  _vm._v("\n                Simpan "),
+                  _c("i", { staticClass: "fas fa-check" })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#rekomendasi" },
+                  on: { click: _vm.cancelRekomendasi }
+                },
+                [
+                  _vm._v("\n                Batal "),
+                  _c("i", { staticClass: "fas fa-times" })
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("common-footer")
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Unit Kerja")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jabatan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Mulai")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Selesai")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tingkat Pendidikan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nama Institusi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jurusan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Masuk")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Keluar")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nama Institusi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jabatan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Masuk")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Keluar")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("colgroup", [
+      _c("col", { attrs: { width: "35%" } }),
+      _vm._v(" "),
+      _c("col", { attrs: { width: "15%" } }),
+      _vm._v(" "),
+      _c("col", { attrs: { width: "50%" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-clipboard-check" }),
+      _vm._v("\n            Hasil Kinerja\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Semester")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nilai")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Catatan")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-clipboard-list" }),
+      _vm._v("\n            Hasil Kompetensi\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", [
+      _c("li", [_vm._v("Buka berkas dengan Microsoft Excel")]),
+      _vm._v(" "),
+      _c("li", [
+        _vm._v('Jika ada, tekan tombol "'),
+        _c("i", [_vm._v("Enable Editing")]),
+        _vm._v('" pada '),
+        _c("i", [_vm._v("bar")]),
+        _vm._v(" kuning di bagian atas")
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _vm._v("Jika ingin disimpan sebagai PDF: \n                        "),
+        _c("ul", [
+          _c("li", [
+            _vm._v("Pilih "),
+            _c("b", [_c("i", [_vm._v("File → Save As")])])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v("Pilih format PDF pada "),
+            _c("i", [_vm._v("dropdown menu")]),
+            _vm._v(" pemilihan format")
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v("Tekan tombol "),
+            _c("b", [_c("i", [_vm._v("Save")])]),
+            _vm._v(" untuk menyimpannya sebagai PDF")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _vm._v("Jika ingin dicetak: \n                        "),
+        _c("ul", [
+          _c("li", [
+            _vm._v("Pilih "),
+            _c("b", [_c("i", [_vm._v("File → Print")])])
+          ]),
+          _vm._v(" "),
+          _c("li", [_vm._v("Masukan pengaturan pencetakan yang sesuai")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _vm._v(
+        "Selain dengan menggunakan Microsoft Excel, berkas Excel yang diunduh juga dapat dikonversi ke format PDF dengan layanan Web seperti "
+      ),
+      _c("a", { attrs: { href: "https://smallpdf.com/excel-to-pdf" } }, [
+        _vm._v("SmallPDF")
+      ]),
+      _vm._v(" atau "),
+      _c("a", { attrs: { href: "https://www.ilovepdf.com/excel_to_pdf" } }, [
+        _vm._v("iLovePDF")
+      ]),
+      _vm._v(
+        ". Ikuti petunjuk yang tertera pada situs-situs tersebut untuk mengkonversi."
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-info-circle" }),
+      _vm._v("\n            Rekomendasi\n             ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Unit Kerja")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jabatan")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a4d53326", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 258:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(259)
+}
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(261)
+/* template */
+var __vue_template__ = __webpack_require__(262)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/ProfilPegawaiSpecific.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-47f115bf", Component.options)
+  } else {
+    hotAPI.reload("data-v-47f115bf", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 259:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(260);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("45cdb34d", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47f115bf\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProfilPegawaiSpecific.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47f115bf\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProfilPegawaiSpecific.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 260:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 261:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14421,677 +19704,4092 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id'],
+  props: ["id-pmo", "id", "unit-kerja", "posisi", "kelompok-kompetensi", "data-kinerja-temp", "rekomendasi-training-temp", "training-list", "rekomendasi-posisi-temp", "app-url"],
 
-    data: function data() {
-        return {
-            isEditProfile: false,
-            cachedpegawai: null,
-            cachedDataKepegawaian: null,
-            cachedRiwayatPendidikan: null,
-            cachedRiwayatPekerjaan: null,
-            pegawai: {
-                imageProfileUrl: "https://i.pinimg.com/236x/34/ba/c1/34bac13dd65ab3b81267f727e5633549--patrick-dempsey-handsome-man.jpg",
-                nama: "",
-                tempatLahir: "",
-                tanggalLahir: "",
-                email: "",
-                nopeg: "",
-                unitKerja: "",
-                posisi: "",
-                kompetensi: "",
-                tahunMasuk: ""
-            }
-        };
+  data: function data() {
+    var _ref;
+
+    return _ref = {
+      pegawai: {
+        imageProfileUrl: "",
+        nama: "",
+        tempatLahir: "",
+        tanggalLahir: "",
+        email: "",
+        nopeg: "",
+        unitKerja: "",
+        posisi: "",
+        kompetensi: "",
+        tahunMasuk: ""
+      },
+      dataKepegawaian: [],
+      dataKepegawaianPrev: null,
+      riwayatPendidikan: [],
+      riwayatPekerjaan: [],
+      sertifikat: [],
+
+      isShowAllDataKinerja: false,
+      disableEdit: false,
+      isEditProfile: false,
+      isEditKepegawaian: false,
+      isEditRiwayat: false,
+      isEditSertifikat: false,
+      isEditDataKinerja: false,
+      isEditRekomendasi: false,
+      cachedPegawai: null,
+      cachedDataKepegawaian: null,
+      cachedRiwayatPendidikan: null,
+      cachedRiwayatPekerjaan: null,
+      cachedSertifikat: null,
+      cachedDataKinerja: null,
+      cachedRekomendasiTraining: null,
+      cachedRekomendasiPosisi: null
+    }, _defineProperty(_ref, "pegawai", {
+      imageProfileUrl: null,
+      nama: null,
+      tempatLahir: null,
+      tanggalLahir: null,
+      email: null,
+      nopeg: null,
+      unitKerja: {
+        id: null,
+        text: null
+      },
+      posisi: {
+        id: null,
+        text: null
+      },
+      kompetensi: {
+        id: null,
+        text: null
+      },
+      tahunMasuk: null
+    }), _defineProperty(_ref, "dataKepegawaian", []), _defineProperty(_ref, "riwayatPendidikan", []), _defineProperty(_ref, "riwayatPekerjaan", []), _defineProperty(_ref, "dataKinerja", []), _defineProperty(_ref, "dataKinerjaShow", []), _defineProperty(_ref, "rekomendasiTraining", []), _defineProperty(_ref, "rekomendasiPosisi", []), _ref;
+  },
+  mounted: function mounted() {},
+  created: function created() {
+    var _this = this;
+
+    //dataKinerja
+    this.dataKinerja = this.dataKinerjaTemp;
+
+    axios.get("/api/pegawai/" + this.id).then(function (response) {
+      //get data from api response
+      var responsePegawai = response.data["data"];
+
+      _this.dataKepegawaian = responsePegawai["kepegawaian"];
+      _this.updateDataKepegawaian();
+      _this.validationTahunKeluar(_this.dataKepegawaian);
+
+      _this.riwayatPendidikan = responsePegawai["pendidikan"];
+      _this.validationTahunKeluar(_this.riwayatPendidikan);
+
+      _this.riwayatPekerjaan = responsePegawai["pekerjaan"];
+      _this.validationTahunKeluar(_this.riwayatPekerjaan);
+
+      _this.updateRiwayat();
+
+      _this.dataKepegawaianPrev = _this.dataKepegawaian[_this.dataKepegawaian.length - 1];
+
+      _this.sertifikat = responsePegawai["sertifikat"];
+      _this.updateSertifikat();
+
+      _this.pegawai.nama = responsePegawai["user"]["name"];
+      _this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
+      _this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
+      _this.pegawai.email = responsePegawai["user"]["email"];
+      _this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
+      _this.pegawai.imageProfileUrl = "pimage/" + responsePegawai["pegawai"]["nip"] + "." + responsePegawai["pegawai"]["ekstensi_foto"];
+      _this.pegawai.kompetensi.id = responsePegawai["pegawai"]["id_kelompok_kompetensi"];
+      _this.updateProfilPegawai();
+
+      //chacing
+      _this.cachedPegawai = JSON.parse(JSON.stringify(_this.pegawai));
+      _this.cachedDataKepegawaian = JSON.parse(JSON.stringify(_this.dataKepegawaian));
+      _this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(_this.riwayatPendidikan));
+      _this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(_this.riwayatPekerjaan));
+      _this.cachedSertifikat = JSON.parse(JSON.stringify(_this.sertifikat));
+      _this.cachedDataKinerja = JSON.parse(JSON.stringify(_this.dataKinerja));
+
+      console.log(_this);
+    }).catch(function (error) {
+      console.log(error);
+      alert("Gagal mengambil data");
+    });
+
+    //caching others
+    this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
+
+    // init dataKinerjaShow
+    if (this.dataKinerja.length > 6) {
+      this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length - 6);
+    } else {
+      this.dataKinerjaShow = this.dataKinerja;
+    }
+
+    //init rekomendasiTraining
+    this.rekomendasiTraining = this.rekomendasiTrainingTemp;
+    this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+
+    //init rekomendasiPosisi
+    this.rekomendasiPosisi = this.rekomendasiPosisiTemp;
+    this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+  },
+
+
+  methods: {
+    browseSertifikatImage: function browseSertifikatImage(event) {
+      var targetIndex = event.currentTarget.id;
+      document.querySelector(".sert" + targetIndex).click();
     },
-    created: function created() {
-        var _this = this;
+    validationTahunKeluar: function validationTahunKeluar(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].tahun_keluar == 0) {
+          arr[i].tahun_keluar = "-";
+        }
+      }
+    },
+    downloadKompetensi: function downloadKompetensi() {
+      window.open("/api/kompetensi/report/" + this.id);
+    },
+    editKommpetensi: function editKommpetensi() {
+      window.open("/pages/pmo?nip=" + this.pegawai.nopeg + "&tab=dataKompetensi");
+    },
+    showAllDataKinerja: function showAllDataKinerja() {
+      this.isShowAllDataKinerja = true;
+      this.dataKinerjaShow = this.dataKinerja;
+    },
+    hideDataKinerja: function hideDataKinerja() {
+      this.isShowAllDataKinerja = false;
 
-        axios.get('/api/pegawai/' + this.id).then(function (response) {
-            var responsePegawai = response.data["data"];
-            _this.pegawai.nama = responsePegawai["user"]["name"];
-            _this.pegawai.tempatLahir = responsePegawai["pegawai"]["tempat_lahir"];
-            _this.pegawai.tanggalLahir = responsePegawai["pegawai"]["tanggal_lahir"];
-            _this.pegawai.email = responsePegawai["user"]["email"];
-            _this.pegawai.nopeg = responsePegawai["pegawai"]["nip"];
+      if (this.dataKinerja.length > 6) {
+        this.dataKinerjaShow = this.dataKinerja.slice(this.dataKinerja.length - 6);
+      }
+    },
+    updateProfilPegawai: function updateProfilPegawai() {
+      var _this2 = this;
+
+      if (this.pegawai.unitKerja.id != null) {
+        this.pegawai.unitKerja.text = this.unitKerja.find(function (x) {
+          return x.id_unit_kerja == _this2.pegawai.unitKerja.id;
+        }).nama_unit_kerja;
+      } else {
+        this.pegawai.unitKerja.text = null;
+      }
+
+      if (this.pegawai.kompetensi.id != null) {
+        this.pegawai.kompetensi.text = this.kelompokKompetensi.find(function (x) {
+          return x.id_kelompok_kompetensi == _this2.pegawai.kompetensi.id;
+        }).nama_kelompok_kompetensi;
+      } else {
+        this.pegawai.kompetensi.text = null;
+      }
+
+      if (this.pegawai.posisi.id != null) {
+        this.pegawai.posisi.text = this.posisi.find(function (x) {
+          return x.id_posisi == _this2.pegawai.posisi.id;
+        }).nama_posisi;
+      } else {
+        this.pegawai.posisi.text = null;
+      }
+    },
+    updateDataKepegawaian: function updateDataKepegawaian() {
+      //update relevan
+      if (this.dataKepegawaian.length == 0) {
+        this.pegawai.unitKerja.id = null;
+        this.pegawai.posisi.id = null;
+        // this.pegawai.kompetensi.id = null;
+        this.pegawai.tahunMasuk = null;
+      } else {
+        //sort
+        this.dataKepegawaian.sort(function (a, b) {
+          var keyA = a.tahun_masuk,
+              keyB = b.tahun_masuk;
+          // Compare the 2 dates
+          if (keyA < keyB) return -1;
+          if (keyA > keyB) return 1;
+          return 0;
+        });
+        var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length - 1];
+        this.pegawai.unitKerja.id = lastDataPegawai["id_unit_kerja"];
+        this.pegawai.posisi.id = lastDataPegawai["id_posisi"];
+        // this.pegawai.kompetensi.id = lastDataPegawai["id_kelompok_kompetensi"];
+        this.pegawai.tahunMasuk = lastDataPegawai["tahun_masuk"];
+      }
+    },
+    updateDataKepegawaianAfterEditProfile: function updateDataKepegawaianAfterEditProfile() {
+      //update relevan
+      if (this.dataKepegawaian.length == 0) {
+        var newData = {
+          id_data_kepegawaian: null,
+          id_pegawai: null,
+          id_unit_kerja: this.pegawai.unitKerja.id,
+          id_posisi: this.pegawai.posisi.id,
+          // id_kelompok_kompetensi : this.pegawai.kompetensi.id,
+          tahun_masuk: this.pegawai.tahunMasuk,
+          tahun_keluar: null
+        };
+        this.dataKepegawaian.push(newData);
+      } else {
+        //sort
+        this.dataKepegawaian.sort(function (a, b) {
+          var keyA = a.tahun_masuk,
+              keyB = b.tahun_masuk;
+          // Compare the 2 dates
+          if (keyA < keyB) return -1;
+          if (keyA > keyB) return 1;
+          return 0;
+        });
+        var lastDataPegawai = this.dataKepegawaian[this.dataKepegawaian.length - 1];
+        lastDataPegawai["id_unit_kerja"] = this.pegawai.unitKerja.id;
+        lastDataPegawai["id_posisi"] = this.pegawai.posisi.id;
+        // lastDataPegawai["id_kelompok_kompetensi"] = this.pegawai.kompetensi.id;
+        lastDataPegawai["tahun_masuk"] = this.pegawai.tahunMasuk;
+      }
+    },
+    updateSertifikat: function updateSertifikat() {
+      for (var i = 0; i < this.sertifikat.length; i++) {
+        this.sertifikat[i].nama_file = "simage/" + this.sertifikat[i].nama_file;
+      }
+    },
+    disableEditButton: function disableEditButton() {
+      this.disableEdit = true;
+    },
+    enableEditButton: function enableEditButton() {
+      this.disableEdit = false;
+    },
+    editProfilPegawai: function editProfilPegawai() {
+      this.isEditProfile = true;
+      this.disableEditButton();
+    },
+    editDataKepegawaian: function editDataKepegawaian() {
+      this.isEditKepegawaian = true;
+      this.disableEditButton();
+    },
+    editRiwayatPegawai: function editRiwayatPegawai() {
+      this.isEditRiwayat = true;
+      this.disableEditButton();
+    },
+    editSertifikat: function editSertifikat() {
+      this.isEditSertifikat = true;
+      this.disableEditButton();
+    },
+    editDataKinerja: function editDataKinerja() {
+      this.isEditDataKinerja = true;
+      this.disableEditButton();
+    },
+    editDataKompetensi: function editDataKompetensi() {},
+    editRekomendasi: function editRekomendasi() {
+      this.isEditRekomendasi = true;
+      this.disableEditButton();
+    },
+    addDataKepegawaian: function addDataKepegawaian() {
+      var newData = {
+        id_data_kepegawaian: null,
+        id_pegawai: null,
+        id_unit_kerja: null,
+        id_posisi: null,
+        // id_kelompok_kompetensi : null,
+        tahun_masuk: null,
+        tahun_keluar: null
+      };
+      this.dataKepegawaian.push(newData);
+    },
+    addRiwayatPendidikan: function addRiwayatPendidikan() {
+      var newData = {
+        id_riwayat_pendidikan: null,
+        id_pegawai: null,
+        nama_institusi: null,
+        strata: null,
+        jurusan: null,
+        tahun_masuk: null,
+        tahun_keluar: null
+      };
+      this.riwayatPendidikan.push(newData);
+    },
+    addRiwayatPekerjaan: function addRiwayatPekerjaan() {
+      var newData = {
+        id_riwayat_pekerjaan: null,
+        id_pegawai: null,
+        nama_institusi: null,
+        posisi: null,
+        tahun_masuk: null,
+        tahun_keluar: null
+      };
+      this.riwayatPekerjaan.push(newData);
+    },
+    addSertifikat: function addSertifikat() {
+      var newData = {
+        id_sertifikat: null,
+        id_pegawai: null,
+        judul: null,
+        lembaga: null,
+        tahun_diterbitkan: null,
+        catatan: null,
+        nama_file: null
+      };
+      this.sertifikat.push(newData);
+    },
+    addDataKinerja: function addDataKinerja() {
+      var newData = {
+        id_kinerja: null,
+        id_pegawai: null,
+        tahun: null,
+        semester: null,
+        nilai: null,
+        catatan: null
+      };
+      this.dataKinerja.push(newData);
+    },
+    addRekomendasiTraining: function addRekomendasiTraining() {
+      var newData = {
+        id_rekomendasi_training: null,
+        id_pegawai: null,
+        id_training: null
+      };
+      this.rekomendasiTraining.push(newData);
+    },
+    addRekomendasiPosisi: function addRekomendasiPosisi() {
+      var newData = {
+        id_rekomendasi_posisi: null,
+        id_pegawai: null,
+        id_unit_kerja: null,
+        id_posisi: null
+      };
+      this.rekomendasiPosisi.push(newData);
+    },
+    delDataKepegawaian: function delDataKepegawaian(event) {
+      var targetIndex = event.currentTarget.id;
+      this.dataKepegawaian.splice(targetIndex, 1);
+    },
+    delRiwayatPendidikan: function delRiwayatPendidikan(event) {
+      var targetIndex = event.currentTarget.id;
+      this.riwayatPendidikan.splice(targetIndex, 1);
+    },
+    delRiwayatPekerjaan: function delRiwayatPekerjaan(event) {
+      var targetIndex = event.currentTarget.id;
+      this.riwayatPekerjaan.splice(targetIndex, 1);
+    },
+    delSertifikat: function delSertifikat(event) {
+      var targetIndex = event.currentTarget.id;
+      this.sertifikat.splice(targetIndex, 1);
+    },
+    delDataKinerja: function delDataKinerja(event) {
+      var targetIndex = event.currentTarget.id;
+      this.dataKinerja.splice(targetIndex, 1);
+    },
+    delRekomendasiTraining: function delRekomendasiTraining(event) {
+      var targetIndex = event.currentTarget.id;
+      this.rekomendasiTraining.splice(targetIndex, 1);
+    },
+    delRekomendasiPosisi: function delRekomendasiPosisi(event) {
+      var targetIndex = event.currentTarget.id;
+      this.rekomendasiPosisi.splice(targetIndex, 1);
+    },
+    isYearValid: function isYearValid(year) {
+      year = year.toString();
+      return year.length == 4 && !isNaN(year) && year > 1945;
+    },
+    isCompleteProfilPegawai: function isCompleteProfilPegawai() {
+      return this.pegawai.nama != "" && this.pegawai.nama != null && this.pegawai.tempatLahir != "" && this.pegawai.tempatLahir != null && this.pegawai.tanggalLahir != "" && this.pegawai.tanggalLahir != null && this.pegawai.email != "" && this.pegawai.email != null && this.pegawai.nopeg != "" && this.pegawai.nopeg != null && this.pegawai.unitKerja.id != "" && this.pegawai.unitKerja.id != null && this.pegawai.posisi.id != "" && this.pegawai.posisi.id != null && this.pegawai.kompetensi.id != "" && this.pegawai.kompetensi.id != null && this.pegawai.tahunMasuk != "" && this.pegawai.tahunMasuk != null && this.isYearValid(this.pegawai.tahunMasuk);
+    },
+    isCompleteDataKepegawaian: function isCompleteDataKepegawaian() {
+      var isEmpty = false;
+      var i = 0;
+      while (i < this.dataKepegawaian.length && !isEmpty) {
+        if (this.dataKepegawaian[i].id_unit_kerja != "" && this.dataKepegawaian[i].id_unit_kerja != null && this.dataKepegawaian[i].id_posisi != "" && this.dataKepegawaian[i].id_posisi != null &&
+        //this.dataKepegawaian[i].id_kelompok_kompetensi != '' && this.dataKepegawaian[i].id_kelompok_kompetensi != null &&
+        this.dataKepegawaian[i].tahun_masuk != "" && this.dataKepegawaian[i].tahun_masuk != null && this.isYearValid(this.dataKepegawaian[i].tahun_masuk) && this.dataKepegawaian[i].tahun_keluar != "" && this.dataKepegawaian[i].tahun_keluar != null && (this.isYearValid(this.dataKepegawaian[i].tahun_keluar) || this.dataKepegawaian[i].tahun_keluar == "-")) {
+          i++;
+        } else {
+          isEmpty = true;
+        }
+      }
+
+      return !isEmpty;
+    },
+    isCompleteRiwayat: function isCompleteRiwayat() {
+      var isEmpty = false;
+      var i = 0;
+      while (i < this.riwayatPendidikan.length && !isEmpty) {
+        if (this.riwayatPendidikan[i].nama_institusi != "" && this.riwayatPendidikan[i].nama_institusi != null && this.riwayatPendidikan[i].strata != "" && this.riwayatPendidikan[i].strata != null && this.riwayatPendidikan[i].jurusan != "" && this.riwayatPendidikan[i].jurusan != null && this.riwayatPendidikan[i].tahun_masuk != "" && this.riwayatPendidikan[i].tahun_masuk != null && this.riwayatPendidikan[i].tahun_keluar != "" && this.riwayatPendidikan[i].tahun_keluar != null && this.isYearValid(this.riwayatPendidikan[i].tahun_masuk) && (this.isYearValid(this.riwayatPendidikan[i].tahun_keluar) || this.riwayatPendidikan[i].tahun_keluar == "-")) {
+          i++;
+        } else {
+          isEmpty = true;
+        }
+      }
+
+      var i = 0;
+      while (i < this.riwayatPekerjaan.length && !isEmpty) {
+        if (this.riwayatPekerjaan[i].nama_institusi != "" && this.riwayatPekerjaan[i].nama_institusi != null && this.riwayatPekerjaan[i].posisi != "" && this.riwayatPekerjaan[i].posisi != null && this.riwayatPekerjaan[i].tahun_masuk != "" && this.riwayatPekerjaan[i].tahun_masuk != null && this.riwayatPekerjaan[i].tahun_keluar != "" && this.riwayatPekerjaan[i].tahun_keluar != null && this.isYearValid(this.riwayatPekerjaan[i].tahun_masuk) && (this.isYearValid(this.riwayatPekerjaan[i].tahun_keluar) || this.riwayatPekerjaan[i].tahun_keluar == "-")) {
+          i++;
+        } else {
+          isEmpty = true;
+        }
+      }
+
+      return !isEmpty;
+    },
+    isCompleteSertifikat: function isCompleteSertifikat() {
+      var isEmpty = false;
+      var i = 0;
+      while (i < this.sertifikat.length && !isEmpty) {
+        if (this.sertifikat[i].judul != "" && this.sertifikat[i].judul != null && this.sertifikat[i].lembaga != "" && this.sertifikat[i].lembaga != null && this.sertifikat[i].tahun_diterbitkan != "" && this.sertifikat[i].tahun_diterbitkan != null && this.isYearValid(this.sertifikat[i].tahun_diterbitkan)) {
+          i++;
+        } else {
+          isEmpty = true;
+        }
+      }
+
+      return !isEmpty;
+    },
+    isCompleteDataKinerja: function isCompleteDataKinerja() {
+      var isEmpty = false;
+      var i = 0;
+      while (i < this.dataKinerja.length && !isEmpty) {
+        if (this.dataKinerja[i].tahun != "" && this.dataKinerja[i].tahun != null && this.isYearValid(this.dataKinerja[i].tahun) && this.dataKinerja[i].semester != "" && this.dataKinerja[i].semester != null && (this.dataKinerja[i].semester == "1" || this.dataKinerja[i].semester == "2") && this.dataKinerja[i].nilai != "" && this.dataKinerja[i].nilai != null) {
+          i++;
+        } else {
+          isEmpty = true;
+        }
+      }
+
+      return !isEmpty;
+    },
+    isCompleteRekomendasi: function isCompleteRekomendasi() {
+      var isEmpty = false;
+      var i = 0;
+      while (i < this.rekomendasiTraining.length && !isEmpty) {
+        if (this.rekomendasiTraining[i].id_training != "" && this.rekomendasiTraining[i].id_training != null) {
+          i++;
+        } else {
+          isEmpty = true;
+        }
+      }
+
+      var i = 0;
+      while (i < this.rekomendasiPosisi.length && !isEmpty) {
+        if (this.rekomendasiPosisi[i].id_unit_kerja != "" && this.rekomendasiPosisi[i].id_unit_kerja != null && this.rekomendasiPosisi[i].id_posisi != "" && this.rekomendasiPosisi[i].id_posisi != null) {
+          i++;
+        } else {
+          isEmpty = true;
+        }
+      }
+
+      return !isEmpty;
+    },
+    saveProfilPegawai: function saveProfilPegawai() {
+      this.enableEditButton();
+
+      this.updateProfilPegawai();
+      this.updateDataKepegawaianAfterEditProfile();
+
+      this.cachedPegawai = JSON.parse(JSON.stringify(this.pegawai));
+      this.isEditProfile = false;
+
+      axios.post("/api/pegawai/" + this.id, {
+        pegawai: this.pegawai,
+        data_kepegawaian: this.dataKepegawaian,
+        data_kepegawaian_prev: this.dataKepegawaianPrev,
+        _method: "put"
+      }).then(function (response) {
+        console.log(response);
+        window.location.href = "/pages/profile/" + this.id;
+      }).catch(function (error) {
+        console.log(error);
+        alert("Semua kolom harus terisi");
+      });
+
+      console.log(this.dataKepegawaian);
+    },
+    saveDataKepegawaian: function saveDataKepegawaian() {
+      this.updateDataKepegawaian();
+      this.updateProfilPegawai();
+      this.enableEditButton();
+      this.cachedDataKepegawaian = JSON.parse(JSON.stringify(this.dataKepegawaian));
+      this.isEditKepegawaian = false;
+
+      console.log(this.dataKepegawaian);
+
+      axios.post("/api/kepegawaian/" + this.id, {
+        kepegawaian: this.dataKepegawaian,
+        _method: "put"
+      }).then(function (response) {
+        console.log(response);
+        window.location.href = "/pages/profile/" + this.id;
+      }).catch(function (error) {
+        console.log(error);
+        alert("Semua kolom harus terisi");
+      });
+    },
+    updateRiwayat: function updateRiwayat() {
+      //sort
+      this.riwayatPendidikan.sort(function (a, b) {
+        var keyA = a.tahun_masuk,
+            keyB = b.tahun_masuk;
+        // Compare the 2 dates
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
+
+      //sort
+      this.riwayatPekerjaan.sort(function (a, b) {
+        var keyA = a.tahun_masuk,
+            keyB = b.tahun_masuk;
+        // Compare the 2 dates
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
+    },
+    saveRiwayatPegawai: function saveRiwayatPegawai() {
+      this.updateRiwayat();
+
+      this.enableEditButton();
+      this.cachedRiwayatPendidikan = JSON.parse(JSON.stringify(this.riwayatPendidikan));
+      this.cachedRiwayatPekerjaan = JSON.parse(JSON.stringify(this.riwayatPekerjaan));
+      this.isEditRiwayat = false;
+
+      console.log(this.riwayatPendidikan);
+      console.log(this.riwayatPekerjaan);
+
+      axios.post("/api/riwayat/" + this.id, {
+        pendidikan: this.riwayatPendidikan,
+        pekerjaan: this.riwayatPekerjaan,
+        _method: "put"
+      }).then(function (response) {
+        console.log(response);
+        window.location.href = "/pages/profile/" + this.id;
+      }).catch(function (error) {
+        console.log(error);
+        alert("Semua kolom harus terisi");
+      });
+    },
+    saveSertifikat: function saveSertifikat() {
+      if (this.isCompleteSertifikat()) {
+        this.enableEditButton();
+        this.cachedSertifikat = JSON.parse(JSON.stringify(this.sertifikat));
+        this.isEditSertifikat = false;
+        console.log(this.sertifikat);
+
+        axios.post("/api/sertifikat/" + this.id, {
+          sertifikat: this.sertifikat,
+          _method: "put"
+        }).then(function (response) {
+          console.log(response);
+          // window.location.href = "/pages/profile/" + response.data.data;
         }).catch(function (error) {
-            console.log(error);
+          console.log(error);
+          // alert('Semua kolom harus terisi');
         });
 
-        this.cachedpegawai = Object.assign({}, this.pegawai);
+        axios.post("/api/lastedited/" + this.id, {
+          id_pengubah: this.idPmo,
+          _method: "put"
+        }).then(function (response) {
+          console.log(response);
+          location.reload();
+        }).catch(function (error) {
+          console.log(error);
+        });
+      } else {
+        alert("Kolom yang wajib harus terisi dengan benar");
+      }
+    },
+    saveDataKinerja: function saveDataKinerja() {
+      if (this.isCompleteDataKinerja()) {
+        //sort
+        this.dataKinerja.sort(function (a, b) {
+          var keyA = a.tahun,
+              keyB = b.tahun;
+          // Compare the 2 dates
+          if (keyA < keyB) return -1;
+          if (keyA > keyB) return 1;
+          if (keyA == keyB) {
+            if (a.semester < b.semester) return -1;else return 1;
+          }
+        });
+
+        this.enableEditButton();
+        this.cachedDataKinerja = JSON.parse(JSON.stringify(this.dataKinerja));
+        this.isEditDataKinerja = false;
+
+        if (this.isShowAllDataKinerja) {
+          this.showAllDataKinerja();
+        } else {
+          this.hideDataKinerja();
+        }
+
+        axios.post("/api/savekinerja/" + this.id, {
+          kinerja: this.dataKinerja,
+          _method: "put"
+        }).then(function (response) {
+          console.log(response);
+          // window.location.href = "/pages/profile/" + this.id;
+        }).catch(function (error) {
+          console.log(error);
+          alert(error);
+          alert("Semua kolom harus terisi");
+        });
+
+        axios.post("/api/lastedited/" + this.id, {
+          id_pengubah: this.idPmo,
+          _method: "put"
+        }).then(function (response) {
+          console.log(response);
+          location.reload();
+          // window.location.href = "/pages/profile/" + this.id;
+        }).catch(function (error) {
+          console.log(error);
+          alert(error);
+          alert("Semua kolom harus terisi");
+        });
+      } else {
+        alert("Kolom yang wajib harus terisi dengan benar");
+      }
+    },
+    saveRekomendasi: function saveRekomendasi() {
+      if (this.isCompleteRekomendasi()) {
+        this.enableEditButton();
+        this.cachedRekomendasiTraining = JSON.parse(JSON.stringify(this.rekomendasiTraining));
+        this.cachedRekomendasiPosisi = JSON.parse(JSON.stringify(this.rekomendasiPosisi));
+        this.isEditRekomendasi = false;
+
+        axios.post("/api/rekomendasi/" + this.id, {
+          training: this.rekomendasiTraining,
+          posisi: this.rekomendasiPosisi,
+          _method: "put"
+        }).then(function (response) {
+          console.log(response);
+          // window.location.href = "/pages/profile/" + this.id;
+        }).catch(function (error) {
+          console.log(error);
+          alert(error);
+          alert("Semua kolom harus terisi");
+        });
+
+        axios.post("/api/lastedited/" + this.id, {
+          id_pengubah: this.idPmo,
+          _method: "put"
+        }).then(function (response) {
+          console.log(response);
+          location.reload();
+          // window.location.href = "/pages/profile/" + this.id;
+        }).catch(function (error) {
+          console.log(error);
+          alert(error);
+          alert("Semua kolom harus terisi");
+        });
+      } else {
+        alert("Kolom yang wajib harus terisi dengan benar");
+      }
     },
 
-    methods: {
-        editProfilPegawai: function editProfilPegawai() {
-            this.isEditProfile = true;
-        },
-        saveProfilPegawai: function saveProfilPegawai() {
-            this.cachedpegawai = Object.assign({}, this.pegawai);
-            this.isEditProfile = false;
 
-            axios.patch('/api/pegawai/4', {
-                name: this.pegawai.nama,
-                email: this.pegawai.email,
-                password: '1234',
-                nip: this.pegawai.nopeg
-            }).then(function (response) {
-                alert(response);
-            }).catch(function (error) {
-                alert(error);
-            });
-        },
-        cancelProfilPegawai: function cancelProfilPegawai() {
-            this.pegawai = Object.assign({}, this.cachedpegawai);
-            this.isEditProfile = false;
-        }
+    /////
+
+    cancelProfilPegawai: function cancelProfilPegawai() {
+      this.enableEditButton();
+      this.pegawai = JSON.parse(JSON.stringify(this.cachedPegawai));
+      this.isEditProfile = false;
+    },
+    cancelDataKepegawaian: function cancelDataKepegawaian() {
+      this.enableEditButton();
+      this.dataKepegawaian = JSON.parse(JSON.stringify(this.cachedDataKepegawaian));
+      this.isEditKepegawaian = false;
+    },
+    cancelRiwayatPegawai: function cancelRiwayatPegawai() {
+      this.enableEditButton();
+      this.riwayatPendidikan = JSON.parse(JSON.stringify(this.cachedRiwayatPendidikan));
+      this.riwayatPekerjaan = JSON.parse(JSON.stringify(this.cachedRiwayatPekerjaan));
+      this.isEditRiwayat = false;
+    },
+    cancelSertifikat: function cancelSertifikat() {
+      this.enableEditButton();
+      this.sertifikat = JSON.parse(JSON.stringify(this.cachedSertifikat));
+      this.isEditSertifikat = false;
+    },
+    cancelDataKinerja: function cancelDataKinerja() {
+      this.enableEditButton();
+      this.dataKinerja = JSON.parse(JSON.stringify(this.cachedDataKinerja));
+      this.isEditDataKinerja = false;
+
+      if (this.isShowAllDataKinerja) {
+        this.showAllDataKinerja();
+      } else {
+        this.hideDataKinerja();
+      }
+    },
+    cancelRekomendasi: function cancelRekomendasi() {
+      this.enableEditButton();
+      this.rekomendasiTraining = JSON.parse(JSON.stringify(this.cachedRekomendasiTraining));
+      this.rekomendasiPosisi = JSON.parse(JSON.stringify(this.cachedRekomendasiPosisi));
+      this.isEditRekomendasi = false;
+    },
+    FileChangeProfile: function FileChangeProfile(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+
+      var reader = new FileReader();
+      var vm = this;
+      reader.onload = function (e) {
+        vm.pegawai.imageProfileUrl = e.target.result;
+      };
+      reader.readAsDataURL(files[0]);
+    },
+    FileChangeSertifikat: function FileChangeSertifikat(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+
+      var idx = e.currentTarget.id;
+
+      var reader = new FileReader();
+      var vm = this;
+      reader.onload = function (e) {
+        vm.sertifikat[idx].nama_file = e.target.result;
+      };
+      reader.readAsDataURL(files[0]);
     }
+  }
 });
 
 /***/ }),
 
-/***/ 251:
+/***/ 262:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card", attrs: { id: "profil-pegawai" } }, [
-    _c("div", { staticClass: "card-header" }, [
-      _vm._v("\n        Profil Pegawai"),
+  return _c(
+    "div",
+    [
       _c(
-        "a",
-        {
-          staticClass: "btn btn-primary float-sm-right",
-          attrs: { href: "#profil-pegawai" },
-          on: { click: _vm.editProfilPegawai }
-        },
-        [_vm._v("Edit")]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "card-container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-3 img-responsive" }, [
-            _c("img", {
-              staticClass: "img-thumbnail",
-              attrs: { id: "img-profile", src: _vm.pegawai.imageProfileUrl }
-            }),
-            _vm._v(" "),
-            _c("br"),
-            _c("br"),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "button" } },
-              [_vm._v("Ganti Foto")]
-            )
-          ]),
+        "div",
+        { staticClass: "card", attrs: { id: "profil-pegawai-specific" } },
+        [
+          _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-1" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-7" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Nama\n                        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.nama) }
-                    })
-                  : _vm._e(),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "card-container" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-1" }),
                 _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      { staticClass: "form-group", attrs: { id: "edit-nama" } },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.nama,
-                              expression: "pegawai.nama"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.nama },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.pegawai, "nama", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Tempat, Tanggal Lahir\n                        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", [
-                      _c("span", {
-                        domProps: {
-                          textContent: _vm._s(_vm.pegawai.tempatLahir)
-                        }
-                      }),
-                      _vm._v(", "),
-                      _c("span", {
-                        domProps: {
-                          textContent: _vm._s(_vm.pegawai.tanggalLahir)
-                        }
+                _c("div", { staticClass: "col-sm-3 img-responsive" }, [
+                  _c("img", {
+                    staticClass: "img-thumbnail",
+                    attrs: {
+                      id: "img-profile",
+                      src: _vm.pegawai.imageProfileUrl
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm.isEditProfile
+                    ? _c("input", {
+                        staticClass: "form-control",
+                        attrs: { type: "file" },
+                        on: { change: _vm.FileChangeProfile }
                       })
-                    ])
-                  : _vm._e(),
+                    : _vm._e()
+                ]),
                 _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c("div", { staticClass: "form-row" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "form-group",
-                          attrs: { id: "edit-tempat-lahir" }
-                        },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.pegawai.tempatLahir,
-                                expression: "pegawai.tempatLahir"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text" },
-                            domProps: { value: _vm.pegawai.tempatLahir },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.pegawai,
-                                  "tempatLahir",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("small", { staticClass: "form-text text-muted" }, [
-                            _vm._v("*Tempat lahir. Wajib diisi")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "form-group",
-                          attrs: { id: "edit-tanggal-lahir" }
-                        },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.pegawai.tanggalLahir,
-                                expression: "pegawai.tanggalLahir"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "date" },
-                            domProps: { value: _vm.pegawai.tanggalLahir },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.pegawai,
-                                  "tanggalLahir",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("small", { staticClass: "form-text text-muted" }, [
-                            _vm._v("*Tanggal lahir. Wajib diisi")
-                          ])
-                        ]
+                _c("div", { staticClass: "col-sm-7" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4 text-right" }, [
+                      _vm._v(
+                        "\n                                Nama\n                            "
                       )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      !_vm.isEditProfile
+                        ? _c("b", {
+                            domProps: { textContent: _vm._s(_vm.pegawai.nama) }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEditProfile
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "form-group",
+                              attrs: { id: "edit-nama" }
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pegawai.nama,
+                                    expression: "pegawai.nama"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.pegawai.nama },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.pegawai,
+                                      "nama",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Wajib diisi")]
+                              )
+                            ]
+                          )
+                        : _vm._e()
                     ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Email\n                        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.email) }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-email" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.email,
-                              expression: "pegawai.email"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "email" },
-                          domProps: { value: _vm.pegawai.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4 text-right" }, [
+                      _vm._v(
+                        "\n                                Tempat, Tanggal Lahir\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      !_vm.isEditProfile
+                        ? _c("b", [
+                            _c("span", {
+                              domProps: {
+                                textContent: _vm._s(_vm.pegawai.tempatLahir)
                               }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "email",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            No. Pegawai\n                        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.nopeg) }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-nopeg" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.nopeg,
-                              expression: "pegawai.nopeg"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.nopeg },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                            }),
+                            _vm._v(", "),
+                            _c("span", {
+                              domProps: {
+                                textContent: _vm._s(_vm.pegawai.tanggalLahir)
                               }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "nopeg",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Unit Kerja\n                        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.unitKerja) }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-unit-kerja" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
+                            })
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEditProfile
+                        ? _c("div", { staticClass: "form-row" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "form-group",
+                                attrs: { id: "edit-tempat-lahir" }
+                              },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.pegawai.tempatLahir,
+                                      expression: "pegawai.tempatLahir"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "text" },
+                                  domProps: { value: _vm.pegawai.tempatLahir },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.pegawai,
+                                        "tempatLahir",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "small",
+                                  { staticClass: "form-text text-muted" },
+                                  [_vm._v("*Tempat lahir. Wajib diisi")]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "form-group",
+                                attrs: { id: "edit-tanggal-lahir" }
+                              },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.pegawai.tanggalLahir,
+                                      expression: "pegawai.tanggalLahir"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "date" },
+                                  domProps: { value: _vm.pegawai.tanggalLahir },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.pegawai,
+                                        "tanggalLahir",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "small",
+                                  { staticClass: "form-text text-muted" },
+                                  [_vm._v("*Tanggal lahir. Wajib diisi")]
+                                )
+                              ]
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4 text-right" }, [
+                      _vm._v(
+                        "\n                                Email\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      !_vm.isEditProfile
+                        ? _c("b", {
+                            domProps: { textContent: _vm._s(_vm.pegawai.email) }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEditProfile
+                        ? _c(
+                            "div",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.unitKerja,
-                              expression: "pegawai.unitKerja"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.unitKerja },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "unitKerja",
-                                $event.target.value
+                              staticClass: "form-group",
+                              attrs: { id: "edit-email" }
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pegawai.email,
+                                    expression: "pegawai.email"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "email" },
+                                domProps: { value: _vm.pegawai.email },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.pegawai,
+                                      "email",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Wajib diisi")]
                               )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Jabatan\n                        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.posisi) }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-posisi" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
+                            ]
+                          )
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4 text-right" }, [
+                      _vm._v(
+                        "\n                                No. Pegawai\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      !_vm.isEditProfile
+                        ? _c("b", {
+                            domProps: { textContent: _vm._s(_vm.pegawai.nopeg) }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEditProfile
+                        ? _c(
+                            "div",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.posisi,
-                              expression: "pegawai.posisi"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.posisi },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "posisi",
-                                $event.target.value
+                              staticClass: "form-group",
+                              attrs: { id: "edit-nopeg" }
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pegawai.nopeg,
+                                    expression: "pegawai.nopeg"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.pegawai.nopeg },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.pegawai,
+                                      "nopeg",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Wajib diisi")]
                               )
+                            ]
+                          )
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4 text-right" }, [
+                      _vm._v(
+                        "\n                                Unit Kerja\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      !_vm.isEditProfile
+                        ? _c("b", {
+                            domProps: {
+                              textContent: _vm._s(_vm.pegawai.unitKerja.text)
                             }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Kompetensi\n                        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.kompetensi) }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-kompetensi" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEditProfile
+                        ? _c(
+                            "div",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.kompetensi,
-                              expression: "pegawai.kompetensi"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.kompetensi },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "kompetensi",
-                                $event.target.value
+                              staticClass: "form-group",
+                              attrs: { id: "edit-unit-kerja" }
+                            },
+                            [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.pegawai.unitKerja.id,
+                                      expression: "pegawai.unitKerja.id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.pegawai.unitKerja,
+                                        "id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.unitKerja, function(uk) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: uk.id_unit_kerja } },
+                                    [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(uk.nama_unit_kerja) +
+                                          "\n                                        "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Wajib diisi")]
                               )
+                            ]
+                          )
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4 text-right" }, [
+                      _vm._v(
+                        "\n                                Jabatan\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      !_vm.isEditProfile
+                        ? _c("b", {
+                            domProps: {
+                              textContent: _vm._s(_vm.pegawai.posisi.text)
                             }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-3 text-right" }, [
-                _vm._v(
-                  "\n                            Tahun Masuk\n                        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-9" }, [
-                !_vm.isEditProfile
-                  ? _c("b", {
-                      domProps: { textContent: _vm._s(_vm.pegawai.tahunMasuk) }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.isEditProfile
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        attrs: { id: "edit-tahun-masuk" }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEditProfile
+                        ? _c(
+                            "div",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pegawai.tahunMasuk,
-                              expression: "pegawai.tahunMasuk"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.pegawai.tahunMasuk },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pegawai,
-                                "tahunMasuk",
-                                $event.target.value
+                              staticClass: "form-group",
+                              attrs: { id: "edit-posisi" }
+                            },
+                            [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.pegawai.posisi.id,
+                                      expression: "pegawai.posisi.id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.pegawai.posisi,
+                                        "id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.posisi, function(pos) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: pos.id_posisi } },
+                                    [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(pos.nama_posisi) +
+                                          "\n                                        "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Wajib diisi")]
                               )
+                            ]
+                          )
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4 text-right" }, [
+                      _vm._v(
+                        "\n                                Kompetensi\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      !_vm.isEditProfile
+                        ? _c("b", {
+                            domProps: {
+                              textContent: _vm._s(_vm.pegawai.kompetensi.text)
                             }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "form-text text-muted" }, [
-                          _vm._v("*Wajib diisi")
-                        ])
-                      ]
-                    )
-                  : _vm._e()
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEditProfile
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "form-group",
+                              attrs: { id: "edit-kompetensi" }
+                            },
+                            [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.pegawai.kompetensi.id,
+                                      expression: "pegawai.kompetensi.id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.pegawai.kompetensi,
+                                        "id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.kelompokKompetensi, function(kk) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      domProps: {
+                                        value: kk.id_kelompok_kompetensi
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(kk.nama_kelompok_kompetensi) +
+                                          "\n                                        "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Wajib diisi")]
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4 text-right" }, [
+                      _vm._v(
+                        "\n                                Tahun Mulai Jabatan Saat Ini\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      !_vm.isEditProfile
+                        ? _c("b", {
+                            domProps: {
+                              textContent: _vm._s(_vm.pegawai.tahunMasuk)
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEditProfile
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "form-group",
+                              attrs: { id: "edit-tahun-masuk" }
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pegawai.tahunMasuk,
+                                    expression: "pegawai.tahunMasuk"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.pegawai.tahunMasuk },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.pegawai,
+                                      "tahunMasuk",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Edit pada data kepegawaian di bawah")]
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ])
+                  ])
+                ])
               ])
             ])
+          ]),
+          _vm._v(" "),
+          _vm.isEditProfile
+            ? _c("div", { staticClass: "card-footer text-muted" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success float-sm-right btn-simpan",
+                    attrs: { href: "#profil-pegawai-specific" },
+                    on: { click: _vm.saveProfilPegawai }
+                  },
+                  [
+                    _vm._v("\n                Simpan "),
+                    _c("i", { staticClass: "fas fa-check" })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-danger float-sm-right",
+                    attrs: { href: "#profil-pegawai-specific" },
+                    on: { click: _vm.cancelProfilPegawai }
+                  },
+                  [
+                    _vm._v("\n                Batal "),
+                    _c("i", { staticClass: "fas fa-times" })
+                  ]
+                )
+              ])
+            : _vm._e()
+        ]
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "data-kepegawaian" } }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _vm.dataKepegawaian.length === 0
+              ? _c("div", { staticClass: "no-data-kepegawaian" }, [
+                  !_vm.isEditKepegawaian
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditKepegawaian
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addDataKepegawaian }
+                        },
+                        [
+                          _vm._v("\n                        Tambah "),
+                          _c("i", { staticClass: "fas fa-plus" })
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.dataKepegawaian.length !== 0
+              ? _c("div", { staticClass: "data-kepegawaian" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _vm._l(_vm.dataKepegawaian, function(dk) {
+                        return _c("tbody", [
+                          !_vm.isEditKepegawaian
+                            ? _c("tr", [
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.unitKerja.find(function(x) {
+                                        return (
+                                          x.id_unit_kerja == dk.id_unit_kerja
+                                        )
+                                      }).nama_unit_kerja
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.posisi.find(function(x) {
+                                        return x.id_posisi == dk.id_posisi
+                                      }).nama_posisi
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(dk.tahun_masuk)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(dk.tahun_keluar)
+                                  }
+                                })
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.isEditKepegawaian
+                            ? _c("tr", [
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.id_unit_kerja,
+                                            expression: "dk.id_unit_kerja"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              dk,
+                                              "id_unit_kerja",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      _vm._l(_vm.unitKerja, function(uk) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            domProps: {
+                                              value: uk.id_unit_kerja
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(uk.nama_unit_kerja) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.id_posisi,
+                                            expression: "dk.id_posisi"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              dk,
+                                              "id_posisi",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      _vm._l(_vm.posisi, function(pos) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            domProps: { value: pos.id_posisi }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(pos.nama_posisi) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.tahun_masuk,
+                                          expression: "dk.tahun_masuk"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.tahun_masuk },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "tahun_masuk",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.tahun_keluar,
+                                          expression: "dk.tahun_keluar"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.tahun_keluar },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "tahun_keluar",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [
+                                        _vm._v(
+                                          '*Isi dengan "-" jika status belum selesai'
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: {
+                                        id: _vm.dataKepegawaian.indexOf(dk),
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.delDataKepegawaian($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Hapus "
+                                      ),
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.isEditKepegawaian
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary float-sm-left",
+                              on: { click: _vm.addDataKepegawaian }
+                            },
+                            [
+                              _vm._v("\n                            Tambah "),
+                              _c("i", { staticClass: "fas fa-plus" })
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("br")
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.isEditKepegawaian
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#data-kepegawaian" },
+                  on: { click: _vm.saveDataKepegawaian }
+                },
+                [
+                  _vm._v("\n                Simpan "),
+                  _c("i", { staticClass: "fas fa-check" })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#data-kepegawaian" },
+                  on: { click: _vm.cancelDataKepegawaian }
+                },
+                [
+                  _vm._v("\n                Batal "),
+                  _c("i", { staticClass: "fas fa-times" })
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "riwayat-pegawai" } }, [
+        _vm._m(3),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _c("h5", [_vm._v("Riwayat Pendidikan")]),
+            _vm._v(" "),
+            _vm.riwayatPendidikan.length === 0
+              ? _c("div", { staticClass: "no-riwayat-pendidikan" }, [
+                  !_vm.isEditRiwayat
+                    ? _c("div", [
+                        _c("hr"),
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditRiwayat
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addRiwayatPendidikan }
+                        },
+                        [
+                          _vm._v("\n                        Tambah "),
+                          _c("i", { staticClass: "fas fa-plus" })
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.riwayatPendidikan.length !== 0
+              ? _c("div", { staticClass: "riwayat-pendidikan" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _vm._l(_vm.riwayatPendidikan, function(rp) {
+                        return _c("tbody", [
+                          !_vm.isEditRiwayat
+                            ? _c("tr", [
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(rp.strata) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.nama_institusi)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(rp.jurusan) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.tahun_masuk)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.tahun_keluar)
+                                  }
+                                })
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.isEditRiwayat
+                            ? _c("tr", [
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.strata,
+                                          expression: "rp.strata"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.strata },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "strata",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.nama_institusi,
+                                          expression: "rp.nama_institusi"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.nama_institusi },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "nama_institusi",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.jurusan,
+                                          expression: "rp.jurusan"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.jurusan },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "jurusan",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.tahun_masuk,
+                                          expression: "rp.tahun_masuk"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.tahun_masuk },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "tahun_masuk",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.tahun_keluar,
+                                          expression: "rp.tahun_keluar"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.tahun_keluar },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "tahun_keluar",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [
+                                        _vm._v(
+                                          '*Isi dengan "-" jika status belum selesai'
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: {
+                                        id: _vm.riwayatPendidikan.indexOf(rp),
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.delRiwayatPendidikan($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Hapus "
+                                      ),
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.isEditRiwayat
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary float-sm-left",
+                              on: { click: _vm.addRiwayatPendidikan }
+                            },
+                            [
+                              _vm._v("\n                            Tambah "),
+                              _c("i", { staticClass: "fas fa-plus" })
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
+            _c("h5", [_vm._v("Riwayat Pekerjaan (di luar ITB)")]),
+            _vm._v(" "),
+            _vm.riwayatPekerjaan.length === 0
+              ? _c("div", { staticClass: "no-riwayat-pekerjaan" }, [
+                  !_vm.isEditRiwayat
+                    ? _c("div", [
+                        _c("hr"),
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditRiwayat
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addRiwayatPekerjaan }
+                        },
+                        [
+                          _vm._v("\n                        Tambah "),
+                          _c("i", { staticClass: "fas fa-plus" })
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.riwayatPekerjaan.length !== 0
+              ? _c("div", { staticClass: "riwayat-pekerjaan" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _vm._l(_vm.riwayatPekerjaan, function(rp) {
+                        return _c("tbody", [
+                          !_vm.isEditRiwayat
+                            ? _c("tr", [
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.nama_institusi)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(rp.posisi) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.tahun_masuk)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rp.tahun_keluar)
+                                  }
+                                })
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.isEditRiwayat
+                            ? _c("tr", [
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.nama_institusi,
+                                          expression: "rp.nama_institusi"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.nama_institusi },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "nama_institusi",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.posisi,
+                                          expression: "rp.posisi"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.posisi },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "posisi",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.tahun_masuk,
+                                          expression: "rp.tahun_masuk"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.tahun_masuk },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "tahun_masuk",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: rp.tahun_keluar,
+                                          expression: "rp.tahun_keluar"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: rp.tahun_keluar },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            rp,
+                                            "tahun_keluar",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [
+                                        _vm._v(
+                                          '*Isi dengan "-" jika status belum selesai'
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: {
+                                        id: _vm.riwayatPekerjaan.indexOf(rp),
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.delRiwayatPekerjaan($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Hapus "
+                                      ),
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.isEditRiwayat
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary float-sm-left",
+                              on: { click: _vm.addRiwayatPekerjaan }
+                            },
+                            [
+                              _vm._v("\n                            Tambah "),
+                              _c("i", { staticClass: "fas fa-plus" })
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.isEditRiwayat
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#riwayat-pegawai" },
+                  on: { click: _vm.saveRiwayatPegawai }
+                },
+                [
+                  _vm._v("\n                Simpan "),
+                  _c("i", { staticClass: "fas fa-check" })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#riwayat-pegawai" },
+                  on: { click: _vm.cancelRiwayatPegawai }
+                },
+                [
+                  _vm._v("\n                Batal "),
+                  _c("i", { staticClass: "fas fa-times" })
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "sertificate" } }, [
+        _c("h5", { staticClass: "card-header" }, [
+          _c("i", { staticClass: "fas fa-file-alt" }),
+          _vm._v("\n            Sertifikat"),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary float-sm-right",
+              attrs: { disabled: _vm.disableEdit },
+              on: { click: _vm.editSertifikat }
+            },
+            [
+              _c("i", { staticClass: "fas fa-edit" }),
+              _vm._v(" Edit \n                ")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _vm.sertifikat.length === 0
+              ? _c("div", { staticClass: "no-sertificate" }, [
+                  !_vm.isEditSertifikat
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditSertifikat
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addSertifikat }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-plus" }),
+                          _vm._v(" Tambah \n                    ")
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.sertifikat.length !== 0
+              ? _c("div", { staticClass: "sertificate" }, [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table",
+                      staticStyle: { width: "100%" },
+                      attrs: { align: "left" }
+                    },
+                    [
+                      _vm._l(_vm.sertifikat, function(dk) {
+                        return _c("tbody", [
+                          !_vm.isEditSertifikat
+                            ? _c("div", [
+                                _vm._m(6, true),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", { attrs: { rowspan: "4" } }, [
+                                    _c("img", {
+                                      staticClass: "img-thumbnail",
+                                      attrs: {
+                                        id: "img-sertifikat-1",
+                                        src: dk.nama_file,
+                                        width: "200"
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Judul")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", {
+                                    domProps: { textContent: _vm._s(dk.judul) }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Lembaga")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(dk.lembaga)
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Tahun Diterbitkan")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(dk.tahun_diterbitkan)
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Catatan")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(dk.catatan)
+                                    }
+                                  })
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.isEditSertifikat
+                            ? _c("div", [
+                                _c("tr", [
+                                  _c("td", { attrs: { rowspan: "4" } }, [
+                                    _c("div", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          attrs: {
+                                            id: _vm.sertifikat.indexOf(dk),
+                                            type: "button"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.delSertifikat($event)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fas fa-trash-alt"
+                                          }),
+                                          _vm._v(
+                                            " Hapus \n                                    "
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { attrs: { rowspan: "4" } }, [
+                                    _c("img", {
+                                      staticClass: "img-thumbnail",
+                                      attrs: {
+                                        id: "img-sertifikat-1",
+                                        src: dk.nama_file,
+                                        width: "200"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("br"),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        attrs: {
+                                          id: _vm.sertifikat.indexOf(dk)
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.browseSertifikatImage($event)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-upload"
+                                        }),
+                                        _vm._v(
+                                          "\n                                    Upload Gambar\n                                "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      staticClass: "form-control",
+                                      class:
+                                        "sert" + _vm.sertifikat.indexOf(dk),
+                                      staticStyle: { display: "none" },
+                                      attrs: {
+                                        type: "file",
+                                        id: _vm.sertifikat.indexOf(dk)
+                                      },
+                                      on: { change: _vm.FileChangeSertifikat }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Judul")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.judul,
+                                            expression: "dk.judul"
+                                          }
+                                        ],
+                                        staticClass: "form-control text-center",
+                                        attrs: { type: "text" },
+                                        domProps: { value: dk.judul },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              dk,
+                                              "judul",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "form-text text-muted" },
+                                        [_vm._v("*Wajib diisi")]
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Lembaga")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.lembaga,
+                                            expression: "dk.lembaga"
+                                          }
+                                        ],
+                                        staticClass: "form-control text-center",
+                                        attrs: { type: "text" },
+                                        domProps: { value: dk.lembaga },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              dk,
+                                              "lembaga",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "form-text text-muted" },
+                                        [_vm._v("*Wajib diisi")]
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Tahun Diterbitkan")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.tahun_diterbitkan,
+                                            expression: "dk.tahun_diterbitkan"
+                                          }
+                                        ],
+                                        staticClass: "form-control text-center",
+                                        attrs: { type: "text" },
+                                        domProps: {
+                                          value: dk.tahun_diterbitkan
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              dk,
+                                              "tahun_diterbitkan",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "form-text text-muted" },
+                                        [_vm._v("*Wajib diisi")]
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("th", { attrs: { scope: "col" } }, [
+                                    _vm._v("Catatan")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: dk.catatan,
+                                            expression: "dk.catatan"
+                                          }
+                                        ],
+                                        staticClass: "form-control text-center",
+                                        attrs: { type: "text" },
+                                        domProps: { value: dk.catatan },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              dk,
+                                              "catatan",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      })
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.isEditSertifikat
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary float-sm-left",
+                              on: { click: _vm.addSertifikat }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-plus" }),
+                              _vm._v(" Tambah \n                        ")
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.isEditSertifikat
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#sertificate" },
+                  on: { click: _vm.saveSertifikat }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-check" }),
+                  _vm._v(" Simpan \n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#sertificate" },
+                  on: { click: _vm.cancelSertifikat }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-times" }),
+                  _vm._v(" Batal \n            ")
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "data-kinerja" } }, [
+        _c("h5", { staticClass: "card-header" }, [
+          _c("i", { staticClass: "fas fa-clipboard-check" }),
+          _vm._v("\n            Hasil Kinerja"),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary float-sm-right",
+              attrs: { disabled: _vm.disableEdit },
+              on: { click: _vm.editDataKinerja }
+            },
+            [
+              _c("i", { staticClass: "fas fa-edit" }),
+              _vm._v(" Edit \n                ")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _vm.dataKinerja.length === 0
+              ? _c("div", { staticClass: "no-data-kinerja" }, [
+                  !_vm.isEditDataKinerja
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                        Belum ditambahkan.\n                        "
+                        ),
+                        _c("br")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditDataKinerja
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-sm-left",
+                          on: { click: _vm.addDataKinerja }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-plus" }),
+                          _vm._v(" Tambah \n                    ")
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.dataKinerja.length !== 0
+              ? _c("div", { staticClass: "data-kinerja" }, [
+                  _c("table", { staticClass: "table" }, [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      [
+                        _vm._l(_vm.dataKinerjaShow, function(dks) {
+                          return !_vm.isEditDataKinerja
+                            ? _c("tr", [
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(dks.tahun) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(dks.semester)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(dks.nilai) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(dks.catatan) }
+                                })
+                              ])
+                            : _vm._e()
+                        }),
+                        _vm._v(" "),
+                        _vm._l(_vm.dataKinerja, function(dk) {
+                          return _vm.isEditDataKinerja
+                            ? _c("tr", [
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.tahun,
+                                          expression: "dk.tahun"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.tahun },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "tahun",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.semester,
+                                          expression: "dk.semester"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.semester },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "semester",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.nilai,
+                                          expression: "dk.nilai"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.nilai },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "nilai",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: dk.catatan,
+                                          expression: "dk.catatan"
+                                        }
+                                      ],
+                                      staticClass: "form-control text-center",
+                                      attrs: { type: "text" },
+                                      domProps: { value: dk.catatan },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            dk,
+                                            "catatan",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "small",
+                                      { staticClass: "form-text text-muted" },
+                                      [_vm._v("*Wajib diisi")]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: {
+                                        id: _vm.dataKinerja.indexOf(dk),
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.delDataKinerja($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      }),
+                                      _vm._v(
+                                        " Hapus \n                                "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    !_vm.isEditDataKinerja && !_vm.isShowAllDataKinerja
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary float-sm-left",
+                            attrs: { href: "#data-kinerja" },
+                            on: { click: _vm.showAllDataKinerja }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-eye" }),
+                            _vm._v(
+                              " Tamplikan semua \n                        "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.isEditDataKinerja && _vm.isShowAllDataKinerja
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-danger float-sm-left",
+                            attrs: { href: "#data-kinerja" },
+                            on: { click: _vm.hideDataKinerja }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-eye-slash" }),
+                            _vm._v(
+                              " Sembunyikan sebagian \n                        "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditDataKinerja
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary float-sm-left",
+                            on: { click: _vm.addDataKinerja }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-plus" }),
+                            _vm._v(" Tambah \n                        ")
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.isEditDataKinerja
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#data-kinerja" },
+                  on: { click: _vm.saveDataKinerja }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-check" }),
+                  _vm._v(" Simpan \n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#data-kinerja" },
+                  on: { click: _vm.cancelDataKinerja }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-times" }),
+                  _vm._v(" Batal \n            ")
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "data-kompetensi" } }, [
+        _c("h5", { staticClass: "card-header" }, [
+          _c("i", { staticClass: "fas fa-clipboard-list" }),
+          _vm._v("\n            Hasil Kompetensi"),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary float-sm-right",
+              attrs: { disabled: _vm.disableEdit },
+              on: { click: _vm.editKommpetensi }
+            },
+            [
+              _c("i", { staticClass: "fas fa-edit" }),
+              _vm._v(" Edit \n                ")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary float-sm-left",
+                attrs: { disabled: _vm.disableEdit },
+                on: { click: _vm.downloadKompetensi }
+              },
+              [
+                _c("i", { staticClass: "fas fa-download" }),
+                _vm._v(" Download \n                ")
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary float-sm-left",
+                attrs: { disabled: _vm.disableEdit },
+                on: { click: _vm.downloadKompetensi }
+              },
+              [
+                _c("i", { staticClass: "fas fa-download" }),
+                _vm._v(" Download \n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _c("br"),
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
+            _c("h5", [_vm._v("Petunjuk:")]),
+            _vm._v(" "),
+            _vm._m(8),
+            _vm._v(" "),
+            _vm._m(9)
           ])
         ])
-      ])
-    ]),
-    _vm._v(" "),
-    _vm.isEditProfile
-      ? _c("div", { staticClass: "card-footer text-muted" }, [
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "rekomendasi" } }, [
+        _c("h5", { staticClass: "card-header" }, [
+          _c("i", { staticClass: "fas fa-info-circle" }),
+          _vm._v("\n            Rekomendasi"),
           _c(
-            "a",
+            "button",
             {
-              staticClass: "btn btn-success float-sm-right btn-simpan",
-              attrs: { href: "#profil-pegawai" },
-              on: { click: _vm.saveProfilPegawai }
+              staticClass: "btn btn-primary float-sm-right",
+              attrs: { disabled: _vm.disableEdit },
+              on: { click: _vm.editRekomendasi }
             },
-            [_vm._v("Simpan")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-danger float-sm-right",
-              attrs: { href: "#profil-pegawai" },
-              on: { click: _vm.cancelProfilPegawai }
-            },
-            [_vm._v("Batal")]
+            [
+              _c("i", { staticClass: "fas fa-edit" }),
+              _vm._v(" Edit \n                ")
+            ]
           )
-        ])
-      : _vm._e()
-  ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "div",
+            { staticClass: "container" },
+            [
+              _c("h5", [_vm._v("Rekomendasi Training")]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _vm.rekomendasiTraining.length === 0
+                ? _c("div", { staticClass: "no-rekomendasi-posisi" }, [
+                    !_vm.isEditRekomendasi
+                      ? _c("div", [
+                          _vm._v(
+                            "\n                        Belum ditambahkan.\n                        "
+                          ),
+                          _c("br")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditRekomendasi
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary float-sm-left",
+                            on: { click: _vm.addRekomendasiTraining }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-plus" }),
+                            _vm._v(" Tambah \n                    ")
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.rekomendasiTraining, function(rt) {
+                return _vm.rekomendasiTraining.length !== 0
+                  ? _c("div", { staticClass: "rekomendasi-training" }, [
+                      !_vm.isEditRekomendasi
+                        ? _c("ul", [
+                            _c("li", {
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.trainingList.find(function(x) {
+                                    return x.id_training == rt.id_training
+                                  }).nama_training
+                                )
+                              }
+                            })
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEditRekomendasi
+                        ? _c("div", { staticClass: "form-group row" }, [
+                            _c("div", { staticClass: "col-sm-10" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: rt.id_training,
+                                      expression: "rt.id_training"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        rt,
+                                        "id_training",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.trainingList, function(tl) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: tl.id_training } },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(tl.nama_training) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "form-text text-muted" },
+                                [_vm._v("*Wajib diisi")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-1" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: {
+                                    id: _vm.rekomendasiTraining.indexOf(rt),
+                                    type: "button"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.delRekomendasiTraining($event)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fas fa-trash-alt" }),
+                                  _vm._v(
+                                    " Hapus \n                            "
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm.isEditRekomendasi && _vm.rekomendasiTraining.length !== 0
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary float-sm-left",
+                      on: { click: _vm.addRekomendasiTraining }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-plus" }),
+                      _vm._v(" Tambah \n                ")
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("br"),
+              _c("br"),
+              _c("br"),
+              _vm._v(" "),
+              _c("h5", [_vm._v("Rekomendasi Lain-lain")]),
+              _vm._v(" "),
+              _vm.rekomendasiPosisi.length === 0
+                ? _c("div", { staticClass: "no-rekomendasi-posisi" }, [
+                    !_vm.isEditRekomendasi
+                      ? _c("div", [
+                          _c("hr"),
+                          _vm._v(
+                            "\n                        Belum ditambahkan.\n                        "
+                          ),
+                          _c("br")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditRekomendasi
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary float-sm-left",
+                            on: { click: _vm.addRekomendasiPosisi }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-plus" }),
+                            _vm._v(" Tambah \n                    ")
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.rekomendasiPosisi.length !== 0
+                ? _c("div", { staticClass: "rekomendasi-posisi" }, [
+                    _c(
+                      "table",
+                      { staticClass: "table" },
+                      [
+                        _vm._m(10),
+                        _vm._v(" "),
+                        _vm._l(_vm.rekomendasiPosisi, function(rp) {
+                          return _c("tbody", [
+                            !_vm.isEditRekomendasi
+                              ? _c("tr", [
+                                  _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.unitKerja.find(function(x) {
+                                          return (
+                                            x.id_unit_kerja == rp.id_unit_kerja
+                                          )
+                                        }).nama_unit_kerja
+                                      )
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.posisi.find(function(x) {
+                                          return x.id_posisi == rp.id_posisi
+                                        }).nama_posisi
+                                      )
+                                    }
+                                  })
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.isEditRekomendasi
+                              ? _c("tr", [
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: rp.id_unit_kerja,
+                                              expression: "rp.id_unit_kerja"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.$set(
+                                                rp,
+                                                "id_unit_kerja",
+                                                $event.target.multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              )
+                                            }
+                                          }
+                                        },
+                                        _vm._l(_vm.unitKerja, function(uk) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              domProps: {
+                                                value: uk.id_unit_kerja
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(uk.nama_unit_kerja) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        })
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "form-text text-muted" },
+                                        [_vm._v("*Wajib diisi")]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: rp.id_posisi,
+                                              expression: "rp.id_posisi"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.$set(
+                                                rp,
+                                                "id_posisi",
+                                                $event.target.multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              )
+                                            }
+                                          }
+                                        },
+                                        _vm._l(_vm.posisi, function(pos) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              domProps: { value: pos.id_posisi }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(pos.nama_posisi) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        })
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "form-text text-muted" },
+                                        [_vm._v("*Wajib diisi")]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        attrs: {
+                                          id: _vm.rekomendasiPosisi.indexOf(rp),
+                                          type: "button"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.delRekomendasiPosisi($event)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-trash-alt"
+                                        }),
+                                        _vm._v(
+                                          " Hapus \n                                "
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e()
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _vm.isEditRekomendasi
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary float-sm-left",
+                                on: { click: _vm.addRekomendasiPosisi }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-plus" }),
+                                _vm._v(" Tambah \n                        ")
+                              ]
+                            )
+                          : _vm._e()
+                      ],
+                      2
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("br")
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm.isEditRekomendasi
+          ? _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success float-sm-right btn-simpan",
+                  attrs: { href: "#rekomendasi" },
+                  on: { click: _vm.saveRekomendasi }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-check" }),
+                  _vm._v(" Simpan \n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger float-sm-right",
+                  attrs: { href: "#rekomendasi" },
+                  on: { click: _vm.cancelRekomendasi }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-times" }),
+                  _vm._v(" Batal \n            ")
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("common-footer")
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-user-circle" }),
+      _vm._v("\n            Profil Pegawai\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-table" }),
+      _vm._v("\n            Data Kepegawaian\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Unit Kerja")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jabatan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Mulai")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Selesai")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-briefcase" }),
+      _vm._v("\n            Riwayat Pendidikan dan Pekerjaan\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tingkat Pendidikan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nama Institusi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jurusan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Masuk")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Keluar")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nama Institusi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jabatan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Masuk")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun Keluar")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("colgroup", [
+      _c("col", { attrs: { width: "35%" } }),
+      _vm._v(" "),
+      _c("col", { attrs: { width: "15%" } }),
+      _vm._v(" "),
+      _c("col", { attrs: { width: "50%" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tahun")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Semester")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nilai")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Catatan")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", [
+      _c("li", [_vm._v("Buka berkas dengan Microsoft Excel")]),
+      _vm._v(" "),
+      _c("li", [
+        _vm._v('Jika ada, tekan tombol "'),
+        _c("i", [_vm._v("Enable Editing")]),
+        _vm._v('" pada '),
+        _c("i", [_vm._v("bar")]),
+        _vm._v(" kuning di bagian atas")
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _vm._v("Jika ingin disimpan sebagai PDF: \n                        "),
+        _c("ul", [
+          _c("li", [
+            _vm._v("Pilih "),
+            _c("b", [_c("i", [_vm._v("File → Save As")])])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v("Pilih format PDF pada "),
+            _c("i", [_vm._v("dropdown menu")]),
+            _vm._v(" pemilihan format")
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v("Tekan tombol "),
+            _c("b", [_c("i", [_vm._v("Save")])]),
+            _vm._v(" untuk menyimpannya sebagai PDF")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _vm._v("Jika ingin dicetak: \n                        "),
+        _c("ul", [
+          _c("li", [
+            _vm._v("Pilih "),
+            _c("b", [_c("i", [_vm._v("File → Print")])])
+          ]),
+          _vm._v(" "),
+          _c("li", [_vm._v("Masukan pengaturan pencetakan yang sesuai")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _vm._v(
+        "Selain dengan menggunakan Microsoft Excel, berkas Excel yang diunduh juga dapat dikonversi ke format PDF dengan layanan Web seperti "
+      ),
+      _c("a", { attrs: { href: "https://smallpdf.com/excel-to-pdf" } }, [
+        _vm._v("SmallPDF")
+      ]),
+      _vm._v(" atau "),
+      _c("a", { attrs: { href: "https://www.ilovepdf.com/excel_to_pdf" } }, [
+        _vm._v("iLovePDF")
+      ]),
+      _vm._v(
+        ". Ikuti petunjuk yang tertera pada situs-situs tersebut untuk mengkonversi."
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Unit Kerja")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jabatan")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a4d53326", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-47f115bf", module.exports)
   }
 }
+
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
 
 /***/ }),
 
 /***/ 30:
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(63)
+}
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(65)
+/* template */
+var __vue_template__ = __webpack_require__(66)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/CommonFooter.vue"
 
-window._ = __webpack_require__(31);
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0c805e1d", Component.options)
+  } else {
+    hotAPI.reload("data-v-0c805e1d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 31:
+/***/ (function(module, exports, __webpack_require__) {
+
+
+window._ = __webpack_require__(32);
 window.Popper = __webpack_require__(13).default;
 
 /**
@@ -15103,7 +23801,7 @@ window.Popper = __webpack_require__(13).default;
 try {
   window.$ = window.jQuery = __webpack_require__(14);
 
-  __webpack_require__(32);
+  __webpack_require__(33);
 } catch (e) {}
 
 /**
@@ -15112,7 +23810,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(10);
+window.axios = __webpack_require__(11);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -15149,7 +23847,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 31:
+/***/ 32:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -32251,11 +40949,11 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(9)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(10)(module)))
 
 /***/ }),
 
-/***/ 32:
+/***/ 33:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -36187,7 +44885,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 33:
+/***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36195,8 +44893,8 @@ if (token) {
 
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(15);
-var Axios = __webpack_require__(35);
-var defaults = __webpack_require__(4);
+var Axios = __webpack_require__(36);
+var defaults = __webpack_require__(7);
 
 /**
  * Create an instance of Axios
@@ -36230,14 +44928,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(20);
-axios.CancelToken = __webpack_require__(49);
+axios.CancelToken = __webpack_require__(50);
 axios.isCancel = __webpack_require__(19);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(50);
+axios.spread = __webpack_require__(51);
 
 module.exports = axios;
 
@@ -36247,7 +44945,7 @@ module.exports.default = axios;
 
 /***/ }),
 
-/***/ 34:
+/***/ 35:
 /***/ (function(module, exports) {
 
 /*!
@@ -36275,16 +44973,16 @@ function isSlowBuffer (obj) {
 
 /***/ }),
 
-/***/ 35:
+/***/ 36:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(7);
 var utils = __webpack_require__(1);
-var InterceptorManager = __webpack_require__(44);
-var dispatchRequest = __webpack_require__(45);
+var InterceptorManager = __webpack_require__(45);
+var dispatchRequest = __webpack_require__(46);
 
 /**
  * Create a new instance of Axios
@@ -36362,7 +45060,7 @@ module.exports = Axios;
 
 /***/ }),
 
-/***/ 36:
+/***/ 37:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36382,7 +45080,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 /***/ }),
 
-/***/ 37:
+/***/ 38:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36416,7 +45114,7 @@ module.exports = function settle(resolve, reject, response) {
 
 /***/ }),
 
-/***/ 38:
+/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36445,7 +45143,117 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 /***/ }),
 
-/***/ 39:
+/***/ 4:
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ 40:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36519,112 +45327,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 /***/ }),
 
-/***/ 4:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(1);
-var normalizeHeaderName = __webpack_require__(36);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(17);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(17);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  /**
-   * A timeout in milliseconds to abort a request. If set to 0 (default) a
-   * timeout is not created.
-   */
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
-
-/***/ }),
-
-/***/ 40:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36685,7 +45388,7 @@ module.exports = function parseHeaders(headers) {
 
 /***/ }),
 
-/***/ 41:
+/***/ 42:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36761,7 +45464,7 @@ module.exports = (
 
 /***/ }),
 
-/***/ 42:
+/***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36805,7 +45508,7 @@ module.exports = btoa;
 
 /***/ }),
 
-/***/ 43:
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36866,7 +45569,7 @@ module.exports = (
 
 /***/ }),
 
-/***/ 44:
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36926,18 +45629,18 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
-/***/ 45:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(1);
-var transformData = __webpack_require__(46);
+var transformData = __webpack_require__(47);
 var isCancel = __webpack_require__(19);
-var defaults = __webpack_require__(4);
-var isAbsoluteURL = __webpack_require__(47);
-var combineURLs = __webpack_require__(48);
+var defaults = __webpack_require__(7);
+var isAbsoluteURL = __webpack_require__(48);
+var combineURLs = __webpack_require__(49);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -37020,7 +45723,7 @@ module.exports = function dispatchRequest(config) {
 
 /***/ }),
 
-/***/ 46:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37048,7 +45751,7 @@ module.exports = function transformData(data, headers, fns) {
 
 /***/ }),
 
-/***/ 47:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37070,7 +45773,7 @@ module.exports = function isAbsoluteURL(url) {
 
 /***/ }),
 
-/***/ 48:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37092,7 +45795,236 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 /***/ }),
 
-/***/ 49:
+/***/ 5:
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(62)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+
+/***/ 50:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37157,7 +46089,7 @@ module.exports = CancelToken;
 
 /***/ }),
 
-/***/ 50:
+/***/ 51:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37192,7 +46124,7 @@ module.exports = function spread(callback) {
 
 /***/ }),
 
-/***/ 51:
+/***/ 52:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48155,11 +57087,11 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(52).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(53).setImmediate))
 
 /***/ }),
 
-/***/ 52:
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
@@ -48212,7 +57144,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(53);
+__webpack_require__(54);
 // On some exotic environments, it's not clear which object `setimmeidate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -48227,7 +57159,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ 53:
+/***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -48421,7 +57353,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ 61:
+/***/ 62:
 /***/ (function(module, exports) {
 
 /**
@@ -48455,225 +57387,204 @@ module.exports = function listToStyles (parentId, list) {
 
 /***/ }),
 
+/***/ 63:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(64);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("5911f927", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c805e1d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CommonFooter.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c805e1d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CommonFooter.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 64:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 65:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "CommonFooter"
+});
+
+/***/ }),
+
+/***/ 66:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "footer text-center m-5" }, [
+      _c("div", { staticClass: "container" }, [
+        _vm._v(
+          "\n        Created by Alkhwarizm for UPT PMO ITB. Supervised by Fanda. © 2018\n    "
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0c805e1d", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ 7:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
 
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
+var utils = __webpack_require__(1);
+var normalizeHeaderName = __webpack_require__(37);
 
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
 };
 
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
 }
 
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(17);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(17);
+  }
+  return adapter;
 }
 
+var defaults = {
+  adapter: getDefaultAdapter(),
 
-/***/ }),
-
-/***/ 8:
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
     }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
     }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
   }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
 };
 
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ })
 

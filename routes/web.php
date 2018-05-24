@@ -17,10 +17,20 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/pages', 'PagesController@landing');
 
-Route::get('/pages/profile', 'ProfileController@index');
+Route::get('/pages/profile', 'PagesController@pegawai');
+
+Route::get('/pages/profile/{id}', 'PagesController@pegawaiSpecific');
 
 Route::get('/pages/pmo', 'PagesController@pmo');
 
 Route::get('/pages/admin', 'PagesController@admin');
 
 Route::get('/pages/admin/adduser', 'PagesController@addUser');
+
+Route::get('/pages/pimage/{filename}', 'PhotoController@profile');
+
+Route::get('/pages/simage/{filename}', 'PhotoController@sertifikat');
+
+Route::get('/pages/profile/pimage/{filename}', 'PhotoController@profile');
+
+Route::get('/pages/profile/simage/{filename}', 'PhotoController@sertifikat');

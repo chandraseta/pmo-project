@@ -12,7 +12,7 @@
 @import '~pretty-checkbox/src/pretty-checkbox.scss';
 
 .navbar-laravel {
-  background-color: #fff;
+  background-color: map_get($theme-colors, primary);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 

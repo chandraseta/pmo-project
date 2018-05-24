@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-use Exception;
-
 class DataKinerjaController extends APIBaseController
 {
     /**
@@ -206,15 +204,22 @@ class DataKinerjaController extends APIBaseController
             if ($extension == "xlsx" || $extension == "xls" || $extension == "csv") {
                 // Load data from Excel file
                 $path = $request->excel->getRealPath();
-                $objs = Excel::load($path, null)->get();
+                $objs = Excel::load($path, function ($reader) {
+                    $reader->ignoreEmpty();
+                })->get();
 
                 // Parse data
                 if (!empty($objs) && $objs->count()) {
                     try {
                         // Insert each row
                         foreach ($objs as $obj) {
+                            $dbObj = Pegawai::where('nip', $obj->nip)->first();
+                            if ($obj->nip == NULL || empty($dbObj)) {
+                                break;
+                            }
+
                             $arr = [
-                                'id_pegawai' => Pegawai::where('nip', $obj->nip)->first()->id_user,
+                                'id_pegawai' => $dbObj->id_user,
                                 'tahun' => $obj->tahun_pemeriksaan,
                                 'semester' => $obj->semester,
                                 'nilai' => $obj->skor_kinerja,
@@ -225,18 +230,18 @@ class DataKinerjaController extends APIBaseController
                             $model->fill($arr);
                             $model->save();
                         }
-                        return response('Data inserted', 200);
-                    } catch (Exception $e) {
-                        return response('Failed in inserting data. Check data correctness', 400);
+                        return response('Data berhasil dimasukkan', 200);
+                    } catch (\Exception $e) {
+                        return response('Gagal memasukkan data. Cek apakah semua data sudah dalam format yang benar', 400);
                     }
                 } else {
-                    return response('Empty file', 400);
+                    return response('Berkas kosong', 400);
                 }
             } else {
-                return response('Wrong file format', 400);
+                return response('Format berkas salah', 400);
             }
         } else {
-            return response('File not found', 400);
+            return response('Berkas tidak ditemukan', 400);
         }
     }
 }

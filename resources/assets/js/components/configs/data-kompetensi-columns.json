@@ -9,11 +9,12 @@
     "immutable": true
   },
   {
-    "label": "NIP",
+    "label": "NIP/Nopeg",
     "field": "nip",
     "immutable": true,
     "fillable": true,
-    "required": true
+    "required": true,
+    "placeholder": "Contoh: 1234567789987654321"
   },
   {
     "label": "Unit Kerja",
@@ -38,7 +39,8 @@
   {
     "label": "Tujuan Pemeriksaan",
     "field": "tujuan",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Tujuan pemeriksaan dilakukan."
   },
   {
     "label": "Tanggal Pelaksanaan",
@@ -53,56 +55,64 @@
     "field": "kognitif_efisiensi_kecerdasan",
     "type": "number",
     "thClass": "text-center fungsi-kognitif-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Daya Nalar",
     "field": "kognitif_daya_nalar",
     "type": "number",
     "thClass": "text-center fungsi-kognitif-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Daya Asosiasi",
     "field": "kognitif_daya_asosiasi",
     "type": "number",
     "thClass": "text-center fungsi-kognitif-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Daya Analitis",
     "field": "kognitif_daya_analitis",
     "type": "number",
     "thClass": "text-center fungsi-kognitif-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Daya Antisipasi",
     "field": "kognitif_daya_antisipasi",
     "type": "number",
     "thClass": "text-center fungsi-kognitif-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Kemandirian Berpikir",
     "field": "kognitif_kemandirian_berpikir",
     "type": "number",
     "thClass": "text-center fungsi-kognitif-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Fleksibilitas",
     "field": "kognitif_fleksibilitas",
     "type": "number",
     "thClass": "text-center fungsi-kognitif-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Daya Tangkap",
     "field": "kognitif_daya_tangkap",
     "type": "number",
     "thClass": "text-center fungsi-kognitif-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Rata-rata Kognitif",
@@ -116,28 +126,32 @@
     "field": "interaksional_penempatan_diri",
     "type": "number",
     "thClass": "text-center fungsi-interaksional-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Percaya Diri",
     "field": "interaksional_percaya_diri",
     "type": "number",
     "thClass": "text-center fungsi-interaksional-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Daya Kooperatif",
     "field": "interaksional_daya_kooperatif",
     "type": "number",
     "thClass": "text-center fungsi-interaksional-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Penyesuaian Perasaan",
     "field": "interaksional_penyesuaian_perasaan",
     "type": "number",
     "thClass": "text-center fungsi-interaksional-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Rata-rata Interaksional",
@@ -151,28 +165,32 @@
     "field": "emosional_stabilitas_emosi",
     "type": "number",
     "thClass": "text-center fungsi-emosional-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Toleransi terhadap Stress",
     "field": "emosional_toleransi_stres",
     "type": "number",
     "thClass": "text-center fungsi-emosional-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Pengendalian Diri",
     "field": "emosional_pengendalian_diri",
     "type": "number",
     "thClass": "text-center fungsi-emosional-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Kemantapan Konsentrasi",
     "field": "emosional_kemantapan_konsentrasi",
     "type": "number",
     "thClass": "text-center fungsi-emosional-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Rata-rata Emosional",
@@ -186,28 +204,32 @@
     "field": "sikap_kerja_hasrat_berprestasi",
     "type": "number",
     "thClass": "text-center fungsi-sikap-kerja-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Daya Tahan",
     "field": "sikap_kerja_daya_tahan",
     "type": "number",
     "thClass": "text-center fungsi-sikap-kerja-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Keteraturan Kerja",
     "field": "sikap_kerja_keteraturan_kerja",
     "type": "number",
     "thClass": "text-center fungsi-sikap-kerja-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Pengerahan Energi Kerja",
     "field": "sikap_kerja_pengerahan_energi_kerja",
     "type": "number",
     "thClass": "text-center fungsi-sikap-kerja-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Rata-rata Sikap Kerja",
@@ -221,28 +243,32 @@
     "field": "manajerial_efektivitas_perencanaan",
     "type": "number",
     "thClass": "text-center fungsi-manajerial-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Pengorganisasian Pelaksanaan",
     "field": "manajerial_pengorganisasian_pelaksanaan",
     "type": "number",
     "thClass": "text-center fungsi-manajerial-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Intensitas Pengarahan",
     "field": "manajerial_intensitas_pengarahan",
     "type": "number",
     "thClass": "text-center fungsi-manajerial-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Kekuatan Pengawasan",
     "field": "manajerial_kekuatan_pengawasan",
     "type": "number",
     "thClass": "text-center fungsi-manajerial-group",
-    "fillable": true
+    "fillable": true,
+    "placeholder": "Contoh: 2"
   },
   {
     "label": "Rata-rata Manajerial",

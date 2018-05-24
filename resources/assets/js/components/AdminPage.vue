@@ -1,8 +1,5 @@
 <template>
     <div>
-        <header>
-            <admin-navbar></admin-navbar>
-        </header>
         <main role="main" class="container">
             <section>
                 <div class="container">
@@ -21,20 +18,20 @@
                         :lineNumbers="true">
             </data-table>
         </main>
-        <footer>
-
-        </footer>
+        <common-footer></common-footer>
     </div>
 </template>
 
 <script>
 
     import axios from 'axios'
+    import CommonFooter from "./CommonFooter.vue";
 
     export default {
         dataUserColumns: require('./configs/data-user-columns.json'),
         name: 'admin-main-page',
         components: {
+            CommonFooter,
             'admin-navbar': require('./AdminNavbar.vue'),
             'data-table': require('./DataTable.vue'),
         },

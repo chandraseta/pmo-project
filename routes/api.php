@@ -29,6 +29,8 @@ Route::get('kompetensi/export', 'DataKompetensiController@export');
 
 Route::post('kompetensi/import', 'DataKompetensiController@import');
 
+Route::get('kompetensi/report/{id}', 'DataKompetensiController@generateReport');
+
 Route::resource('kompetensi', 'DataKompetensiController');
 
 Route::get('kinerja/export', 'DataKinerjaController@export');
@@ -38,3 +40,19 @@ Route::post('kinerja/import', 'DataKinerjaController@import');
 Route::resource('kinerja', 'DataKinerjaController');
 
 Route::resource('pegawai-denormalized', 'DataPegawaiController');
+
+Route::resource('training', 'TrainingController');
+
+Route::resource('kepegawaian', 'KepegawaianController');
+
+Route::resource('riwayat', 'RiwayatController');
+
+Route::resource('sertifikat', 'SertifikatController');
+
+Route::resource('savekinerja', 'HasilKinerjaController');
+
+Route::resource('rekomendasi', 'RekomendasiController');
+
+Route::resource('lastedited', 'LastEditedController');
+
+

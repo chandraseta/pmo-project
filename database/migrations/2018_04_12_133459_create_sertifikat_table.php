@@ -20,7 +20,7 @@ class CreateSertifikatTable extends Migration
             $table->string('lembaga')->nullable();
             $table->year('tahun_diterbitkan')->nullable();
             $table->text('catatan')->nullable();
-            $table->string('nama_file')->unique();
+            $table->string('nama_file')->nullable();
             $table->timestamps();
 
             $table->foreign('id_pegawai')

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use PHPExcel_IOFactory;
+use PHPExcel_Settings;
 use Validator;
 
 class DataKompetensiController extends APIBaseController
@@ -373,15 +375,22 @@ class DataKompetensiController extends APIBaseController
             if ($extension == "xlsx" || $extension == "xls" || $extension == "csv") {
                 // Load data from Excel file
                 $path = $request->excel->getRealPath();
-                $objs = Excel::load($path, null)->get();
+                $objs = Excel::load($path, function ($reader) {
+                    $reader->ignoreEmpty();
+                })->get();
 
                 // Parse data
                 if (!empty($objs) && $objs->count()) {
                     try {
                         // Insert each row
                         foreach ($objs as $obj) {
+                            $dbObj = Pegawai::where('nip', $obj->nip)->first();
+                            if ($obj->nip == NULL || empty($dbObj)) {
+                                break;
+                            }
+
                             $arr = [
-                                'id_pegawai' => Pegawai::where('nip', $obj->nip)->first()->id_user,
+                                'id_pegawai' => $dbObj->id_user,
                                 'tujuan' => $obj->tujuan_pemeriksaan,
                                 'tanggal' => $obj->tanggal_pelaksanaan,
                                 'kognitif_efisiensi_kecerdasan' => $obj->efisiensi_kecerdasan,
@@ -414,19 +423,182 @@ class DataKompetensiController extends APIBaseController
                             $model->fill($arr);
                             $model->save();
                         }
-                        return response('Data inserted', 200);
-                    } catch (Exception $e) {
-                        return response('Failed in inserting data. Check data correctness', 400);
+                        return response('Data berhasil dimasukkan', 200);
+                    } catch (\Exception $e) {
+                        \Log::error($e);
+                        return response('Gagal memasukkan data. Cek apakah semua data sudah dalam format yang benar', 400);
                     }
                 } else {
-                    return response('Empty file', 400);
+                    return response('Berkas kosong', 400);
                 }
             } else {
-                return response('Wrong file format', 400);
+                return response('Format berkas salah', 400);
             }
         } else {
-            return response('File not found', 400);
+            return response('Berkas tidak ditemukan', 400);
         }
+    }
+
+    public function generateReport($id) {
+        // Get kompetensi data from DB
+        $obj = DB::table('denormalized_pegawai')
+            ->join('kompetensi', 'denormalized_pegawai.id_user', '=', 'kompetensi.id_pegawai')
+            ->select([
+                'id_kompetensi',
+                'nama',
+                'nip',
+                'unit_kerja',
+                'pendidikan_terakhir',
+                'tanggal_lahir',
+                'posisi',
+                'tujuan',
+                'tanggal',
+                'kognitif_efisiensi_kecerdasan',
+                'kognitif_daya_nalar',
+                'kognitif_daya_asosiasi',
+                'kognitif_daya_analitis',
+                'kognitif_daya_antisipasi',
+                'kognitif_kemandirian_berpikir',
+                'kognitif_fleksibilitas',
+                'kognitif_daya_tangkap',
+                'interaksional_penempatan_diri',
+                'interaksional_percaya_diri',
+                'interaksional_daya_kooperatif',
+                'interaksional_penyesuaian_perasaan',
+                'emosional_stabilitas_emosi',
+                'emosional_toleransi_stres',
+                'emosional_pengendalian_diri',
+                'emosional_kemantapan_konsentrasi',
+                'sikap_kerja_hasrat_berprestasi',
+                'sikap_kerja_daya_tahan',
+                'sikap_kerja_keteraturan_kerja',
+                'sikap_kerja_pengerahan_energi_kerja',
+                'manajerial_efektivitas_perencanaan',
+                'manajerial_pengorganisasian_pelaksanaan',
+                'manajerial_intensitas_pengarahan',
+                'manajerial_kekuatan_pengawasan',
+            ])
+            ->where('denormalized_pegawai.id_user', '=', $id)
+            ->orderBy('tanggal', 'desc')
+            ->limit(1)
+            ->get();
+        
+        if (empty($obj) || $obj->count() == 0) {
+            return response('Data kompetensi tidak ditemukan', 404);
+        }
+        
+        $obj = $obj[0];
+
+        // Get rek. training data from database
+        $obj_rek = DB::table('training')
+            ->leftJoin(DB::raw("(SELECT * FROM rekomendasi_training WHERE id_pegawai = $id) AS rek"),
+                        'training.id_training',
+                        '=',
+                        'rek.id_training')
+            ->get();
+        $obj_rek = json_decode(json_encode($obj_rek), true);
+
+        // Open Excel template
+        $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+        $path = $storagePath . 'templates/laporan_template.xlsx';
+
+        $reader = PHPExcel_IOFactory::createReader('Excel2007');
+        $reader->setIncludeCharts(true);
+        $excel = $reader->load($path);
+        $sheet = $excel->getSheetByName('Psikogram');
+
+        // Set kompetensi data in Excel
+        $sheet->getCell('A16')->setValue($obj->id_kompetensi);
+        $sheet->getCell('B16')->setValue($obj->nama);
+        $sheet->getCell('C16')->setValue($obj->nip);
+        $sheet->getCell('D16')->setValue($obj->unit_kerja);
+        $sheet->getCell('E16')->setValue($obj->pendidikan_terakhir);
+        $sheet->getCell('F16')->setValue($obj->tanggal_lahir);
+        $sheet->getCell('G16')->setValue($obj->posisi);
+        $sheet->getCell('H16')->setValue($obj->tujuan);
+        $sheet->getCell('I16')->setValue(date('d-m-Y', strtotime($obj->tanggal)));
+        $sheet->getCell('J16')->setValue(floor($obj->kognitif_efisiensi_kecerdasan));
+        $sheet->getCell('K16')->setValue(floor($obj->kognitif_daya_nalar));
+        $sheet->getCell('L16')->setValue(floor($obj->kognitif_daya_asosiasi));
+        $sheet->getCell('M16')->setValue(floor($obj->kognitif_daya_analitis));
+        $sheet->getCell('N16')->setValue(floor($obj->kognitif_daya_antisipasi));
+        $sheet->getCell('O16')->setValue(floor($obj->kognitif_kemandirian_berpikir));
+        $sheet->getCell('P16')->setValue(floor($obj->kognitif_fleksibilitas));
+        $sheet->getCell('Q16')->setValue(floor($obj->kognitif_daya_tangkap));
+        $sheet->getCell('S16')->setValue(floor($obj->interaksional_penempatan_diri));
+        $sheet->getCell('T16')->setValue(floor($obj->interaksional_percaya_diri));
+        $sheet->getCell('U16')->setValue(floor($obj->interaksional_daya_kooperatif));
+        $sheet->getCell('V16')->setValue(floor($obj->interaksional_penyesuaian_perasaan));
+        $sheet->getCell('X16')->setValue(floor($obj->emosional_stabilitas_emosi));
+        $sheet->getCell('Y16')->setValue(floor($obj->emosional_toleransi_stres));
+        $sheet->getCell('Z16')->setValue(floor($obj->emosional_pengendalian_diri));
+        $sheet->getCell('AA16')->setValue(floor($obj->emosional_kemantapan_konsentrasi));
+        $sheet->getCell('AC16')->setValue(floor($obj->sikap_kerja_hasrat_berprestasi));
+        $sheet->getCell('AD16')->setValue(floor($obj->sikap_kerja_daya_tahan));
+        $sheet->getCell('AE16')->setValue(floor($obj->sikap_kerja_keteraturan_kerja));
+        $sheet->getCell('AF16')->setValue(floor($obj->sikap_kerja_pengerahan_energi_kerja));
+        $sheet->getCell('AN16')->setValue(floor($obj->manajerial_efektivitas_perencanaan));
+        $sheet->getCell('AO16')->setValue(floor($obj->manajerial_pengorganisasian_pelaksanaan));
+        $sheet->getCell('AP16')->setValue(floor($obj->manajerial_intensitas_pengarahan));
+        $sheet->getCell('AQ16')->setValue(floor($obj->manajerial_kekuatan_pengawasan));
+
+        // Move sheet
+        $sheet = $excel->getSheetByName('x');
+
+        // Set rekomendasi data
+        $row_num = 60;
+        foreach ($obj_rek as $rek) {
+            $sheet->getCell('C' . $row_num)->setValue(strtoupper($rek['nama_training']));
+            $sheet->getCell('G' . $row_num)->setValue($rek['id_training'] ? 'l' : '');
+
+            if (++$row_num > 71) {
+                break;
+            }
+        }
+
+        // Convert all formulas to values
+        for ($i = 'C'; $i <= 'K'; ++$i) {
+            for ($j = 6; $j <= 71; ++$j) {
+                $cell = $sheet->getCell($i . $j);
+                if ($cell->isFormula()) {
+                    $cell->setValue($cell->getCalculatedValue());
+                }
+            }
+        }
+
+        // Delete template
+        $excel->removeSheetByIndex(
+            $excel->getIndex(
+                $excel->getSheetByName('Psikogram')
+            )
+        );
+
+        $sheet = $excel->getSheetByName('x');
+        for ($i = 12; $i < 48; ++$i) {
+            $sheet->removeColumnByIndex($i);
+        }
+
+        // Protect results sheet
+        $sheet->getProtection()->setSheet(true);
+        $sheet->getProtection()->setSort(true);
+        $sheet->getProtection()->setInsertRows(true);
+        $sheet->getProtection()->setFormatCells(true);
+        $sheet->getProtection()->setPassword('uptpmoitb');
+
+        // Protect workbook
+        $excel->getSecurity()->setLockWindows(true);
+        $excel->getSecurity()->setLockStructure(true);
+        $excel->getSecurity()->setWorkbookPassword('uptpmoitb');
+
+        // Export Excel
+        $filename = 'laporan_kompetensi_' . $id . '.xlsx';
+
+        $writer = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        header('Content-type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        $writer->setPreCalculateFormulas(true);
+        $writer->setIncludeCharts(true);
+        $writer->save('php://output');
     }
 
     private function authenticate($role)
@@ -457,7 +629,15 @@ class DataKompetensiController extends APIBaseController
                     $auth = Pegawai::find($session_id);
                 }
                 break;
+
             case 5:
+                $auth = PMO::find($session_id);
+                if (is_null($auth)) {
+                    $auth = Admin::find($session_id);
+                }
+                break;
+
+            case 6:
                 $auth = User::find($session_id);
                 break;
         }

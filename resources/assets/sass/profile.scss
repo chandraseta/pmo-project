@@ -1,6 +1,21 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~open-iconic/font/css/open-iconic-bootstrap';
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
 body {
-    padding-top: 5rem;
+    background-color: #f5f8fa;
 }
+
+.navbar-laravel {
+    background-color: map_get($theme-colors, primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
 .starter-template {
     padding: 3rem 1.5rem;
     text-align: center;
@@ -12,7 +27,7 @@ body {
 }
 
 .card-container {
-    padding: 30px 120px;
+    padding: 30px 20px;
 }
 
 footer {
@@ -30,4 +45,27 @@ table th{
 
 .btn-simpan {
     margin-left: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: map_get($theme-colors, primary);
+    border-color: map_get($theme-colors, primary);
+}
+
+.btn-danger {
+    background-color: #ba0101;
+    border-color: #ba0101;
+}
+
+.btn-success {
+    background-color: #009602;
+    border-color: #009602;
+}
+
+.img-responsive {
+    text-align: center;
 }

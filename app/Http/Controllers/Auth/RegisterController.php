@@ -42,9 +42,7 @@ class RegisterController extends Controller
      * @return void
      */
     public function __construct()
-    {
-        $this->middleware('guest');
-    }
+    {}
 
     /**
      * Override register to disable auto login
@@ -55,21 +53,36 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'nip' => 'required|string|unique:pegawai',
+        ]);
 
-        if ($request->has('isAdmin') or $request->has('isPMO') or $request->has('isPegawai')) {
-            event(new Registered($user = $this->create($request->all())));
-            if ($this->registered($request, $user)) {
-                $request->session()->flash('alert-success', 'Pengguna berhasil ditambahkan');
+        if ($validator->fails()) {
+            if ($validator->errors()->first('email')) {
+                session()->flash('alert-danger', 'Email telah terdaftar');
             }
-            else {
-                $request->session()->flash('alert-warning', 'Terjadi kesalahan dalam penambahan pengguna');
+            else if ($validator->errors()->first('nip')) {
+                session()->flash('alert-danger', 'NIP/Nopeg telah terdaftar');
             }
         }
         else {
-            $request->session()->flash('alert-warning', 'Pengguna baru harus memiliki setidaknya 1 peran (Administrator, Anggota PMO, atau Pegawai)');
+            if ($request->has('isAdmin') or $request->has('isPMO') or $request->has('isPegawai')) {
+                event(new Registered($user = $this->create($request->all())));
+                session()->flash('alert-success', 'Pengguna berhasil ditambahkan');
+                if ($this->registered($request, $user)) {
+                    session()->flash('alert-success', 'Pengguna berhasil ditambahkan');
+                }
+                else {
+                    session()->flash('alert-danger', 'Terjadi kesalahan dalam penambahan pengguna');
+                }
+            }
+            else {
+                session()->flash('alert-warning', 'Pengguna baru harus memiliki setidaknya 1 peran (Administrator, Anggota PMO, atau Pegawai)');
+            }
         }
-        return redirect($this->redirectPath());
+        return view('pages.admin.adduser');
     }
 
     /**
@@ -78,14 +91,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'nip' => 'required|string|min:18|max:18|unique:pegawai',
-        ]);
-    }
+//    protected function validator(array $data)
+//    {
+//        return Validator::make($data, [
+//            'name' => 'required|string|max:255',
+//            'email' => 'required|string|email|max:255|unique:users',
+//            'nip' => 'required|string|unique:pegawai',
+//        ]);
+//    }
 
     /**
      * Create a new user instance after a valid registration.

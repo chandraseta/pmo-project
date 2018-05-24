@@ -241,16 +241,16 @@ class CreateDenormalizedPegawaiTable extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER `tr_riwayat_pendidikan_denomarlize_delete`');
-        DB::unprepared('DROP TRIGGER `tr_riwayat_pendidikan_denomarlize_update`');
-        DB::unprepared('DROP TRIGGER `tr_riwayat_pendidikan_denomarlize_insert`');
-        DB::unprepared('DROP PROCEDURE `proc_riwayat_pendidikan_denormalize`');
-        DB::unprepared('DROP TRIGGER `tr_data_kepegawaian_denomarlize_delete`');
-        DB::unprepared('DROP TRIGGER `tr_data_kepegawaian_denomarlize_update`');
-        DB::unprepared('DROP TRIGGER `tr_data_kepegawaian_denomarlize_insert`');
-        DB::unprepared('DROP PROCEDURE `proc_data_kepegawaian_denormalize`');
-        DB::unprepared('DROP TRIGGER `tr_pegawai_denomarlize_update`');
-        DB::unprepared('DROP TRIGGER `tr_pegawai_denomarlize_insert`');
+        DB::unprepared('DROP TRIGGER IF EXISTS `tr_riwayat_pendidikan_denomarlize_delete`');
+        DB::unprepared('DROP TRIGGER IF EXISTS `tr_riwayat_pendidikan_denomarlize_update`');
+        DB::unprepared('DROP TRIGGER IF EXISTS `tr_riwayat_pendidikan_denomarlize_insert`');
+        DB::unprepared('DROP PROCEDURE IF EXISTS `proc_riwayat_pendidikan_denormalize`');
+        DB::unprepared('DROP TRIGGER IF EXISTS `tr_data_kepegawaian_denomarlize_delete`');
+        DB::unprepared('DROP TRIGGER IF EXISTS `tr_data_kepegawaian_denomarlize_update`');
+        DB::unprepared('DROP TRIGGER IF EXISTS `tr_data_kepegawaian_denomarlize_insert`');
+        DB::unprepared('DROP PROCEDURE IF EXISTS `proc_data_kepegawaian_denormalize`');
+        DB::unprepared('DROP TRIGGER IF EXISTS `tr_pegawai_denomarlize_update`');
+        DB::unprepared('DROP TRIGGER IF EXISTS `tr_pegawai_denomarlize_insert`');
         
         Schema::dropIfExists('denormalized_pegawai');
     }

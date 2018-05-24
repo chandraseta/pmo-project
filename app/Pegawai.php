@@ -53,7 +53,7 @@ class Pegawai extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_kelompok_kompetensi', 'id_pengubah', 'nama', 'nip', 'tempat_lahir', 'tanggal_lahir', 'no_telp', 'created_at', 'updated_at'];
+    protected $fillable = ['id_user', 'id_kelompok_kompetensi', 'id_pengubah', 'nama', 'nip', 'tempat_lahir', 'tanggal_lahir', 'no_telp', 'ekstensi_foto', 'created_at', 'updated_at'];
 
     /**
      * Indicates if the model should be timestamped.

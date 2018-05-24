@@ -11,17 +11,18 @@
     },
     "devDependencies": {
         "axios": "^0.18.0",
-        "bootstrap": "^4.1.0",
-        "cross-env": "^5.1",
+        "bootstrap": "^4.1.1",
+        "cross-env": "^5.1.5",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
-        "lodash": "^4.17.4",
+        "lodash": "^4.17.10",
         "popper.js": "^1.14.3",
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "google-material-design-icons": "^1.0.0",
         "open-iconic": "^1.1.1",
         "pretty-checkbox": "^3.0.3",
-        "vue-good-table": "^2.4.1"
+        "vue-good-table": "^2.5.2"
     }
 }

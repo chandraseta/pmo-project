@@ -53,7 +53,7 @@ class SprintReview3ChangeRequest extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER `tr_pegawai_def_id_pengubah`');
+        DB::unprepared('DROP TRIGGER IF EXISTS `tr_pegawai_def_id_pengubah`');
 
         Schema::table('pegawai', function (Blueprint $table) {
             $table->dropForeign(['id_pengubah']);

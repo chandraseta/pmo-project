@@ -6,9 +6,5 @@
   {
     "label": "Email",
     "field": "email"
-  },
-  {
-    "label": "",
-    "field": "resetButton"
   }
 ]

@@ -6,9 +6,8 @@
             <div class="col-md-8">
                 <div class="flash-message">
                     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                        @if(Session::has('alert-' . $msg))
-
-                            <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                        @if(session()->has('alert-' . $msg))
+                            <p class="alert alert-{{ $msg }}">{{ session()->get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                         @endif
                     @endforeach
                 </div>
@@ -48,7 +47,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="nip" class="col-md-4 col-form-label text-md-right">{{ __('NIP') }}</label>
+                                <label for="nip" class="col-md-4 col-form-label text-md-right">{{ __('NIP/Nopeg') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="nip" type="text" class="form-control{{ $errors->has('nip') ? ' is-invalid' : '' }}" name="nip" required>
@@ -64,9 +63,10 @@
                             <div class="form-group row">
                                 <label for="checkbox-admin" class="col-md-4 col-form-label text-md-right">{{ __('Administrator') }}</label>
                                 <div class="col-md-6">
-                                    <div class="pretty p-default p-round p-smooth">
+                                    <div class="pretty p-icon p-round p-pulse">
                                         <input id="checkbox-admin" type="checkbox" name="isAdmin">
                                         <div class="state p-primary">
+                                            <i class="icon material-icons"></i>
                                             <label></label>
                                         </div>
                                     </div>
@@ -76,9 +76,10 @@
                             <div class="form-group row">
                                 <label for="checkbox-pmo" class="col-md-4 col-form-label text-md-right">{{ __('Anggota PMO') }}</label>
                                 <div class="col-md-6">
-                                    <div class="pretty p-default p-round p-smooth">
+                                    <div class="pretty p-icon p-round p-pulse">
                                         <input id="checkbox-pmo" type="checkbox" name="isPMO">
                                         <div class="state p-primary">
+                                            <i class="icon material-icons"></i>
                                             <label></label>
                                         </div>
                                     </div>
@@ -88,10 +89,11 @@
                             <div class="form-group row">
                                 <label for="checkbox-pegawai" class="col-md-4 col-form-label text-md-right">{{ __('Pegawai') }}</label>
                                 <div class="col-md-6">
-                                    <div class="pretty p-default p-round p-smooth">
+                                    <div class="pretty p-icon p-round p-pulse">
                                         <input name="isPegawai" type="hidden" value="on">
                                         <input id="checkbox-pegawai" type="checkbox" name="dummyIsPegawai" disabled="disabled" checked>
                                         <div class="state p-primary">
+                                            <i class="icon material-icons"></i>
                                             <label></label>
                                         </div>
                                     </div>
