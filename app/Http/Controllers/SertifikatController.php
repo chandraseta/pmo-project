@@ -35,12 +35,12 @@ class SertifikatController extends APIBaseController
                 $image = Image::make($imageData);
 
                 if ($image->width() <= $image->height()) {
-                    $image->resize(null, 200, function ($constraint) {
+                    $image->resize(null, 1000, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     });
                 } else {
-                    $image->resize(200, null, function ($constraint) {
+                    $image->resize(1000, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     });
