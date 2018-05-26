@@ -880,15 +880,14 @@
                 </a>
             </div>
         </div>
-        <common-footer></common-footer>
+        
     </div>
 </template>
 
 <script>
-    import CommonFooter from "./CommonFooter.vue";
+    
 
     export default {
-        components: {CommonFooter},
         props: ['id', 'unit-kerja', 'posisi', 'kelompok-kompetensi', 'data-kinerja-temp', 'rekomendasi-training-temp', 'training-list', 'rekomendasi-posisi-temp'],
 
         data() {

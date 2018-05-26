@@ -873,7 +873,7 @@
                 </a>
             </div>
         </div>
-        <common-footer></common-footer>
+        
     </div>
 </template>
 
