@@ -612,7 +612,7 @@
                 Hasil Kinerja
                 <!-- <button class="btn btn-primary float-sm-right" v-on:click="editDataKinerja" v-bind:disabled="disableEdit">
                     Edit <i class="fas fa-edit"></i>
-                 -->    </button>
+                    </button> -->
             </h5>
 
             <div class="card-body">
@@ -668,7 +668,7 @@
                                 <td>
                                     <div class="form-group">
                                         <input v-model="dk.catatan" type="text" class="form-control text-center">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <!-- <small class="form-text text-muted">*Wajib diisi</small> -->
                                     </div>
                                 </td>
                                 <td>
@@ -1149,7 +1149,11 @@
 
             updateSertifikat(){
                 for(var i = 0; i < this.sertifikat.length; i++){
-                    this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
+                    if (this.sertifikat[i].nama_file == '') {
+                        this.sertifikat[i].nama_file = 'simage/default_sertifikat.png';
+                    } else {
+                        this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
+                    }
                 }
             },
 

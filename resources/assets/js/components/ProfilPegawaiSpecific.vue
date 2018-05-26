@@ -662,7 +662,7 @@
                                 <td>
                                     <div class="form-group">
                                         <input v-model="dk.catatan" type="text" class="form-control text-center">
-                                        <small class="form-text text-muted">*Wajib diisi</small>
+                                        <!-- <small class="form-text text-muted">*Wajib diisi</small> -->
                                     </div>
                                 </td>
                                 <td>
@@ -704,15 +704,6 @@
                     <i class="fas fa-edit"></i> Edit 
                     </button>
             </h5>
-
-            <div class="card-body">
-                <div class="container">
-
-                    <button class="btn btn-primary float-sm-left" v-on:click="downloadKompetensi" v-bind:disabled="disableEdit">
-                        <i class="fas fa-download"></i> Download 
-                    </button>
-                </div>
-            </div>
 
             <div class="card-body">
                 <div class="container">
@@ -1185,9 +1176,13 @@ export default {
     },
 
     updateSertifikat() {
-      for (var i = 0; i < this.sertifikat.length; i++) {
-        this.sertifikat[i].nama_file = "simage/" + this.sertifikat[i].nama_file;
-      }
+        for (var i = 0; i < this.sertifikat.length; i++) {
+            if (this.sertifikat[i].nama_file == '') {
+                this.sertifikat[i].nama_file = 'simage/default_sertifikat.png';
+            } else {
+                this.sertifikat[i].nama_file = 'simage/' + this.sertifikat[i].nama_file;
+            }
+        }
     },
 
     disableEditButton() {
