@@ -15537,7 +15537,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "card", attrs: { id: "profil-pegawai" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fa fa-user-circle" }),
+        _c("i", { staticClass: "fas fa-user-circle" }),
         _vm._v("\n            Profil Pegawai\n            "),
         _c(
           "button",
@@ -15548,7 +15548,7 @@ var render = function() {
           },
           [
             _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fa fa-edit" })
+            _c("i", { staticClass: "fas fa-edit" })
           ]
         )
       ]),
@@ -15575,7 +15575,7 @@ var render = function() {
                       on: { click: _vm.browseImageProfile }
                     },
                     [
-                      _c("i", { staticClass: "fa fa-image" }),
+                      _c("i", { staticClass: "fas fa-image" }),
                       _vm._v(
                         "\n                            Ganti\n                        "
                       )
@@ -16213,7 +16213,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fa fa-check" })
+                _c("i", { staticClass: "fas fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -16226,7 +16226,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fa fa-times" })
+                _c("i", { staticClass: "fas fa-times" })
               ]
             )
           ])
@@ -16237,7 +16237,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kepegawaian" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fa fa-table" }),
+        _c("i", { staticClass: "fas fa-table" }),
         _vm._v("\n            Data Kepegawaian\n            "),
         _c(
           "button",
@@ -16248,7 +16248,7 @@ var render = function() {
           },
           [
             _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fa fa-edit" })
+            _c("i", { staticClass: "fas fa-edit" })
           ]
         )
       ]),
@@ -16275,7 +16275,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fa fa-plus" })
+                        _c("i", { staticClass: "fas fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -16553,7 +16553,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fa fa-trash-o" })
+                                    _c("i", { staticClass: "fas fa-trash-alt" })
                                   ]
                                 )
                               ])
@@ -16571,7 +16571,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fa fa-plus" })
+                            _c("i", { staticClass: "fas fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -16596,7 +16596,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fa fa-check" })
+                _c("i", { staticClass: "fas fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -16609,7 +16609,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fa fa-times" })
+                _c("i", { staticClass: "fas fa-times" })
               ]
             )
           ])
@@ -16620,7 +16620,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "riwayat-pegawai" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fa fa-briefcase" }),
+        _c("i", { staticClass: "fas fa-briefcase" }),
         _vm._v("\n            Riwayat Pendidikan dan Pekerjaan"),
         _c(
           "button",
@@ -16631,7 +16631,7 @@ var render = function() {
           },
           [
             _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fa fa-edit" })
+            _c("i", { staticClass: "fas fa-edit" })
           ]
         )
       ]),
@@ -16661,7 +16661,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fa fa-plus" })
+                        _c("i", { staticClass: "fas fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -16913,7 +16913,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fa fa-trash-o" })
+                                    _c("i", { staticClass: "fas fa-trash-alt" })
                                   ]
                                 )
                               ])
@@ -16931,7 +16931,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fa fa-plus" })
+                            _c("i", { staticClass: "fas fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -16967,7 +16967,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fa fa-plus" })
+                        _c("i", { staticClass: "fas fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -17179,7 +17179,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fa fa-trash-o" })
+                                    _c("i", { staticClass: "fas fa-trash-alt" })
                                   ]
                                 )
                               ])
@@ -17197,7 +17197,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fa fa-plus" })
+                            _c("i", { staticClass: "fas fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -17220,7 +17220,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fa fa-check" })
+                _c("i", { staticClass: "fas fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -17233,7 +17233,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fa fa-times" })
+                _c("i", { staticClass: "fas fa-times" })
               ]
             )
           ])
@@ -17244,7 +17244,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "sertificate" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fa fa-file-text" }),
+        _c("i", { staticClass: "fas fa-file-alt" }),
         _vm._v("\n            Sertifikat"),
         _c(
           "button",
@@ -17255,7 +17255,7 @@ var render = function() {
           },
           [
             _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fa fa-edit" })
+            _c("i", { staticClass: "fas fa-edit" })
           ]
         )
       ]),
@@ -17282,7 +17282,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fa fa-plus" })
+                        _c("i", { staticClass: "fas fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -17384,7 +17384,7 @@ var render = function() {
                                           "\n                                        Hapus "
                                         ),
                                         _c("i", {
-                                          staticClass: "fa fa-trash-o"
+                                          staticClass: "fas fa-trash-alt"
                                         })
                                       ]
                                     )
@@ -17416,7 +17416,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c("i", { staticClass: "fa fa-upload" }),
+                                      _c("i", { staticClass: "fas fa-upload" }),
                                       _vm._v(
                                         "\n                                    Upload Gambar\n                                "
                                       )
@@ -17609,7 +17609,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fa fa-plus" })
+                            _c("i", { staticClass: "fas fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -17632,7 +17632,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fa fa-check" })
+                _c("i", { staticClass: "fas fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -17645,7 +17645,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fa fa-times" })
+                _c("i", { staticClass: "fas fa-times" })
               ]
             )
           ])
@@ -17679,7 +17679,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fa fa-plus" })
+                        _c("i", { staticClass: "fas fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -17876,7 +17876,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fa fa-trash-o" })
+                                    _c("i", { staticClass: "fas fa-trash-alt" })
                                   ]
                                 )
                               ])
@@ -17899,7 +17899,7 @@ var render = function() {
                           _vm._v(
                             "\n                            Tamplikan semua "
                           ),
-                          _c("i", { staticClass: "fa fa-eye" })
+                          _c("i", { staticClass: "fas fa-eye" })
                         ]
                       )
                     : _vm._e(),
@@ -17916,7 +17916,7 @@ var render = function() {
                           _vm._v(
                             "\n                            Sembunyikan sebagian "
                           ),
-                          _c("i", { staticClass: "fa fa-eye-slash" })
+                          _c("i", { staticClass: "fas fa-eye-slash" })
                         ]
                       )
                     : _vm._e(),
@@ -17930,7 +17930,7 @@ var render = function() {
                         },
                         [
                           _vm._v("\n                            Tambah "),
-                          _c("i", { staticClass: "fa fa-plus" })
+                          _c("i", { staticClass: "fas fa-plus" })
                         ]
                       )
                     : _vm._e()
@@ -17951,7 +17951,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fa fa-check" })
+                _c("i", { staticClass: "fas fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -17964,7 +17964,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fa fa-times" })
+                _c("i", { staticClass: "fas fa-times" })
               ]
             )
           ])
@@ -17987,7 +17987,7 @@ var render = function() {
             },
             [
               _vm._v("\n                    Download "),
-              _c("i", { staticClass: "fa fa-download" })
+              _c("i", { staticClass: "fas fa-download" })
             ]
           ),
           _vm._v(" "),
@@ -18038,7 +18038,7 @@ var render = function() {
                         },
                         [
                           _vm._v("\n                        Tambah "),
-                          _c("i", { staticClass: "fa fa-plus" })
+                          _c("i", { staticClass: "fas fa-plus" })
                         ]
                       )
                     : _vm._e()
@@ -18139,7 +18139,7 @@ var render = function() {
                                 _vm._v(
                                   "\n                                Hapus "
                                 ),
-                                _c("i", { staticClass: "fa fa-trash-o" })
+                                _c("i", { staticClass: "fas fa-trash-alt" })
                               ]
                             )
                           ])
@@ -18158,7 +18158,7 @@ var render = function() {
                   },
                   [
                     _vm._v("\n                    Tambah "),
-                    _c("i", { staticClass: "fa fa-plus" })
+                    _c("i", { staticClass: "fas fa-plus" })
                   ]
                 )
               : _vm._e(),
@@ -18190,7 +18190,7 @@ var render = function() {
                         },
                         [
                           _vm._v("\n                        Tambah "),
-                          _c("i", { staticClass: "fa fa-plus" })
+                          _c("i", { staticClass: "fas fa-plus" })
                         ]
                       )
                     : _vm._e()
@@ -18386,7 +18386,9 @@ var render = function() {
                                       _vm._v(
                                         "\n                                    Hapus "
                                       ),
-                                      _c("i", { staticClass: "fa fa-trash-o" })
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      })
                                     ]
                                   )
                                 ])
@@ -18404,7 +18406,7 @@ var render = function() {
                             },
                             [
                               _vm._v("\n                            Tambah "),
-                              _c("i", { staticClass: "fa fa-plus" })
+                              _c("i", { staticClass: "fas fa-plus" })
                             ]
                           )
                         : _vm._e()
@@ -18431,7 +18433,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fa fa-check" })
+                _c("i", { staticClass: "fas fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -18444,7 +18446,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fa fa-times" })
+                _c("i", { staticClass: "fas fa-times" })
               ]
             )
           ])
@@ -18520,7 +18522,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fa fa-list-alt" }),
+      _c("i", { staticClass: "fas fa-clipboard-check" }),
       _vm._v("\n            Hasil Kinerja\n            ")
     ])
   },
@@ -18545,7 +18547,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fa fa-clipboard" }),
+      _c("i", { staticClass: "fas fa-clipboard-list" }),
       _vm._v("\n            Hasil Kompetensi\n            ")
     ])
   },
@@ -18624,7 +18626,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fa fa-info-circle" }),
+      _c("i", { staticClass: "fas fa-info-circle" }),
       _vm._v("\n            Rekomendasi\n             ")
     ])
   },
@@ -21060,7 +21062,7 @@ var render = function() {
                 },
                 [
                   _vm._v("\n                Simpan "),
-                  _c("i", { staticClass: "fa fa-check" })
+                  _c("i", { staticClass: "fas fa-check" })
                 ]
               ),
               _vm._v(" "),
@@ -21073,7 +21075,7 @@ var render = function() {
                 },
                 [
                   _vm._v("\n                Batal "),
-                  _c("i", { staticClass: "fa fa-times" })
+                  _c("i", { staticClass: "fas fa-times" })
                 ]
               )
             ])
@@ -21108,7 +21110,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fa fa-plus" })
+                        _c("i", { staticClass: "fas fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -21386,7 +21388,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fa fa-trash-o" })
+                                    _c("i", { staticClass: "fas fa-trash-alt" })
                                   ]
                                 )
                               ])
@@ -21404,7 +21406,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fa fa-plus" })
+                            _c("i", { staticClass: "fas fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -21429,7 +21431,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fa fa-check" })
+                _c("i", { staticClass: "fas fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -21442,7 +21444,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fa fa-times" })
+                _c("i", { staticClass: "fas fa-times" })
               ]
             )
           ])
@@ -21479,7 +21481,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fa fa-plus" })
+                        _c("i", { staticClass: "fas fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -21731,7 +21733,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fa fa-trash-o" })
+                                    _c("i", { staticClass: "fas fa-trash-alt" })
                                   ]
                                 )
                               ])
@@ -21749,7 +21751,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fa fa-plus" })
+                            _c("i", { staticClass: "fas fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -21785,7 +21787,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fa fa-plus" })
+                        _c("i", { staticClass: "fas fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -21997,7 +21999,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fa fa-trash-o" })
+                                    _c("i", { staticClass: "fas fa-trash-alt" })
                                   ]
                                 )
                               ])
@@ -22015,7 +22017,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fa fa-plus" })
+                            _c("i", { staticClass: "fas fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -22038,7 +22040,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fa fa-check" })
+                _c("i", { staticClass: "fas fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -22051,7 +22053,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fa fa-times" })
+                _c("i", { staticClass: "fas fa-times" })
               ]
             )
           ])
@@ -22062,7 +22064,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "sertificate" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fa fa-file-text" }),
+        _c("i", { staticClass: "fas fa-file-alt" }),
         _vm._v("\n            Sertifikat"),
         _c(
           "button",
@@ -22072,7 +22074,7 @@ var render = function() {
             on: { click: _vm.editSertifikat }
           },
           [
-            _c("i", { staticClass: "fa fa-edit" }),
+            _c("i", { staticClass: "fas fa-edit" }),
             _vm._v(" Edit \n                ")
           ]
         )
@@ -22099,7 +22101,7 @@ var render = function() {
                         on: { click: _vm.addSertifikat }
                       },
                       [
-                        _c("i", { staticClass: "fa fa-plus" }),
+                        _c("i", { staticClass: "fas fa-plus" }),
                         _vm._v(" Tambah \n                    ")
                       ]
                     )
@@ -22199,7 +22201,7 @@ var render = function() {
                                       },
                                       [
                                         _c("i", {
-                                          staticClass: "fa fa-trash-o"
+                                          staticClass: "fas fa-trash-alt"
                                         }),
                                         _vm._v(
                                           " Hapus \n                                    "
@@ -22234,7 +22236,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c("i", { staticClass: "fa fa-upload" }),
+                                      _c("i", { staticClass: "fas fa-upload" }),
                                       _vm._v(
                                         "\n                                    Upload Gambar\n                                "
                                       )
@@ -22426,7 +22428,7 @@ var render = function() {
                             on: { click: _vm.addSertifikat }
                           },
                           [
-                            _c("i", { staticClass: "fa fa-plus" }),
+                            _c("i", { staticClass: "fas fa-plus" }),
                             _vm._v(" Tambah \n                        ")
                           ]
                         )
@@ -22449,7 +22451,7 @@ var render = function() {
                 on: { click: _vm.saveSertifikat }
               },
               [
-                _c("i", { staticClass: "fa fa-check" }),
+                _c("i", { staticClass: "fas fa-check" }),
                 _vm._v(" Simpan \n                ")
               ]
             ),
@@ -22462,7 +22464,7 @@ var render = function() {
                 on: { click: _vm.cancelSertifikat }
               },
               [
-                _c("i", { staticClass: "fa fa-times" }),
+                _c("i", { staticClass: "fas fa-times" }),
                 _vm._v(" Batal \n            ")
               ]
             )
@@ -22474,7 +22476,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kinerja" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fa fa-list-alt" }),
+        _c("i", { staticClass: "fas fa-clipboard-check" }),
         _vm._v("\n            Hasil Kinerja"),
         _c(
           "button",
@@ -22484,7 +22486,7 @@ var render = function() {
             on: { click: _vm.editDataKinerja }
           },
           [
-            _c("i", { staticClass: "fa fa-edit" }),
+            _c("i", { staticClass: "fas fa-edit" }),
             _vm._v(" Edit \n                ")
           ]
         )
@@ -22511,7 +22513,7 @@ var render = function() {
                         on: { click: _vm.addDataKinerja }
                       },
                       [
-                        _c("i", { staticClass: "fa fa-plus" }),
+                        _c("i", { staticClass: "fas fa-plus" }),
                         _vm._v(" Tambah \n                    ")
                       ]
                     )
@@ -22706,7 +22708,9 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    _c("i", { staticClass: "fa fa-trash-o" }),
+                                    _c("i", {
+                                      staticClass: "fas fa-trash-alt"
+                                    }),
                                     _vm._v(
                                       " Hapus \n                                "
                                     )
@@ -22729,7 +22733,7 @@ var render = function() {
                           on: { click: _vm.showAllDataKinerja }
                         },
                         [
-                          _c("i", { staticClass: "fa fa-eye" }),
+                          _c("i", { staticClass: "fas fa-eye" }),
                           _vm._v(" Tamplikan semua \n                        ")
                         ]
                       )
@@ -22744,7 +22748,7 @@ var render = function() {
                           on: { click: _vm.hideDataKinerja }
                         },
                         [
-                          _c("i", { staticClass: "fa fa-eye-slash" }),
+                          _c("i", { staticClass: "fas fa-eye-slash" }),
                           _vm._v(
                             " Sembunyikan sebagian \n                        "
                           )
@@ -22760,7 +22764,7 @@ var render = function() {
                           on: { click: _vm.addDataKinerja }
                         },
                         [
-                          _c("i", { staticClass: "fa fa-plus" }),
+                          _c("i", { staticClass: "fas fa-plus" }),
                           _vm._v(" Tambah \n                        ")
                         ]
                       )
@@ -22781,7 +22785,7 @@ var render = function() {
                 on: { click: _vm.saveDataKinerja }
               },
               [
-                _c("i", { staticClass: "fa fa-check" }),
+                _c("i", { staticClass: "fas fa-check" }),
                 _vm._v(" Simpan \n                ")
               ]
             ),
@@ -22794,7 +22798,7 @@ var render = function() {
                 on: { click: _vm.cancelDataKinerja }
               },
               [
-                _c("i", { staticClass: "fa fa-times" }),
+                _c("i", { staticClass: "fas fa-times" }),
                 _vm._v(" Batal \n            ")
               ]
             )
@@ -22806,7 +22810,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kompetensi" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fa fa-clipboard" }),
+        _c("i", { staticClass: "fas fa-clipboard-list" }),
         _vm._v("\n            Hasil Kompetensi"),
         _c(
           "button",
@@ -22816,7 +22820,7 @@ var render = function() {
             on: { click: _vm.editKommpetensi }
           },
           [
-            _c("i", { staticClass: "fa fa-edit" }),
+            _c("i", { staticClass: "fas fa-edit" }),
             _vm._v(" Edit \n                ")
           ]
         )
@@ -22832,7 +22836,7 @@ var render = function() {
               on: { click: _vm.downloadKompetensi }
             },
             [
-              _c("i", { staticClass: "fa fa-download" }),
+              _c("i", { staticClass: "fas fa-download" }),
               _vm._v(" Download \n                ")
             ]
           ),
@@ -22854,7 +22858,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "rekomendasi" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fa fa-info-circle" }),
+        _c("i", { staticClass: "fas fa-info-circle" }),
         _vm._v("\n            Rekomendasi"),
         _c(
           "button",
@@ -22864,7 +22868,7 @@ var render = function() {
             on: { click: _vm.editRekomendasi }
           },
           [
-            _c("i", { staticClass: "fa fa-edit" }),
+            _c("i", { staticClass: "fas fa-edit" }),
             _vm._v(" Edit \n                ")
           ]
         )
@@ -22898,7 +22902,7 @@ var render = function() {
                           on: { click: _vm.addRekomendasiTraining }
                         },
                         [
-                          _c("i", { staticClass: "fa fa-plus" }),
+                          _c("i", { staticClass: "fas fa-plus" }),
                           _vm._v(" Tambah \n                    ")
                         ]
                       )
@@ -22997,7 +23001,7 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("i", { staticClass: "fa fa-trash-o" }),
+                                _c("i", { staticClass: "fas fa-trash-alt" }),
                                 _vm._v(" Hapus \n                            ")
                               ]
                             )
@@ -23016,7 +23020,7 @@ var render = function() {
                     on: { click: _vm.addRekomendasiTraining }
                   },
                   [
-                    _c("i", { staticClass: "fa fa-plus" }),
+                    _c("i", { staticClass: "fas fa-plus" }),
                     _vm._v(" Tambah \n                ")
                   ]
                 )
@@ -23048,7 +23052,7 @@ var render = function() {
                           on: { click: _vm.addRekomendasiPosisi }
                         },
                         [
-                          _c("i", { staticClass: "fa fa-plus" }),
+                          _c("i", { staticClass: "fas fa-plus" }),
                           _vm._v(" Tambah \n                    ")
                         ]
                       )
@@ -23242,7 +23246,9 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c("i", { staticClass: "fa fa-trash-o" }),
+                                      _c("i", {
+                                        staticClass: "fas fa-trash-alt"
+                                      }),
                                       _vm._v(
                                         " Hapus \n                                "
                                       )
@@ -23262,7 +23268,7 @@ var render = function() {
                               on: { click: _vm.addRekomendasiPosisi }
                             },
                             [
-                              _c("i", { staticClass: "fa fa-plus" }),
+                              _c("i", { staticClass: "fas fa-plus" }),
                               _vm._v(" Tambah \n                        ")
                             ]
                           )
@@ -23289,7 +23295,7 @@ var render = function() {
                 on: { click: _vm.saveRekomendasi }
               },
               [
-                _c("i", { staticClass: "fa fa-check" }),
+                _c("i", { staticClass: "fas fa-check" }),
                 _vm._v(" Simpan \n                ")
               ]
             ),
@@ -23302,7 +23308,7 @@ var render = function() {
                 on: { click: _vm.cancelRekomendasi }
               },
               [
-                _c("i", { staticClass: "fa fa-times" }),
+                _c("i", { staticClass: "fas fa-times" }),
                 _vm._v(" Batal \n            ")
               ]
             )
@@ -23317,7 +23323,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fa fa-user-circle" }),
+      _c("i", { staticClass: "fas fa-user-circle" }),
       _vm._v("\n            Profil Pegawai\n            ")
     ])
   },
@@ -23326,7 +23332,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fa fa-table" }),
+      _c("i", { staticClass: "fas fa-table" }),
       _vm._v("\n            Data Kepegawaian\n            ")
     ])
   },
@@ -23351,7 +23357,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fa fa-briefcase" }),
+      _c("i", { staticClass: "fas fa-briefcase" }),
       _vm._v("\n            Riwayat Pendidikan dan Pekerjaan\n            ")
     ])
   },
