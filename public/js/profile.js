@@ -72,7 +72,7 @@
 
 
 var bind = __webpack_require__(15);
-var isBuffer = __webpack_require__(35);
+var isBuffer = __webpack_require__(34);
 
 /*global toString:true*/
 
@@ -408,7 +408,7 @@ module.exports = function(module) {
 /***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(34);
+module.exports = __webpack_require__(33);
 
 /***/ }),
 
@@ -13531,12 +13531,12 @@ process.umask = function() { return 0; };
 
 
 var utils = __webpack_require__(1);
-var settle = __webpack_require__(38);
-var buildURL = __webpack_require__(40);
-var parseHeaders = __webpack_require__(41);
-var isURLSameOrigin = __webpack_require__(42);
+var settle = __webpack_require__(37);
+var buildURL = __webpack_require__(39);
+var parseHeaders = __webpack_require__(40);
+var isURLSameOrigin = __webpack_require__(41);
 var createError = __webpack_require__(18);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(43);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(42);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13633,7 +13633,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(44);
+      var cookies = __webpack_require__(43);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13718,7 +13718,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(39);
+var enhanceError = __webpack_require__(38);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -13821,9 +13821,9 @@ module.exports = __webpack_require__(252);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-__webpack_require__(31);
+__webpack_require__(30);
 
-window.Vue = __webpack_require__(52);
+window.Vue = __webpack_require__(51);
 
 
 
@@ -13902,7 +13902,7 @@ var content = __webpack_require__(255);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("41430490", content, false, {});
+var update = __webpack_require__(6)("41430490", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -15537,7 +15537,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "card", attrs: { id: "profil-pegawai" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fas fa-user-circle" }),
+        _c("i", { staticClass: "fa fa-user-circle" }),
         _vm._v("\n            Profil Pegawai\n            "),
         _c(
           "button",
@@ -15548,7 +15548,7 @@ var render = function() {
           },
           [
             _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fas fa-edit" })
+            _c("i", { staticClass: "fa fa-edit" })
           ]
         )
       ]),
@@ -15575,7 +15575,7 @@ var render = function() {
                       on: { click: _vm.browseImageProfile }
                     },
                     [
-                      _c("i", { staticClass: "fas fa-image" }),
+                      _c("i", { staticClass: "fa fa-image" }),
                       _vm._v(
                         "\n                            Ganti\n                        "
                       )
@@ -16213,7 +16213,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fa fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -16226,7 +16226,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fa fa-times" })
               ]
             )
           ])
@@ -16237,7 +16237,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kepegawaian" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fas fa-table" }),
+        _c("i", { staticClass: "fa fa-table" }),
         _vm._v("\n            Data Kepegawaian\n            "),
         _c(
           "button",
@@ -16248,7 +16248,7 @@ var render = function() {
           },
           [
             _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fas fa-edit" })
+            _c("i", { staticClass: "fa fa-edit" })
           ]
         )
       ]),
@@ -16275,7 +16275,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fas fa-plus" })
+                        _c("i", { staticClass: "fa fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -16553,7 +16553,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fas fa-trash-alt" })
+                                    _c("i", { staticClass: "fa fa-trash-o" })
                                   ]
                                 )
                               ])
@@ -16571,7 +16571,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fas fa-plus" })
+                            _c("i", { staticClass: "fa fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -16596,7 +16596,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fa fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -16609,7 +16609,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fa fa-times" })
               ]
             )
           ])
@@ -16620,7 +16620,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "riwayat-pegawai" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fas fa-briefcase" }),
+        _c("i", { staticClass: "fa fa-briefcase" }),
         _vm._v("\n            Riwayat Pendidikan dan Pekerjaan"),
         _c(
           "button",
@@ -16631,7 +16631,7 @@ var render = function() {
           },
           [
             _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fas fa-edit" })
+            _c("i", { staticClass: "fa fa-edit" })
           ]
         )
       ]),
@@ -16661,7 +16661,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fas fa-plus" })
+                        _c("i", { staticClass: "fa fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -16913,7 +16913,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fas fa-trash-alt" })
+                                    _c("i", { staticClass: "fa fa-trash-o" })
                                   ]
                                 )
                               ])
@@ -16931,7 +16931,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fas fa-plus" })
+                            _c("i", { staticClass: "fa fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -16967,7 +16967,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fas fa-plus" })
+                        _c("i", { staticClass: "fa fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -17179,7 +17179,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fas fa-trash-alt" })
+                                    _c("i", { staticClass: "fa fa-trash-o" })
                                   ]
                                 )
                               ])
@@ -17197,7 +17197,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fas fa-plus" })
+                            _c("i", { staticClass: "fa fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -17220,7 +17220,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fa fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -17233,7 +17233,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fa fa-times" })
               ]
             )
           ])
@@ -17244,7 +17244,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "sertificate" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fas fa-file-alt" }),
+        _c("i", { staticClass: "fa fa-file-text" }),
         _vm._v("\n            Sertifikat"),
         _c(
           "button",
@@ -17255,7 +17255,7 @@ var render = function() {
           },
           [
             _vm._v("\n                Edit "),
-            _c("i", { staticClass: "fas fa-edit" })
+            _c("i", { staticClass: "fa fa-edit" })
           ]
         )
       ]),
@@ -17282,7 +17282,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fas fa-plus" })
+                        _c("i", { staticClass: "fa fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -17384,7 +17384,7 @@ var render = function() {
                                           "\n                                        Hapus "
                                         ),
                                         _c("i", {
-                                          staticClass: "fas fa-trash-alt"
+                                          staticClass: "fa fa-trash-o"
                                         })
                                       ]
                                     )
@@ -17416,7 +17416,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c("i", { staticClass: "fas fa-upload" }),
+                                      _c("i", { staticClass: "fa fa-upload" }),
                                       _vm._v(
                                         "\n                                    Upload Gambar\n                                "
                                       )
@@ -17609,7 +17609,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fas fa-plus" })
+                            _c("i", { staticClass: "fa fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -17632,7 +17632,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fa fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -17645,7 +17645,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fa fa-times" })
               ]
             )
           ])
@@ -17679,7 +17679,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fas fa-plus" })
+                        _c("i", { staticClass: "fa fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -17876,7 +17876,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fas fa-trash-alt" })
+                                    _c("i", { staticClass: "fa fa-trash-o" })
                                   ]
                                 )
                               ])
@@ -17899,7 +17899,7 @@ var render = function() {
                           _vm._v(
                             "\n                            Tamplikan semua "
                           ),
-                          _c("i", { staticClass: "fas fa-eye" })
+                          _c("i", { staticClass: "fa fa-eye" })
                         ]
                       )
                     : _vm._e(),
@@ -17916,7 +17916,7 @@ var render = function() {
                           _vm._v(
                             "\n                            Sembunyikan sebagian "
                           ),
-                          _c("i", { staticClass: "fas fa-eye-slash" })
+                          _c("i", { staticClass: "fa fa-eye-slash" })
                         ]
                       )
                     : _vm._e(),
@@ -17930,7 +17930,7 @@ var render = function() {
                         },
                         [
                           _vm._v("\n                            Tambah "),
-                          _c("i", { staticClass: "fas fa-plus" })
+                          _c("i", { staticClass: "fa fa-plus" })
                         ]
                       )
                     : _vm._e()
@@ -17951,7 +17951,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fa fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -17964,7 +17964,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fa fa-times" })
               ]
             )
           ])
@@ -17987,7 +17987,7 @@ var render = function() {
             },
             [
               _vm._v("\n                    Download "),
-              _c("i", { staticClass: "fas fa-download" })
+              _c("i", { staticClass: "fa fa-download" })
             ]
           ),
           _vm._v(" "),
@@ -18038,7 +18038,7 @@ var render = function() {
                         },
                         [
                           _vm._v("\n                        Tambah "),
-                          _c("i", { staticClass: "fas fa-plus" })
+                          _c("i", { staticClass: "fa fa-plus" })
                         ]
                       )
                     : _vm._e()
@@ -18139,7 +18139,7 @@ var render = function() {
                                 _vm._v(
                                   "\n                                Hapus "
                                 ),
-                                _c("i", { staticClass: "fas fa-trash-alt" })
+                                _c("i", { staticClass: "fa fa-trash-o" })
                               ]
                             )
                           ])
@@ -18158,7 +18158,7 @@ var render = function() {
                   },
                   [
                     _vm._v("\n                    Tambah "),
-                    _c("i", { staticClass: "fas fa-plus" })
+                    _c("i", { staticClass: "fa fa-plus" })
                   ]
                 )
               : _vm._e(),
@@ -18190,7 +18190,7 @@ var render = function() {
                         },
                         [
                           _vm._v("\n                        Tambah "),
-                          _c("i", { staticClass: "fas fa-plus" })
+                          _c("i", { staticClass: "fa fa-plus" })
                         ]
                       )
                     : _vm._e()
@@ -18386,9 +18386,7 @@ var render = function() {
                                       _vm._v(
                                         "\n                                    Hapus "
                                       ),
-                                      _c("i", {
-                                        staticClass: "fas fa-trash-alt"
-                                      })
+                                      _c("i", { staticClass: "fa fa-trash-o" })
                                     ]
                                   )
                                 ])
@@ -18406,7 +18404,7 @@ var render = function() {
                             },
                             [
                               _vm._v("\n                            Tambah "),
-                              _c("i", { staticClass: "fas fa-plus" })
+                              _c("i", { staticClass: "fa fa-plus" })
                             ]
                           )
                         : _vm._e()
@@ -18433,7 +18431,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fa fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -18446,7 +18444,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fa fa-times" })
               ]
             )
           ])
@@ -18522,7 +18520,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-clipboard-check" }),
+      _c("i", { staticClass: "fa fa-list-alt" }),
       _vm._v("\n            Hasil Kinerja\n            ")
     ])
   },
@@ -18547,7 +18545,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-clipboard-list" }),
+      _c("i", { staticClass: "fa fa-clipboard" }),
       _vm._v("\n            Hasil Kompetensi\n            ")
     ])
   },
@@ -18626,7 +18624,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-info-circle" }),
+      _c("i", { staticClass: "fa fa-info-circle" }),
       _vm._v("\n            Rekomendasi\n             ")
     ])
   },
@@ -18716,7 +18714,7 @@ var content = __webpack_require__(260);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("838a5ee0", content, false, {});
+var update = __webpack_require__(6)("838a5ee0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -21062,7 +21060,7 @@ var render = function() {
                 },
                 [
                   _vm._v("\n                Simpan "),
-                  _c("i", { staticClass: "fas fa-check" })
+                  _c("i", { staticClass: "fa fa-check" })
                 ]
               ),
               _vm._v(" "),
@@ -21075,7 +21073,7 @@ var render = function() {
                 },
                 [
                   _vm._v("\n                Batal "),
-                  _c("i", { staticClass: "fas fa-times" })
+                  _c("i", { staticClass: "fa fa-times" })
                 ]
               )
             ])
@@ -21110,7 +21108,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fas fa-plus" })
+                        _c("i", { staticClass: "fa fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -21388,7 +21386,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fas fa-trash-alt" })
+                                    _c("i", { staticClass: "fa fa-trash-o" })
                                   ]
                                 )
                               ])
@@ -21406,7 +21404,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fas fa-plus" })
+                            _c("i", { staticClass: "fa fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -21431,7 +21429,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fa fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -21444,7 +21442,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fa fa-times" })
               ]
             )
           ])
@@ -21481,7 +21479,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fas fa-plus" })
+                        _c("i", { staticClass: "fa fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -21733,7 +21731,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fas fa-trash-alt" })
+                                    _c("i", { staticClass: "fa fa-trash-o" })
                                   ]
                                 )
                               ])
@@ -21751,7 +21749,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fas fa-plus" })
+                            _c("i", { staticClass: "fa fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -21787,7 +21785,7 @@ var render = function() {
                       },
                       [
                         _vm._v("\n                        Tambah "),
-                        _c("i", { staticClass: "fas fa-plus" })
+                        _c("i", { staticClass: "fa fa-plus" })
                       ]
                     )
                   : _vm._e()
@@ -21999,7 +21997,7 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    Hapus "
                                     ),
-                                    _c("i", { staticClass: "fas fa-trash-alt" })
+                                    _c("i", { staticClass: "fa fa-trash-o" })
                                   ]
                                 )
                               ])
@@ -22017,7 +22015,7 @@ var render = function() {
                           },
                           [
                             _vm._v("\n                            Tambah "),
-                            _c("i", { staticClass: "fas fa-plus" })
+                            _c("i", { staticClass: "fa fa-plus" })
                           ]
                         )
                       : _vm._e()
@@ -22040,7 +22038,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Simpan "),
-                _c("i", { staticClass: "fas fa-check" })
+                _c("i", { staticClass: "fa fa-check" })
               ]
             ),
             _vm._v(" "),
@@ -22053,7 +22051,7 @@ var render = function() {
               },
               [
                 _vm._v("\n                Batal "),
-                _c("i", { staticClass: "fas fa-times" })
+                _c("i", { staticClass: "fa fa-times" })
               ]
             )
           ])
@@ -22064,7 +22062,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "sertificate" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fas fa-file-alt" }),
+        _c("i", { staticClass: "fa fa-file-text" }),
         _vm._v("\n            Sertifikat"),
         _c(
           "button",
@@ -22074,7 +22072,7 @@ var render = function() {
             on: { click: _vm.editSertifikat }
           },
           [
-            _c("i", { staticClass: "fas fa-edit" }),
+            _c("i", { staticClass: "fa fa-edit" }),
             _vm._v(" Edit \n                ")
           ]
         )
@@ -22101,7 +22099,7 @@ var render = function() {
                         on: { click: _vm.addSertifikat }
                       },
                       [
-                        _c("i", { staticClass: "fas fa-plus" }),
+                        _c("i", { staticClass: "fa fa-plus" }),
                         _vm._v(" Tambah \n                    ")
                       ]
                     )
@@ -22201,7 +22199,7 @@ var render = function() {
                                       },
                                       [
                                         _c("i", {
-                                          staticClass: "fas fa-trash-alt"
+                                          staticClass: "fa fa-trash-o"
                                         }),
                                         _vm._v(
                                           " Hapus \n                                    "
@@ -22236,7 +22234,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c("i", { staticClass: "fas fa-upload" }),
+                                      _c("i", { staticClass: "fa fa-upload" }),
                                       _vm._v(
                                         "\n                                    Upload Gambar\n                                "
                                       )
@@ -22428,7 +22426,7 @@ var render = function() {
                             on: { click: _vm.addSertifikat }
                           },
                           [
-                            _c("i", { staticClass: "fas fa-plus" }),
+                            _c("i", { staticClass: "fa fa-plus" }),
                             _vm._v(" Tambah \n                        ")
                           ]
                         )
@@ -22451,7 +22449,7 @@ var render = function() {
                 on: { click: _vm.saveSertifikat }
               },
               [
-                _c("i", { staticClass: "fas fa-check" }),
+                _c("i", { staticClass: "fa fa-check" }),
                 _vm._v(" Simpan \n                ")
               ]
             ),
@@ -22464,7 +22462,7 @@ var render = function() {
                 on: { click: _vm.cancelSertifikat }
               },
               [
-                _c("i", { staticClass: "fas fa-times" }),
+                _c("i", { staticClass: "fa fa-times" }),
                 _vm._v(" Batal \n            ")
               ]
             )
@@ -22476,7 +22474,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kinerja" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fas fa-clipboard-check" }),
+        _c("i", { staticClass: "fa fa-list-alt" }),
         _vm._v("\n            Hasil Kinerja"),
         _c(
           "button",
@@ -22486,7 +22484,7 @@ var render = function() {
             on: { click: _vm.editDataKinerja }
           },
           [
-            _c("i", { staticClass: "fas fa-edit" }),
+            _c("i", { staticClass: "fa fa-edit" }),
             _vm._v(" Edit \n                ")
           ]
         )
@@ -22513,7 +22511,7 @@ var render = function() {
                         on: { click: _vm.addDataKinerja }
                       },
                       [
-                        _c("i", { staticClass: "fas fa-plus" }),
+                        _c("i", { staticClass: "fa fa-plus" }),
                         _vm._v(" Tambah \n                    ")
                       ]
                     )
@@ -22708,9 +22706,7 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    _c("i", {
-                                      staticClass: "fas fa-trash-alt"
-                                    }),
+                                    _c("i", { staticClass: "fa fa-trash-o" }),
                                     _vm._v(
                                       " Hapus \n                                "
                                     )
@@ -22733,7 +22729,7 @@ var render = function() {
                           on: { click: _vm.showAllDataKinerja }
                         },
                         [
-                          _c("i", { staticClass: "fas fa-eye" }),
+                          _c("i", { staticClass: "fa fa-eye" }),
                           _vm._v(" Tamplikan semua \n                        ")
                         ]
                       )
@@ -22748,7 +22744,7 @@ var render = function() {
                           on: { click: _vm.hideDataKinerja }
                         },
                         [
-                          _c("i", { staticClass: "fas fa-eye-slash" }),
+                          _c("i", { staticClass: "fa fa-eye-slash" }),
                           _vm._v(
                             " Sembunyikan sebagian \n                        "
                           )
@@ -22764,7 +22760,7 @@ var render = function() {
                           on: { click: _vm.addDataKinerja }
                         },
                         [
-                          _c("i", { staticClass: "fas fa-plus" }),
+                          _c("i", { staticClass: "fa fa-plus" }),
                           _vm._v(" Tambah \n                        ")
                         ]
                       )
@@ -22785,7 +22781,7 @@ var render = function() {
                 on: { click: _vm.saveDataKinerja }
               },
               [
-                _c("i", { staticClass: "fas fa-check" }),
+                _c("i", { staticClass: "fa fa-check" }),
                 _vm._v(" Simpan \n                ")
               ]
             ),
@@ -22798,7 +22794,7 @@ var render = function() {
                 on: { click: _vm.cancelDataKinerja }
               },
               [
-                _c("i", { staticClass: "fas fa-times" }),
+                _c("i", { staticClass: "fa fa-times" }),
                 _vm._v(" Batal \n            ")
               ]
             )
@@ -22810,7 +22806,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "data-kompetensi" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fas fa-clipboard-list" }),
+        _c("i", { staticClass: "fa fa-clipboard" }),
         _vm._v("\n            Hasil Kompetensi"),
         _c(
           "button",
@@ -22820,7 +22816,7 @@ var render = function() {
             on: { click: _vm.editKommpetensi }
           },
           [
-            _c("i", { staticClass: "fas fa-edit" }),
+            _c("i", { staticClass: "fa fa-edit" }),
             _vm._v(" Edit \n                ")
           ]
         )
@@ -22836,7 +22832,7 @@ var render = function() {
               on: { click: _vm.downloadKompetensi }
             },
             [
-              _c("i", { staticClass: "fas fa-download" }),
+              _c("i", { staticClass: "fa fa-download" }),
               _vm._v(" Download \n                ")
             ]
           ),
@@ -22858,7 +22854,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card", attrs: { id: "rekomendasi" } }, [
       _c("h5", { staticClass: "card-header" }, [
-        _c("i", { staticClass: "fas fa-info-circle" }),
+        _c("i", { staticClass: "fa fa-info-circle" }),
         _vm._v("\n            Rekomendasi"),
         _c(
           "button",
@@ -22868,7 +22864,7 @@ var render = function() {
             on: { click: _vm.editRekomendasi }
           },
           [
-            _c("i", { staticClass: "fas fa-edit" }),
+            _c("i", { staticClass: "fa fa-edit" }),
             _vm._v(" Edit \n                ")
           ]
         )
@@ -22902,7 +22898,7 @@ var render = function() {
                           on: { click: _vm.addRekomendasiTraining }
                         },
                         [
-                          _c("i", { staticClass: "fas fa-plus" }),
+                          _c("i", { staticClass: "fa fa-plus" }),
                           _vm._v(" Tambah \n                    ")
                         ]
                       )
@@ -23001,7 +22997,7 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("i", { staticClass: "fas fa-trash-alt" }),
+                                _c("i", { staticClass: "fa fa-trash-o" }),
                                 _vm._v(" Hapus \n                            ")
                               ]
                             )
@@ -23020,7 +23016,7 @@ var render = function() {
                     on: { click: _vm.addRekomendasiTraining }
                   },
                   [
-                    _c("i", { staticClass: "fas fa-plus" }),
+                    _c("i", { staticClass: "fa fa-plus" }),
                     _vm._v(" Tambah \n                ")
                   ]
                 )
@@ -23052,7 +23048,7 @@ var render = function() {
                           on: { click: _vm.addRekomendasiPosisi }
                         },
                         [
-                          _c("i", { staticClass: "fas fa-plus" }),
+                          _c("i", { staticClass: "fa fa-plus" }),
                           _vm._v(" Tambah \n                    ")
                         ]
                       )
@@ -23246,9 +23242,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c("i", {
-                                        staticClass: "fas fa-trash-alt"
-                                      }),
+                                      _c("i", { staticClass: "fa fa-trash-o" }),
                                       _vm._v(
                                         " Hapus \n                                "
                                       )
@@ -23268,7 +23262,7 @@ var render = function() {
                               on: { click: _vm.addRekomendasiPosisi }
                             },
                             [
-                              _c("i", { staticClass: "fas fa-plus" }),
+                              _c("i", { staticClass: "fa fa-plus" }),
                               _vm._v(" Tambah \n                        ")
                             ]
                           )
@@ -23295,7 +23289,7 @@ var render = function() {
                 on: { click: _vm.saveRekomendasi }
               },
               [
-                _c("i", { staticClass: "fas fa-check" }),
+                _c("i", { staticClass: "fa fa-check" }),
                 _vm._v(" Simpan \n                ")
               ]
             ),
@@ -23308,7 +23302,7 @@ var render = function() {
                 on: { click: _vm.cancelRekomendasi }
               },
               [
-                _c("i", { staticClass: "fas fa-times" }),
+                _c("i", { staticClass: "fa fa-times" }),
                 _vm._v(" Batal \n            ")
               ]
             )
@@ -23323,7 +23317,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-user-circle" }),
+      _c("i", { staticClass: "fa fa-user-circle" }),
       _vm._v("\n            Profil Pegawai\n            ")
     ])
   },
@@ -23332,7 +23326,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-table" }),
+      _c("i", { staticClass: "fa fa-table" }),
       _vm._v("\n            Data Kepegawaian\n            ")
     ])
   },
@@ -23357,7 +23351,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-briefcase" }),
+      _c("i", { staticClass: "fa fa-briefcase" }),
       _vm._v("\n            Riwayat Pendidikan dan Pekerjaan\n            ")
     ])
   },
@@ -23600,11 +23594,11 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 31:
+/***/ 30:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(32);
+window._ = __webpack_require__(31);
 window.Popper = __webpack_require__(13).default;
 
 /**
@@ -23616,7 +23610,7 @@ window.Popper = __webpack_require__(13).default;
 try {
   window.$ = window.jQuery = __webpack_require__(14);
 
-  __webpack_require__(33);
+  __webpack_require__(32);
 } catch (e) {}
 
 /**
@@ -23662,7 +23656,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 32:
+/***/ 31:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -40776,7 +40770,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 33:
+/***/ 32:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -44710,7 +44704,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 34:
+/***/ 33:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44718,7 +44712,7 @@ if (token) {
 
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(15);
-var Axios = __webpack_require__(36);
+var Axios = __webpack_require__(35);
 var defaults = __webpack_require__(7);
 
 /**
@@ -44753,14 +44747,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(20);
-axios.CancelToken = __webpack_require__(50);
+axios.CancelToken = __webpack_require__(49);
 axios.isCancel = __webpack_require__(19);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(51);
+axios.spread = __webpack_require__(50);
 
 module.exports = axios;
 
@@ -44770,7 +44764,7 @@ module.exports.default = axios;
 
 /***/ }),
 
-/***/ 35:
+/***/ 34:
 /***/ (function(module, exports) {
 
 /*!
@@ -44798,7 +44792,7 @@ function isSlowBuffer (obj) {
 
 /***/ }),
 
-/***/ 36:
+/***/ 35:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44806,8 +44800,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(7);
 var utils = __webpack_require__(1);
-var InterceptorManager = __webpack_require__(45);
-var dispatchRequest = __webpack_require__(46);
+var InterceptorManager = __webpack_require__(44);
+var dispatchRequest = __webpack_require__(45);
 
 /**
  * Create a new instance of Axios
@@ -44885,7 +44879,7 @@ module.exports = Axios;
 
 /***/ }),
 
-/***/ 37:
+/***/ 36:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44905,7 +44899,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 /***/ }),
 
-/***/ 38:
+/***/ 37:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44939,7 +44933,7 @@ module.exports = function settle(resolve, reject, response) {
 
 /***/ }),
 
-/***/ 39:
+/***/ 38:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44963,6 +44957,80 @@ module.exports = function enhanceError(error, config, code, request, response) {
   error.request = request;
   error.response = response;
   return error;
+};
+
+
+/***/ }),
+
+/***/ 39:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(1);
+
+function encode(val) {
+  return encodeURIComponent(val).
+    replace(/%40/gi, '@').
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%20/g, '+').
+    replace(/%5B/gi, '[').
+    replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+module.exports = function buildURL(url, params, paramsSerializer) {
+  /*eslint no-param-reassign:0*/
+  if (!params) {
+    return url;
+  }
+
+  var serializedParams;
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params);
+  } else if (utils.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+
+    utils.forEach(params, function serialize(val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+
+      if (utils.isArray(val)) {
+        key = key + '[]';
+      } else {
+        val = [val];
+      }
+
+      utils.forEach(val, function parseValue(v) {
+        if (utils.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push(encode(key) + '=' + encode(v));
+      });
+    });
+
+    serializedParams = parts.join('&');
+  }
+
+  if (serializedParams) {
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
+
+  return url;
 };
 
 
@@ -45086,80 +45154,6 @@ module.exports = function normalizeComponent (
 
 var utils = __webpack_require__(1);
 
-function encode(val) {
-  return encodeURIComponent(val).
-    replace(/%40/gi, '@').
-    replace(/%3A/gi, ':').
-    replace(/%24/g, '$').
-    replace(/%2C/gi, ',').
-    replace(/%20/g, '+').
-    replace(/%5B/gi, '[').
-    replace(/%5D/gi, ']');
-}
-
-/**
- * Build a URL by appending params to the end
- *
- * @param {string} url The base of the url (e.g., http://www.google.com)
- * @param {object} [params] The params to be appended
- * @returns {string} The formatted url
- */
-module.exports = function buildURL(url, params, paramsSerializer) {
-  /*eslint no-param-reassign:0*/
-  if (!params) {
-    return url;
-  }
-
-  var serializedParams;
-  if (paramsSerializer) {
-    serializedParams = paramsSerializer(params);
-  } else if (utils.isURLSearchParams(params)) {
-    serializedParams = params.toString();
-  } else {
-    var parts = [];
-
-    utils.forEach(params, function serialize(val, key) {
-      if (val === null || typeof val === 'undefined') {
-        return;
-      }
-
-      if (utils.isArray(val)) {
-        key = key + '[]';
-      } else {
-        val = [val];
-      }
-
-      utils.forEach(val, function parseValue(v) {
-        if (utils.isDate(v)) {
-          v = v.toISOString();
-        } else if (utils.isObject(v)) {
-          v = JSON.stringify(v);
-        }
-        parts.push(encode(key) + '=' + encode(v));
-      });
-    });
-
-    serializedParams = parts.join('&');
-  }
-
-  if (serializedParams) {
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
-  }
-
-  return url;
-};
-
-
-/***/ }),
-
-/***/ 41:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(1);
-
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
 var ignoreDuplicateOf = [
@@ -45213,7 +45207,7 @@ module.exports = function parseHeaders(headers) {
 
 /***/ }),
 
-/***/ 42:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45289,7 +45283,7 @@ module.exports = (
 
 /***/ }),
 
-/***/ 43:
+/***/ 42:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45333,7 +45327,7 @@ module.exports = btoa;
 
 /***/ }),
 
-/***/ 44:
+/***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45394,7 +45388,7 @@ module.exports = (
 
 /***/ }),
 
-/***/ 45:
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45454,18 +45448,18 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
-/***/ 46:
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(1);
-var transformData = __webpack_require__(47);
+var transformData = __webpack_require__(46);
 var isCancel = __webpack_require__(19);
 var defaults = __webpack_require__(7);
-var isAbsoluteURL = __webpack_require__(48);
-var combineURLs = __webpack_require__(49);
+var isAbsoluteURL = __webpack_require__(47);
+var combineURLs = __webpack_require__(48);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -45548,7 +45542,7 @@ module.exports = function dispatchRequest(config) {
 
 /***/ }),
 
-/***/ 47:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45576,7 +45570,7 @@ module.exports = function transformData(data, headers, fns) {
 
 /***/ }),
 
-/***/ 48:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45598,7 +45592,7 @@ module.exports = function isAbsoluteURL(url) {
 
 /***/ }),
 
-/***/ 49:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45620,236 +45614,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 /***/ }),
 
-/***/ 5:
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(62)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-
-/***/ 50:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45914,7 +45679,7 @@ module.exports = CancelToken;
 
 /***/ }),
 
-/***/ 51:
+/***/ 50:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45949,7 +45714,7 @@ module.exports = function spread(callback) {
 
 /***/ }),
 
-/***/ 52:
+/***/ 51:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56912,11 +56677,11 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(53).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(52).setImmediate))
 
 /***/ }),
 
-/***/ 53:
+/***/ 52:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
@@ -56969,7 +56734,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(54);
+__webpack_require__(53);
 // On some exotic environments, it's not clear which object `setimmeidate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -56984,7 +56749,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ 54:
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -57178,7 +56943,236 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ 62:
+/***/ 6:
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(61)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+
+/***/ 61:
 /***/ (function(module, exports) {
 
 /**
@@ -57219,7 +57213,7 @@ module.exports = function listToStyles (parentId, list) {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(1);
-var normalizeHeaderName = __webpack_require__(37);
+var normalizeHeaderName = __webpack_require__(36);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'

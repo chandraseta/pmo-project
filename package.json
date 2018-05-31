@@ -20,6 +20,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "font-awesome": "^4.7.0",
         "google-material-design-icons": "^1.0.0",
         "open-iconic": "^1.1.1",
         "pretty-checkbox": "^3.0.3",
